@@ -8,6 +8,8 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
+        var minLines = 1000;
+        var maxLines = 4000;
         var totalAmount = 0;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
@@ -17,8 +19,8 @@ public class StatementPrinter
         {
             var play = plays[perf.PlayId];
             var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
+            if (lines < minLines) lines = minLines;
+            if (lines > maxLines) lines = maxLines;
             var thisAmount = lines * 10;
             switch (play.Type.Name) 
             {
