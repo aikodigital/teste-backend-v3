@@ -24,9 +24,7 @@ public class StatementPrinter
             var thisAmount = lines * 10;
             thisAmount += play.Type.CalcAmount(perf);
             // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type.Name) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            volumeCredits += play.Type.CalcCredits(perf);
 
             // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);

@@ -32,4 +32,13 @@ public class Type
         }
         return amount;
     }
+
+    public int CalcCredits(Performance perf){
+        int credits = -1;
+        // calc volume credits
+        credits = Math.Max(perf.Audience - 30, 0);
+        // add extra credit for every ten comedy attendees
+        if ("comedy" == this._name) credits += (int)Math.Floor((decimal)perf.Audience / 5);
+        return credits;
+    }
 }
