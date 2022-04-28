@@ -22,22 +22,7 @@ public class StatementPrinter
             if (lines < minLines) lines = minLines;
             if (lines > maxLines) lines = maxLines;
             var thisAmount = lines * 10;
-            switch (play.Type.Name) 
-            {
-                case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Type);
-            }
+            thisAmount += play.Type.CalcAmount(perf);
             // add volume credits
             volumeCredits += Math.Max(perf.Audience - 30, 0);
             // add extra credit for every ten comedy attendees
