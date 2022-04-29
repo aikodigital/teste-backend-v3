@@ -12,20 +12,25 @@ public class Type
         this._name = name;
     }
 
-    public int CalcAmount(Performance perf){
-        int amount = -1;
+    public int CalcAmount(Performance perf, int lines){
+        int amount = lines * 10;
         switch (this._name) 
         {
             case "tragedy":
                 if (perf.Audience > 30) {
-                    amount = 1000 * (perf.Audience - 30);
+                    amount += 1000 * (perf.Audience - 30);
                 }
                 break;
             case "comedy":
-                amount = 300 * perf.Audience;
+                amount += 300 * perf.Audience;
                 if (perf.Audience > 20) {
                     amount += 10000 + 500 * (perf.Audience - 20);
                 }
+                break;
+            case "history":
+                Type tragedy = new Type("tragedy");
+                Type comedy = new Type("comedy");
+                amount = tragedy.CalcAmount(perf, lines) + comedy.CalcAmount(perf, lines);
                 break;
             default:
                 throw new Exception("unknown type: " + this._name);
@@ -34,7 +39,7 @@ public class Type
     }
 
     public int CalcCredits(Performance perf){
-        int credits = -1;
+        int credits = 0;
         // calc volume credits
         credits = Math.Max(perf.Audience - 30, 0);
         // add extra credit for every ten comedy attendees

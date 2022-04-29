@@ -21,16 +21,15 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < minLines) lines = minLines;
             if (lines > maxLines) lines = maxLines;
-            var thisAmount = lines * 10;
-            thisAmount += play.Type.CalcAmount(perf);
+            var thisAmount = play.Type.CalcAmount(perf, lines);
             // add volume credits
             volumeCredits += play.Type.CalcCredits(perf);
 
             // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100f), perf.Audience);
             totalAmount += thisAmount;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
+        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100f));
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
