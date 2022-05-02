@@ -34,16 +34,23 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
+        IPlay hamlet = new Play("Hamlet", 4024),
+            asLike = new Play("As You Like It", 2670),
+            othello = new Play("Othello", 3560),
+            henryV = new Play("Henry V", 3227),
+            john = new Play("King John", 2648);
+        
+
         Invoice invoice = new Invoice(
             "BigCo",
             new List<IPerformance>
             {
-                new TragedyPerformance(new Play("Hamlet", 4024), 55),
-                new ComedyPerformance(new Play("As You Like It", 2670), 35),
-                new TragedyPerformance(new Play("Othello", 3560), 40),
-                new HistoryPerformance(new Play("Henry V", 3227), 20),
-                new HistoryPerformance(new Play("King John", 2648), 39),
-                new HistoryPerformance(new Play("Richard III", 3718), 20)
+                new TragedyPerformance(hamlet, 55),
+                new ComedyPerformance(asLike, 35),
+                new TragedyPerformance(othello, 40),
+                new HistoryPerformance(henryV, 20),
+                new HistoryPerformance(john, 39),
+                new HistoryPerformance(henryV, 20)
             }
         );
 
