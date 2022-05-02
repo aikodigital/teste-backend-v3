@@ -13,5 +13,4 @@ public class Performance
         this._playId = playID;
         this._audience = audience;
     }
-
 }
