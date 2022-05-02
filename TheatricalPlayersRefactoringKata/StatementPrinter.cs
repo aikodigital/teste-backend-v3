@@ -25,12 +25,14 @@ public class StatementPrinter
             if (lines < minLines) lines = minLines;
             if (lines > maxLines) lines = maxLines;
             var thisAmount = play.Type.CalcAmount(perf, lines);
-            // add volume credits
-            volumeCredits += play.Type.CalcCredits(perf);
+            var thisCredits = play.Type.CalcCredits(perf);
             printData.Names.Add(play.Name);
             printData.Amounts.Add(thisAmount);
             printData.Audiences.Add(perf.Audience);
+            printData.Credits.Add(thisCredits);
             totalAmount += thisAmount;
+            // add volume credits
+            volumeCredits += thisCredits;
         }
         printData.TotalAmount = totalAmount;
         printData.VolumeCredits = volumeCredits;
@@ -76,6 +78,43 @@ public class StatementPrinter
         root.AppendChild(customerNode);
         XmlText customerText = result.CreateTextNode(data.Customer);
         customerNode.AppendChild(customerText);
+
+        //Itens node
+        XmlElement itensNode = result.CreateElement("Items");
+        root.AppendChild(itensNode);
+
+        //iteration for each item
+        for(int i = 0; i < data.Names.Count; i++){
+            //Item node
+            XmlElement itemNode = result.CreateElement("Item");
+            itensNode.AppendChild(itemNode);
+            //Amount node
+            XmlElement amountNode = result.CreateElement("AmountOwed");
+            itemNode.AppendChild(amountNode);
+            XmlText amountText = result.CreateTextNode(String.Format(cultureInfo, "{0}", Convert.ToDecimal(data.Amounts[i] / 100f)));
+            amountNode.AppendChild(amountText);
+            //Credits node
+            XmlElement creditsNode = result.CreateElement("EarnedCredits");
+            itemNode.AppendChild(creditsNode);
+            XmlText creditsText = result.CreateTextNode(data.Credits[i].ToString());
+            creditsNode.AppendChild(creditsText);
+            //Seats node
+            XmlElement seatsNode = result.CreateElement("Seats");
+            itemNode.AppendChild(seatsNode);
+            XmlText seatsText = result.CreateTextNode(data.Audiences[i].ToString());
+            seatsNode.AppendChild(seatsText);
+        }
+
+        //Total amount node
+        XmlElement totalAmountNode = result.CreateElement("AmountOwed");
+        root.AppendChild(totalAmountNode);
+        XmlText totalAmountText = result.CreateTextNode(String.Format(cultureInfo, "{0}", Convert.ToDecimal(data.TotalAmount / 100f)));
+        totalAmountNode.AppendChild(totalAmountText);
+        //Volume credits node
+        XmlElement volumeCreditsNode = result.CreateElement("EarnedCredits");
+        root.AppendChild(volumeCreditsNode);
+        XmlText volumeCreditsText = result.CreateTextNode(data.VolumeCredits.ToString());
+        volumeCreditsNode.AppendChild(volumeCreditsText);
 
         return result.OuterXml;
     }

@@ -8,6 +8,7 @@ public class PrintData
     private List<string> _names;
     private List<int> _amounts;
     private List<int> _audiences;
+    private List<int> _credits;
     private int _totalAmount;
     private int _volumeCredits;
 
@@ -15,6 +16,7 @@ public class PrintData
     public List<string> Names { get => _names; set => _names = value; }
     public List<int> Amounts { get => _amounts; set => _amounts = value; }
     public List<int> Audiences { get => _audiences; set => _audiences = value; }
+    public List<int> Credits { get => _credits; set => _credits = value; }
     public int TotalAmount { get => _totalAmount; set => _totalAmount = value; }
     public int VolumeCredits { get => _volumeCredits; set => _volumeCredits = value; }
 
@@ -23,6 +25,7 @@ public class PrintData
         _names = new List<string>();
         _amounts = new List<int>();
         _audiences = new List<int>();
+        _credits = new List<int>();
     }
 
 }
