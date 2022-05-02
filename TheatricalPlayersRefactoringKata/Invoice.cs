@@ -1,19 +1,16 @@
 using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Contracts;
 
 namespace TheatricalPlayersRefactoringKata;
 
 public class Invoice
 {
-    private string _customer;
-    private List<Performance> _performances;
+    public string Customer { get; set; }
+    public List<IPerformance> Performances { get; init; }
 
-    public string Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
-
-    public Invoice(string customer, List<Performance> performance)
+    public Invoice(string customer, List<IPerformance> performances)
     {
-        this._customer = customer;
-        this._performances = performance;
+        Customer = customer;
+        Performances = performances;
     }
-
 }

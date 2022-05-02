@@ -2,7 +2,6 @@
 
 public interface IPerformance
 {
-    string PlayId { get; set; }
     int Audience { get; set; }
     IPlay Play { get; set; }
 
