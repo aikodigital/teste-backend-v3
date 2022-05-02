@@ -5,6 +5,6 @@ public interface IPerformance
     int Audience { get; set; }
     IPlay Play { get; set; }
 
-    int CalculateAmmount();
+    decimal CalculateAmmount();
     int CalculateCredits();
 }

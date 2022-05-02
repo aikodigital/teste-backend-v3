@@ -7,7 +7,7 @@ public abstract class BasePerformance : IPerformance
     public abstract int Audience { get; set; }
     public abstract IPlay Play { get; set; }
 
-    public abstract int CalculateAmmount();
+    public abstract decimal CalculateAmmount();
     public abstract int CalculateCredits();
 
     protected BasePerformance(IPlay play, int audience)
