@@ -28,7 +28,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, ".txt");
 
         Approvals.Verify(result);
     }
@@ -59,7 +59,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, ".txt");
 
         Approvals.Verify(result);
     }
@@ -90,7 +90,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXML(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, ".xml");
 
         Approvals.Verify(result);
     }

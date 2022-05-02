@@ -11,12 +11,13 @@ public class StatementPrinter
     int maxLines = 4000;
     CultureInfo cultureInfo = new CultureInfo("en-US");
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public string Print(Invoice invoice, Dictionary<string, Play> plays, string format)
     {
+        PrintData printData = new PrintData();
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
 
+        printData.Customer = invoice.Customer;
         foreach(var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
@@ -26,17 +27,38 @@ public class StatementPrinter
             var thisAmount = play.Type.CalcAmount(perf, lines);
             // add volume credits
             volumeCredits += play.Type.CalcCredits(perf);
-
-            // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100f), perf.Audience);
+            printData.Names.Add(play.Name);
+            printData.Amounts.Add(thisAmount);
+            printData.Audiences.Add(perf.Audience);
             totalAmount += thisAmount;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100f));
-        result += String.Format("You earned {0} credits\n", volumeCredits);
+        printData.TotalAmount = totalAmount;
+        printData.VolumeCredits = volumeCredits;
+       
+        switch(format)
+        {
+            case ".txt":
+                return PrintTxt(printData);
+            case ".xml":
+                return PrintXml(printData);
+            default:
+                throw new Exception("unknown format: " + format);
+        }
+    }
+
+    public string PrintTxt(PrintData data){
+        var result = string.Format("Statement for {0}\n", data.Customer);
+        for(int i = 0; i < data.Names.Count; i++){
+             // print line for this order
+            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", data.Names[i], Convert.ToDecimal(data.Amounts[i] / 100f), data.Audiences[i]);
+        }
+        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(data.TotalAmount / 100f));
+        result += String.Format("You earned {0} credits\n", data.VolumeCredits);
+
         return result;
     }
 
-    public string PrintXML(Invoice invoice, Dictionary<string, Play> plays)
+    public string PrintXml(PrintData data)
     {
         //Declare a new XMLDocument object
         XmlDocument result = new XmlDocument();
@@ -52,7 +74,7 @@ public class StatementPrinter
         //Customer node
         XmlElement customerNode = result.CreateElement("Customer");
         root.AppendChild(customerNode);
-        XmlText customerText = result.CreateTextNode(invoice.Customer);
+        XmlText customerText = result.CreateTextNode(data.Customer);
         customerNode.AppendChild(customerText);
 
         return result.OuterXml;
