@@ -4,4 +4,6 @@
 
 .suo
 
+*.testlog
+
 *.received.txt
