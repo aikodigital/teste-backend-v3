@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Xml;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -116,6 +117,9 @@ public class StatementPrinter
         XmlText volumeCreditsText = result.CreateTextNode(data.VolumeCredits.ToString());
         volumeCreditsNode.AppendChild(volumeCreditsText);
 
-        return result.OuterXml;
+        //save the invoice in XML format
+        result.Save(Directory.GetCurrentDirectory() + "//invoiceXML.xml");
+        //return the XML invoice for test approval
+        return File.ReadAllText(Directory.GetCurrentDirectory() + "//invoiceXML.xml");
     }
 }
