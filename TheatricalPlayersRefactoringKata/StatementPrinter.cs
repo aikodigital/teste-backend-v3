@@ -17,7 +17,7 @@ public class StatementPrinter
         foreach(var perf in invoice.Performances) 
         {
             var play = perf.Play;
-            var lines = play.Lines;
+            decimal lines = play.Lines;
 
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
