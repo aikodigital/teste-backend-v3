@@ -94,4 +94,33 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+
+    //Unit test for CalcAmount method
+    [Theory]
+    [InlineData("tragedy", 55, 4024, 65240)]
+    [InlineData("comedy", 35, 2670, 54700)]
+    [InlineData("tragedy", 40, 3560, 45600)]
+    [InlineData("history", 20, 3227, 70540)]
+    [InlineData("history", 39, 2648, 93160)]
+    public void TestCalcAmountMethod(string typeName, int audience, int lines, int expectedResult)
+    {
+        Type testType = new Type(typeName);
+        Performance testPerf = new Performance("test", audience);
+        var result = testType.CalcAmount(testPerf, lines);
+        Assert.Equal(expectedResult, result);
+    }
+
+    //Unit test for CalcCredits method
+    [Theory]
+    [InlineData("tragedy", 55, 25)]
+    [InlineData("comedy", 35, 12)]
+    [InlineData("tragedy", 40, 10)]
+    [InlineData("history", 20, 0)]
+    [InlineData("history", 39, 9)]
+    public void TestCalcCreditsMethod(string typeName, int audience, int expectedResult){
+        Type testType = new Type(typeName);
+        Performance testPerf = new Performance("test", audience);
+        var result = testType.CalcCredits(testPerf);
+        Assert.Equal(expectedResult, result);
+    }
 }
