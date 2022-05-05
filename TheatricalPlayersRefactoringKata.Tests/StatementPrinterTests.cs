@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Contracts;
@@ -14,11 +15,11 @@ public partial class StatementPrinterTests
     [Theory]
     [UseReporter(typeof(DiffReporter))]
     [MemberData(nameof(GetInvoice))]
-    public void TestTextStatementExample(Invoice invoice)
+    public void TestTextStatementExample(Invoice invoice, CultureInfo cultureInfo)
     {
         var statementPrinter = new TextStatementPrinter();
         var statement = new Statement(invoice);
-        var result = statementPrinter.Print(statement);
+        var result = statementPrinter.Print(statement, cultureInfo);
         
         Approvals.Verify(result);
     }
@@ -26,11 +27,11 @@ public partial class StatementPrinterTests
     [Theory]
     [UseReporter(typeof(DiffReporter))]
     [MemberData(nameof(GetInvoice))]
-    public void XmlTextStatementExample(Invoice invoice)
+    public void XmlTextStatementExample(Invoice invoice, CultureInfo cultureInfo)
     {
-        var statementPrinter = new TextStatementPrinter();
+        var statementPrinter = new XmlStatementPrinter();
         var statement = new Statement(invoice);
-        var result = statementPrinter.Print(statement);
+        var result = statementPrinter.Print(statement, cultureInfo);
 
         Approvals.Verify(result);
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Contracts;
@@ -33,6 +34,6 @@ public partial class StatementPrinterTests
             }
         );
 
-        yield return new[] { invoice };
+        yield return new object[] { invoice, CultureInfo.CreateSpecificCulture("en-US") };
     }
 }
