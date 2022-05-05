@@ -8,13 +8,13 @@ public class HistoryPerformance : BasePerformance
     public override int Audience { get; set; }
     public override IPlay Play { get; set; }
 
-    public override decimal CalculateAmmount()
+    public override decimal CalculateAmmount(decimal baseAmount)
     {
         var tragedy = new TragedyPerformance(Play, Audience);
 
         var comedy = new ComedyPerformance(Play, Audience);
 
-        return tragedy.CalculateAmmount() + comedy.CalculateAmmount();
+        return tragedy.CalculateAmmount(Audience) + comedy.CalculateAmmount(Audience) + baseAmount;
     }
 
     public override int CalculateCredits()

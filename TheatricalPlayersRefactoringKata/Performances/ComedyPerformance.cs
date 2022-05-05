@@ -8,7 +8,7 @@ public class ComedyPerformance : BasePerformance
     public override int Audience { get; set; }
     public override IPlay Play { get; set; }
 
-    public override decimal CalculateAmmount()
+    public override decimal CalculateAmmount(decimal baseAmount)
     {
         decimal calc = 3.00m * Audience;
 

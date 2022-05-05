@@ -12,7 +12,7 @@ public class TragedyPerformance : BasePerformance
     public override int Audience { get; set; }
     public override IPlay Play { get; set; }
     
-    public override decimal CalculateAmmount()
+    public override decimal CalculateAmmount(decimal baseAmount)
     {
         if (Audience <= 30)
             return 0m;

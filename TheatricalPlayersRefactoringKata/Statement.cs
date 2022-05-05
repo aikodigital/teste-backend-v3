@@ -97,7 +97,7 @@ public class Statement
 
             int thisCredits = 0;
 
-            thisAmount += perf.CalculateAmmount();
+            thisAmount += perf.CalculateAmmount(baseAmount);
 
             thisCredits += perf.CalculateCredits();
 

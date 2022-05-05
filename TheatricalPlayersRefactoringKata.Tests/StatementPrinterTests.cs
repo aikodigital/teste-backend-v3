@@ -4,6 +4,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Contracts;
 using TheatricalPlayersRefactoringKata.Performances;
+using TheatricalPlayersRefactoringKata.Printers;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -34,9 +35,10 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice);
-
+        var statementPrinter = new TextStatementPrinter();
+        var statement = new Statement(invoice);
+        var result = statementPrinter.Print(statement);
+        
         Approvals.Verify(result);
     }
 }
