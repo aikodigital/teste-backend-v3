@@ -20,7 +20,7 @@ public class TextStatementPrinter : IStatementPrinter
             decimal thisAmount = entry.Amount;
 
             // print line for this order
-            result.AppendLine($"   {play.Name}: {thisAmount.ToString("C", cultureInfo)} ({perf.Audience} seats)");
+            result.AppendLine($"  {play.Name}: {thisAmount.ToString("C", cultureInfo)} ({perf.Audience} seats)");
         }
         result.AppendLine($"Amount owed is {statement.TotalAmount.ToString("C", cultureInfo)}");
 

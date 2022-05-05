@@ -8,3 +8,4 @@
 
 *.received.txt
 /description.txt
+/TheatricalPlayersRefactoringKata.Tests/StatementPrinterTests.XmlTextStatementExample.approved.txt
