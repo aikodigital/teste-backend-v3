@@ -38,6 +38,10 @@ esperado que você torne o código mais testável e então adicione testes
 unitários que validem a aplicação de forma mais granular e que dêem segurança
 para futuras refatorações e para o acréscimo das novas funcionalidades.
 
+Também serão avaliados a abordagem para desenvolvimento da solução (Desing 
+Patters, DDD, Solid, etc.) e a arquitetura utilizada (Clean Architecture, Onion
+Architecture, etc.).
+
 O projeto de testes possui três ApprovalTests.
 
 * O teste TestStatementExampleLegacy, está passando no estado atual do
@@ -49,13 +53,26 @@ O projeto de testes possui três ApprovalTests.
 * O teste TestXmlStatementExample não está implementado e deve ser implementado
   por você e gerar a saída aprovada que está no projeto de testes.
 
-O código dos testes dados pode ser refatorado, desde que a saída continue a
+O código dos testes pode ser refatorado, desde que a saída continue a
 mesma e os testes continuem cumprindo o mesmo propósito. É esperado que você
 implemente as novas funcionalidades pedidas para que todos os ApprovalTests
 passem.
 
 Faça commits com frequência para que sua abordagem de refatoração seja mostrada
 pelo histórico de versões.
+
+## Extras
+
+Não é mandatório, mas de maneira opcional os seguintes requisitos poderão ser
+implementados:
+
+* Implementar processamento assincrono de extratos, os dados devem ser imputados,
+  enfileirados, processados assincronicamente e gerar o XML resultante em um 
+  diretório
+* API rest para expor os métodos para futuras integrações
+  * Expor documentação da API por Swagger
+* Persistencia dos dados em um banco de dados para salvar o extrato com suas
+  respectivas peças
 
 ## Regras de negócio
 
