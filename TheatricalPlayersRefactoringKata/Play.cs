@@ -1,5 +1,6 @@
 namespace TheatricalPlayersRefactoringKata;
 
+//Peça de teatro
 public class Play
 {
     private string _name;

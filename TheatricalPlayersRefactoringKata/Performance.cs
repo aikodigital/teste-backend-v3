@@ -1,5 +1,6 @@
 namespace TheatricalPlayersRefactoringKata;
 
+//Apresentação de teatro
 public class Performance
 {
     private string _playId;
