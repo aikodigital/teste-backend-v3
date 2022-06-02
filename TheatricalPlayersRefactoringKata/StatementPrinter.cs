@@ -7,12 +7,12 @@ namespace TheatricalPlayersRefactoringKata;
 //Impressora de extratos
 public class StatementPrinter
 {
-    private const int TRAGEDY_ADICIONAL_AUDIENCE_VALUE = 1000;
+    private const int TRAGEDY_ADICIONAL_AUDIENCE_VALUE = 10;
     private const int TRAGEDY_MAX_AUDIENCE = 30;
 
-    private const int COMEDY_DEFAULT_AUDIENCE_VALUE = 300;
-    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE = 500;
-    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED = 10000; 
+    private const int COMEDY_DEFAULT_AUDIENCE_VALUE = 3;
+    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE = 5;
+    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED = 100; 
     private const int COMEDY_MAX_AUDIENCE = 20;
     private const int COMEDY_AUDIENCE_DIVISION_CREDIT = 5;
 
@@ -47,12 +47,12 @@ public class StatementPrinter
             }
 
             AddCredits(ref volumeCredits, performance, play);
-            result = PrintLineThisOrder(invoice, result, cultureInfo, performance, play, baseValue);
+            result = PrintLineThisOrder(invoice, result, cultureInfo, performance, play, ref baseValue);
 
             totalAmount += baseValue;
         }
 
-        invoice.TotalAmount = Convert.ToDecimal(totalAmount / 100);
+        invoice.TotalAmount = totalAmount;
         invoice.VolumeCredits = volumeCredits;
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", invoice.TotalAmount);
@@ -85,16 +85,14 @@ public class StatementPrinter
     private int CalculateBaseValue(Play play)
     {
         int linesPlay = GetLinesPlay(play);
-        var baseValue = linesPlay * 10;
+        var baseValue = linesPlay / 10;
 
         return baseValue;
     }
 
     private string PrintLineThisOrder(Invoice invoice, string result, CultureInfo cultureInfo,
-                                      Performance performance, Play play, int baseValue)
+                                      Performance performance, Play play, ref int performanceAmount)
     {
-        var performanceAmount = Convert.ToDecimal(baseValue / 100);
-
         invoice.PerformancesAmountCurtumer.Add(play.Name, performanceAmount);
         result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, performanceAmount, performance.Audience);
         return result;

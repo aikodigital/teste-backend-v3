@@ -113,16 +113,12 @@ public class StatementPrinterTests
         //Arrange
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance("hamlet", 55)
             }
         );
 
@@ -133,11 +129,9 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(650, invoice.PerformancesAmountCurtumer["Hamlet"]);
-        Assert.Equal(547, invoice.PerformancesAmountCurtumer["As You Like It"]);
-        Assert.Equal(456, invoice.PerformancesAmountCurtumer["Othello"]);
 
-        Assert.Equal(1653, invoice.TotalAmount);
-        Assert.Equal(47, invoice.VolumeCredits);
+        Assert.Equal(650, invoice.TotalAmount);
+        Assert.Equal(25, invoice.VolumeCredits);
     }
 
     [Fact]
@@ -145,10 +139,27 @@ public class StatementPrinterTests
     public void PlayWithRangeLess1000_Return1000()
     {
         //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("as-like", new Play("As You Like It", 900, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("as-like", 35)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
+        statementPrinter.Print(invoice, plays);
 
         //Assert
+        Assert.Equal(380, invoice.PerformancesAmountCurtumer["As You Like It"]);
+
+        Assert.Equal(380, invoice.TotalAmount);
+        Assert.Equal(12, invoice.VolumeCredits);
     }
 
     [Fact]
@@ -156,10 +167,29 @@ public class StatementPrinterTests
     public void ValueBaseIsLinesDivided10()
     {
         //Arrange
+        const int LINES = 4000;
+
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", LINES, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 29)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
+        statementPrinter.Print(invoice, plays);
 
         //Assert
+        Assert.Equal(LINES/10, invoice.PerformancesAmountCurtumer["Hamlet"]);
+
+        Assert.Equal(400, invoice.TotalAmount);
+        Assert.Equal(0, invoice.VolumeCredits);
     }
 
     [Fact]
