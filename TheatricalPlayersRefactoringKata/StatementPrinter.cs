@@ -13,41 +13,27 @@ public class StatementPrinter
         var volumeCredits = 0;
 
         var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        var cultureInfo = new CultureInfo("en-US");
 
         foreach(var performance in invoice.Performances)
         {
             var play = plays[performance.PlayId];
-            int linesPlay = GetLinesPlay(play);
-
-            var baseValue = linesPlay * 10;
+            int baseValue = CalculateBaseValue(play);
 
             switch (play.Type)
             {
                 case "tragedy":
-                    if (performance.Audience > 30)
-                    {
-                        baseValue += 1000 * (performance.Audience - 30);
-                    }
+                    baseValue = CalculateTragedyValue(performance, baseValue);
                     break;
                 case "comedy":
-                    if (performance.Audience > 20)
-                    {
-                        baseValue += 10000 + 500 * (performance.Audience - 20);
-                    }
-                    baseValue += 300 * performance.Audience;
+                    baseValue = CalculateComedyValue(performance, baseValue);
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
 
             AddCredits(ref volumeCredits, performance, play);
-
-            // print line for this order
-            var performanceAmount = Convert.ToDecimal(baseValue / 100);
-
-            invoice.PerformancesAmountCurtumer.Add(play.Name, performanceAmount);
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, performanceAmount, performance.Audience);
+            result = PrintLineThisOrder(invoice, result, cultureInfo, performance, play, baseValue);
 
             totalAmount += baseValue;
         }
@@ -57,6 +43,45 @@ public class StatementPrinter
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", invoice.TotalAmount);
         result += String.Format("You earned {0} credits\n", invoice.VolumeCredits);
+        return result;
+    }
+
+    private int CalculateComedyValue(Performance performance, int baseValue)
+    {
+        if (performance.Audience > 20)
+        {
+            baseValue += 10000 + 500 * (performance.Audience - 20);
+        }
+
+        baseValue += 300 * performance.Audience;
+        
+        return baseValue;
+    }
+
+    private int CalculateTragedyValue(Performance performance, int baseValue)
+    {
+        if (performance.Audience < 30) return baseValue;
+
+        baseValue += 1000 * (performance.Audience - 30);
+
+        return baseValue;
+    }
+
+    private int CalculateBaseValue(Play play)
+    {
+        int linesPlay = GetLinesPlay(play);
+        var baseValue = linesPlay * 10;
+
+        return baseValue;
+    }
+
+    private string PrintLineThisOrder(Invoice invoice, string result, CultureInfo cultureInfo,
+                                      Performance performance, Play play, int baseValue)
+    {
+        var performanceAmount = Convert.ToDecimal(baseValue / 100);
+
+        invoice.PerformancesAmountCurtumer.Add(play.Name, performanceAmount);
+        result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, performanceAmount, performance.Audience);
         return result;
     }
 
