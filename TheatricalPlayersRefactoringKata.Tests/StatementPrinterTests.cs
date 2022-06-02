@@ -101,7 +101,6 @@ public class StatementPrinterTests
         Assert.Equal(650, invoice.PerformancesAmountCurtumer["Hamlet"]);
         Assert.Equal(547, invoice.PerformancesAmountCurtumer["As You Like It"]);
         Assert.Equal(456, invoice.PerformancesAmountCurtumer["Othello"]);
-
         Assert.Equal(1653, invoice.TotalAmount);
         Assert.Equal(47, invoice.VolumeCredits);
     }
@@ -129,7 +128,6 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(650, invoice.PerformancesAmountCurtumer["Hamlet"]);
-
         Assert.Equal(650, invoice.TotalAmount);
         Assert.Equal(25, invoice.VolumeCredits);
     }
@@ -157,7 +155,6 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(380, invoice.PerformancesAmountCurtumer["As You Like It"]);
-
         Assert.Equal(380, invoice.TotalAmount);
         Assert.Equal(12, invoice.VolumeCredits);
     }
@@ -187,7 +184,6 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(LINES/10, invoice.PerformancesAmountCurtumer["Hamlet"]);
-
         Assert.Equal(400, invoice.TotalAmount);
         Assert.Equal(0, invoice.VolumeCredits);
     }
@@ -197,21 +193,116 @@ public class StatementPrinterTests
     public void TragedyPlay_WhenAudienceLessOrEqualTo30_AmountPlayWillBeBaseValue()
     {
         //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 29)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
+        statementPrinter.Print(invoice, plays);
 
         //Assert
+        Assert.Equal(400, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(400, invoice.TotalAmount);
     }
 
-    [Fact]
+
+    [Theory]
+    [InlineData(31)]
+    [InlineData(32)]
     [UseReporter(typeof(DiffReporter))]
-    public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValue()
+    public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValueForAdicionalAudience(int audience)
     {
         //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var baseValue = 400 + 10 * (audience - 30);
 
         //Act
+        statementPrinter.Print(invoice, plays);
 
         //Assert
+        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(baseValue, invoice.TotalAmount);
     }
+
+    [Theory]
+    [InlineData(31)]
+    [InlineData(32)]
+    [UseReporter(typeof(DiffReporter))]
+    public void AllPlays_WhenAudienceGreaterTo30_Sum1CreditForAdicionalAudience(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        
+        var volumeCredits = audience - 30;
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(volumeCredits, invoice.VolumeCredits);
+    }
+
+    [Theory]
+    [InlineData(30)]
+    [InlineData(29)]
+    [UseReporter(typeof(DiffReporter))]
+    public void AllPlays_WhenAudienceLessOrEqualTo30_NotAddCreditsForAudience(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(0, invoice.VolumeCredits);
+    }
+
+    //comedia
+    //bonus
+
 
 }
