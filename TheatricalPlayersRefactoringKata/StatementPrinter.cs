@@ -7,6 +7,20 @@ namespace TheatricalPlayersRefactoringKata;
 //Impressora de extratos
 public class StatementPrinter
 {
+    private const int TRAGEDY_ADICIONAL_AUDIENCE_VALUE = 1000;
+    private const int TRAGEDY_MAX_AUDIENCE = 30;
+
+    private const int COMEDY_DEFAULT_AUDIENCE_VALUE = 300;
+    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE = 500;
+    private const int COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED = 10000; 
+    private const int COMEDY_MAX_AUDIENCE = 20;
+    private const int COMEDY_AUDIENCE_DIVISION_CREDIT = 5;
+
+    private const int AUDIENCE_FROM_AT_LEAST_FOR_CREDIT = 30;
+    
+    private const int LINE_MIN = 1000;
+    private const int LINE_MAX = 4000;
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
         var totalAmount = 0;
@@ -48,21 +62,22 @@ public class StatementPrinter
 
     private int CalculateComedyValue(Performance performance, int baseValue)
     {
-        if (performance.Audience > 20)
+        if (performance.Audience > COMEDY_MAX_AUDIENCE)
         {
-            baseValue += 10000 + 500 * (performance.Audience - 20);
+            baseValue += COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED +
+                         COMEDY_ADICIONAL_AUDIENCE_VALUE * (performance.Audience - COMEDY_MAX_AUDIENCE);
         }
 
-        baseValue += 300 * performance.Audience;
+        baseValue += COMEDY_DEFAULT_AUDIENCE_VALUE * performance.Audience;
         
         return baseValue;
     }
 
     private int CalculateTragedyValue(Performance performance, int baseValue)
     {
-        if (performance.Audience < 30) return baseValue;
+        if (performance.Audience < TRAGEDY_MAX_AUDIENCE) return baseValue;
 
-        baseValue += 1000 * (performance.Audience - 30);
+        baseValue += TRAGEDY_ADICIONAL_AUDIENCE_VALUE * (performance.Audience - TRAGEDY_MAX_AUDIENCE);
 
         return baseValue;
     }
@@ -87,27 +102,28 @@ public class StatementPrinter
 
     private void AddCredits(ref int volumeCredits, Performance performance, Play play)
     {
-        AddVolumeCredits(ref volumeCredits, performance);
-        AddExtraCreditForEveryTenCommedyAttendees(ref volumeCredits, performance, play);
+        AddCreditsForAudience(ref volumeCredits, performance);
+        AddCreditForCommedyAudience(ref volumeCredits, performance, play);
     }
 
-    private void AddExtraCreditForEveryTenCommedyAttendees(ref int volumeCredits, Performance performance, Play play)
+    private void AddCreditForCommedyAudience(ref int volumeCredits, Performance performance, Play play)
     {
-        if ("comedy" == play.Type)
-            volumeCredits += (int)Math.Floor((decimal)performance.Audience / 5);
+        if (play.Type != "comedy") return;
+
+        volumeCredits += (int)Math.Floor((decimal)performance.Audience / COMEDY_AUDIENCE_DIVISION_CREDIT);
     }
 
-    private void AddVolumeCredits(ref int volumeCredits, Performance performance)
+    private void AddCreditsForAudience(ref int volumeCredits, Performance performance)
     {
-        volumeCredits += Math.Max(performance.Audience - 30, 0);
+        volumeCredits += Math.Max(performance.Audience - AUDIENCE_FROM_AT_LEAST_FOR_CREDIT, 0);
     }
 
     private int GetLinesPlay(Play play)
     {
         var lines = play.Lines;
 
-        if (play.Lines < 1000) lines = 1000;
-        if (play.Lines > 4000) lines = 4000;
+        if (play.Lines < LINE_MIN) lines = LINE_MIN;
+        if (play.Lines > LINE_MAX) lines = LINE_MAX;
 
         return lines;
     }
