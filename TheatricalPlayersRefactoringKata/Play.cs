@@ -4,6 +4,8 @@ namespace TheatricalPlayersRefactoringKata;
 //Peça de teatro
 public abstract class Play : IPlay
 {
+    public Guid Guid { get; private set; }
+
     private const int LINE_MIN = 1000;
     private const int LINE_MAX = 4000;
 
@@ -20,15 +22,14 @@ public abstract class Play : IPlay
     {
         Name = name;
         Lines = lines;
-
         _baseValue = GetLines() / 10;
+        Guid = Guid.NewGuid();
     }
 
     public void SumBaseValue(int value)
     {
         _baseValue += value;
     }
-    
     
 
     public int GetLines()

@@ -13,8 +13,6 @@
 
         public override int CalculateBaseValue(Performance performance)
         {
-            
-
             if (performance.Audience > COMEDY_MAX_AUDIENCE)
             {
                SumBaseValue(COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED +
@@ -22,7 +20,6 @@
             }
 
             SumBaseValue(COMEDY_DEFAULT_AUDIENCE_VALUE * performance.Audience);
-
 
             return BaseValue;
         }

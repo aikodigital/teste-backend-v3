@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -8,13 +9,12 @@ public class Invoice
 {
     private string _customer;
     private List<Performance> _performances;
+    private int _volumeCredits;
 
-    public string Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
-
-    //Todo
-    public decimal TotalAmount { get; set; }
-    public int VolumeCredits { get; set; }
+    public string Customer => _customer;
+    public IReadOnlyList<Performance> Performances => _performances.AsReadOnly();
+    public decimal TotalAmount => _performances.Sum(p => p.Play.BaseValue);
+    public int VolumeCredits => _performances.Sum(p => p.GetCredits());
 
     public Dictionary<string, decimal> PerformancesAmountCurtumer { get; set; } =
         new Dictionary<string, decimal>();
@@ -22,8 +22,8 @@ public class Invoice
 
     public Invoice(string customer, List<Performance> performance)
     {
-        this._customer = customer;
-        this._performances = performance;
+        _customer = customer;
+        _performances = performance;
     }
 
 }

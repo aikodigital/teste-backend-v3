@@ -46,23 +46,28 @@ public class StatementPrinterTests
     {
         //Arrange
 
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
-        plays.Add("othello", new TragedyPlay("Othello", 3560));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+        var asLike = new ComedyPlay("As You Like It", 2670);
+        var othello = new TragedyPlay("Othello", 3560);
+
+        var plays = new List<Play>
+        {
+            hamlet,
+            asLike,
+            othello
+        };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance(hamlet, 55),
+                new Performance(asLike, 35),
+                new Performance(othello, 40),
             }
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-
 
         //Act
         var result = statementPrinter.Print(invoice, plays);
@@ -77,18 +82,20 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy_Refatored()
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
-        plays.Add("othello", new TragedyPlay("Othello", 3560));
+
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+        var asLike = new ComedyPlay("As You Like It", 2670);
+        var othello = new TragedyPlay("Othello", 3560);
+
+        var plays = new List<Play> { hamlet, asLike, othello };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance(hamlet, 55),
+                new Performance(asLike, 35),
+                new Performance(othello, 40),
             }
         );
 
@@ -110,14 +117,15 @@ public class StatementPrinterTests
     public void PlayWithRangeGreater4000_Return4000()
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55)
+                new Performance(hamlet, 55)
             }
         );
 
@@ -137,14 +145,16 @@ public class StatementPrinterTests
     public void PlayWithRangeLess1000_Return1000()
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new ComedyPlay("As You Like It", 900));
+
+        var asLike = new ComedyPlay("As You Like It", 900);
+
+        var plays = new List<Play> { asLike };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("as-like", 35)
+                new Performance(asLike, 35),
             }
         );
 
@@ -165,15 +175,16 @@ public class StatementPrinterTests
     {
         //Arrange
         const int LINES = 4000;
+        
+        var hamlet = new TragedyPlay("Hamlet", LINES);
 
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", LINES));
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 29)
+                new Performance(hamlet, 29),
             }
         );
 
@@ -195,14 +206,15 @@ public class StatementPrinterTests
     public void AllPlays_WhenAudienceGreaterTo30_Sum1CreditForAdicionalAudience(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", audience)
+                new Performance(hamlet, audience),
             }
         );
 
@@ -224,14 +236,15 @@ public class StatementPrinterTests
     public void AllPlays_WhenAudienceLessOrEqualTo30_NotAddCreditsForAudience(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", audience)
+                new Performance(hamlet, audience),
             }
         );
 
@@ -251,14 +264,15 @@ public class StatementPrinterTests
     public void TragedyPlay_WhenAudienceLessOrEqualTo30_AmountPlayWillBeBaseValue(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", audience)
+                new Performance(hamlet, audience),
             }
         );
 
@@ -280,14 +294,15 @@ public class StatementPrinterTests
     public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValueForAdicionalAudience(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        var hamlet = new TragedyPlay("Hamlet", 4024);
+
+        var plays = new List<Play> { hamlet };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", audience)
+                new Performance(hamlet, audience),
             }
         );
 
@@ -310,14 +325,15 @@ public class StatementPrinterTests
     public void AllComedyPlay_Sum3BaseValueForAudience(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        var asLike = new ComedyPlay("As You Like It", 2670);
+
+        var plays = new List<Play> { asLike };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("as-like", audience),
+                new Performance(asLike, audience)
             }
         );
 
@@ -339,16 +355,18 @@ public class StatementPrinterTests
     public void ComedyPlay_WhenAudienceLessOrEqualTo20_UseBaseValue(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        var asLike = new ComedyPlay("As You Like It", 2670);
+
+        var plays = new List<Play> { asLike };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("as-like", audience),
+                new Performance(asLike, audience)
             }
         );
+
 
         StatementPrinter statementPrinter = new StatementPrinter();
         var baseValue = 267 + audience * 3;
@@ -369,16 +387,18 @@ public class StatementPrinterTests
     public void ComedyPlay_WhenAudienceGreaterTo20_SumBaseValueWithAdicionalAudienceMultiplicationAdicionalValues(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        var asLike = new ComedyPlay("As You Like It", 2670);
+
+        var plays = new List<Play> { asLike };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("as-like", audience)
+                new Performance(asLike, audience)
             }
         );
+
 
         StatementPrinter statementPrinter = new StatementPrinter();
         var baseValue = GetBaseValueComedy(267, 100, audience) + 5 * GetAdicionalAudienceComedy(audience);
@@ -399,16 +419,18 @@ public class StatementPrinterTests
     public void ComedyPlay_AwaysAddComedyCredits_CalculteWithValuePartAudience(int audience)
     {
         //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        var asLike = new ComedyPlay("As You Like It", 2670);
+
+        var plays = new List<Play> { asLike };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("as-like", audience)
+                new Performance(asLike, audience)
             }
         );
+
 
         StatementPrinter statementPrinter = new StatementPrinter();
 

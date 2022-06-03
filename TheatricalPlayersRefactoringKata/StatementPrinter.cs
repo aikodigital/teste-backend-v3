@@ -7,14 +7,8 @@ namespace TheatricalPlayersRefactoringKata;
 //Impressora de extratos
 public class StatementPrinter
 {
-    private const int COMEDY_AUDIENCE_DIVISION_CREDIT = 5;
-
-    private const int AUDIENCE_FROM_AT_LEAST_FOR_CREDIT = 30;
-
-
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public string Print(Invoice invoice, List<Play> plays)
     {
-        var totalAmount = 0;
         var volumeCredits = 0;
 
         var result = string.Format("Statement for {0}\n", invoice.Customer);
@@ -22,18 +16,14 @@ public class StatementPrinter
 
         foreach(var performance in invoice.Performances)
         {
-            var play = plays[performance.PlayId];
+            if (!plays.Contains(performance.Play)) throw new ArgumentException();
+            
+            var baseValue = performance.Play.CalculateBaseValue(performance);
 
-            var baseValue = play.CalculateBaseValue(performance);
+            result = PrintLineThisOrder(invoice, result, cultureInfo, performance, performance.Play, ref baseValue);
 
-            AddCredits(ref volumeCredits, performance, play);
-            result = PrintLineThisOrder(invoice, result, cultureInfo, performance, play, ref baseValue);
-
-            totalAmount += baseValue;
         }
 
-        invoice.TotalAmount = totalAmount;
-        invoice.VolumeCredits = volumeCredits;
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", invoice.TotalAmount);
         result += String.Format("You earned {0} credits\n", invoice.VolumeCredits);
@@ -48,22 +38,6 @@ public class StatementPrinter
         return result;
     }
 
-    private void AddCredits(ref int volumeCredits, Performance performance, Play play)
-    {
-        AddCreditsForAudience(ref volumeCredits, performance);
-        AddCreditForCommedyAudience(ref volumeCredits, performance, play);
-    }
 
-    private void AddCreditForCommedyAudience(ref int volumeCredits, Performance performance, Play play)
-    {
-        if (play is not ComedyPlay) return;
-
-        volumeCredits += (int)Math.Floor((decimal)performance.Audience / COMEDY_AUDIENCE_DIVISION_CREDIT);
-    }
-
-    private void AddCreditsForAudience(ref int volumeCredits, Performance performance)
-    {
-        volumeCredits += Math.Max(performance.Audience - AUDIENCE_FROM_AT_LEAST_FOR_CREDIT, 0);
-    }
 
 }
