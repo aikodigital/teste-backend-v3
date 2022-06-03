@@ -9,7 +9,6 @@ public class Invoice
 {
     private string _customer;
     private List<Performance> _performances;
-    private int _volumeCredits;
 
     public string Customer => _customer;
     public IReadOnlyList<Performance> Performances => _performances.AsReadOnly();
@@ -24,6 +23,11 @@ public class Invoice
     {
         _customer = customer;
         _performances = performance;
+    }
+
+    public void Calculute()
+    {
+        _performances.ForEach(p => p.Play.CalculateBaseValue(p));
     }
 
 }
