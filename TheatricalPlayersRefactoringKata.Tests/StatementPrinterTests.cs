@@ -9,38 +9,6 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
-    {
-        //Arrange
-
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-            }
-        );
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-
-
-        //Act
-        var result = statementPrinter.Print(invoice, plays);
-
-
-        //Assert
-        Approvals.Verify(result);
-    }
-
     //[Fact]
     //[UseReporter(typeof(DiffReporter))]
     //public void TestTextStatementExample()
@@ -74,7 +42,39 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy_2()
+    public void TestStatementExampleLegacy()
+    {
+        //Arrange
+
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("othello", 40),
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+
+        //Act
+        var result = statementPrinter.Print(invoice, plays);
+
+
+        //Assert
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestStatementExampleLegacy_Refatored()
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
@@ -188,63 +188,6 @@ public class StatementPrinterTests
         Assert.Equal(0, invoice.VolumeCredits);
     }
 
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void TragedyPlay_WhenAudienceLessOrEqualTo30_AmountPlayWillBeBaseValue()
-    {
-        //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 29)
-            }
-        );
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-
-        //Act
-        statementPrinter.Print(invoice, plays);
-
-        //Assert
-        Assert.Equal(400, invoice.PerformancesAmountCurtumer["Hamlet"]);
-        Assert.Equal(400, invoice.TotalAmount);
-    }
-
-
-    [Theory]
-    [InlineData(31)]
-    [InlineData(32)]
-    [UseReporter(typeof(DiffReporter))]
-    public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValueForAdicionalAudience(int audience)
-    {
-        //Arrange
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", audience)
-            }
-        );
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-
-        var baseValue = 400 + 10 * (audience - 30);
-
-        //Act
-        statementPrinter.Print(invoice, plays);
-
-        //Assert
-        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["Hamlet"]);
-        Assert.Equal(baseValue, invoice.TotalAmount);
-    }
-
     [Theory]
     [InlineData(31)]
     [InlineData(32)]
@@ -264,8 +207,8 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        
-        var volumeCredits = audience - 30;
+
+        var volumeCredits = GetAdicionalAudienceTragedy(audience);
 
         //Act
         statementPrinter.Print(invoice, plays);
@@ -300,6 +243,201 @@ public class StatementPrinterTests
         //Assert
         Assert.Equal(0, invoice.VolumeCredits);
     }
+
+    [Theory]
+    [InlineData(30)]
+    [InlineData(29)]
+    [UseReporter(typeof(DiffReporter))]
+    public void TragedyPlay_WhenAudienceLessOrEqualTo30_AmountPlayWillBeBaseValue(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(400, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(400, invoice.TotalAmount);
+    }
+
+
+    [Theory]
+    [InlineData(31)]
+    [InlineData(32)]
+    [UseReporter(typeof(DiffReporter))]
+    public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValueForAdicionalAudience(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var baseValue = 400 + 10 * (GetAdicionalAudienceTragedy(audience));
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(baseValue, invoice.TotalAmount);
+    }
+
+    [Theory]
+    [InlineData(19)]
+    [InlineData(20)]
+    [UseReporter(typeof(DiffReporter))]
+    public void AllComedyPlay_Sum3BaseValueForAudience(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("as-like", audience),
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var baseValue =  GetBaseValueComedy(267, 0, audience);
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.TotalAmount);
+    }
+
+    [Theory]
+    [InlineData(19)]
+    [InlineData(20)]
+    [UseReporter(typeof(DiffReporter))]
+    public void ComedyPlay_WhenAudienceLessOrEqualTo20_UseBaseValue(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("as-like", audience),
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var baseValue = 267 + audience * 3;
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.TotalAmount);
+    }
+
+
+    [Theory]
+    [InlineData(21)]
+    [InlineData(22)]
+    [UseReporter(typeof(DiffReporter))]
+    public void ComedyPlay_WhenAudienceGreaterTo20_SumBaseValueWithAdicionalAudienceMultiplicationAdicionalValues(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("as-like", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var baseValue = GetBaseValueComedy(267, 100, audience) + 5 * GetAdicionalAudienceComedy(audience);
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.TotalAmount);
+
+    }
+
+    [Theory]
+    [InlineData(21)]
+    [InlineData(22)]
+    [UseReporter(typeof(DiffReporter))]
+    public void ComedyPlay_AwaysAddComedyCredits_CalculteWithValuePartAudience(int audience)
+    {
+        //Arrange
+        var plays = new Dictionary<string, Play>();
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("as-like", audience)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var volumeCredits = Math.Floor((decimal)audience / 5);
+        volumeCredits += Math.Max(audience - 30, 0);
+
+        //Act
+        statementPrinter.Print(invoice, plays);
+
+        //Assert
+        Assert.Equal(volumeCredits, invoice.VolumeCredits);
+    }
+
+    private int GetBaseValueComedy(int baseValue, int adicionalValues, int audience)
+    {
+        return baseValue + adicionalValues + 3 * audience;
+    }
+
+    private int GetAdicionalAudienceComedy(int audience)
+    {
+        return audience - 20;
+    }
+
+    private int GetAdicionalAudienceTragedy(int audience)
+    {
+        return audience - 30; //30 - max audience;
+    }
+
+
 
     //comedia
     //bonus
