@@ -1,19 +1,43 @@
+using System;
 namespace TheatricalPlayersRefactoringKata;
 
 //Peça de teatro
-public class Play
+public abstract class Play : IPlay
 {
-    private string _name;
-    private int _lines;
-    private string _type;
+    private const int LINE_MIN = 1000;
+    private const int LINE_MAX = 4000;
 
-    public string Name { get => _name; set => _name = value; }
-    public int Lines { get => _lines; set => _lines = value; }
-    public string Type { get => _type; set => _type = value; }
+    private int _baseValue;
 
-    public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+    public string Name { get; protected set; }
+    public int Lines { get; protected set; }
+    public int BaseValue { get => _baseValue; }
+
+    
+    public abstract int CalculateBaseValue(Performance performance);
+
+    public Play(string name, int lines)
+    {
+        Name = name;
+        Lines = lines;
+
+        _baseValue = GetLines() / 10;
+    }
+
+    public void SumBaseValue(int value)
+    {
+        _baseValue += value;
+    }
+    
+    
+
+    public int GetLines()
+    {
+        var lines = Lines;
+
+        if (Lines < LINE_MIN) lines = LINE_MIN;
+        if (Lines > LINE_MAX) lines = LINE_MAX;
+
+        return lines;
     }
 }

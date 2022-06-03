@@ -47,9 +47,9 @@ public class StatementPrinterTests
         //Arrange
 
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        plays.Add("othello", new TragedyPlay("Othello", 3560));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -78,9 +78,9 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        plays.Add("othello", new TragedyPlay("Othello", 3560));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -111,7 +111,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -138,7 +138,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new Play("As You Like It", 900, "comedy"));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 900));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -167,7 +167,7 @@ public class StatementPrinterTests
         const int LINES = 4000;
 
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", LINES, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", LINES));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -196,7 +196,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -225,7 +225,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -252,7 +252,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -281,7 +281,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -311,7 +311,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -340,7 +340,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -370,7 +370,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -400,7 +400,7 @@ public class StatementPrinterTests
     {
         //Arrange
         var plays = new Dictionary<string, Play>();
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
 
         Invoice invoice = new Invoice(
             "BigCo",
