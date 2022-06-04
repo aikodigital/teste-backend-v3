@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.CrossCutting.Mapper\TheatricalPlayersRefactoringKata.CrossCutting.Mapper.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Interface\TheatricalPlayersRefactoringKata.Domain.Interface.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Repository\TheatricalPlayersRefactoringKata.Repository.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Service\TheatricalPlayersRefactoringKata.Domain.Service.csproj" />

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using System.Text;
+﻿using System.Text;
 using TheatricalPlayersRefactoringKata.App.Interfaces;
 using TheatricalPlayersRefactoringKata.App.Model.Request;
 using TheatricalPlayersRefactoringKata.App.Model.Response;
@@ -7,21 +6,22 @@ using TheatricalPlayersRefactoringKata.App.ViewModel;
 using TheatricalPlayersRefactoringKata.Domain.Interface.Services;
 using TheatricalPlayersRefactoringKata.Domain.Interface.UoW;
 using TheatricalPlayersRefactoringKata.Domain.Model.Entity;
+using TheatricalPlayersRefactoringKata.Domain.Model.Enum;
 
 namespace TheatricalPlayersRefactoringKata.App
 {
     public class InvoiceApp : IInvoiceApp
     {
         private readonly IUnitOfWork _uow;
-        private readonly IMapper _mapper;
         private readonly IInvoiceService _invoiceService;
+        private readonly IExtractService _extractService;
 
         public InvoiceApp(IInvoiceService invoiceService,
-            IMapper mapper,
+            IExtractService extractService,
             IUnitOfWork uow)
         {
             _invoiceService = invoiceService;
-            _mapper = mapper;
+            _extractService = extractService;
             _uow = uow;
         }
 
@@ -31,25 +31,73 @@ namespace TheatricalPlayersRefactoringKata.App
 
             using (_uow.OpenTransation())
             {
-                bool isValidRequest = ValidateRequest(request, out StringBuilder errors, out Customer customer, out List<Play> lstPlays);
+                bool isValidRequest = ValidateRequest(request, out StringBuilder errors);
                 if (!isValidRequest)
                 {
-                    response.AddErrorMessage(errors); 
+                    response.AddErrorMessage(errors);
+                    return response;
+                }
+
+                bool isValidDate = ValidateData(request, out errors, out Customer customer, out List<Play> lstPlays);
+                if (!isValidDate)
+                {
+                    response.AddErrorMessage(errors);
                     return response;
                 }
 
                 List<Performance> performances = FilterPerformance(request.Value.PerformanceViewModels, lstPlays);
-
                 Invoice invoice = await _invoiceService.Invoice(request.Value.CustomerId, performances, lstPlays);
 
                 NewInvoiceResponse newInvoiceResponse = new NewInvoiceResponse();
                 newInvoiceResponse.Id = invoice.Id;
                 newInvoiceResponse.CreationDate = invoice.CreationDate;
-                newInvoiceResponse.TotalAmout = invoice.Amount;
-                newInvoiceResponse.TotalCredits = invoice.Credits;
+                newInvoiceResponse.TotalAmout = invoice.TotalAmount;
+                newInvoiceResponse.TotalCredits = invoice.TotalCredits;
                 newInvoiceResponse.CustomerId = customer.Id;
                 newInvoiceResponse.CustomerName = customer.Name;
                 response.Value = newInvoiceResponse;
+            }
+
+            return response;
+        }
+
+        public async Task<Response<string>> GenerateExtract(long invoiceId, ExtractTypeEnum extractType)
+        {
+            Response<string> response = new Response<string>(_uow);
+
+            Response<Invoice> validateInvoice = await ValidateInvoice(invoiceId);
+            if (validateInvoice.HasErrors)
+            {
+                response.AddErrorMessage(validateInvoice.ErrorMessage);
+                return response;
+            }
+
+            response.Value = _extractService.GenerateExtract(validateInvoice.Value, extractType);
+
+            return response;
+        }
+
+        private async Task<Response<Invoice>> ValidateInvoice(long invoiceId)
+        {
+            Response<Invoice> response = new Response<Invoice>(_uow);
+
+            if (invoiceId <= 0)
+            {
+                response.AddErrorMessage(new StringBuilder("Invoice Id inválido"));
+                return response;
+            }
+
+            using (_uow.OpenTransation())
+            {
+                Invoice invoice = await _uow.InvoiceRepository.GetAsync(invoiceId);
+                if (invoice == null)
+                {
+                    response.AddErrorMessage(new StringBuilder("Invoice Id inválido"));
+                }
+                else
+                {
+                    response.Value = invoice;
+                }
             }
 
             return response;
@@ -64,17 +112,15 @@ namespace TheatricalPlayersRefactoringKata.App
                 CreationDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 Audience = x.Audience,
-                PlayId = x.PlayId                
+                PlayId = x.PlayId
             }).ToList();
 
             return performances;
         }
 
-        private bool ValidateRequest(Request<NewInvoiceRequest> request, out StringBuilder errors, out Customer customer, out List<Play> lstPlays)
+        private bool ValidateRequest(Request<NewInvoiceRequest> request, out StringBuilder errors)
         {
             errors = new StringBuilder();
-            lstPlays = new List<Play>();
-            customer = new Customer();
 
             if (request == null || request.Value == null)
             {
@@ -93,7 +139,16 @@ namespace TheatricalPlayersRefactoringKata.App
                 errors.Append("Necessário informar Performance");
                 return false;
             }
-                        
+
+            return true;
+        }
+
+        private bool ValidateData(Request<NewInvoiceRequest> request, out StringBuilder errors, out Customer customer, out List<Play> lstPlays)
+        {
+            errors = new StringBuilder();
+            lstPlays = new List<Play>();
+            customer = new Customer();
+
             customer = _uow.CustomerRepository.Get(request.Value.CustomerId);
             if (customer == null)
             {

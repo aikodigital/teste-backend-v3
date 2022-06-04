@@ -10,8 +10,8 @@ namespace TheatricalPlayersRefactoringKata.Repository.Configuration.Mapping
             base.Configure(builder);
 
             builder.Property(x => x.CustomerId).IsRequired();
-            builder.Property(x => x.Amount).IsRequired();
-            builder.Property(x => x.Credits).IsRequired();
+            builder.Property(x => x.TotalAmount).IsRequired();
+            builder.Property(x => x.TotalCredits).IsRequired();
 
             builder.HasOne(x => x.Customer)
                 .WithMany(c => c.Invoices)

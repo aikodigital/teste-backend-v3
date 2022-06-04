@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheatricalPlayersRefactoringKata.Repository.Configuration.Context;
 
@@ -11,9 +12,10 @@ using TheatricalPlayersRefactoringKata.Repository.Configuration.Context;
 namespace TheatricalPlayersRefactoringKata.Repository.Migrations
 {
     [DbContext(typeof(TheatricalContext))]
-    partial class TheatricalContextModelSnapshot : ModelSnapshot
+    [Migration("20220604183019_update-column")]
+    partial class updatecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,8 +73,8 @@ namespace TheatricalPlayersRefactoringKata.Repository.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TotalCredits")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalCredits")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -92,7 +94,7 @@ namespace TheatricalPlayersRefactoringKata.Repository.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("AmountOwed")
+                    b.Property<decimal>("AmountOwned")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Audience")
@@ -101,8 +103,8 @@ namespace TheatricalPlayersRefactoringKata.Repository.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EarnedCredits")
-                        .HasColumnType("int");
+                    b.Property<decimal>("EarnedCredits")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("InvoiceId")
                         .HasColumnType("bigint");

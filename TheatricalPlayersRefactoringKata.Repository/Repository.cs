@@ -31,6 +31,21 @@ namespace TheatricalPlayersRefactoringKata.Repository
             _theatricalContext.SaveChanges();
         }
 
+        public async Task<TEntity> AddAsync(TEntity entity)
+        {
+            TEntity entityCreated = (await DbSet.AddAsync(entity)).Entity;
+
+            _theatricalContext.SaveChanges();
+
+            return entityCreated;
+        }
+
+        public async Task AddRangeAsync(List<TEntity> entities)
+        {
+            await DbSet.AddRangeAsync(entities);
+            _theatricalContext.SaveChanges();
+        }
+        
         public void Update(TEntity entity)
         {
             DbSet.Update(entity);
@@ -65,6 +80,20 @@ namespace TheatricalPlayersRefactoringKata.Repository
         public virtual List<TEntity> Get(List<long> ids)
         {
             List<TEntity> entities = DbSet.Where(data => ids.Contains(data.Id))?.ToList();
+
+            return entities;
+        }
+
+        public virtual async Task<TEntity> GetAsync(long id)
+        {
+            TEntity entity = await DbSet.FirstOrDefaultAsync(data => data.Id == id);
+
+            return entity;
+        }
+
+        public virtual async Task<List<TEntity>> GetAsync(List<long> ids)
+        {
+            List<TEntity> entities = await DbSet.Where(data => ids.Contains(data.Id))?.ToListAsync();
 
             return entities;
         }

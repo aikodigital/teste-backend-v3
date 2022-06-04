@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.App;
 using TheatricalPlayersRefactoringKata.App.Interfaces;
-using TheatricalPlayersRefactoringKata.CrossCutting.Mapper;
 using TheatricalPlayersRefactoringKata.Domain.Interface.Repository;
 using TheatricalPlayersRefactoringKata.Domain.Interface.Services;
 using TheatricalPlayersRefactoringKata.Domain.Interface.UoW;
@@ -16,7 +15,6 @@ namespace TheatricalPlayersRefactoringKata.CrossCutting.IoC
     {
         public static IServiceCollection AddTheatricalPlayersIoC(this IServiceCollection services)
         {
-            services.AddMapperConfiguration();
             services.AddTheatricalPlayersApplication();
             services.AddTheatricalPlayersService();
             services.AddTheatricalPlayersRepository();
@@ -36,6 +34,10 @@ namespace TheatricalPlayersRefactoringKata.CrossCutting.IoC
         {
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<ICalculateService, CalculateService>();
+            services.AddTransient<IExtractService, ExtractService>();
+            services.AddTransient<IExtractXMLService, ExtractXMLService>();
+            services.AddTransient<IExtractTextService, ExtractTextService>();
+            services.AddTransient<IExtractJsonService, ExtractJsonService>();
 
             return services;
         }

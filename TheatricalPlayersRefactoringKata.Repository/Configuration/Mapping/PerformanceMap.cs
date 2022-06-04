@@ -12,6 +12,8 @@ namespace TheatricalPlayersRefactoringKata.Repository.Configuration.Mapping
             builder.Property(x => x.PlayId).IsRequired();
             builder.Property(x => x.InvoiceId).IsRequired();
             builder.Property(x => x.Audience).IsRequired();
+            builder.Property(x => x.AmountOwed).IsRequired();
+            builder.Property(x => x.EarnedCredits).IsRequired();
 
             builder.HasOne(x => x.Play)
                .WithMany(c => c.Performances)

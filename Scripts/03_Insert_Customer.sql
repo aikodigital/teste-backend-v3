@@ -18,6 +18,11 @@ BEGIN TRY
 		INSERT INTO [Customer] ([Name], [CreationDate], [LastModifiedDate], [Active]) VALUES ('Paludeto', GETUTCDATE(), GETUTCDATE(), 1)
 	END
 
+	IF NOT EXISTS (SELECT * FROM [Customer] WHERE [Name] = 'BigCo')
+	BEGIN
+		INSERT INTO [Customer] ([Name], [CreationDate], [LastModifiedDate], [Active]) VALUES ('BigCo', GETUTCDATE(), GETUTCDATE(), 1)
+	END
+
 	COMMIT
 END TRY
 BEGIN CATCH

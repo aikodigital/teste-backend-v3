@@ -29,9 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - CrossCutting", "5 - CrossCutting", "{BDEC9187-1EE2-471B-8352-276F8E9B3966}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.CrossCutting.Mapper", "TheatricalPlayersRefactoringKata.CrossCutting.Mapper\TheatricalPlayersRefactoringKata.CrossCutting.Mapper.csproj", "{FBB67189-1ABA-4FDD-975B-1E744EE58F26}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.CrossCutting.IoC", "TheatricalPlayersRefactoringKata.CrossCutting.IoC\TheatricalPlayersRefactoringKata.CrossCutting.IoC.csproj", "{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.CrossCutting.IoC", "TheatricalPlayersRefactoringKata.CrossCutting.IoC\TheatricalPlayersRefactoringKata.CrossCutting.IoC.csproj", "{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{079D3528-C3B3-4ABF-A9C1-08B28D44AEDB}"
 	ProjectSection(SolutionItems) = preProject
@@ -39,6 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Scripts\02_Insert_Play.sql = Scripts\02_Insert_Play.sql
 		Scripts\03_Insert_Customer.sql = Scripts\03_Insert_Customer.sql
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Tests", "6 - Tests", "{E6094939-16C4-46A4-913D-9A20C8EA728B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.UnitTest", "TheatricalPlayersRefactoringKata.UnitTest\TheatricalPlayersRefactoringKata.UnitTest.csproj", "{F59F463D-0923-4ABE-8E1C-7F2999FDC01A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.FunctionalTest", "TheatricalPlayersRefactoringKata.FunctionalTest\TheatricalPlayersRefactoringKata.FunctionalTest.csproj", "{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.CrossCutting.Extension", "TheatricalPlayersRefactoringKata.CrossCutting.Extension\TheatricalPlayersRefactoringKata.CrossCutting.Extension.csproj", "{DF22F982-8546-4650-9FAE-44E6E040989A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,14 +84,22 @@ Global
 		{B47189B2-0AB5-4320-A924-300B25A398FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B47189B2-0AB5-4320-A924-300B25A398FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B47189B2-0AB5-4320-A924-300B25A398FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBB67189-1ABA-4FDD-975B-1E744EE58F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBB67189-1ABA-4FDD-975B-1E744EE58F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBB67189-1ABA-4FDD-975B-1E744EE58F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBB67189-1ABA-4FDD-975B-1E744EE58F26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{575CAD2A-AD51-426D-9AAA-53ECBC364E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59F463D-0923-4ABE-8E1C-7F2999FDC01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59F463D-0923-4ABE-8E1C-7F2999FDC01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59F463D-0923-4ABE-8E1C-7F2999FDC01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59F463D-0923-4ABE-8E1C-7F2999FDC01A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF22F982-8546-4650-9FAE-44E6E040989A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF22F982-8546-4650-9FAE-44E6E040989A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF22F982-8546-4650-9FAE-44E6E040989A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF22F982-8546-4650-9FAE-44E6E040989A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,8 +111,10 @@ Global
 		{A6388FBB-29E4-43FB-B829-DC0AA29F97C8} = {23D6B0C4-8853-49E6-B143-E74AAD37C1BA}
 		{1E201CAB-8C1E-4596-94D1-405EB1B18C8F} = {23D6B0C4-8853-49E6-B143-E74AAD37C1BA}
 		{B47189B2-0AB5-4320-A924-300B25A398FE} = {C9C1A6F6-8B2A-4E7F-9723-CC82670EF0C5}
-		{FBB67189-1ABA-4FDD-975B-1E744EE58F26} = {BDEC9187-1EE2-471B-8352-276F8E9B3966}
 		{575CAD2A-AD51-426D-9AAA-53ECBC364E2F} = {BDEC9187-1EE2-471B-8352-276F8E9B3966}
+		{F59F463D-0923-4ABE-8E1C-7F2999FDC01A} = {E6094939-16C4-46A4-913D-9A20C8EA728B}
+		{C5B0B95E-19AD-4B45-A79D-9BF435FDBDBE} = {E6094939-16C4-46A4-913D-9A20C8EA728B}
+		{DF22F982-8546-4650-9FAE-44E6E040989A} = {BDEC9187-1EE2-471B-8352-276F8E9B3966}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC596CA-1BE8-4FB3-8D29-E11141DE8AF6}

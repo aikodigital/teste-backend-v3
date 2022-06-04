@@ -10,7 +10,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
 
         }
 
-        private decimal CalculateBaseValue(int lines)
+        public decimal CalculateBaseValue(int lines)
         {
             if (lines < 1000)
                 lines = 1000;
@@ -23,14 +23,19 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             return baseValue;
         }
 
-        private decimal CalculateTragedyValue(int audience)
+        public decimal CalculateTragedyValue(int audience, int lines)
         {
-            decimal baseValue = CalculateBaseValue(audience);
+            if (audience <= 0)
+                return 0;
+
+            if (lines <= 0)
+                return 0;
+
+            decimal baseValue = CalculateBaseValue(lines);
             const int baseAudience = 30;
             if (audience > baseAudience)
             {
-                int audienceGreatherThan = (audience - baseAudience);
-                baseValue += (audienceGreatherThan * 10.00m);
+                baseValue += ((audience - baseAudience ) * 10.00m);
             }
 
             decimal tragedyValue = baseValue;
@@ -38,9 +43,12 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             return tragedyValue;
         }
 
-        private decimal CalculateComedyValue(int audience)
+        public decimal CalculateComedyValue(int audience, int lines)
         {
-            decimal baseValue = CalculateBaseValue(audience);
+            if (audience < 0)
+                audience = 0;
+
+            decimal baseValue = CalculateBaseValue(lines);
             const int baseAudience = 20;
 
             baseValue += (audience * 3.00m);
@@ -49,8 +57,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             {
                 baseValue += 100.00m;
 
-                int audienceGreatherThan = (audience - baseAudience);
-                baseValue += (audienceGreatherThan * 10.00m);
+                baseValue += ((audience - baseAudience ) * 10.00m);
             }
 
             decimal comedyValue = baseValue;
@@ -58,25 +65,33 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             return comedyValue;
         }
 
-        public decimal CalculateValueByType(PlayTypeEnum playTypeEnum, int audience)
+        public decimal CalculateHistoryValue(int audience, int lines)
+        {
+            decimal tragedy = CalculateTragedyValue(audience, lines);
+            decimal comedyValue = CalculateComedyValue(audience, lines);
+
+            return (tragedy + comedyValue);
+        }
+
+        public decimal CalculateValueByType(PlayTypeEnum playTypeEnum, int audience, int lines)
         {
             if (playTypeEnum == PlayTypeEnum.Tragedy)
-                return CalculateTragedyValue(audience);
+                return CalculateTragedyValue(audience, lines);
 
             if (playTypeEnum == PlayTypeEnum.Comedy)
-                return CalculateComedyValue(audience);
+                return CalculateComedyValue(audience, lines);
 
             if (playTypeEnum == PlayTypeEnum.History)
             {
-                return CalculateTragedyValue(audience) + CalculateComedyValue(audience);
+                return CalculateHistoryValue(audience, lines);
             }
 
             return 0;
         }
 
-        public decimal CalculateCreditsByType(PlayTypeEnum playTypeEnum, int audience)
+        public int CalculateCreditsByType(PlayTypeEnum playTypeEnum, int audience)
         {
-            decimal baseCredits = CalculateBaseCredits(audience);
+            int baseCredits = CalculateBaseCredits(audience);
 
             if (playTypeEnum == PlayTypeEnum.Comedy)
                 baseCredits += CalculateBonusCreditsComedy(audience);
@@ -84,21 +99,25 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             return baseCredits;
         }
 
-        private decimal CalculateBaseCredits(int audience)
+        public int CalculateBaseCredits(int audience)
         {
-            decimal credits = 0;
+            int credits = 0;
 
+            const int baseAudience = 30;
             if (audience > 30)
             {
-                credits = (audience * 1.00m);
+                credits = ((audience - baseAudience ) * 1);
             }
 
             return credits;
         }
 
-        private decimal CalculateBonusCreditsComedy(int audience)
+        public int CalculateBonusCreditsComedy(int audience)
         {
-            decimal credits = Math.Floor(audience / 5.00m);
+            if (audience <= 0)
+                audience = 0;
+
+            int credits = (int)Math.Floor(audience / 5m);
 
             return credits;
         }

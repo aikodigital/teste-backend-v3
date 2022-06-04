@@ -25,6 +25,12 @@ namespace TheatricalPlayersRefactoringKata.App.Model.Response
 
             _uow.HasErrors = this.HasErrors;
         }
+        public void AddErrorMessage(string errors)
+        {
+            this.ErrorMessage = errors;
+
+            _uow.HasErrors = this.HasErrors;
+        }
     }
 
     public class Response<T> : Response

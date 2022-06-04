@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.CrossCutting.IoC\TheatricalPlayersRefactoringKata.CrossCutting.IoC.csproj" />
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.CrossCutting.Mapper\TheatricalPlayersRefactoringKata.CrossCutting.Mapper.csproj" />
   </ItemGroup>
 
 </Project>

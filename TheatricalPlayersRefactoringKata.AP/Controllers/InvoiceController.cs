@@ -26,5 +26,38 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             else
                 return Ok(response);
         }
+
+        [HttpGet]
+        [Route("extract/invoice-xml/{invoiceId}")]
+        public async Task<IActionResult> ExtractXML([FromRoute] long invoiceId)
+        {
+            Response<string> response = await _invoiceApp.GenerateExtract(invoiceId, Domain.Model.Enum.ExtractTypeEnum.XML);
+            if (response.HasErrors)
+                return BadRequest(response.ErrorMessage);
+            else
+                return Ok(response.Value);
+        }
+
+        [HttpGet]
+        [Route("extract/invoice-text/{invoiceId}")]
+        public async Task<IActionResult> ExtractText([FromRoute] long invoiceId)
+        {
+            Response<string> response = await _invoiceApp.GenerateExtract(invoiceId, Domain.Model.Enum.ExtractTypeEnum.Text);
+            if (response.HasErrors)
+                return BadRequest(response.ErrorMessage);
+            else
+                return Ok(response.Value);
+        }
+
+        [HttpGet]
+        [Route("extract/invoice-json/{invoiceId}")]
+        public async Task<IActionResult> ExtractJson([FromRoute] long invoiceId)
+        {
+            Response<string> response = await _invoiceApp.GenerateExtract(invoiceId, Domain.Model.Enum.ExtractTypeEnum.Json);
+            if (response.HasErrors)
+                return BadRequest(response.ErrorMessage);
+            else
+                return Ok(response.Value);
+        }
     }
 }
