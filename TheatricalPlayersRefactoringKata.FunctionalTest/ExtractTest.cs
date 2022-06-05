@@ -1,4 +1,5 @@
 ﻿using ApprovalTests;
+using ApprovalTests.Reporters;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.API;
 using TheatricalPlayersRefactoringKata.FunctionalTest.Config;
@@ -17,7 +18,8 @@ namespace TheatricalPlayersRefactoringKata.FunctionalTest
         }
 
         [Theory]
-        [InlineData(13)]
+        [InlineData(19)]
+        [UseReporter(typeof(DiffReporter))]
         public async Task TestXmlStatementExample(long invoiceId)
         {
             string value = await _testsFixture.GetExtractXML(invoiceId);

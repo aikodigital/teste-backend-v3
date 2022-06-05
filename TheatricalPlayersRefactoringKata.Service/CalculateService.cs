@@ -18,7 +18,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             if (lines > 4000)
                 lines = 4000;
 
-            decimal baseValue = lines / 10;
+            decimal baseValue = lines / 10m;
 
             return baseValue;
         }
@@ -53,11 +53,11 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
 
             baseValue += (audience * 3.00m);
 
-            if (baseAudience > 20)
+            if (audience > 20)
             {
                 baseValue += 100.00m;
 
-                baseValue += ((audience - baseAudience ) * 10.00m);
+                baseValue += ((audience - baseAudience ) * 5.00m);
             }
 
             decimal comedyValue = baseValue;

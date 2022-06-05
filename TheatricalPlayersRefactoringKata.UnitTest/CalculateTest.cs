@@ -39,6 +39,8 @@ namespace TheatricalPlayersRefactoringKata.UnitTest
         [InlineData(100, 1680, 868)]
         [InlineData(100, 5680, 1100)]
         [InlineData(300, 5680, 3100)]
+        [InlineData(55, 4024, 650)]
+        [InlineData(40, 3560, 456)]
         public void CalculateTragedyValue(int audience, int lines, decimal expectedResult)
         {
             decimal calculate = _calculateService.CalculateTragedyValue(audience, lines);
@@ -51,9 +53,10 @@ namespace TheatricalPlayersRefactoringKata.UnitTest
         [InlineData(0, 0, 100)]
         [InlineData(1, 0, 103)]
         [InlineData(10, 0, 130)]
-        [InlineData(100, 1500, 450)]
-        [InlineData(1000, 5400, 3400)]
-        [InlineData(10000, 150, 30100)]
+        [InlineData(100, 1500, 950)]
+        [InlineData(1000, 5400, 8400)]
+        [InlineData(10000, 150, 80100)]
+        [InlineData(35, 2670, 547)]
         public void CalculateComedyValue(int audience, int lines, decimal expectedResult)
         {
             decimal calculate = _calculateService.CalculateComedyValue(audience, lines);

@@ -18,13 +18,13 @@ namespace TheatricalPlayersRefactoringKata.Domain.Service
             XElement statement = new XElement("Statement", new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance")
                                                          , new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"));
             XElement customer = new XElement("Customer", invoice.Customer.Name);
-            XElement amount = new XElement("AmountOwed", ((int)invoice.TotalAmount).ToString());
+            XElement amount = new XElement("AmountOwed", invoice.TotalAmount.FormatCentsHigherThan10());
             XElement credits = new XElement("EarnedCredits", invoice.TotalCredits);
             XElement items = new XElement("Items");
             foreach (Performance performance in invoice.Performances)
             {
                 XElement item = new XElement("Item",
-                                             new XElement("AmountOwed", ((int)performance.AmountOwed).ToString()),
+                                             new XElement("AmountOwed", performance.AmountOwed.FormatCentsHigherThan10()),
                                              new XElement("EarnedCredits", performance.EarnedCredits),
                                              new XElement("Seats", performance.Audience));
                 items.Add(item);
