@@ -8,7 +8,7 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        var totalAmount = 0m;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
@@ -19,19 +19,22 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            var thisAmount = lines * 10m;
             switch (play.Type) 
             {
                 case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
+                    thisAmount = CalculateTragedyValue(perf.Audience, thisAmount);
+                    
                     break;
                 case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
+                    thisAmount = CalculateComedyValue(perf.Audience, thisAmount);
+                    break;
+                case "history":
+                    var tragedyAmount = CalculateTragedyValue(perf.Audience, thisAmount);
+                    var comedyAmount = CalculateComedyValue(perf.Audience, thisAmount);
+
+                    thisAmount = (tragedyAmount + comedyAmount);
+
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
@@ -48,5 +51,23 @@ public class StatementPrinter
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
+    }
+
+    private decimal CalculateTragedyValue(int audience, decimal amount)
+    {
+        if (audience > 30)
+            amount += 1000 * (audience - 30);
+
+        return amount;
+    }
+
+    private decimal CalculateComedyValue(int audience, decimal amount)
+    {
+        if (audience > 30)
+            amount += 10000 + 500 * (audience - 20);
+
+        amount += 300 * audience;
+
+        return amount;
     }
 }

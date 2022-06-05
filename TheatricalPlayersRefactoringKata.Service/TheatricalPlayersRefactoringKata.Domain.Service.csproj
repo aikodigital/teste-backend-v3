@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.CrossCutting.Extension\TheatricalPlayersRefactoringKata.CrossCutting.Extension.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Entity\TheatricalPlayersRefactoringKata.Domain.Model.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Interface\TheatricalPlayersRefactoringKata.Domain.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
