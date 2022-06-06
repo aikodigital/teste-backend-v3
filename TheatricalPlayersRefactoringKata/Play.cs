@@ -1,7 +1,6 @@
 using System;
 namespace TheatricalPlayersRefactoringKata;
 
-//Peça de teatro
 public abstract class Play : IPlay
 {
     private const int AUDIENCE_FROM_AT_LEAST_FOR_CREDIT = 30;
@@ -11,13 +10,13 @@ public abstract class Play : IPlay
     private const int LINE_MIN = 1000;
     private const int LINE_MAX = 4000;
 
-    private int _baseValue;
+    private decimal _baseValue;
 
     public string Name { get; protected set; }
     public int Lines { get; protected set; }
-    public int BaseValue { get => _baseValue; }
+    public decimal BaseValue { get => _baseValue; }
 
-    public abstract int CalculateBaseValue(Performance performance);
+    public abstract decimal CalculateBaseValue(int audience);
     protected abstract int CalculateCredits(int audience);
 
     public Play(string name, int lines)

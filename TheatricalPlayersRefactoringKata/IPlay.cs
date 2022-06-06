@@ -2,7 +2,7 @@
 {
     public interface IPlay
     {
-        int CalculateBaseValue(Performance performance);
+        decimal CalculateBaseValue(int audience);
 
         int GetLines();
     }

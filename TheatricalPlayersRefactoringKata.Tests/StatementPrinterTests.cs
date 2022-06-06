@@ -10,36 +10,31 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
-    //[Fact]
-    //[UseReporter(typeof(DiffReporter))]
-    //public void TestTextStatementExample()
-    //{
-    //    var plays = new Dictionary<string, Play>();
-    //    plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-    //    plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-    //    plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-    //    plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-    //    plays.Add("john", new Play("King John", 2648, "history"));
-    //    plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTextStatementExample()
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+            new Performance(new ComedyPlay("As You Like It", 2670), 35),
+            new Performance(new TragedyPlay("Othello", 3560), 40),
+            new Performance(new HistoryPlay("Henry V", 3227), 20),
+            new Performance(new HistoryPlay("King John", 2648), 39),
+            new Performance(new HistoryPlay("Richard III", 3718), 20)
+        });
 
-    //    Invoice invoice = new Invoice(
-    //        "BigCo",
-    //        new List<Performance>
-    //        {
-    //            new Performance("hamlet", 55),
-    //            new Performance("as-like", 35),
-    //            new Performance("othello", 40),
-    //            new Performance("henry-v", 20),
-    //            new Performance("john", 39),
-    //            new Performance("henry-v", 20)
-    //        }
-    //    );
+        StatementPrinter statementPrinter = new StatementPrinter();
 
-    //    StatementPrinter statementPrinter = new StatementPrinter();
-    //    var result = statementPrinter.Print(invoice, plays);
+        //Act
+        invoice.Calculute();
 
-    //    Approvals.Verify(result);
-    //}
+        var result = statementPrinter.Print(invoice);
+
+        //Assert
+        Approvals.Verify(result);
+    }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
@@ -66,7 +61,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy_Refatored()
+    public void TestStatementExampleLegacy_RefatoredWithValues()
     {
         //Arrange
         var invoice = new Invoice("BigCo", new List<Performance>
@@ -91,6 +86,40 @@ public class StatementPrinterTests
 
         Assert.Equal(1653, invoice.TotalAmount);
         Assert.Equal(47, invoice.VolumeCredits);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTextStatementExample_RefatoredWithValues()
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+            new Performance(new ComedyPlay("As You Like It", 2670), 35),
+            new Performance(new TragedyPlay("Othello", 3560), 40),
+            new Performance(new HistoryPlay("Henry V", 3227), 20),
+            new Performance(new HistoryPlay("King John", 2648), 39),
+            new Performance(new HistoryPlay("Richard III", 3718), 20)
+        });
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        //Act
+        invoice.Calculute();
+
+        var result = statementPrinter.Print(invoice);
+
+        //Assert
+        Assert.Equal(650M, invoice.GetPerformanceByName("Hamlet").Amount);
+        Assert.Equal(547M, invoice.GetPerformanceByName("As You Like It").Amount);
+        Assert.Equal(456M, invoice.GetPerformanceByName("Othello").Amount);
+        Assert.Equal(705.40M, invoice.GetPerformanceByName("Henry V").Amount);
+        Assert.Equal(931.60M, invoice.GetPerformanceByName("King John").Amount);
+        Assert.Equal(705.40M, invoice.GetPerformanceByName("Richard III").Amount);
+
+        Assert.Equal(3995.4M, invoice.TotalAmount);
+        Assert.Equal(56, invoice.VolumeCredits);
     }
 
     [Fact]
@@ -389,11 +418,5 @@ public class StatementPrinterTests
     {
         return audience - 30; //30 - max audience;
     }
-
-
-
-    //comedia
-    //bonus
-
 
 }

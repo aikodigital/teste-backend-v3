@@ -3,8 +3,6 @@ using System.Linq;
 
 namespace TheatricalPlayersRefactoringKata;
 
-
-//Fatura
 public class Invoice
 {
     private string _customer;
@@ -12,7 +10,7 @@ public class Invoice
 
     public string Customer => _customer;
     public IReadOnlyList<Performance> Performances => _performances.AsReadOnly();
-    public decimal TotalAmount => _performances.Sum(p => p.Play.BaseValue);
+    public decimal TotalAmount => _performances.Sum(p => p.Amount);
     public int VolumeCredits => _performances.Sum(p => p.GetCredits());
 
     public Invoice(string customer, List<Performance> performance)
@@ -23,12 +21,12 @@ public class Invoice
 
     public void Calculute()
     {
-        _performances.ForEach(p => p.Play.CalculateBaseValue(p));
+        _performances.ForEach(p => p.CalculteAmount());
     }
 
     public Performance GetPerformanceByName(string name)
     {
-        return _performances.SingleOrDefault(p => p.Play.Name == name);
+        return _performances.SingleOrDefault(p => p.PlayName == name);
     }
 
 }

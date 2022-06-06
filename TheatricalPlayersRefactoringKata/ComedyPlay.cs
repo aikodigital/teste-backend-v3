@@ -15,15 +15,15 @@ namespace TheatricalPlayersRefactoringKata
         {
         }
 
-        public override int CalculateBaseValue(Performance performance)
+        public override decimal CalculateBaseValue(int audience)
         {
-            if (performance.Audience > COMEDY_MAX_AUDIENCE)
+            if (audience > COMEDY_MAX_AUDIENCE)
             {
                SumBaseValue(COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED +
-                             COMEDY_ADICIONAL_AUDIENCE_VALUE * (performance.Audience - COMEDY_MAX_AUDIENCE));
+                             COMEDY_ADICIONAL_AUDIENCE_VALUE * (audience - COMEDY_MAX_AUDIENCE));
             }
 
-            SumBaseValue(COMEDY_DEFAULT_AUDIENCE_VALUE * performance.Audience);
+            SumBaseValue(COMEDY_DEFAULT_AUDIENCE_VALUE * audience);
 
             return BaseValue;
         }

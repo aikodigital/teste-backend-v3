@@ -9,10 +9,10 @@
         {
         }
 
-        public override int CalculateBaseValue(Performance performance)
+        public override decimal CalculateBaseValue(int audience)
         {
-            if (performance.Audience > TRAGEDY_MAX_AUDIENCE)
-                SumBaseValue(TRAGEDY_ADICIONAL_AUDIENCE_VALUE * (performance.Audience - TRAGEDY_MAX_AUDIENCE));
+            if (audience > TRAGEDY_MAX_AUDIENCE)
+                SumBaseValue(TRAGEDY_ADICIONAL_AUDIENCE_VALUE * (audience - TRAGEDY_MAX_AUDIENCE));
 
             return BaseValue;
         }

@@ -1,26 +1,30 @@
-using System;
-
 namespace TheatricalPlayersRefactoringKata;
 
-//Apresentação de teatro
 public class Performance
 {
     private int _audience;
-    
-    public Play Play { get; private set; }
+
+    public readonly Play _play;
 
     public int Audience => _audience;
 
-    public int Amount => Play.BaseValue;
+    public decimal Amount => _play.BaseValue;
+
+    public string PlayName => _play.Name;
 
     public Performance(Play play, int audience)
     {
-        Play = play;
+        _play = play;
         _audience = audience;
     }
 
     public int GetCredits()
     {
-        return Play.GetCredits(_audience);
+        return _play.GetCredits(_audience);
+    }
+
+    public void CalculteAmount()
+    {
+        _play.CalculateBaseValue(_audience);
     }
 }
