@@ -4,6 +4,6 @@
     {
         decimal CalculateBaseValue(int audience);
 
-        int GetLines();
+        decimal GetLines();
     }
 }

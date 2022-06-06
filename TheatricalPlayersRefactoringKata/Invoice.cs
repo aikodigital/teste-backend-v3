@@ -21,12 +21,12 @@ public class Invoice
 
     public void Calculute()
     {
-        _performances.ForEach(p => p.CalculteAmount());
+        _performances.ForEach(p => p.CalculateAmount());
     }
 
-    public Performance GetPerformanceByName(string name)
+    public List<Performance> GetPerformancesByName(string name)
     {
-        return _performances.SingleOrDefault(p => p.PlayName == name);
+        return _performances.Where(p => p.PlayName == name).ToList();
     }
 
 }

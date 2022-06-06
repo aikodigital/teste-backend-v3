@@ -1,7 +1,11 @@
+using System;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Performance
 {
+    public Guid Guid { get; set; }
+
     private int _audience;
 
     public readonly Play _play;
@@ -16,6 +20,7 @@ public class Performance
     {
         _play = play;
         _audience = audience;
+        Guid = Guid.NewGuid();
     }
 
     public int GetCredits()
@@ -23,7 +28,7 @@ public class Performance
         return _play.GetCredits(_audience);
     }
 
-    public void CalculteAmount()
+    public void CalculateAmount()
     {
         _play.CalculateBaseValue(_audience);
     }

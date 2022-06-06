@@ -4,9 +4,6 @@ namespace TheatricalPlayersRefactoringKata;
 public abstract class Play : IPlay
 {
     private const int AUDIENCE_FROM_AT_LEAST_FOR_CREDIT = 30;
-
-    public Guid Guid { get; private set; }
-
     private const int LINE_MIN = 1000;
     private const int LINE_MAX = 4000;
 
@@ -15,6 +12,8 @@ public abstract class Play : IPlay
     public string Name { get; protected set; }
     public int Lines { get; protected set; }
     public decimal BaseValue { get => _baseValue; }
+    
+    public Guid Guid { get; private set; }
 
     public abstract decimal CalculateBaseValue(int audience);
     protected abstract int CalculateCredits(int audience);
@@ -23,7 +22,7 @@ public abstract class Play : IPlay
     {
         Name = name;
         Lines = lines;
-        _baseValue = GetLines() / 10;
+        _baseValue = GetLines() / 10M;
         Guid = Guid.NewGuid();
     }
 
@@ -35,13 +34,13 @@ public abstract class Play : IPlay
     }
 
 
-    public void SumBaseValue(int value)
+    public void SumBaseValue(decimal value)
     {
         _baseValue += value;
     }
     
 
-    public int GetLines()
+    public decimal GetLines()
     {
         var lines = Lines;
 
