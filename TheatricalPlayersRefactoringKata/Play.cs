@@ -4,6 +4,8 @@ namespace TheatricalPlayersRefactoringKata;
 //Peça de teatro
 public abstract class Play : IPlay
 {
+    private const int AUDIENCE_FROM_AT_LEAST_FOR_CREDIT = 30;
+
     public Guid Guid { get; private set; }
 
     private const int LINE_MIN = 1000;
@@ -15,8 +17,8 @@ public abstract class Play : IPlay
     public int Lines { get; protected set; }
     public int BaseValue { get => _baseValue; }
 
-    
     public abstract int CalculateBaseValue(Performance performance);
+    protected abstract int CalculateCredits(int audience);
 
     public Play(string name, int lines)
     {
@@ -25,6 +27,14 @@ public abstract class Play : IPlay
         _baseValue = GetLines() / 10;
         Guid = Guid.NewGuid();
     }
+
+    public int GetCredits(int audience)
+    {
+        var defaultCredits = Math.Max(audience - AUDIENCE_FROM_AT_LEAST_FOR_CREDIT, 0);
+
+        return defaultCredits + CalculateCredits(audience);
+    }
+
 
     public void SumBaseValue(int value)
     {
@@ -41,4 +51,6 @@ public abstract class Play : IPlay
 
         return lines;
     }
+
+    
 }

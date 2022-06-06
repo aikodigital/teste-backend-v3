@@ -16,5 +16,10 @@
 
             return BaseValue;
         }
+
+        protected override int CalculateCredits(int audience)
+        {
+            return 0;
+        }
     }
 }

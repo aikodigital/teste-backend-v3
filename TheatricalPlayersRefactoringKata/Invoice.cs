@@ -15,10 +15,6 @@ public class Invoice
     public decimal TotalAmount => _performances.Sum(p => p.Play.BaseValue);
     public int VolumeCredits => _performances.Sum(p => p.GetCredits());
 
-    public Dictionary<string, decimal> PerformancesAmountCurtumer { get; set; } =
-        new Dictionary<string, decimal>();
-
-
     public Invoice(string customer, List<Performance> performance)
     {
         _customer = customer;
@@ -28,6 +24,11 @@ public class Invoice
     public void Calculute()
     {
         _performances.ForEach(p => p.Play.CalculateBaseValue(p));
+    }
+
+    public Performance GetPerformanceByName(string name)
+    {
+        return _performances.SingleOrDefault(p => p.Play.Name == name);
     }
 
 }

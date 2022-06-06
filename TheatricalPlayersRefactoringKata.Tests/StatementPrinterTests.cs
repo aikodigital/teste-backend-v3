@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -45,33 +46,19 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy()
     {
         //Arrange
-
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-        var asLike = new ComedyPlay("As You Like It", 2670);
-        var othello = new TragedyPlay("Othello", 3560);
-
-        var plays = new List<Play>
+        var invoice = new Invoice("BigCo", new List<Performance>
         {
-            hamlet,
-            asLike,
-            othello
-        };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, 55),
-                new Performance(asLike, 35),
-                new Performance(othello, 40),
-            }
-        );
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+            new Performance(new ComedyPlay("As You Like It", 2670), 35),
+            new Performance(new TragedyPlay("Othello", 3560), 40)
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        var result = statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
 
+        var result = statementPrinter.Print(invoice);
 
         //Assert
         Approvals.Verify(result);
@@ -82,32 +69,26 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy_Refatored()
     {
         //Arrange
-
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-        var asLike = new ComedyPlay("As You Like It", 2670);
-        var othello = new TragedyPlay("Othello", 3560);
-
-        var plays = new List<Play> { hamlet, asLike, othello };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, 55),
-                new Performance(asLike, 35),
-                new Performance(othello, 40),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+            new Performance(new ComedyPlay("As You Like It", 2670), 35),
+            new Performance(new TragedyPlay("Othello", 3560), 40)
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(650, invoice.PerformancesAmountCurtumer["Hamlet"]);
-        Assert.Equal(547, invoice.PerformancesAmountCurtumer["As You Like It"]);
-        Assert.Equal(456, invoice.PerformancesAmountCurtumer["Othello"]);
+
+        Assert.Equal(650, invoice.GetPerformanceByName("Hamlet").Amount);
+        Assert.Equal(547, invoice.GetPerformanceByName("As You Like It").Amount);
+        Assert.Equal(456, invoice.GetPerformanceByName("Othello").Amount);
+
         Assert.Equal(1653, invoice.TotalAmount);
         Assert.Equal(47, invoice.VolumeCredits);
     }
@@ -117,25 +98,22 @@ public class StatementPrinterTests
     public void PlayWithRangeGreater4000_Return4000()
     {
         //Arrange
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, 55)
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(650, invoice.PerformancesAmountCurtumer["Hamlet"]);
+
+        Assert.Equal(650, invoice.GetPerformanceByName("Hamlet").Amount);
+
         Assert.Equal(650, invoice.TotalAmount);
         Assert.Equal(25, invoice.VolumeCredits);
     }
@@ -145,26 +123,22 @@ public class StatementPrinterTests
     public void PlayWithRangeLess1000_Return1000()
     {
         //Arrange
-
-        var asLike = new ComedyPlay("As You Like It", 900);
-
-        var plays = new List<Play> { asLike };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(asLike, 35),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new ComedyPlay("As You Like It", 900), 35),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(380, invoice.PerformancesAmountCurtumer["As You Like It"]);
+
+        Assert.Equal(380, invoice.GetPerformanceByName("As You Like It").Amount);
+
         Assert.Equal(380, invoice.TotalAmount);
         Assert.Equal(12, invoice.VolumeCredits);
     }
@@ -175,28 +149,26 @@ public class StatementPrinterTests
     {
         //Arrange
         const int LINES = 4000;
-        
-        var hamlet = new TragedyPlay("Hamlet", LINES);
 
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, 29),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", LINES), 29)
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(LINES/10, invoice.PerformancesAmountCurtumer["Hamlet"]);
+
+        Assert.Equal(LINES / 10, invoice.GetPerformanceByName("Hamlet").Amount);
+
         Assert.Equal(400, invoice.TotalAmount);
         Assert.Equal(0, invoice.VolumeCredits);
+
     }
 
     [Theory]
@@ -206,24 +178,18 @@ public class StatementPrinterTests
     public void AllPlays_WhenAudienceGreaterTo30_Sum1CreditForAdicionalAudience(int audience)
     {
         //Arrange
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, audience),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
-
         var volumeCredits = GetAdicionalAudienceTragedy(audience);
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
         Assert.Equal(volumeCredits, invoice.VolumeCredits);
@@ -236,22 +202,17 @@ public class StatementPrinterTests
     public void AllPlays_WhenAudienceLessOrEqualTo30_NotAddCreditsForAudience(int audience)
     {
         //Arrange
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, audience),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
         Assert.Equal(0, invoice.VolumeCredits);
@@ -264,25 +225,20 @@ public class StatementPrinterTests
     public void TragedyPlay_WhenAudienceLessOrEqualTo30_AmountPlayWillBeBaseValue(int audience)
     {
         //Arrange
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, audience),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(400, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(400, invoice.GetPerformanceByName("Hamlet").Amount);
         Assert.Equal(400, invoice.TotalAmount);
     }
 
@@ -293,28 +249,24 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TragedyPlay_WhenAudienceGreaterTo30_Sum10BaseValueForAdicionalAudience(int audience)
     {
+
         //Arrange
-        var hamlet = new TragedyPlay("Hamlet", 4024);
-
-        var plays = new List<Play> { hamlet };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(hamlet, audience),
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
         var baseValue = 400 + 10 * (GetAdicionalAudienceTragedy(audience));
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["Hamlet"]);
+        Assert.Equal(baseValue, invoice.GetPerformanceByName("Hamlet").Amount);
         Assert.Equal(baseValue, invoice.TotalAmount);
     }
 
@@ -325,26 +277,22 @@ public class StatementPrinterTests
     public void AllComedyPlay_Sum3BaseValueForAudience(int audience)
     {
         //Arrange
-        var asLike = new ComedyPlay("As You Like It", 2670);
-
-        var plays = new List<Play> { asLike };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(asLike, audience)
-            }
-        );
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new ComedyPlay("As You Like It", 2670), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var baseValue =  GetBaseValueComedy(267, 0, audience);
+
+        var baseValue = GetBaseValueComedy(267, 0, audience);
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.GetPerformanceByName("As You Like It").Amount);
         Assert.Equal(baseValue, invoice.TotalAmount);
     }
 
@@ -355,27 +303,22 @@ public class StatementPrinterTests
     public void ComedyPlay_WhenAudienceLessOrEqualTo20_UseBaseValue(int audience)
     {
         //Arrange
-        var asLike = new ComedyPlay("As You Like It", 2670);
-
-        var plays = new List<Play> { asLike };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(asLike, audience)
-            }
-        );
-
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new ComedyPlay("As You Like It", 2670), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
+
         var baseValue = 267 + audience * 3;
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.GetPerformanceByName("As You Like It").Amount);
         Assert.Equal(baseValue, invoice.TotalAmount);
     }
 
@@ -387,29 +330,23 @@ public class StatementPrinterTests
     public void ComedyPlay_WhenAudienceGreaterTo20_SumBaseValueWithAdicionalAudienceMultiplicationAdicionalValues(int audience)
     {
         //Arrange
-        var asLike = new ComedyPlay("As You Like It", 2670);
-
-        var plays = new List<Play> { asLike };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(asLike, audience)
-            }
-        );
-
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new ComedyPlay("As You Like It", 2670), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
+
         var baseValue = GetBaseValueComedy(267, 100, audience) + 5 * GetAdicionalAudienceComedy(audience);
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
-        Assert.Equal(baseValue, invoice.PerformancesAmountCurtumer["As You Like It"]);
+        Assert.Equal(baseValue, invoice.GetPerformanceByName("As You Like It").Amount);
         Assert.Equal(baseValue, invoice.TotalAmount);
-
     }
 
     [Theory]
@@ -419,18 +356,10 @@ public class StatementPrinterTests
     public void ComedyPlay_AwaysAddComedyCredits_CalculteWithValuePartAudience(int audience)
     {
         //Arrange
-        var asLike = new ComedyPlay("As You Like It", 2670);
-
-        var plays = new List<Play> { asLike };
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance(asLike, audience)
-            }
-        );
-
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new ComedyPlay("As You Like It", 2670), audience),
+        });
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
@@ -438,7 +367,9 @@ public class StatementPrinterTests
         volumeCredits += Math.Max(audience - 30, 0);
 
         //Act
-        statementPrinter.Print(invoice, plays);
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice);
 
         //Assert
         Assert.Equal(volumeCredits, invoice.VolumeCredits);
