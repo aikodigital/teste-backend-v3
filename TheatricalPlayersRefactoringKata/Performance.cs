@@ -1,5 +1,8 @@
+using System;
+
 namespace TheatricalPlayersRefactoringKata;
 
+[Obsolete($"This class should not be directly used anymore, instead, use the better decoupled Contracts.IPerformance type")]
 public class Performance
 {
     private string _playId;
@@ -13,5 +16,4 @@ public class Performance
         this._playId = playID;
         this._audience = audience;
     }
-
 }

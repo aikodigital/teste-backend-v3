@@ -20,4 +20,16 @@
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="StatementPrinterTests.Text.TestXmlStatementExample.approved.txt">
+      <DependentUpon>StatementPrinterTests.Text.cs</DependentUpon>
+    </None>
+    <None Update="StatementPrinterTests.Text.TestTextStatementExample.approved.txt">
+      <DependentUpon>StatementPrinterTests.Text.cs</DependentUpon>
+    </None>
+    <None Update="StatementPrinterTests.Text.TestStatementExampleLegacy.approved.txt">
+      <DependentUpon>StatementPrinterTests.Text.cs</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>

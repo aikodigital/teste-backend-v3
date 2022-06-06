@@ -1,4 +1,11 @@
 [Bb]in/
 [Oo]bj/
+.vs/
+
+.suo
+
+*.testlog
 
 *.received.txt
+/description.txt
+/TheatricalPlayersRefactoringKata.Tests/StatementPrinterTests.XmlTextStatementExample.approved.txt
