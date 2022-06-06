@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -29,8 +29,34 @@ public class StatementPrinterTests
 
         //Act
         invoice.Calculute();
+        
+        var result = statementPrinter.Print(invoice.GetStatementDto());
 
-        var result = statementPrinter.Print(invoice);
+        //Assert
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new TragedyPlay("Hamlet", 4024), 55),
+            new Performance(new ComedyPlay("As You Like It", 2670), 35),
+            new Performance(new TragedyPlay("Othello", 3560), 40),
+            new Performance(new HistoryPlay("Henry V", 3227), 20),
+            new Performance(new HistoryPlay("King John", 2648), 39),
+            new Performance(new HistoryPlay("Henry V", 3227), 20),
+        });
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        //Act
+        invoice.Calculute();
+
+        var result = '﻿' + statementPrinter.PrintXml(invoice.GetStatementDto());
 
         //Assert
         Approvals.Verify(result);
@@ -53,7 +79,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Approvals.Verify(result);
@@ -76,7 +102,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -108,7 +134,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(650M, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
@@ -138,7 +164,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -161,7 +187,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -184,7 +210,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -209,7 +235,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -236,7 +262,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
 
@@ -265,7 +291,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(volumeCredits, invoice.VolumeCredits);
@@ -288,7 +314,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(0, invoice.VolumeCredits);
@@ -311,7 +337,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(400, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
@@ -339,7 +365,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
@@ -365,7 +391,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
@@ -391,7 +417,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
@@ -418,7 +444,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
@@ -445,7 +471,7 @@ public class StatementPrinterTests
         //Act
         invoice.Calculute();
 
-        statementPrinter.Print(invoice);
+        statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
         Assert.Equal(volumeCredits, invoice.VolumeCredits);

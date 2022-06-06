@@ -8,7 +8,7 @@ public class Performance
 
     private int _audience;
 
-    public readonly Play _play;
+    private readonly Play _play;
 
     public int Audience => _audience;
 
@@ -32,4 +32,5 @@ public class Performance
     {
         _play.CalculateBaseValue(_audience);
     }
+
 }

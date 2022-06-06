@@ -29,4 +29,22 @@ public class Invoice
         return _performances.Where(p => p.PlayName == name).ToList();
     }
 
+    public StatementDto GetStatementDto()
+    {
+        return new StatementDto
+        {
+            Customer = Customer,
+            AmountOwed = TotalAmount,
+            EarnedCredits = VolumeCredits,
+            Items = _performances.Select(p => new StatementItemDto
+            {
+                Name = p.PlayName,
+                AmountOwed = p.Amount,
+                EarnedCredits = p.GetCredits(),
+                Seats = p.Audience
+
+            }).ToList()
+        };
+    }
+
 }

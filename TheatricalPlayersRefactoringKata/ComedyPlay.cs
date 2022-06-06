@@ -10,7 +10,6 @@ namespace TheatricalPlayersRefactoringKata
         private const int COMEDY_MAX_AUDIENCE = 20;
         private const int COMEDY_AUDIENCE_DIVISION_CREDIT = 5;
 
-
         public ComedyPlay(string name, int lines) : base(name, lines)
         {
         }
