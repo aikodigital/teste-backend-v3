@@ -1,5 +1,5 @@
 using System;
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Performances;
 
 public abstract class Play : IPlay
 {
@@ -12,10 +12,10 @@ public abstract class Play : IPlay
     public string Name { get; protected set; }
     public int Lines { get; protected set; }
     public decimal BaseValue { get => _baseValue; }
-    
+
     public Guid Guid { get; private set; }
 
-    public abstract decimal CalculateBaseValue(int audience);
+    public abstract void CalculateBaseValue(int audience);
     protected abstract int CalculateCredits(int audience);
 
     public Play(string name, int lines)
@@ -33,12 +33,10 @@ public abstract class Play : IPlay
         return defaultCredits + CalculateCredits(audience);
     }
 
-
     public void SumBaseValue(decimal value)
     {
         _baseValue += value;
     }
-    
 
     public decimal GetLines()
     {
@@ -49,6 +47,4 @@ public abstract class Play : IPlay
 
         return lines;
     }
-
-    
 }

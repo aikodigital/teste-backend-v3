@@ -1,4 +1,4 @@
-﻿namespace TheatricalPlayersRefactoringKata
+﻿namespace TheatricalPlayersRefactoringKata.Performances
 {
     public class TragedyPlay : Play
     {
@@ -9,12 +9,10 @@
         {
         }
 
-        public override decimal CalculateBaseValue(int audience)
+        public override void CalculateBaseValue(int audience)
         {
             if (audience > TRAGEDY_MAX_AUDIENCE)
                 SumBaseValue(TRAGEDY_ADICIONAL_AUDIENCE_VALUE * (audience - TRAGEDY_MAX_AUDIENCE));
-
-            return BaseValue;
         }
 
         protected override int CalculateCredits(int audience)

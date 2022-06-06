@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ApprovalTests;
+using ApprovalTests.Reporters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using ApprovalTests;
-using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Performances;
+using TheatricalPlayersRefactoringKata.Tickets;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -110,8 +111,8 @@ public class StatementPrinterTests
         Assert.Equal(547, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
         Assert.Equal(456, invoice.GetPerformancesByName("Othello").FirstOrDefault().Amount);
 
-        Assert.Equal(1653, invoice.TotalAmount);
-        Assert.Equal(47, invoice.VolumeCredits);
+        Assert.Equal(1653, invoice.AmountOwed);
+        Assert.Equal(47, invoice.EarnedCredits);
     }
 
     [Fact]
@@ -144,8 +145,8 @@ public class StatementPrinterTests
         Assert.Equal(931.60M, invoice.GetPerformancesByName("King John").FirstOrDefault().Amount);
         Assert.Equal(705.40M, invoice.GetPerformancesByName("Henry V")[1].Amount);
 
-        Assert.Equal(3995.4M, invoice.TotalAmount);
-        Assert.Equal(56, invoice.VolumeCredits);
+        Assert.Equal(3995.4M, invoice.AmountOwed);
+        Assert.Equal(56, invoice.EarnedCredits);
     }
 
 
@@ -169,7 +170,7 @@ public class StatementPrinterTests
         //Assert
 
         Assert.Equal(705.40M, invoice.GetPerformancesByName("Henry V").FirstOrDefault().Amount);
-        Assert.Equal(705.40M, invoice.TotalAmount);
+        Assert.Equal(705.40M, invoice.AmountOwed);
     }
 
     [Fact]
@@ -192,7 +193,7 @@ public class StatementPrinterTests
         //Assert
 
         Assert.Equal(931.60M, invoice.GetPerformancesByName("King John").FirstOrDefault().Amount);
-        Assert.Equal(931.60M, invoice.TotalAmount);
+        Assert.Equal(931.60M, invoice.AmountOwed);
     }
 
     [Fact]
@@ -216,8 +217,8 @@ public class StatementPrinterTests
 
         Assert.Equal(650, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
 
-        Assert.Equal(650, invoice.TotalAmount);
-        Assert.Equal(25, invoice.VolumeCredits);
+        Assert.Equal(650, invoice.AmountOwed);
+        Assert.Equal(25, invoice.EarnedCredits);
     }
 
     [Fact]
@@ -241,8 +242,8 @@ public class StatementPrinterTests
 
         Assert.Equal(380, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
 
-        Assert.Equal(380, invoice.TotalAmount);
-        Assert.Equal(12, invoice.VolumeCredits);
+        Assert.Equal(380, invoice.AmountOwed);
+        Assert.Equal(12, invoice.EarnedCredits);
     }
 
     [Fact]
@@ -268,8 +269,8 @@ public class StatementPrinterTests
 
         Assert.Equal(LINES / 10, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
 
-        Assert.Equal(400, invoice.TotalAmount);
-        Assert.Equal(0, invoice.VolumeCredits);
+        Assert.Equal(400, invoice.AmountOwed);
+        Assert.Equal(0, invoice.EarnedCredits);
 
     }
 
@@ -294,7 +295,7 @@ public class StatementPrinterTests
         statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
-        Assert.Equal(volumeCredits, invoice.VolumeCredits);
+        Assert.Equal(volumeCredits, invoice.EarnedCredits);
     }
 
     [Theory]
@@ -317,7 +318,7 @@ public class StatementPrinterTests
         statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
-        Assert.Equal(0, invoice.VolumeCredits);
+        Assert.Equal(0, invoice.EarnedCredits);
     }
 
     [Theory]
@@ -341,7 +342,7 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(400, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
-        Assert.Equal(400, invoice.TotalAmount);
+        Assert.Equal(400, invoice.AmountOwed);
     }
 
 
@@ -369,7 +370,7 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("Hamlet").FirstOrDefault().Amount);
-        Assert.Equal(baseValue, invoice.TotalAmount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
     }
 
     [Theory]
@@ -395,7 +396,7 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
-        Assert.Equal(baseValue, invoice.TotalAmount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
     }
 
     [Theory]
@@ -421,7 +422,7 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
-        Assert.Equal(baseValue, invoice.TotalAmount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
     }
 
 
@@ -448,7 +449,7 @@ public class StatementPrinterTests
 
         //Assert
         Assert.Equal(baseValue, invoice.GetPerformancesByName("As You Like It").FirstOrDefault().Amount);
-        Assert.Equal(baseValue, invoice.TotalAmount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
     }
 
     [Theory]
@@ -474,7 +475,7 @@ public class StatementPrinterTests
         statementPrinter.Print(invoice.GetStatementDto());
 
         //Assert
-        Assert.Equal(volumeCredits, invoice.VolumeCredits);
+        Assert.Equal(volumeCredits, invoice.EarnedCredits);
     }
 
     private int GetBaseValueComedy(int baseValue, int adicionalValues, int audience)

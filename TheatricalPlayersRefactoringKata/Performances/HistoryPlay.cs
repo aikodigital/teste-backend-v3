@@ -1,4 +1,4 @@
-﻿namespace TheatricalPlayersRefactoringKata
+﻿namespace TheatricalPlayersRefactoringKata.Performances
 {
     public class HistoryPlay : Play
     {
@@ -14,7 +14,7 @@
         {
         }
 
-        public override decimal CalculateBaseValue(int audience)
+        public override void CalculateBaseValue(int audience)
         {
             SumBaseValue(BaseValue + HISTORY_COMEDY_DEFAULT_AUDIENCE_VALUE * audience);
 
@@ -26,8 +26,6 @@
                 SumBaseValue(HISTORY_COMEDY_ADICIONAL_AUDIENCE_VALUE_INCREASED +
                              HISTORY_COMEDY_ADICIONAL_AUDIENCE_VALUE * (audience - HISTORY_COMEDY_MAX_AUDIENCE));
             }
-
-            return BaseValue;
         }
 
         protected override int CalculateCredits(int audience)

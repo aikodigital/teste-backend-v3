@@ -1,14 +1,14 @@
 using System;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Performances;
 
 public class Performance
 {
-    public Guid Guid { get; set; }
+    private readonly int _audience;
 
-    private int _audience;
+    private readonly IPlay _play;
 
-    private readonly Play _play;
+    public Guid Guid { get; private set; }
 
     public int Audience => _audience;
 
@@ -16,7 +16,7 @@ public class Performance
 
     public string PlayName => _play.Name;
 
-    public Performance(Play play, int audience)
+    public Performance(IPlay play, int audience)
     {
         _play = play;
         _audience = audience;

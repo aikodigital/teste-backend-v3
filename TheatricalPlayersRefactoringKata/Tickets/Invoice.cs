@@ -1,22 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
+using TheatricalPlayersRefactoringKata.Performances;
+using TheatricalPlayersRefactoringKata.Dtos;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Tickets;
 
 public class Invoice
 {
-    private string _customer;
-    private List<Performance> _performances;
-
-    public string Customer => _customer;
+    private readonly string _customer;
+    private readonly List<Performance> _performances;
+    
     public IReadOnlyList<Performance> Performances => _performances.AsReadOnly();
-    public decimal TotalAmount => _performances.Sum(p => p.Amount);
-    public int VolumeCredits => _performances.Sum(p => p.GetCredits());
+    public decimal AmountOwed => _performances.Sum(p => p.Amount);
+    public int EarnedCredits => _performances.Sum(p => p.GetCredits());
 
-    public Invoice(string customer, List<Performance> performance)
+    public Invoice(string customer, List<Performance> performances)
     {
         _customer = customer;
-        _performances = performance;
+        _performances = performances;
     }
 
     public void Calculute()
@@ -33,9 +34,9 @@ public class Invoice
     {
         return new StatementDto
         {
-            Customer = Customer,
-            AmountOwed = TotalAmount,
-            EarnedCredits = VolumeCredits,
+            Customer = _customer,
+            AmountOwed = AmountOwed,
+            EarnedCredits = EarnedCredits,
             Items = _performances.Select(p => new StatementItemDto
             {
                 Name = p.PlayName,
