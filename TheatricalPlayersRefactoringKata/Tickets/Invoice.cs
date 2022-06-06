@@ -10,7 +10,6 @@ public class Invoice
     private readonly string _customer;
     private readonly List<Performance> _performances;
     
-    public IReadOnlyList<Performance> Performances => _performances.AsReadOnly();
     public decimal AmountOwed => _performances.Sum(p => p.Amount);
     public int EarnedCredits => _performances.Sum(p => p.GetCredits());
 

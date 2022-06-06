@@ -152,52 +152,6 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample_RefatoredWithValues_SumTestHistory()
-    {
-        //Arrange
-        var invoice = new Invoice("BigCo", new List<Performance>
-        {
-            new Performance(new HistoryPlay("Henry V", 3227), 20)
-        });
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-
-        //Act
-        invoice.Calculute();
-
-        var result = statementPrinter.Print(invoice.GetStatementDto());
-
-        //Assert
-
-        Assert.Equal(705.40M, invoice.GetPerformancesByName("Henry V").FirstOrDefault().Amount);
-        Assert.Equal(705.40M, invoice.AmountOwed);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample_RefatoredWithValues_SumTestHistory3()
-    {
-        //Arrange
-        var invoice = new Invoice("BigCo", new List<Performance>
-        {
-            new Performance(new HistoryPlay("King John", 2648), 39)
-        });
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-
-        //Act
-        invoice.Calculute();
-
-        var result = statementPrinter.Print(invoice.GetStatementDto());
-
-        //Assert
-
-        Assert.Equal(931.60M, invoice.GetPerformancesByName("King John").FirstOrDefault().Amount);
-        Assert.Equal(931.60M, invoice.AmountOwed);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void PlayWithRangeGreater4000_Return4000()
     {
         //Arrange
@@ -478,19 +432,106 @@ public class StatementPrinterTests
         Assert.Equal(volumeCredits, invoice.EarnedCredits);
     }
 
-    private int GetBaseValueComedy(int baseValue, int adicionalValues, int audience)
+    [Theory]
+    [InlineData(19)]
+    [InlineData(20)]
+    [UseReporter(typeof(DiffReporter))]
+    public void AllHistoryPlay_Sum3BaseValueForAudience(int audience)
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new HistoryPlay("Henry V", 3227), audience)
+        });
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var baseValue = GetBaseValueTragedy(322.7M) +
+                        GetBaseValueComedy(322.7M, 0, audience);
+
+        //Act
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice.GetStatementDto());
+
+        //Assert
+        Assert.Equal(baseValue, invoice.GetPerformancesByName("Henry V").FirstOrDefault().Amount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
+    }
+
+    [Theory]
+    [InlineData(21)]
+    [InlineData(22)]
+    [UseReporter(typeof(DiffReporter))]
+    public void HistoryPlay_WhenAudienceGreaterTo20_SumBaseValueWithAdicionalAudienceMultiplicationAdicionalValue(int audience)
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new HistoryPlay("Henry V", 3227), audience)
+        });
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var baseValue = GetBaseValueTragedy(322.7M) +
+                        GetBaseValueComedy(322.7M, 100 + 5 * (audience - 20), audience);
+
+
+        //Act
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice.GetStatementDto());
+
+        //Assert
+        Assert.Equal(baseValue, invoice.GetPerformancesByName("Henry V").FirstOrDefault().Amount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
+    }
+
+        [Theory]
+    [InlineData(31)]
+    [InlineData(32)]
+    [UseReporter(typeof(DiffReporter))]
+    public void HistoryPlay_WhenAudienceGreaterTo30_AdicionalAudienceMultiplicationAdicionalValue(int audience)
+    {
+        //Arrange
+        var invoice = new Invoice("BigCo", new List<Performance>
+        {
+            new Performance(new HistoryPlay("Henry V", 3227), audience)
+        });
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+
+        var baseValue = GetBaseValueTragedy(322.7M, 10 * (audience - 30)) +
+                        GetBaseValueComedy(322.7M, 100 + 5 * (audience - 20), audience);
+
+        //Act
+        invoice.Calculute();
+
+        statementPrinter.Print(invoice.GetStatementDto());
+
+        //Assert
+        Assert.Equal(baseValue, invoice.GetPerformancesByName("Henry V").FirstOrDefault().Amount);
+        Assert.Equal(baseValue, invoice.AmountOwed);
+    }
+
+    private decimal GetBaseValueTragedy(decimal baseValue, decimal? adicionalValue = 0)
+    {
+        return baseValue + adicionalValue.Value;
+    }
+
+    private decimal GetBaseValueComedy(decimal baseValue, decimal adicionalValues, decimal audience)
     {
         return baseValue + adicionalValues + 3 * audience;
     }
 
-    private int GetAdicionalAudienceComedy(int audience)
+    private decimal GetAdicionalAudienceComedy(decimal audience)
     {
         return audience - 20;
     }
 
-    private int GetAdicionalAudienceTragedy(int audience)
+    private decimal GetAdicionalAudienceTragedy(decimal audience)
     {
-        return audience - 30; //30 - max audience;
+        return audience - 30;
     }
 
 }
