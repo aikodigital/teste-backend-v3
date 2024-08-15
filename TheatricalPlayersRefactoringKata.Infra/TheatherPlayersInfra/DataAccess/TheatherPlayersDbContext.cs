@@ -1,5 +1,5 @@
-﻿using TheatherPlayerRefactoringKata.Invoice;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatherPlayersInfra.DataAccess;
 

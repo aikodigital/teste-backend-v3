@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersAPI", "TheatricalPlayersRefactroingKata.API\TheatricalPlayersAPI\TheatricalPlayersAPI.csproj", "{184473A8-BF52-4348-ABEA-268DA915CF6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersAPI", "TheatricalPlayersRefactroingKata.API\TheatricalPlayersAPI\TheatricalPlayersAPI.csproj", "{184473A8-BF52-4348-ABEA-268DA915CF6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatherPlayersInfra", "TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj", "{296A4A2C-58C6-49BB-A40F-5EFE87419095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatherPlayersInfra", "TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj", "{296A4A2C-58C6-49BB-A40F-5EFE87419095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Communication", "TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Communication", "TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Domain", "TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{DE46890D-D398-44A4-B888-606F495073D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE46890D-D398-44A4-B888-606F495073D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE46890D-D398-44A4-B888-606F495073D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE46890D-D398-44A4-B888-606F495073D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE46890D-D398-44A4-B888-606F495073D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

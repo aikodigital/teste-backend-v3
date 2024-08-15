@@ -11,7 +11,7 @@ namespace TheatricalPlayersAPI.Controllers;
 public class InvoiceController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseExpense), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseInvoice), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterExpenseValidation validation,
@@ -25,7 +25,7 @@ public class InvoiceController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseExpenses), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseInvoices), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAllExpenses([FromServices] IGetAllExpenseValidation validation)
     {
@@ -39,7 +39,7 @@ public class InvoiceController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    [ProducesResponseType(typeof(ResponseExpense), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseInvoice), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(
       [FromServices] IGetExpenseByIdValidation validation,

@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactroingKata.API\TheatricalPlayersAPI\TheatricalPlayersAPI.csproj" />
   </ItemGroup>
 
