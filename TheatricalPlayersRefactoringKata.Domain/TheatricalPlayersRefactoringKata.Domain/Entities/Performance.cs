@@ -10,7 +10,7 @@ public class Performance
      public PlayTypes PlayId { get; set; }
     public int Audience { get => _audience; set => _audience = value; }
 
-    public Performance(int audience)
+    public Performance(string v, int audience)
     {
         _audience = audience;
         _playId = PlayId.ToString();

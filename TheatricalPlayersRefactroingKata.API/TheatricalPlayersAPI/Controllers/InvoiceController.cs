@@ -37,14 +37,14 @@ public class InvoiceController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route("{name}")]
     [ProducesResponseType(typeof(ResponseInvoice), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(
-      [FromServices] IGetInvoiceByIdValidation validation,
-      [FromRoute] long id)
+    public async Task<IActionResult> GetByCustomer(
+      [FromServices] IGetInvoiceByCustomerValidation validation,
+      [FromRoute] string name)
     {
-        var response = await validation.Execute(id);
+        var response = await validation.Execute(name);
 
         return Ok(response);
     }

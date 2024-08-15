@@ -5,7 +5,7 @@ public class ResponseError
 
     public ResponseError(string errorMessage)
     {
-        ErrorMessage = [errorMessage];
+        ErrorMessage = new List<string> { errorMessage };
     }
 
     public ResponseError(List<string> errorMessage)

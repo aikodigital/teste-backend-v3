@@ -1,17 +1,16 @@
-﻿using CashFlow.Communication.Requests;
-using CashFlow.Communication.Responses;
-using CashFlow.Exception;
+﻿
 using FluentValidation;
+using TheatricalPlayersRefactoringKata.Communication.Requests;
+using TheatricalPlayersRefactoringKata.Exception;
+using TheatricalPlayersRefactoringKata.Exception.ExceptionBase;
 
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 
-public class RegisterInvoiceValidator : AbstractValidator<RequestExpenses>
+public class RegisterInvoiceValidator : AbstractValidator<RequestInvoice>
 {
     public RegisterInvoiceValidator()
     {
-        RuleFor(expense => expense.Title).NotEmpty().WithMessage(ResourceErrorMessages.Title_Required);
-        RuleFor(expense => expense.Amount).GreaterThan(0).WithMessage(ResourceErrorMessages.Amount_Greather_Than_0);
-        RuleFor(expense => expense.Date).LessThan(DateTime.UtcNow).WithMessage(ResourceErrorMessages.Expenses_Not_In_Future);
-        RuleFor(expense => expense.PaymentType).IsInEnum().WithMessage(ResourceErrorMessages.Payment_Invalid);
+        RuleFor(invoice => invoice.Customer).NotEmpty().WithMessage(ResourceErrorMessages.CUSTOMER_NAME_INVALID);
+        RuleFor(invoice => invoice.Performances).NotEmpty().WithMessage(ResourceErrorMessages.PLAY_TYPE_INVALID);
     }
 }

@@ -22,6 +22,6 @@ public static class DependencyInjection
     {
         services.AddScoped<IRegisterInvoiceValidation, RegisterInvoiceValidation>();
         services.AddScoped<IGetAllInvoiceValidation, GetAllInvoicesValidation>();
-        services.AddScoped<IGetInvoiceByIdValidation, GeInvoiceByIdValidation>();
+        services.AddScoped<IGetInvoiceByCustomerValidation, GeInvoiceByCustomerValidation>();
     }
 }

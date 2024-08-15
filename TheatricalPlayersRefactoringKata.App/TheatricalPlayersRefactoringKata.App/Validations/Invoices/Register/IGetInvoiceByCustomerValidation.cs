@@ -2,7 +2,7 @@
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
-public interface IGetInvoiceByIdValidation
+public interface IGetInvoiceByCustomerValidation
 {
-    Task<ResponseInvoice> Execute(long id);
+    Task<ResponseInvoice> Execute(string name);
 }

@@ -18,7 +18,7 @@ public class StatementPrinter
 
         foreach(var perf in invoice.Performances) 
         {
-            var play = plays[perf.PlayId];
+             var play = plays[perf.PlayId.ToString()];
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
@@ -40,7 +40,7 @@ public class StatementPrinter
                     var amountHistory = amountTragedy + amountComedy;
                     break;
                 default:
-                    throw new Exception("unknown type: " + play.Type);
+                    throw new System.Exception("unknown type: " + play.Type);
             }
             // add volume credits
             volumeCredits += Math.Max(perf.Audience - 30, 0);

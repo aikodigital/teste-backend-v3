@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
-using System.Threading.Tasks;
 using TheatherPlayersInfra;
 using TheatricalPlayersRefactoringKata.Communication.Requests;
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Repos;
-using TheatricalPlayersRefactoringKata.Validations.Invoices.Register;
+using TheatricalPlayersRefactoringKata.Exception.ExceptionBase;
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 public class RegisterInvoiceValidation : IRegisterInvoiceValidation
 {
-    private readonly IInvoices _repo;
+    private readonly IInvoice _repo;
     private readonly IUnityOfWork _unityOfWork;
     private readonly IMapper _mapper;
     public RegisterInvoiceValidation(
@@ -23,7 +22,7 @@ public class RegisterInvoiceValidation : IRegisterInvoiceValidation
         _mapper = mapper;
     }
 
-    public async Task<ResponseInvoice> Execute(RequestInvoices request)
+    public async Task<ResponseInvoice> Execute(RequestInvoice request)
     {
         Validate(request);
 
@@ -34,7 +33,7 @@ public class RegisterInvoiceValidation : IRegisterInvoiceValidation
         return _mapper.Map<ResponseInvoice>(entity);
     }
 
-    private void Validate(RequestInvoices request)
+    private void Validate(RequestInvoice request)
     {
         var validator = new RegisterInvoiceValidator();
 

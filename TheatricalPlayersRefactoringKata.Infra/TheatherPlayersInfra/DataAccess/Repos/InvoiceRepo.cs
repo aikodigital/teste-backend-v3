@@ -21,11 +21,11 @@ internal class InvoiceRepo : IInvoice
 
     }
 
-    public async Task<Invoice?> GetById(long id)
+    public async Task<Invoice?> GetByCustomer(string name)
     {
         return await _dbContext.Invoices
             .AsNoTracking()
-            .FirstOrDefaultAsync(i => i.Id == id);
+            .FirstOrDefaultAsync(i => i.Customer == name);
     }
 
 }

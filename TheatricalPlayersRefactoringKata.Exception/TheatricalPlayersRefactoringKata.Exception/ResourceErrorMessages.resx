@@ -120,4 +120,13 @@
   <data name="PLAY_TYPE_INVALID" xml:space="preserve">
     <value>The play type is invalid</value>
   </data>
+  <data name="CUSTOMER_NAME_INVALID" xml:space="preserve">
+    <value>Customer name cannot be empty</value>
+  </data>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="INVOICE_NOT_FOUND" xml:space="preserve">
+    <value>Invoice not found</value>
+  </data>
 </root>

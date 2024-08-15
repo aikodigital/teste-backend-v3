@@ -1,26 +1,25 @@
 ﻿using AutoMapper;
-using CashFlow.Communication.Responses;
-using CashFlow.Domain.Entities;
-using CashFlow.Domain.Repos.Expenses;
+using TheatricalPlayersRefactoringKata.Communication.Responses;
+using TheatricalPlayersRefactoringKata.Domain.Repos;
 
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 
 public class GetAllInvoicesValidation : IGetAllInvoiceValidation
 {
-    private readonly IExpenses _repo;
+    private readonly IInvoice _repo;
     private readonly IMapper _mapper;
-    public GetAllInvoicesValidation(IExpenses repo, IMapper mapper)
+    public GetAllInvoicesValidation(IInvoice repo, IMapper mapper)
     {
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<ResponseExpenses> Execute()
+    public async Task<ResponseInvoices> Execute()
     {
         var result = await _repo.GetAll();
 
-        return new ResponseExpenses
+        return new ResponseInvoices
         {
-            Expenses = _mapper.Map<List<ResponseShortExpense>>(result)
+            Invoices = _mapper.Map<List<ResponseInvoice>>(result)
         };
     }
 }

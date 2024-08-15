@@ -22,14 +22,14 @@ namespace TheatricalPlayersRefactoringKata.Exception {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceErrorMessages {
+    public class ResourceErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceErrorMessages() {
+        public ResourceErrorMessages() {
         }
         
         /// <summary>
@@ -59,13 +59,40 @@ namespace TheatricalPlayersRefactoringKata.Exception {
                 resourceCulture = value;
             }
         }
-        
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Customer name cannot be empty.
+        /// </summary>
+        public static string CUSTOMER_NAME_INVALID {
+            get {
+                return ResourceManager.GetString("CUSTOMER_NAME_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invoice not found.
+        /// </summary>
+        public static string INVOICE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("INVOICE_NOT_FOUND", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The play type is invalid.
         /// </summary>
-        internal static string PLAY_TYPE_INVALID {
+        public static string PLAY_TYPE_INVALID {
             get {
                 return ResourceManager.GetString("PLAY_TYPE_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
     }
