@@ -1,3 +1,5 @@
+using TheatricalPlayersRefactoringKata.Consts_Enum;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Play
@@ -11,8 +13,8 @@ public class Play
     public string Type { get => _type; set => _type = value; }
 
     public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+        _name = name;
+        _lines = lines;
+        _type = type;
     }
 }
