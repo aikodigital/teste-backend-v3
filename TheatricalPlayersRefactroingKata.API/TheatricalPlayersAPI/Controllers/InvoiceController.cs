@@ -1,7 +1,6 @@
-﻿using CashFlow.App.Validations.Expenses.Register;
-using CashFlow.Communication.Requests;
-using CashFlow.Communication.Responses;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
+using TheatricalPlayersRefactoringKata.Communication.Requests;
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 
 namespace TheatricalPlayersAPI.Controllers;
@@ -14,8 +13,8 @@ public class InvoiceController : ControllerBase
     [ProducesResponseType(typeof(ResponseInvoice), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
-        [FromServices] IRegisterExpenseValidation validation,
-        [FromBody] RequestExpenses request)
+        [FromServices] IRegisterInvoiceValidation validation,
+        [FromBody] RequestInvoice request)
     {
 
         var response = await validation.Execute(request);
@@ -27,11 +26,11 @@ public class InvoiceController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(ResponseInvoices), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> GetAllExpenses([FromServices] IGetAllExpenseValidation validation)
+    public async Task<IActionResult> GetAllInvoices([FromServices] IGetAllInvoiceValidation validation)
     {
         var response = await validation.Execute();
 
-        if (response.Expenses.Count != 0)
+        if (response.Invoices.Count != 0)
             return Ok(response);
 
         return NoContent();
@@ -42,7 +41,7 @@ public class InvoiceController : ControllerBase
     [ProducesResponseType(typeof(ResponseInvoice), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(
-      [FromServices] IGetExpenseByIdValidation validation,
+      [FromServices] IGetInvoiceByIdValidation validation,
       [FromRoute] long id)
     {
         var response = await validation.Execute(id);

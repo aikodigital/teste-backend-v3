@@ -1,5 +1,5 @@
 ﻿namespace TheatricalPlayersRefactoringKata.Communication.Responses;
 public class ResponseInvoices
 {
-    public List<ResponseShortExpense> Expenses { get; set; } = [];
+    public List<ResponseInvoice> Invoices { get; set; } = new List<ResponseInvoice>();
 }

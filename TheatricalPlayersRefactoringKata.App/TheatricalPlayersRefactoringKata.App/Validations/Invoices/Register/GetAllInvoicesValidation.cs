@@ -3,13 +3,13 @@ using CashFlow.Communication.Responses;
 using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repos.Expenses;
 
-namespace TheatricalPlayersRefactoringKata.Validations.Expenses.Register;
+namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 
-public class GetAllExpensesValidation : IGetAllExpenseValidation
+public class GetAllInvoicesValidation : IGetAllInvoiceValidation
 {
     private readonly IExpenses _repo;
     private readonly IMapper _mapper;
-    public GetAllExpensesValidation(IExpenses repo, IMapper mapper)
+    public GetAllInvoicesValidation(IExpenses repo, IMapper mapper)
     {
         _repo = repo;
         _mapper = mapper;

@@ -1,6 +1,6 @@
 ﻿namespace TheatricalPlayersRefactoringKata.Communication.Responses;
 
-public class ResponseInvoiceeRegistered
+public class ResponseInvoiceRegistered
 {
     public string Title { get; set; } = string.Empty;
 }

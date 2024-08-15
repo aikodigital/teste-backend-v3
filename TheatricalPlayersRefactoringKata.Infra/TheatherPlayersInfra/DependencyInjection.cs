@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TheatherPlayersInfra.DataAccess;
 using TheatherPlayersInfra.DataAccess.Repos;
+using TheatricalPlayersRefactoringKata.Domain.Repos;
 
 namespace TheatherPlayersInfra;
 

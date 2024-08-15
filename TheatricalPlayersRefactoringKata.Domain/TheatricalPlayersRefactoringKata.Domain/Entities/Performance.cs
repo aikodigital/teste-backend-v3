@@ -1,4 +1,4 @@
-using TheatricalPlayersRefactoringKata.Communication.Enums;
+using TheatricalPlayersRefactoringKata.Domain.Enums;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Entities;
 
@@ -7,13 +7,14 @@ public class Performance
     private string _playId;
     private int _audience;
 
-    public PlayTypes PlayId;
+     public PlayTypes PlayId { get; set; }
     public int Audience { get => _audience; set => _audience = value; }
 
-    public Performance(string playID, int audience)
+    public Performance(int audience)
     {
-        _playId = playID;
         _audience = audience;
+        _playId = PlayId.ToString();
+
     }
 
 }

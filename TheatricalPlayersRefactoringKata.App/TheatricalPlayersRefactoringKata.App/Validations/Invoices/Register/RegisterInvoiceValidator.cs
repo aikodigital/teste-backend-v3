@@ -3,11 +3,11 @@ using CashFlow.Communication.Responses;
 using CashFlow.Exception;
 using FluentValidation;
 
-namespace TheatricalPlayersRefactoringKata.Validations.Expenses.Register;
+namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 
-public class RegisterExpenseValidator : AbstractValidator<RequestExpenses>
+public class RegisterInvoiceValidator : AbstractValidator<RequestExpenses>
 {
-    public RegisterExpenseValidator()
+    public RegisterInvoiceValidator()
     {
         RuleFor(expense => expense.Title).NotEmpty().WithMessage(ResourceErrorMessages.Title_Required);
         RuleFor(expense => expense.Amount).GreaterThan(0).WithMessage(ResourceErrorMessages.Amount_Greather_Than_0);

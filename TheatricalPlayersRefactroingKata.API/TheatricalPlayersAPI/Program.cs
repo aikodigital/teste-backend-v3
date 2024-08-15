@@ -1,3 +1,5 @@
+using TheatherPlayersInfra;
+using TheatricalPlayersRefactoringKata.App;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -6,9 +8,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfra(builder.Configuration);
+builder.Services.AddApp();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

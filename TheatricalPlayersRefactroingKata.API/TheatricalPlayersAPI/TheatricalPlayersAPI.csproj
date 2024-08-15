@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App.csproj" />
     <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj" />
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj" />
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj" />
   </ItemGroup>
 
 </Project>

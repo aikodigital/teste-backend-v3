@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatherPlayersInfra", "The
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Communication", "TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{A47B6E19-C7B3-464C-9D36-3B03C8BF1583}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Domain", "TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{DE46890D-D398-44A4-B888-606F495073D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Domain", "TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{DE46890D-D398-44A4-B888-606F495073D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Exception", "TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj", "{079CBBF0-37C4-4150-9077-6A80552F2A3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.App", "TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App.csproj", "{343D9AC7-5CAE-457C-B31B-4F4F39988862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{DE46890D-D398-44A4-B888-606F495073D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE46890D-D398-44A4-B888-606F495073D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE46890D-D398-44A4-B888-606F495073D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079CBBF0-37C4-4150-9077-6A80552F2A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079CBBF0-37C4-4150-9077-6A80552F2A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079CBBF0-37C4-4150-9077-6A80552F2A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079CBBF0-37C4-4150-9077-6A80552F2A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343D9AC7-5CAE-457C-B31B-4F4F39988862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343D9AC7-5CAE-457C-B31B-4F4F39988862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343D9AC7-5CAE-457C-B31B-4F4F39988862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343D9AC7-5CAE-457C-B31B-4F4F39988862}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

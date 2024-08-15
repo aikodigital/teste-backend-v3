@@ -1,5 +1,6 @@
-﻿using CashFlow.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Domain.Repos;
 
 namespace TheatherPlayersInfra.DataAccess.Repos;
 
@@ -20,21 +21,12 @@ internal class InvoiceRepo : IInvoice
 
     }
 
-    public async Task Delete(Invoice expense)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task Update(Invoice expense)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Invoice?> GetById(long id)
     {
         return await _dbContext.Invoices
             .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.Id == id);
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
 }
+
