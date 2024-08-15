@@ -1,4 +1,3 @@
-using TheatricalPlayersRefactoringKata;
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersAPI.Models;
 
@@ -11,4 +10,5 @@ public class TheatricalDbContext : DbContext
     
     public DbSet<PerformanceModel> Performances { get; set; }
     public DbSet<InvoiceModel> Invoices { get; set; }
+    public DbSet<PlayModel> Plays { get; set; }
 }
