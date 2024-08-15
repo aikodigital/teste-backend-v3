@@ -4,4 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactroingKata.API\TheatricalPlayersAPI\TheatricalPlayersAPI.csproj" />
+  </ItemGroup>
+
 </Project>

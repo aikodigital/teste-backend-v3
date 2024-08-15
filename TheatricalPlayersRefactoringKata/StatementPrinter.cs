@@ -10,6 +10,8 @@ public class StatementPrinter
     {
         var totalAmount = 0;
         var volumeCredits = 0;
+        var amountTragedy = 0;
+        var amountComedy = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
@@ -24,14 +26,17 @@ public class StatementPrinter
             {
                 case "tragedy":
                     if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
+                        amountTragedy = thisAmount += 1000 * (perf.Audience - 30);
                     }
                     break;
                 case "comedy":
                     if (perf.Audience > 20) {
                         thisAmount += 10000 + 500 * (perf.Audience - 20);
                     }
-                    thisAmount += 300 * perf.Audience;
+                     amountComedy = thisAmount += 300 * perf.Audience;
+                    break;
+                case "history":
+                    var amountHistory = amountTragedy + amountComedy;
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
