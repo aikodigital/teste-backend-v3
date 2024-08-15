@@ -1,0 +1,15 @@
+<Extrato>
+  <Cliente>João da Silva</Cliente>
+  <Apresentacao>
+    <NomePeca>O Grande Show de Comédia</NomePeca>
+    <Valor>300</Valor>
+    <Publico>35</Publico>
+    <Creditos>12</Creditos>
+  </Apresentacao>
+  <Apresentacao>
+    <NomePeca>A Tragédia do Rei Lear</NomePeca>
+    <Valor>215</Valor>
+    <Publico>50</Publico>
+    <Creditos>20</Creditos>
+  </Apresentacao>
+</Extrato>

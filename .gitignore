@@ -2,3 +2,7 @@
 [Oo]bj/
 
 *.received.txt
+
+.vs/
+
+.vscode/
