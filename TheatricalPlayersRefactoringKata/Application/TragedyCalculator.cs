@@ -13,17 +13,31 @@ namespace TheatricalPlayersRefactoringKata.Application
 
         public decimal CalculateAmount(Play play, Performance performance)
         {
-            var baseAmount = play.Price / 10;
-            if (performance.Audience > 30)
+            try
             {
-                baseAmount += 10 * (performance.Audience - 30);
+                var baseAmount = play.Price / 10;
+                if (performance.Audience > 30)
+                {
+                    baseAmount += 10 * (performance.Audience - 30);
+                }
+                return baseAmount;
             }
-            return baseAmount;
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao calcular o valor para tragédia.", ex);
+            }
         }
 
         public int CalculateCredits(Play play, Performance performance)
         {
-            return Math.Max(performance.Audience - 30, 0);
+            try
+            {
+                return Math.Max(performance.Audience - 30, 0);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao calcular os créditos para tragédia.", ex);
+            }
         }
     }
 }

@@ -1,15 +1,21 @@
 <Extrato>
-  <Cliente>João da Silva</Cliente>
+  <Cliente>Cliente Exemplo</Cliente>
   <Apresentacao>
-    <NomePeca>O Grande Show de Comédia</NomePeca>
-    <Valor>300</Valor>
+    <NomePeca>Hamlet</NomePeca>
+    <Valor>290</Valor>
+    <Publico>55</Publico>
+    <Creditos>25</Creditos>
+  </Apresentacao>
+  <Apresentacao>
+    <NomePeca>As You Like It</NomePeca>
+    <Valor>305</Valor>
     <Publico>35</Publico>
     <Creditos>12</Creditos>
   </Apresentacao>
   <Apresentacao>
-    <NomePeca>A Tragédia do Rei Lear</NomePeca>
-    <Valor>215</Valor>
-    <Publico>50</Publico>
-    <Creditos>20</Creditos>
+    <NomePeca>Othello</NomePeca>
+    <Valor>130</Valor>
+    <Publico>40</Publico>
+    <Creditos>10</Creditos>
   </Apresentacao>
 </Extrato>

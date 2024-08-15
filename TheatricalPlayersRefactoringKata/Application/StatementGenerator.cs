@@ -17,30 +17,37 @@ namespace TheatricalPlayersRefactoringKata.Application
 
         public string Generate(Invoice invoice, Dictionary<string, Play> plays)
         {
-            var totalAmount = 0m;
-            var volumeCredits = 0;
-            var result = $"Extrato para {invoice.Customer}\n";
-
-            foreach (var perf in invoice.Performances)
+            try
             {
-                var play = plays[perf.PlayId];
-                var calculator = _calculators.FirstOrDefault(c => c.CanHandle(play.Type));
+                var totalAmount = 0m;
+                var volumeCredits = 0;
+                var result = $"Extrato para {invoice.Customer}\n";
 
-                if (calculator == null)
+                foreach (var perf in invoice.Performances)
                 {
-                    throw new ArgumentException($"Nenhum calculador disponível para o tipo de peça: {play.Type}");
+                    var play = plays[perf.PlayId];
+                    var calculator = _calculators.FirstOrDefault(c => c.CanHandle(play.Type));
+
+                    if (calculator == null)
+                    {
+                        throw new ArgumentException($"Nenhum calculador disponível para o tipo de peça: {play.Type}");
+                    }
+
+                    var thisAmount = calculator.CalculateAmount(play, perf);
+                    volumeCredits += calculator.CalculateCredits(play, perf);
+
+                    result += $"  {play.Name}: {thisAmount:C} ({perf.Audience} espectadores)\n";
+                    totalAmount += thisAmount;
                 }
 
-                var thisAmount = calculator.CalculateAmount(play, perf);
-                volumeCredits += calculator.CalculateCredits(play, perf);
-
-                result += $"  {play.Name}: {thisAmount:C} ({perf.Audience} espectadores)\n";
-                totalAmount += thisAmount;
+                result += $"Valor total devido é {totalAmount:C}\n";
+                result += $"Você ganhou {volumeCredits} créditos\n";
+                return result;
             }
-
-            result += $"Valor total devido é {totalAmount:C}\n";
-            result += $"Você ganhou {volumeCredits} créditos\n";
-            return result;
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao gerar o extrato.", ex);
+            }
         }
     }
 }

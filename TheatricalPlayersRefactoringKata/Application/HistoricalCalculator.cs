@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
@@ -20,28 +21,42 @@ namespace TheatricalPlayersRefactoringKata.Application
 
         public decimal CalculateAmount(Play play, Performance performance)
         {
-            var amount = 0m;
-            foreach (var calculator in _calculators)
+            try
             {
-                if (calculator.CanHandle(play.Type))
+                var amount = 0m;
+                foreach (var calculator in _calculators)
                 {
-                    amount += calculator.CalculateAmount(play, performance);
+                    if (calculator.CanHandle(play.Type))
+                    {
+                        amount += calculator.CalculateAmount(play, performance);
+                    }
                 }
+                return amount;
             }
-            return amount;
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao calcular o valor para histórica.", ex);
+            }
         }
 
         public int CalculateCredits(Play play, Performance performance)
         {
-            var credits = 0;
-            foreach (var calculator in _calculators)
+            try
             {
-                if (calculator.CanHandle(play.Type))
+                var credits = 0;
+                foreach (var calculator in _calculators)
                 {
-                    credits += calculator.CalculateCredits(play, performance);
+                    if (calculator.CanHandle(play.Type))
+                    {
+                        credits += calculator.CalculateCredits(play, performance);
+                    }
                 }
+                return credits;
             }
-            return credits;
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao calcular os créditos para histórica.", ex);
+            }
         }
     }
 }

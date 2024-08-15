@@ -1,5 +1,6 @@
-Extrato para João da Silva
-  O Grande Show de Comédia: R$ 300,00 (35 espectadores)
-  A Tragédia do Rei Lear: R$ 215,00 (50 espectadores)
-Valor total devido é R$ 515,00
-Você ganhou 32 créditos
+Extrato para Cliente Exemplo
+  Hamlet: R$ 290,00 (55 espectadores)
+  As You Like It: R$ 305,00 (35 espectadores)
+  Othello: R$ 130,00 (40 espectadores)
+Valor total devido é R$ 725,00
+Você ganhou 47 créditos
