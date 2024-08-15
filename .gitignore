@@ -3,3 +3,4 @@
 
 *.received.txt
 /TheatricalPlayersRefactroingKata.API/TheatricalPlayersAPI/appsettings.Development.json
+/.vs/TheatricalPlayersRefactoringKata
