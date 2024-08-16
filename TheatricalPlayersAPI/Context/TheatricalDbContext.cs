@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersAPI.Models;
 
-namespace ApprovalTests.Approvers;
+namespace TheatricalPlayersAPI.Context;
 
 public class TheatricalDbContext : DbContext
 {
     public TheatricalDbContext(DbContextOptions<TheatricalDbContext> options) : base(options){
+        
     }
     
     public DbSet<PerformanceModel> Performances { get; set; }
