@@ -19,7 +19,7 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            var thisAmount = lines / 10;
             switch (play.Type) 
             {
                 case "tragedy":
