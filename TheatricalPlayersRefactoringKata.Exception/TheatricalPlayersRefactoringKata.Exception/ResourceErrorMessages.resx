@@ -129,4 +129,16 @@
   <data name="INVOICE_NOT_FOUND" xml:space="preserve">
     <value>Invoice not found</value>
   </data>
+  <data name="LINES_IN_INTERVAL" xml:space="preserve">
+    <value>The lines needs to be greater than 1000 and less than 4000</value>
+  </data>
+  <data name="PERFORMANCES_INVALID" xml:space="preserve">
+    <value>The performance need to include the play name and the audience need to be greather than 0</value>
+  </data>
+  <data name="PLAY_INVALID" xml:space="preserve">
+    <value>Play name cannot be empty</value>
+  </data>
+  <data name="AUDIENCE_INVALID" xml:space="preserve">
+    <value>Audience need to be greather than 0</value>
+  </data>
 </root>

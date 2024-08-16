@@ -20,6 +20,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IUnityOfWork, UnitOfWork>();
         services.AddScoped<IInvoice, InvoiceRepo>();
+        services.AddScoped<IPlay, PlayRepo>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration config)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.App.AutoMapper;
 using TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
+using TheatricalPlayersRefactoringKata.App.Validations.Plays.Register;
 
 namespace TheatricalPlayersRefactoringKata.App;
 
@@ -21,6 +22,7 @@ public static class DependencyInjection
     private static void AddValidations(IServiceCollection services)
     {
         services.AddScoped<IRegisterInvoiceValidation, RegisterInvoiceValidation>();
+        services.AddScoped<IRegisterPlayValidation, RegisterPlayValidation>();
         services.AddScoped<IGetAllInvoiceValidation, GetAllInvoicesValidation>();
         services.AddScoped<IGetInvoiceByCustomerValidation, GeInvoiceByCustomerValidation>();
     }

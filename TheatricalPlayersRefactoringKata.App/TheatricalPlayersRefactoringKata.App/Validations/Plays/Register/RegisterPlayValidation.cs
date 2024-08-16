@@ -1,20 +1,19 @@
 ﻿using AutoMapper;
-using System.Linq;
-using System.Threading.Tasks;
 using TheatherPlayersInfra;
 using TheatricalPlayersRefactoringKata.Communication.Requests;
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Repos;
 using TheatricalPlayersRefactoringKata.Exception.ExceptionBase;
-namespace TheatricalPlayersRefactoringKata.Validations.Invoices.Register;
-public class RegisterInvoiceValidation : IRegisterInvoiceValidation
+
+namespace TheatricalPlayersRefactoringKata.App.Validations.Plays.Register;
+public class RegisterPlayValidation : IRegisterPlayValidation
 {
-    private readonly IInvoices _repo;
+    private readonly IPlay _repo;
     private readonly IUnityOfWork _unityOfWork;
     private readonly IMapper _mapper;
-    public RegisterInvoiceValidation(
-        IInvoice repo,
+    public RegisterPlayValidation(
+        IPlay repo,
         IUnityOfWork unityOfWork,
         IMapper mapper
         )
@@ -24,20 +23,20 @@ public class RegisterInvoiceValidation : IRegisterInvoiceValidation
         _mapper = mapper;
     }
 
-    public async Task<ResponseInvoice> Execute(RequestInvoices request)
+    public async Task<ResponsePlay> Execute(RequestPlay request)
     {
         Validate(request);
 
-        var entity = _mapper.Map<Invoice>(request);
+        var entity = _mapper.Map<Play>(request);
         await _repo.Add(entity);
 
         await _unityOfWork.Commit();
-        return _mapper.Map<ResponseInvoice>(entity);
+        return _mapper.Map<ResponsePlay>(entity);
     }
 
-    private void Validate(RequestInvoices request)
+    private void Validate(RequestPlay request)
     {
-        var validator = new RegisterInvoiceValidator();
+        var validator = new RegisterPlayValidator();
 
         var result = validator.Validate(request);
 

@@ -1,5 +1,6 @@
 using TheatherPlayersInfra;
 using TheatricalPlayersAPI.Filters;
+using TheatricalPlayersAPI.Middleware;
 using TheatricalPlayersRefactoringKata.App;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

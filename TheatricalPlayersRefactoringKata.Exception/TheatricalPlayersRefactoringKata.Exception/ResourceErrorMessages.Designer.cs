@@ -36,7 +36,7 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TheatricalPlayersRefactoringKata.Exception.ResourceErrorMessages", typeof(ResourceErrorMessages).Assembly);
@@ -61,6 +61,15 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         }
 
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Audience need to be greather than 0.
+        /// </summary>
+        public static string AUDIENCE_INVALID {
+            get {
+                return ResourceManager.GetString("AUDIENCE_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Customer name cannot be empty.
         /// </summary>
         public static string CUSTOMER_NAME_INVALID {
@@ -75,6 +84,33 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         public static string INVOICE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("INVOICE_NOT_FOUND", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The lines needs to be greater than 1000 and less than 4000.
+        /// </summary>
+        public static string LINES_IN_INTERVAL {
+            get {
+                return ResourceManager.GetString("LINES_IN_INTERVAL", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The performance need to include the play name and the audience need to be greather than 0.
+        /// </summary>
+        public static string PERFORMANCES_INVALID {
+            get {
+                return ResourceManager.GetString("PERFORMANCES_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Play name cannot be empty.
+        /// </summary>
+        public static string PLAY_INVALID {
+            get {
+                return ResourceManager.GetString("PLAY_INVALID", resourceCulture);
             }
         }
 

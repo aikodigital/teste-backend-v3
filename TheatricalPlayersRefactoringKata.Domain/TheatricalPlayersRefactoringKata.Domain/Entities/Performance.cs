@@ -1,19 +1,21 @@
-using TheatricalPlayersRefactoringKata.Domain.Enums;
-
+using System.Text.Json.Serialization;
 namespace TheatricalPlayersRefactoringKata.Domain.Entities;
 
 public class Performance
 {
+    private readonly long _id;
     private string _playId;
     private int _audience;
 
-     public PlayTypes PlayId { get; set; }
-    public int Audience { get => _audience; set => _audience = value; }
+    public string PlayId { get => _playId; set => _playId = value; }
 
-    public Performance(string v, int audience)
+    public int Audience { get => _audience; set => _audience = value; }
+    [JsonConstructor]
+    public Performance(long id,string playId, int audience)
     {
+        _id = id;
         _audience = audience;
-        _playId = PlayId.ToString();
+        _playId = playId;
 
     }
 

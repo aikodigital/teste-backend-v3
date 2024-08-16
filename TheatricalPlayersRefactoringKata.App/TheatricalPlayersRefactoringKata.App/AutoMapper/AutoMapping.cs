@@ -17,11 +17,12 @@ public class AutoMapping : Profile
     private void RequestToEntity()
     {
         CreateMap<RequestInvoice, Invoice>();
+        CreateMap<RequestPlay, Play>();
     }
 
     private void EntityToResponse()
     {
         CreateMap<Invoice, ResponseInvoice>();
-        CreateMap<Invoice, ResponseInvoiceRegistered>();
+        CreateMap<Play, ResponsePlay>();
     }
 }

@@ -1,19 +1,28 @@
+using TheatricalPlayersRefactoringKata.Domain.Enums;
+
 namespace TheatricalPlayersRefactoringKata.Domain.Entities;
 
 public class Play
 {
+    public Play()
+    {
+        
+    }
+    private readonly long _id;
     private string _name;
     private int _lines;
     private string _type;
 
     public string Name { get => _name; set => _name = value; }
     public int Lines { get => _lines; set => _lines = value; }
-    public string Type { get => _type; set => _type = value; }
 
-    public Play(string name, int lines, string type)
+    public PlayTypes Type { get; set; }
+
+    public Play(string name, int lines, long id)
     {
+        _id = id;
         _name = name;
         _lines = lines;
-        _type = type;
+        _type = Type.ToString();
     }
 }
