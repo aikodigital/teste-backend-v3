@@ -23,7 +23,7 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
     {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("<Customer>{0}</Customer>\n<Items>", invoice.Customer);
+        var result = string.Format("<Customer>{0}</Customer>\n<Items>\n", invoice.Customer);
 
         foreach (var perf in invoice.Performances)
         {
@@ -35,15 +35,15 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
 
             volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
 
-            result += String.Format("<Item>\n<AmountOwed>{0}</AmountOwed> \n",
+            result += String.Format("  <Item>\n    <AmountOwed>{0}</AmountOwed>\n",
                       Convert.ToDecimal(totalAmount));
 
-            result += String.Format("<EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
+            result += String.Format("    <EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
 
-            result += String.Format("<Seats>{0}<Seats>\n</Item>", perf.Audience);
+            result += String.Format("    <Seats>{0}<Seats>\n  </Item>\n", perf.Audience);
         }
 
-        result += String.Format("<AmountOwed>{0}</AmountOwed>\n", Convert.ToDecimal(totalAmount));
+        result += String.Format("</Items>\n<AmountOwed>{0}</AmountOwed>\n", Convert.ToDecimal(totalAmount));
         result += String.Format("<EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
 
         return result;
@@ -54,16 +54,20 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
         try
         {
             var caminhoDestino = @"C:\Users\TheatricalPlayers";
+            var arquivoXml = @"TheatricalPlayers.xml";
+
             var dadosASeremSerializados = RecebeDadosParaSerializaçao(invoice, plays);
 
             var dir = Directory.CreateDirectory(caminhoDestino);
 
+            var caminhoCompleto = Path.Combine(caminhoDestino, arquivoXml);
+
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(string));
 
-            await using (StreamWriter streamWriter = new StreamWriter(caminhoDestino))
+            await using (StreamWriter streamWriter = new StreamWriter(caminhoCompleto))
             {
                 xmlSerializer.Serialize(streamWriter, dadosASeremSerializados);
-            };
+            }
         }
         catch (Exception ex)
         {
