@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Domain.Repos;
 
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 
-public class GetAllInvoicesValidation : IGetAllInvoiceValidation
+public class GetAllInvoicesValidation : IGetAllInvoicesValidation
 {
     private readonly IInvoice _repo;
     private readonly IMapper _mapper;

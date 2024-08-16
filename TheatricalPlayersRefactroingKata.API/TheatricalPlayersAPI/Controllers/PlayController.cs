@@ -24,5 +24,29 @@ public class PlayController : ControllerBase
         return Created(string.Empty, response);
 
     }
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponsePlays), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetAllPlays([FromServices] IGetAllPlaysValidation validation)
+    {
+        var response = await validation.Execute();
+
+        if (response.Plays.Count != 0)
+            return Ok(response);
+
+        return NoContent();
+    }
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponsePlays), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(
+          [FromServices] IGetPlayByIdValidation validation,
+          [FromRoute] long id)
+    {
+        var response = await validation.Execute(id);
+
+        return Ok(response);
+    }
 
 }

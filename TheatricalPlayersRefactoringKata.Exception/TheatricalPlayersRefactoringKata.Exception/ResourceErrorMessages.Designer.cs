@@ -59,7 +59,7 @@ namespace TheatricalPlayersRefactoringKata.Exception {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Audience need to be greather than 0.
         /// </summary>
@@ -111,6 +111,15 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         public static string PLAY_INVALID {
             get {
                 return ResourceManager.GetString("PLAY_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Play not found.
+        /// </summary>
+        public static string PLAY_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("PLAY_NOT_FOUND", resourceCulture);
             }
         }
 

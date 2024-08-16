@@ -141,4 +141,7 @@
   <data name="AUDIENCE_INVALID" xml:space="preserve">
     <value>Audience need to be greather than 0</value>
   </data>
+  <data name="PLAY_NOT_FOUND" xml:space="preserve">
+    <value>Play not found</value>
+  </data>
 </root>

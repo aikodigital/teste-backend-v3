@@ -26,7 +26,7 @@ public class InvoiceController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(ResponseInvoices), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> GetAllInvoices([FromServices] IGetAllInvoiceValidation validation)
+    public async Task<IActionResult> GetAllInvoices([FromServices] IGetAllInvoicesValidation validation)
     {
         var response = await validation.Execute();
 

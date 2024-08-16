@@ -8,10 +8,11 @@ public class Invoice
     {
 
     }
-    private readonly long _id;
+    private long _id;
     private string _customer;
     private List<Performance> _performances;
 
+    public long Id { get => _id; set => _id = value; }
     public string Customer { get => _customer; set => _customer = value; }
     public List<Performance> Performances { get => _performances; set => _performances = value; }
 

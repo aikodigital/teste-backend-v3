@@ -5,5 +5,5 @@ public interface IPlay
 {
     Task Add(Play play);
     Task<List<Play>> GetAllPlays();
-    Task<Play?> GetByPlay(string name);
+    Task<Play?> GetById(long id);
 }

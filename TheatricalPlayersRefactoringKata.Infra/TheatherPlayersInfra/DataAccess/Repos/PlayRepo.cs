@@ -20,11 +20,11 @@ internal class PlayRepo : IPlay
         return await _dbContext.Plays.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Play?> GetByPlay(string name)
+    public async Task<Play?> GetById(long id)
     {
         return await _dbContext.Plays
             .AsNoTracking()
-            .FirstOrDefaultAsync(i => i.Name == name);
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
 }

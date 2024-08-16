@@ -1,30 +1,31 @@
 ﻿using AutoMapper;
+using TheatricalPlayersRefactoringKata.App.Validations.Plays.Register;
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 using TheatricalPlayersRefactoringKata.Domain.Repos;
 using TheatricalPlayersRefactoringKata.Exception;
 using TheatricalPlayersRefactoringKata.Exception.ExceptionBase;
 
 namespace TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
-public class GetInvoiceByCustomerValidation : IGetInvoiceByCustomerValidation
+public class GetPlayByIdValidation : IGetPlayByIdValidation
 {
-    private readonly IInvoice _repos;
+    private readonly IPlay _repos;
     private readonly IMapper _mapper;
 
-    public GetInvoiceByCustomerValidation(IInvoice repos, IMapper mapper)
+    public GetPlayByIdValidation(IPlay repos, IMapper mapper)
     {
         _repos = repos;
         _mapper = mapper;
     }
 
-    public async Task<ResponseInvoice> Execute(string name)
+    public async Task<ResponsePlay> Execute(long id)
     {
-        var result = await _repos.GetByCustomer(name);
+        var result = await _repos.GetById(id);
 
         if (result is null)
         {
-            throw new NotFoundException(ResourceErrorMessages.INVOICE_NOT_FOUND);
+            throw new NotFoundException(ResourceErrorMessages.PLAY_NOT_FOUND);
         }
 
-        return _mapper.Map<ResponseInvoice>(result);
+        return _mapper.Map<ResponsePlay>(result);
     }
 }

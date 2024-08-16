@@ -8,11 +8,12 @@ public class Play
     {
         
     }
-    private readonly long _id;
+    private long _id;
     private string _name;
     private int _lines;
     private string _type;
 
+    public long Id { get => _id; set => _id = value; }
     public string Name { get => _name; set => _name = value; }
     public int Lines { get => _lines; set => _lines = value; }
 
