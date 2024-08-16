@@ -38,7 +38,7 @@ public class StatementPrinter
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, 
                       Convert.ToDecimal(thisAmount), perf.Audience);
 
-            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
+            totalAmount += thisAmount;
         }
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount));

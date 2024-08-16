@@ -32,21 +32,29 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
         foreach (var perf in invoice.Performances)
         {
             var play = plays[perf.PlayId];
+            var thisAmount = 0;
+            var credits = 0;
 
             var calculoEmRelacaoAoTipo = _factory.FabricaDeTypes(play);
 
-            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
+            thisAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
 
-            volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
+            credits += _creditoEspectador.CalculaCredito(perf, play);
 
             writer.WriteStartAttribute("item");
-            writer.WriteElementString("AmountOwed", Convert.ToString(totalAmount));
-            writer.WriteElementString("EarnedCredits", Convert.ToString(volumeCredits));
+            writer.WriteElementString("AmountOwed", Convert.ToString(thisAmount));
+            writer.WriteElementString("EarnedCredits", Convert.ToString(credits));
             writer.WriteElementString("Seats", Convert.ToString(perf.Audience));
             writer.WriteEndAttribute();
+
+            totalAmount += thisAmount;
+            volumeCredits += credits;
         }
 
         writer.WriteEndElement();
+        writer.WriteElementString("AmountOwed", Convert.ToString(totalAmount));
+        writer.WriteElementString("EarnedCredits", Convert.ToString(volumeCredits));
+        writer.WriteEndDocument();
 
         XmlDocument xmlDocument = new XmlDocument();
         xmlDocument.Load("TheatricalPlayers.xml");
