@@ -18,7 +18,7 @@ public class PerformanceController : ControllerBase
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Response<PerformanceModel>>> Create(PerformanceModel request){
+    public async Task<ActionResult<Response<PerformanceResponseModel>>> Create(PerformanceModel request){
         var performance = await _performanceServices.Create(request);
         if (performance.statusCode == HttpStatusCode.BadRequest) return BadRequest(performance);
         if (performance.statusCode == HttpStatusCode.NotFound) return NotFound(performance);
@@ -29,7 +29,7 @@ public class PerformanceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Response<PerformanceModel>>> Update(int id, PerformanceModel updatedPerformance)
+    public async Task<ActionResult<Response<PerformanceResponseModel>>> Update(int id, PerformanceModel updatedPerformance)
     {
         var performance = await _performanceServices.Update(id, updatedPerformance);
         if(performance.statusCode == HttpStatusCode.BadRequest) return BadRequest(performance);
@@ -40,7 +40,7 @@ public class PerformanceController : ControllerBase
     [HttpGet("getAll")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Response<List<PerformanceModel>>>> GetAll(){
+    public async Task<ActionResult<Response<List<PerformanceResponseModel>>>> GetAll(){
         var performances = await _performanceServices.GetAll();
         if (performances.statusCode == HttpStatusCode.NotFound) return NotFound(performances);
         return Ok(performances);
@@ -49,7 +49,7 @@ public class PerformanceController : ControllerBase
     [HttpGet("get/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Response<PerformanceModel>>> GetById(int id){
+    public async Task<ActionResult<Response<PerformanceResponseModel>>> GetById(int id){
         var performance = await _performanceServices.GetById(id);
         if(performance.statusCode == HttpStatusCode.NotFound) return NotFound(performance);
         return Ok(performance);
@@ -58,7 +58,7 @@ public class PerformanceController : ControllerBase
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Response<PerformanceModel>>> Delete(int id)
+    public async Task<ActionResult<Response<PerformanceResponseModel>>> Delete(int id)
     {
         var play = await _performanceServices.Delete(id);
         if(play.statusCode == HttpStatusCode.NotFound) return NotFound(play);

@@ -12,4 +12,6 @@ public class PerformanceModel
     public int Audience { get; set; }
     [JsonIgnore]
     public string? PlayGenre { get; set; }
+    [JsonIgnore]
+    public int InvoiceModelId { get; set; }
 }

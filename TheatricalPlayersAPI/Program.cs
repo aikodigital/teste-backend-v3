@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 // Add services
 builder.Services.AddScoped<PlayServices>();
 builder.Services.AddScoped<PerformanceServices>();
+builder.Services.AddScoped<InvoiceServices>();
 
 
 var app = builder.Build();
