@@ -33,9 +33,9 @@ namespace TheatricalPlayersAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Lines = table.Column<int>(type: "int", nullable: false),
-                    Genre = table.Column<int>(type: "int", nullable: false)
+                    Genre = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,9 +49,9 @@ namespace TheatricalPlayersAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    PlayId = table.Column<string>(type: "longtext", nullable: false),
+                    PlayId = table.Column<string>(type: "text", nullable: false),
                     Audience = table.Column<int>(type: "int", nullable: false),
-                    PlayGenre = table.Column<string>(type: "longtext", nullable: false),
+                    PlayGenre = table.Column<string>(type: "text", nullable: false),
                     InvoiceModelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

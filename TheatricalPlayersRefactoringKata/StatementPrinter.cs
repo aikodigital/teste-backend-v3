@@ -15,9 +15,10 @@ public class StatementPrinter
     {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
-
+        
+        var result = string.Format("Statement for {0}\n", invoice.Customer);
+        
         if (printMode == XML_MODE){
             result = "\ufeff<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
             result += "<Statement xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n";
