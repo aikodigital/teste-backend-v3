@@ -27,15 +27,18 @@ public class StatementPrinter
         foreach(var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
+            var thisAmount = 0;
 
             var calculoEmRelacaoAoTipo = _factory.FabricaDeTypes(play);
-            
-            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
+
+            thisAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
 
             volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
 
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, 
-                      Convert.ToDecimal(totalAmount), perf.Audience);
+                      Convert.ToDecimal(thisAmount), perf.Audience);
+
+            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
         }
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount));
