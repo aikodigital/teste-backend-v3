@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;

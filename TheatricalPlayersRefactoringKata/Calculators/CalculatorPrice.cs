@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Calculators
 {
     class CalculatorPrice
     {
@@ -37,7 +38,7 @@ namespace TheatricalPlayersRefactoringKata
                         tragedyAmount += 10 * (perf.Audience - 30);
                     }
 
-                    var comedyAmount = baseAmount + (3 * perf.Audience);
+                    var comedyAmount = baseAmount + 3 * perf.Audience;
                     if (perf.Audience > 20)
                     {
                         comedyAmount += 100 + 5 * (perf.Audience - 20);
