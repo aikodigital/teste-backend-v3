@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Xml;
 
 namespace TheatricalPlayersRefactoringKata.XML;
 
 public interface ISerializaçaoDados
 {
-    Task SerializandoDados(Invoice invoice, Dictionary<string, Play> plays);
+    XmlDocument SerializandoDados(Invoice invoice, Dictionary<string, Play> plays);
 }

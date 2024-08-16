@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Calculo_Credito;
 using TheatricalPlayersRefactoringKata.Factory;
 using System.Threading.Tasks;
-using System.IO;
-using System.Xml.Serialization;
+using System.Xml;
 
 namespace TheatricalPlayersRefactoringKata.XML;
 
@@ -19,11 +18,16 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
         _creditoEspectador = creditoEspectador;
     }
 
-    private string RecebeDadosParaSerializaçao(Invoice invoice, Dictionary<string, Play> plays)
+    public XmlDocument SerializandoDados(Invoice invoice, Dictionary<string, Play> plays)
     {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("<Customer>{0}</Customer>\n<Items>\n", invoice.Customer);
+
+        XmlWriter writer = XmlWriter.Create("TheatricalPlayers.xml");
+
+        writer.WriteStartDocument();
+        writer.WriteElementString("Customer", invoice.Customer);
+        writer.WriteStartElement("items");
 
         foreach (var perf in invoice.Performances)
         {
@@ -35,44 +39,18 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
 
             volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
 
-            result += String.Format("  <Item>\n    <AmountOwed>{0}</AmountOwed>\n",
-                      Convert.ToDecimal(totalAmount));
-
-            result += String.Format("    <EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
-
-            result += String.Format("    <Seats>{0}<Seats>\n  </Item>\n", perf.Audience);
+            writer.WriteStartAttribute("item");
+            writer.WriteElementString("AmountOwed", Convert.ToString(totalAmount));
+            writer.WriteElementString("EarnedCredits", Convert.ToString(volumeCredits));
+            writer.WriteElementString("Seats", Convert.ToString(perf.Audience));
+            writer.WriteEndAttribute();
         }
 
-        result += String.Format("</Items>\n<AmountOwed>{0}</AmountOwed>\n", Convert.ToDecimal(totalAmount));
-        result += String.Format("<EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
+        writer.WriteEndElement();
 
-        return result;
-    }
+        XmlDocument xmlDocument = new XmlDocument();
+        xmlDocument.Load("TheatricalPlayers.xml");
 
-    public async Task SerializandoDados(Invoice invoice, Dictionary<string, Play> plays)
-    {
-        try
-        {
-            var caminhoDestino = @"C:\Users\TheatricalPlayers";
-            var arquivoXml = @"TheatricalPlayers.xml";
-
-            var dadosASeremSerializados = RecebeDadosParaSerializaçao(invoice, plays);
-
-            var dir = Directory.CreateDirectory(caminhoDestino);
-
-            var caminhoCompleto = Path.Combine(caminhoDestino, arquivoXml);
-
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(string));
-
-            await using (StreamWriter streamWriter = new StreamWriter(caminhoCompleto))
-            {
-                xmlSerializer.Serialize(streamWriter, dadosASeremSerializados);
-            }
-        }
-        catch (Exception ex)
-        {
-
-            throw new Exception(ex.Message);
-        }
+        return xmlDocument;
     }
 }
