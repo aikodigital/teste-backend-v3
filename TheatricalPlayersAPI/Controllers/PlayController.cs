@@ -30,10 +30,12 @@ public class PlayController : ControllerBase
 	[HttpPut("update/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<ActionResult<ResponseModel<PlayModel>>> Update(int id, PlayModel request)
 	{
 		var play = await _playServices.Update(id, request);
 		if (play.statusCode == HttpStatusCode.BadRequest) return BadRequest(play);
+		if (play.statusCode == HttpStatusCode.NotFound) return NotFound(play);
 		return Ok(play);
 	}
 
@@ -43,7 +45,7 @@ public class PlayController : ControllerBase
 	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetAll()
 	{
 		var plays = await _playServices.GetAll();
-		if(plays.statusCode == HttpStatusCode.NotFound) return NotFound();
+		if(plays.statusCode == HttpStatusCode.NotFound) return NotFound(plays);
 		return Ok(plays);
 	}
 
@@ -52,7 +54,7 @@ public class PlayController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<ActionResult<ResponseModel<PlayModel>>> GetByName(string name){
 		var play = await _playServices.GetByName(name);
-		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound(play);
 		return Ok(play);
 	}
 	
@@ -62,7 +64,7 @@ public class PlayController : ControllerBase
 	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetByGenre(string genre)
 	{
 		var play = await _playServices.GetByGenre(genre);
-		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound(play);
 		return Ok(play);
 	}
 
@@ -72,7 +74,7 @@ public class PlayController : ControllerBase
 	public async Task<ActionResult<ResponseModel<PlayModel>>> Delete(int id)
 	{
 		var play = await _playServices.Delete(id);
-		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound(play);
 		return Ok(play);
 	}
 }
