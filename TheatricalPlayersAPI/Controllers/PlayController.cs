@@ -27,12 +27,12 @@ public class PlayController : ControllerBase
 		return Ok(play);
 	}
 
-	[HttpPut("update")]
+	[HttpPut("update/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public async Task<ActionResult<ResponseModel<PlayModel>>> Update(PlayModel request)
+	public async Task<ActionResult<ResponseModel<PlayModel>>> Update(int id, PlayModel request)
 	{
-		var play = await _playServices.Update(request);
+		var play = await _playServices.Update(id, request);
 		if (play.statusCode == HttpStatusCode.BadRequest) return BadRequest(play);
 		return Ok(play);
 	}
@@ -66,12 +66,12 @@ public class PlayController : ControllerBase
 		return Ok(play);
 	}
 
-	[HttpDelete("delete")]
+	[HttpDelete("delete/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
-	public async Task<ActionResult<ResponseModel<PlayModel>>> Delete(string name)
+	public async Task<ActionResult<ResponseModel<PlayModel>>> Delete(int id)
 	{
-		var play = await _playServices.Delete(name);
+		var play = await _playServices.Delete(id);
 		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
 		return Ok(play);
 	}

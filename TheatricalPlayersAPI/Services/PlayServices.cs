@@ -17,7 +17,7 @@ public class PlayServices
         _response = new();
         _responseList = new();
     }
-    public async Task<ResponseModel<PlayModel>> Create(PlayModel? request){
+    public async Task<ResponseModel<PlayModel>> Create(PlayModel request){
         
         if (request == null){
             _response.message = "Request is empty";
@@ -27,10 +27,18 @@ public class PlayServices
         
         var play = new PlayModel();
         play.Name = request.Name;
-        play.Genre = request.Genre;
+        play.Genre = request.Genre.ToLower();
         play.Lines = request.Lines;
+
+        var is_name_valid = GenericServices.validateName(play.Name);
+        if (!is_name_valid){
+            _response.data = play;
+            _response.message = $"Play name is invalid";
+            _response.statusCode = HttpStatusCode.BadRequest;
+            return _response;
+        }
         
-        var is_genre_valid = validateGenre(play);
+        var is_genre_valid = GenericServices.validateGenre(play.Genre);
         if (!is_genre_valid){
             _response.data = play;
             _response.message = $"Genre are invalid. Should be {Genres.COMEDY}, " +
@@ -49,15 +57,30 @@ public class PlayServices
         return _response;
     }
     
-    public async Task<ResponseModel<PlayModel>> Update(PlayModel? request){
-        var play = new PlayModel();
+    public async Task<ResponseModel<PlayModel>> Update(int id, PlayModel request){
+        
+        var play = await _context.Plays.FirstOrDefaultAsync(play => play.Id == id);
+        if (play == null){
+            _response.message = "Play doesn't exist";
+            _response.statusCode = HttpStatusCode.NotFound;
+            return _response;
+        }
         play.Name = request.Name;
-        play.Genre = request.Genre;
+        play.Genre = request.Genre.ToLower();
         play.Lines = request.Lines;
         
-        var is_genre_valid = validateGenre(play);
+        var is_name_valid = GenericServices.validateName(play.Name);
+        if (!is_name_valid){
+            _response.data = play;
+            _response.message = $"Play name is invalid";
+            _response.statusCode = HttpStatusCode.BadRequest;
+            return _response;
+        }
+        
+        var is_genre_valid = GenericServices.validateGenre(play.Genre);
         if (!is_genre_valid){
-            _response.message = $"Genre is invalid. Should be {Genres.COMEDY}, " +
+            _response.data = play;
+            _response.message = $"Genre are invalid. Should be {Genres.COMEDY}, " +
                                 $"{Genres.TRAGEDY} " +
                                 $"or {Genres.HISTORY}";
             _response.statusCode = HttpStatusCode.BadRequest;
@@ -100,18 +123,7 @@ public class PlayServices
         
         return _response;
     }
-
-    public bool validateGenre(PlayModel play)
-    {
-        if (play.Genre != Genres.COMEDY &&
-            play.Genre != Genres.TRAGEDY &&
-            play.Genre != Genres.HISTORY){
-            return false;
-        }
-        return true;
-    }
-
-
+    
     public async Task<ResponseModel<List<PlayModel>>> GetByGenre(string genre)
     {
         var plays = _context.Plays.Where(play => play.Genre == genre).ToList();
@@ -128,11 +140,11 @@ public class PlayServices
         return _responseList;
     }
 
-    public async Task<ResponseModel<PlayModel>>  Delete(string name)
+    public async Task<ResponseModel<PlayModel>>  Delete(int id)
     {
-        var play = _context.Plays.FirstOrDefault(play => play.Name == name);
+        var play = _context.Plays.FirstOrDefault(play => play.Id == id);
         if (play == null){
-            _response.message = $"Play with name {name} does not exist";
+            _response.message = "Selected play does not exist";
             _response.statusCode = HttpStatusCode.NotFound;
             return _response;   
         }
@@ -141,7 +153,7 @@ public class PlayServices
         await _context.SaveChangesAsync();
         
         _response.data = play;
-        _response.message = $"Play {name} deleted successfully";
+        _response.message = "Selected play deleted successfully";
         _response.statusCode = HttpStatusCode.OK;
         
         return _response;

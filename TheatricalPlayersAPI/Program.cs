@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Add services
 builder.Services.AddScoped<PlayServices>();
+builder.Services.AddScoped<PerformanceServices>();
 
 
 var app = builder.Build();

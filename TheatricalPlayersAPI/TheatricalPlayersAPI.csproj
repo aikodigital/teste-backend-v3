@@ -24,4 +24,20 @@
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dto\**" />
+  </ItemGroup>
+
 </Project>
