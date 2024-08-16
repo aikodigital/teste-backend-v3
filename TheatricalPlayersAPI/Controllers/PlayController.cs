@@ -7,23 +7,61 @@ using TheatricalPlayersAPI.Services;
 
 namespace TheatricalPlayersAPI.Controllers;
 
+[Route("")]
+[ApiController]
 public class PlayController : ControllerBase
 {
-	private ResponseModel<PlayModel> _response;
-	private PlayServices _playServices;
-	private readonly TheatricalDbContext _context;
+	private readonly PlayServices _playServices;
 	
-	public PlayController(){
-		_context = new(new DbContextOptions<TheatricalDbContext>());
-		_response = new();
-		_playServices = new(_context);
+	public PlayController(PlayServices playServices){
+		_playServices = playServices;
 	}
 
 	[HttpPost("create")]
-	public async Task<ActionResult<ResponseModel<PlayModel>>> Create(PlayModel request){
-		
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<ActionResult<ResponseModel<PlayModel>>> Create(PlayModel request)
+	{
 		var play = await _playServices.Create(request);
 		if (play.statusCode == HttpStatusCode.BadRequest) return BadRequest(play);
+		return Ok(play);
+	}
+
+	[HttpPut("update")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<ActionResult<ResponseModel<PlayModel>>> Update(PlayModel request)
+	{
+		var play = await _playServices.Update(request);
+		if (play.statusCode == HttpStatusCode.BadRequest) return BadRequest(play);
+		return Ok(play);
+	}
+
+	[HttpGet("getAll")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetAll()
+	{
+		var plays = await _playServices.GetAll();
+		if(plays.statusCode == HttpStatusCode.NotFound) return NotFound();
+		return Ok(plays);
+	}
+
+	[HttpGet("name/{name}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<ActionResult<ResponseModel<PlayModel>>> GetByName(string name){
+		var play = await _playServices.GetByName(name);
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
+		return Ok(play);
+	}
+	
+	[HttpGet("genre/{genre}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetByGenre(string genre){
+		var play = await _playServices.GetByGenre(genre);
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
 		return Ok(play);
 	}
 }

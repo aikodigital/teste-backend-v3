@@ -1,18 +1,23 @@
 using TheatricalPlayersAPI.Context;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using TheatricalPlayersAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add dbContext
+builder.Services.AddDbContext<TheatricalDbContext>(options =>
+{
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+// Add controllers
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<TheatricalDbContext>(options =>
-{
-    options.UseMySQL(builder.Configuration.GetConnectionString("Mysql"));
-});
+// Add services
+builder.Services.AddScoped<PlayServices>();
+
 
 var app = builder.Build();
 
