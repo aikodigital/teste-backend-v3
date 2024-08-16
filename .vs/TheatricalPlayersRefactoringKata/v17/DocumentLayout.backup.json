@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\xml\\serializa\u00E7aodadosxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\xml\\serializa\u00E7aodadosxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\calculos_valores_base_pe\u00E7a\\icalculovaloresbasepe\u00E7a.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculos_valores_base_pe\u00E7a\\icalculovaloresbasepe\u00E7a.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\calculo_credito\\icalculocreditoespectador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculo_credito\\icalculocreditoespectador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renat\\source\\repos\\aiko teste backend\\teste-renato\\theatricalplayersrefactoringkata\\consts-enum\\constantes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\consts-enum\\constantes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StatementPrinter.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAowAMAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T02:11:06.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Invoice.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Invoice.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Invoice.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Invoice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T00:29:23.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICalculoValoresBasePe\u00E7a.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Calculos_Valores_Base_Pe\u00E7a\\ICalculoValoresBasePe\u00E7a.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculos_Valores_Base_Pe\u00E7a\\ICalculoValoresBasePe\u00E7a.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Calculos_Valores_Base_Pe\u00E7a\\ICalculoValoresBasePe\u00E7a.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculos_Valores_Base_Pe\u00E7a\\ICalculoValoresBasePe\u00E7a.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T02:10:28.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ICalculoCreditoEspectador.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Calculo_Credito\\ICalculoCreditoEspectador.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculo_Credito\\ICalculoCreditoEspectador.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Calculo_Credito\\ICalculoCreditoEspectador.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculo_Credito\\ICalculoCreditoEspectador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T02:36:23.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Serializa\u00E7aoDadosXml.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\XML\\Serializa\u00E7aoDadosXml.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\XML\\Serializa\u00E7aoDadosXml.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\XML\\Serializa\u00E7aoDadosXml.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\XML\\Serializa\u00E7aoDadosXml.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAywCkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T02:14:33.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Constantes.cs",
+              "DocumentMoniker": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Consts-Enum\\Constantes.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Consts-Enum\\Constantes.cs",
+              "ToolTip": "C:\\Users\\renat\\source\\repos\\Aiko TESTE BACKEND\\teste-Renato\\TheatricalPlayersRefactoringKata\\Consts-Enum\\Constantes.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Consts-Enum\\Constantes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T02:10:43.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

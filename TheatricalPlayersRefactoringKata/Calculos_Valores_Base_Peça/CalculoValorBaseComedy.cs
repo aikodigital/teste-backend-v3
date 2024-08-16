@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Consts_Enum;
+﻿using TheatricalPlayersRefactoringKata.Consts_Enum;
 
 namespace TheatricalPlayersRefactoringKata.Calculos_Valores_Base_Peça;
 
 public class CalculoValorBaseComedy : ICalculoValoresBasePeça
 {
-    private readonly int valorAcrescentadoAposNumeroBaseEspectadores = 10000;
-    private readonly int valorAdicionadoPorEspectador = 500;
+    private readonly int valorAcrescentadoAposNumeroBaseEspectadores = 100;
+    private readonly int valorAdicionadoPorEspectadorAcimaDoNumeroDePessoasBase = 5;
+    private readonly int valorBaseCalculadoPorEspectador = 3;
     private readonly int numeroDePessoasBaseNaPlateia = 20;
 
-    public int CalculaValoresBase(Invoice invoice, Play play)
+    public int CalculaValoresBase(Performance perf, Play play)
     {
         var lines = play.Lines;
 
@@ -20,15 +19,15 @@ public class CalculoValorBaseComedy : ICalculoValoresBasePeça
         if (lines > Constantes.maxLines)
             lines = Constantes.maxLines;
 
-        var result = lines * Constantes.valorBaseCobrançaPeça;
+        var result = lines / Constantes.valorASerDivididoPelasLinhas;
 
-        foreach (var perf in invoice.Performances)
+        if (perf.Audience > numeroDePessoasBaseNaPlateia)
         {
-            if (perf.Audience > numeroDePessoasBaseNaPlateia)
-            {
-                result += valorAcrescentadoAposNumeroBaseEspectadores + valorAdicionadoPorEspectador * (perf.Audience - numeroDePessoasBaseNaPlateia);
-            }
+            result += valorAcrescentadoAposNumeroBaseEspectadores + valorAdicionadoPorEspectadorAcimaDoNumeroDePessoasBase * 
+                        (perf.Audience - numeroDePessoasBaseNaPlateia);
         }
+
+        result += valorBaseCalculadoPorEspectador * perf.Audience;
 
         return result;
     }

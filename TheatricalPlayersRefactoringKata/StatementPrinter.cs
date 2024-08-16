@@ -9,6 +9,13 @@ namespace TheatricalPlayersRefactoringKata;
 public class StatementPrinter
 {
     private readonly IPlayTypeFactory _factory;
+    private readonly ICalculoCreditoEspectador _creditoEspectador;
+
+    public StatementPrinter(IPlayTypeFactory factory, ICalculoCreditoEspectador creditoEspectador)
+    {
+        _factory = factory;
+        _creditoEspectador = creditoEspectador;
+    }
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
@@ -23,15 +30,15 @@ public class StatementPrinter
 
             var calculoEmRelacaoAoTipo = _factory.FabricaDeTypes(play);
             
-            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(invoice, play);
+            totalAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
 
-            volumeCredits += CalculoCreditoEspectador.CalculaCredito(invoice, play);
+            volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
 
-            // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(totalAmount / 100), perf.Audience);
+            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, 
+                      Convert.ToDecimal(totalAmount), perf.Audience);
         }
 
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
+        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount));
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }

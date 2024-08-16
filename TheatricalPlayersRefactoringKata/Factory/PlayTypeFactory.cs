@@ -17,6 +17,9 @@ public class PlayTypeFactory : IPlayTypeFactory
             case "comedy":
                 calculoValoresBasePeça = new CalculoValorBaseComedy();
                 break;
+            case "history":
+                calculoValoresBasePeça = new CalculoValorBaseHistory();
+                break;
             default:
                 throw new Exception("unknown type: " + play.Type);
         }
