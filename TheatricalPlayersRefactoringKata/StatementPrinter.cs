@@ -8,7 +8,7 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        double totalAmount = 0;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
@@ -19,19 +19,34 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            double thisAmount = lines * 10;
             switch (play.Type) 
             {
                 case "tragedy":
                     if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
+                        thisAmount += 1000.0 * (perf.Audience - 30);
                     }
                     break;
                 case "comedy":
                     if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
+                        thisAmount += 10000.0 + 500.0 * (perf.Audience - 20);
                     }
-                    thisAmount += 300 * perf.Audience;
+                    thisAmount += 300.0 * perf.Audience;
+                    break;
+
+                case "history":
+                    int tragedyAmount = lines * 10;
+                    if (perf.Audience > 30) {
+                        tragedyAmount += 1000 * (perf.Audience - 30);
+                    }
+
+                    int comedyAmount = lines * 10;
+                    if (perf.Audience > 20) {
+                        comedyAmount += 10000 + 500 * (perf.Audience - 20);
+                    }
+                    comedyAmount += 300 * perf.Audience;
+
+                    thisAmount = tragedyAmount + comedyAmount;
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
