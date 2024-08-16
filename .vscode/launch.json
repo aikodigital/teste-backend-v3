@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/TheatricalPlayersRefactoringKata.Tests/bin/Debug/net6.0/TheatricalPlayersRefactoringKata.Tests.dll",
+            "program": "${workspaceFolder}/TheatricalPlayersRefactoringKata.Tests/bin/Debug/net8.0/TheatricalPlayersRefactoringKata.Tests.dll",
             "args": [],
             "cwd": "${workspaceFolder}/TheatricalPlayersRefactoringKata.Tests",
             "console": "internalConsole",
