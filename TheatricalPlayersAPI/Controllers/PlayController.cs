@@ -7,7 +7,7 @@ using TheatricalPlayersAPI.Services;
 
 namespace TheatricalPlayersAPI.Controllers;
 
-[Route("")]
+[Route("play")]
 [ApiController]
 public class PlayController : ControllerBase
 {
@@ -59,8 +59,19 @@ public class PlayController : ControllerBase
 	[HttpGet("genre/{genre}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
-	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetByGenre(string genre){
+	public async Task<ActionResult<ResponseModel<List<PlayModel>>>> GetByGenre(string genre)
+	{
 		var play = await _playServices.GetByGenre(genre);
+		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
+		return Ok(play);
+	}
+
+	[HttpDelete("delete")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<ActionResult<ResponseModel<PlayModel>>> Delete(string name)
+	{
+		var play = await _playServices.Delete(name);
 		if(play.statusCode == HttpStatusCode.NotFound) return NotFound();
 		return Ok(play);
 	}

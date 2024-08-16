@@ -127,4 +127,23 @@ public class PlayServices
         
         return _responseList;
     }
+
+    public async Task<ResponseModel<PlayModel>>  Delete(string name)
+    {
+        var play = _context.Plays.FirstOrDefault(play => play.Name == name);
+        if (play == null){
+            _response.message = $"Play with name {name} does not exist";
+            _response.statusCode = HttpStatusCode.NotFound;
+            return _response;   
+        }
+        
+        _context.Remove(play);
+        await _context.SaveChangesAsync();
+        
+        _response.data = play;
+        _response.message = $"Play {name} deleted successfully";
+        _response.statusCode = HttpStatusCode.OK;
+        
+        return _response;
+    }
 }
