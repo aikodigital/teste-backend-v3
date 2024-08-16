@@ -9,15 +9,15 @@ namespace TheatricalPlayersAPI.Services;
 public class PlayServices
 {
     private readonly TheatricalDbContext _context;
-    private ResponseModel<PlayModel> _response;
-    private ResponseModel<List<PlayModel>> _responseList;
+    private Response<PlayModel> _response;
+    private Response<List<PlayModel>> _responseList;
     
     public PlayServices(TheatricalDbContext context){
         _context = context;
         _response = new();
         _responseList = new();
     }
-    public async Task<ResponseModel<PlayModel>> Create(PlayModel request){
+    public async Task<Response<PlayModel>> Create(PlayModel request){
         
         if (request == null){
             _response.message = "Request is empty";
@@ -57,7 +57,7 @@ public class PlayServices
         return _response;
     }
     
-    public async Task<ResponseModel<PlayModel>> Update(int id, PlayModel request){
+    public async Task<Response<PlayModel>> Update(int id, PlayModel request){
         
         var play = await _context.Plays.FirstOrDefaultAsync(play => play.Id == id);
         if (play == null){
@@ -96,7 +96,7 @@ public class PlayServices
         return _response;
     }
 
-    public async Task<ResponseModel<List<PlayModel>>> GetAll(){
+    public async Task<Response<List<PlayModel>>> GetAll(){
         var plays = await _context.Plays.ToListAsync();
         if (plays.Count == 0){
             _responseList.message = "No plays were found";
@@ -109,7 +109,7 @@ public class PlayServices
         return _responseList;
     }
     
-    public async Task<ResponseModel<PlayModel>> GetByName(string playName)
+    public async Task<Response<PlayModel>> GetByName(string playName)
     {
         var play = await _context.Plays.FirstOrDefaultAsync(play => play.Name == playName);
         if (play == null){
@@ -124,7 +124,7 @@ public class PlayServices
         return _response;
     }
     
-    public async Task<ResponseModel<List<PlayModel>>> GetByGenre(string genre)
+    public async Task<Response<List<PlayModel>>> GetByGenre(string genre)
     {
         var plays = _context.Plays.Where(play => play.Genre == genre).ToList();
         if (plays.Count == 0){
@@ -140,7 +140,7 @@ public class PlayServices
         return _responseList;
     }
 
-    public async Task<ResponseModel<PlayModel>>  Delete(int id)
+    public async Task<Response<PlayModel>>  Delete(int id)
     {
         var play = _context.Plays.FirstOrDefault(play => play.Id == id);
         if (play == null){

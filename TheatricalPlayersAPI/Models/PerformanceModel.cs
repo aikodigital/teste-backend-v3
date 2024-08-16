@@ -1,14 +1,15 @@
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace TheatricalPlayersAPI.Models;
 
 public class PerformanceModel
 {
-    [Key][IgnoreDataMember]
+    [Key][JsonIgnore]
     public int Id { get; set; }
     public string PlayId { get; set; }
     public int Audience { get; set; }
-    public string PlayGenre { get; set; }
+    [JsonIgnore]
+    public string? PlayGenre { get; set; }
 }
