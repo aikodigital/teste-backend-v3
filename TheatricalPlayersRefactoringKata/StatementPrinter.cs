@@ -28,6 +28,9 @@ public class StatementPrinter
                 case "comedy":
                     thisAmount = CalculateComedyAmount(perf, thisAmount);
                     break;
+                case "history":
+                    thisAmount = CalculateHistoryAmount(perf, thisAmount);
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
@@ -62,6 +65,16 @@ public class StatementPrinter
             thisAmount += 1000 * (perf.Audience - 30);
         }
 
+        return thisAmount;
+    }
+
+    private static int CalculateHistoryAmount(Performance perf, int thisAmount)
+    {
+        int tragedyAmount = CalculateTragedyAmount(perf, thisAmount);
+
+        int comedyAmount = CalculateComedyAmount(perf, thisAmount);
+
+        thisAmount = tragedyAmount + comedyAmount;
         return thisAmount;
     }
 
