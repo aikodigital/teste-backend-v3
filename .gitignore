@@ -1,4 +1,5 @@
 [Bb]in/
 [Oo]bj/
 
-*.received.txt
+*.received.txt.vs/
+.vs/

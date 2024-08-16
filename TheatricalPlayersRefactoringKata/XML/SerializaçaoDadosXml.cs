@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Calculo_Credito;
 using TheatricalPlayersRefactoringKata.Factory;
@@ -24,8 +23,7 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
     {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("Customer : {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        var result = string.Format("<Customer>{0}</Customer>\n<Items>", invoice.Customer);
 
         foreach (var perf in invoice.Performances)
         {
@@ -37,16 +35,16 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
 
             volumeCredits += _creditoEspectador.CalculaCredito(perf, play);
 
-            result += String.Format(cultureInfo, "Amount Earned : {0:C} \n",
+            result += String.Format("<Item>\n<AmountOwed>{0}</AmountOwed> \n",
                       Convert.ToDecimal(totalAmount));
 
-            result += String.Format(cultureInfo, "Credits : {0:C} \n", volumeCredits);
+            result += String.Format("<EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
 
-            result += String.Format(cultureInfo, "Seats : {0:C} \n", perf.Audience);
+            result += String.Format("<Seats>{0}<Seats>\n</Item>", perf.Audience);
         }
 
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount));
-        result += String.Format("You earned {0} credits\n", volumeCredits);
+        result += String.Format("<AmountOwed>{0}</AmountOwed>\n", Convert.ToDecimal(totalAmount));
+        result += String.Format("<EarnedCredits>{0}</EarnedCredits>\n", volumeCredits);
 
         return result;
     }
