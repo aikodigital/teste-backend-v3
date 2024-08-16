@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Models;
 
@@ -12,8 +11,7 @@ namespace TheatricalPlayersRefactoringKata.Services
     public class StatementPrinter
     {
         private readonly CultureInfo _cultureInfo = CultureInfo.GetCultureInfo("en-US");
-
-        private readonly CalculatorPrice calculatorPrice = new CalculatorPrice();
+        private readonly PlayCalculatorFactory _calculatorFactory = new PlayCalculatorFactory();
 
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
@@ -26,11 +24,14 @@ namespace TheatricalPlayersRefactoringKata.Services
             foreach (var perf in invoice.Performances)
             {
                 var play = plays[perf.PlayId];
-                var thisAmount = calculatorPrice.CalculateAmount(play, perf);
-                volumeCredits += calculatorPrice.CalculateVolumeCredits(play, perf);
+                var calculator = _calculatorFactory.GetCalculator(play.Type);
+                var thisAmount = calculator.CalculateAmount(play, perf);
+                var credits = calculator.CalculateVolumeCredits(play, perf);
+
+                volumeCredits += credits;
+                totalAmount += thisAmount;
 
                 result.AppendFormat(_cultureInfo, "  {0}: {1:C2} ({2} seats)\n", play.Name, thisAmount, perf.Audience);
-                totalAmount += thisAmount;
             }
 
             result.AppendFormat(_cultureInfo, "Amount owed is {0:C2}\n", totalAmount);
