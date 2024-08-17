@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="RequestPlay.Tests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="RequestPlay.Tests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.7.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
