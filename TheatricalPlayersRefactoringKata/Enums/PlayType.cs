@@ -1,6 +1,6 @@
 ﻿namespace TheatricalPlayersRefactoringKata.Enums
 {
-    public enum Type
+    public enum PlayType
     {
         Tragedy,
         Comedy,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -23,16 +24,19 @@ public class StatementPrinter
             var thisAmount = lines * 10;
             switch (play.Type) 
             {
-                case "tragedy":
+                case PlayType.Tragedy:
                     if (perf.Audience > 30) {
                         thisAmount += 1000 * (perf.Audience - 30);
                     }
                     break;
-                case "comedy":
+                case PlayType.Comedy:
                     if (perf.Audience > 20) {
                         thisAmount += 10000 + 500 * (perf.Audience - 20);
                     }
                     thisAmount += 300 * perf.Audience;
+                    break;
+                case PlayType.History:
+                    //regra de negócio para gênero histórico
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
@@ -40,7 +44,7 @@ public class StatementPrinter
             // add volume credits
             volumeCredits += Math.Max(perf.Audience - 30, 0);
             // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            if (PlayType.Comedy == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
 
             // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
