@@ -11,7 +11,10 @@ public abstract class Play(string name, int lines)
     public abstract string Type { get; }
 
     public virtual int CalculateCharge(int audience) {
-        int lines = _lines;
+        return StaticCalculateCharge(_lines);
+    }
+
+    protected static int StaticCalculateCharge(int lines) {
         if (lines < 1000) lines = 1000;
         if (lines > 4000) lines = 4000;
         return lines / 10; // TODO: Determine if result should be truncated as now or rounded.
