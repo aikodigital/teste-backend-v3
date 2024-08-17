@@ -9,7 +9,7 @@ public class Performance
     public int Id { get; set; }
 
     [Required]
-    public int PlayId { get; set; }
+    public string PlayId { get; set; }
 
     [ForeignKey(nameof(PlayId))]
     public Play Play { get; set; }
@@ -22,7 +22,7 @@ public class Performance
     [ForeignKey(nameof(InvoiceId))]
     public Invoice Invoice { get; set; }
 
-    public Performance(int playId, int audience)
+    public Performance(string playId, int audience)
     {
         PlayId = playId;
         Audience = audience;
