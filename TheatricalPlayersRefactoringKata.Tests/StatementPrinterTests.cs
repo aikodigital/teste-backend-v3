@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Domain.Enums;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -14,9 +14,9 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        plays.Add("hamlet", new Play("Hamlet", 4024, Genre.Tragedy));
+        plays.Add("as-like", new Play("As You Like It", 2670, Genre.Comedy));
+        plays.Add("othello", new Play("Othello", 3560, Genre.Tragedy));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -39,12 +39,12 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        plays.Add("hamlet", new Play("Hamlet", 4024, Genre.Tragedy));
+        plays.Add("as-like", new Play("As You Like It", 2670, Genre.Comedy));
+        plays.Add("othello", new Play("Othello", 3560, Genre.Tragedy));
+        plays.Add("henry-v", new Play("Henry V", 3227, Genre.History));
+        plays.Add("john", new Play("King John", 2648, Genre.History));
+        plays.Add("richard-iii", new Play("Richard III", 3718, Genre.History));
 
         Invoice invoice = new Invoice(
             "BigCo",
