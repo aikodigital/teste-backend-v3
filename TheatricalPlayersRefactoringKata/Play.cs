@@ -1,18 +1,18 @@
-namespace TheatricalPlayersRefactoringKata;
+using TheatricalPlayersRefactoringKata.Enums;
 
-public class Play
+namespace TheatricalPlayersRefactoringKata
 {
-    private string _name;
-    private int _lines;
-    private string _type;
+    public class Play
+    {
+        public string Name { get; }
+        public int Lines { get; }
+        public TheatricalType Type { get; }
 
-    public string Name { get => _name; set => _name = value; }
-    public int Lines { get => _lines; set => _lines = value; }
-    public string Type { get => _type; set => _type = value; }
-
-    public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+        public Play(string name, int lines, TheatricalType type)
+        {
+            Name = name;
+            Lines = lines;
+            Type = type;
+        }
     }
 }
