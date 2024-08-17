@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Microsoft.SqlServer.Server;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
@@ -30,7 +31,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "text");
 
         Approvals.Verify(result);
     }
@@ -61,7 +62,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "text");
 
         Approvals.Verify(result);
     }
@@ -91,7 +92,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXml(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "xml");
 
         Approvals.Verify(result);
     }
