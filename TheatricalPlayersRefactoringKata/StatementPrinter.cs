@@ -23,7 +23,7 @@ public class StatementPrinter
                 TheatricalType.Tragedy => new Tragedy(),
                 TheatricalType.Comedy => new Comedy(),
                 TheatricalType.History => new History(),
-                _ => throw new Exception($"Unknown genre {play.Type}")
+                _ => throw new Exception($"Unknown theatrical genre {play.Type}")
             };
             // calculate this amount
             int thisAmount = genre.CalculateAmount(perf.Audience, lines);
