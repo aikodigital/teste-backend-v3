@@ -8,10 +8,20 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        decimal totalAmount = 0;
-        var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
+
+        decimal totalAmount = CalculateTotalAmount(invoice, plays, ref result, cultureInfo);
+        int volumeCredits = CalculateVolumeCredits(invoice, plays);
+        
+        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount / 100);
+        result += String.Format("You earned {0} credits\n", volumeCredits);
+        return result;
+    }
+
+    private decimal CalculateTotalAmount(Invoice invoice, Dictionary<string, Play> plays, ref string result, CultureInfo cultureInfo)
+    {
+        decimal totalAmount = 0;
 
         foreach (var perf in invoice.Performances)
         {
@@ -20,6 +30,7 @@ public class StatementPrinter
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
             decimal thisAmount = lines * 10;
+
             switch (play.Type)
             {
                 case "tragedy":
@@ -34,18 +45,25 @@ public class StatementPrinter
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-
             // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount / 100, perf.Audience);
             totalAmount += thisAmount;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount / 100);
-        result += String.Format("You earned {0} credits\n", volumeCredits);
-        return result;
+        return totalAmount;
+    }
+
+    private int CalculateVolumeCredits(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        int volumeCredits = 0;
+
+        foreach(var perf in invoice.Performances)
+        {
+            var play = plays[perf.PlayId];
+            // add volume credits
+            volumeCredits += Math.Max(perf.Audience - 30, 0);
+            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+        }
+        return volumeCredits;
     }
 
     private static decimal CalculateComedyAmount(Performance perf, decimal thisAmount)
