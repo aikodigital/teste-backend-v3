@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace TheatricalPlayersRefactoringKata.Models;
@@ -5,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata.Models;
 public class Play
 {
     [Key]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     [Required]
     [MaxLength(100)]
@@ -17,11 +18,16 @@ public class Play
     [MaxLength(50)]
     public string Type { get; set; }
 
+    public Play()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+
     public Play(string name, int lines, string type)
     {
+        Id = Guid.NewGuid().ToString();
         Name = name;
         Lines = lines;
         Type = type;
     }
 }
-

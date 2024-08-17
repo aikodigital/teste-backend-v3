@@ -22,6 +22,10 @@ public class Performance
     [ForeignKey(nameof(InvoiceId))]
     public Invoice Invoice { get; set; }
 
+    public Performance()
+    {
+    }
+
     public Performance(string playId, int audience)
     {
         PlayId = playId;

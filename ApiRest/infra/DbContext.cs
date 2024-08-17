@@ -24,7 +24,7 @@ namespace TheatricalPlayersRefactoringKata.infra
 
             modelBuilder.Entity<Performance>()
                 .HasOne(p => p.Play)
-                .WithMany()
+                .WithMany() 
                 .HasForeignKey(p => p.PlayId);
 
             modelBuilder.Entity<Performance>()
@@ -34,6 +34,7 @@ namespace TheatricalPlayersRefactoringKata.infra
 
             base.OnModelCreating(modelBuilder);
         }
+
 
 
         public ApiDbContext(IConfiguration configuration, DbContextOptions options) : base(options)
