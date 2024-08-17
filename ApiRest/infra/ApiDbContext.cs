@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.infra
 {
-    internal class ApiDbContext : DbContext
+    public class ApiDbContext : DbContext
     {
         private IConfiguration _configuration;
         public DbSet<Play>? Plays { get; set; }
