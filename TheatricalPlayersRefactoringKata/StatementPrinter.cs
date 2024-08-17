@@ -34,7 +34,7 @@ namespace TheatricalPlayersRefactoringKata
             return result;
         }
 
-        private IChargeStrategy GetChargeStrategy(string playType)
+        static private IChargeStrategy GetChargeStrategy(string playType)
         {
             return playType switch
             {
