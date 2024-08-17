@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.infra;
 using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.DTOs;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -18,19 +19,26 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreatePlay([FromBody] Play play)
+        public IActionResult CreatePlay([FromBody] PlayDto playDto)
         {
-            if (play == null)
+            if (playDto == null)
             {
                 return BadRequest("Play data is null.");
             }
+            var play = new Play
+            {
+                Name = playDto.Name,
+                Lines = playDto.Lines,
+                Type = playDto.Type
+            };
             _db.Plays.Add(play);
             _db.SaveChanges();
 
             return CreatedAtAction(nameof(GetPlay), new { id = play.Id }, play);
         }
+
         [HttpGet("{id}")]
-        public IActionResult GetPlay(string id)
+        public IActionResult GetPlay(int id)
         {
             var play = _db.Plays.Find(id);
             if (play == null)
@@ -40,6 +48,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 
             return Ok(play);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllPlays()
         {
@@ -48,4 +57,3 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
     }
 }
-

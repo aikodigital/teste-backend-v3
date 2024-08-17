@@ -9,7 +9,7 @@ public class Performance
     public int Id { get; set; }
 
     [Required]
-    public string PlayId { get; set; }
+    public string PlayId { get; set; } // Play Name
 
     [ForeignKey(nameof(PlayId))]
     public Play Play { get; set; }
