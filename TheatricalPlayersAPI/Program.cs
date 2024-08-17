@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PlayServices>();
 builder.Services.AddScoped<PerformanceServices>();
 builder.Services.AddScoped<InvoiceServices>();
+builder.Services.AddScoped<StatementServices>();
 
 
 var app = builder.Build();

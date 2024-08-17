@@ -8,6 +8,7 @@ public class StatementPrinter
 {
     public const string TEXT_MODE = "text";
     public const string XML_MODE = "xml";
+    public const string ALL_MODES = "all";
 
     public const int MIN_AUDIENCE_FOR_CREDITS = 30;
     

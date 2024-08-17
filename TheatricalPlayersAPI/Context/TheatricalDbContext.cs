@@ -12,6 +12,7 @@ public class TheatricalDbContext : DbContext
     public DbSet<PerformanceModel> Performances { get; set; }
     public DbSet<InvoiceModel> Invoices { get; set; }
     public DbSet<PlayModel> Plays { get; set; }
+    public DbSet<StatementModel> Statements { get; set; }
 
     /*
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){

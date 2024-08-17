@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Compile Remove="Dto\**" />
+    <Compile Remove="Controllers\TheatricalPlayersController.cs" />
   </ItemGroup>
 
   <ItemGroup>

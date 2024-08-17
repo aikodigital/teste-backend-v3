@@ -22,6 +22,16 @@ public class GenericServices
         if (name == "") return false;
         return true;
     }
+
+    public static bool validatePrintModes(string printMode){
+        if (printMode == "") return false;
+        if (printMode != StatementPrinter.TEXT_MODE &&
+            printMode != StatementPrinter.XML_MODE &&
+            printMode != StatementPrinter.ALL_MODES){
+            return false;
+        }
+        return true;
+    }
     
     public static List<PerformanceResponseModel> GeneratePerfResponse(List<PerformanceModel> performances){
         var performanceResponseList = new List<PerformanceResponseModel>();
@@ -35,5 +45,14 @@ public class GenericServices
             performanceResponseList.Add(performanceResponseModel);
         }
         return performanceResponseList;
+    }
+
+    public static List<Performance> GeneratePerfs(List<PerformanceModel> performances){
+        var perfs = new List<Performance>();
+        foreach (var model in performances){
+            var perf = new Performance(model.PlayId, model.Audience, model.PlayGenre);
+            perfs.Add(perf);
+        }
+        return perfs;
     }
 }
