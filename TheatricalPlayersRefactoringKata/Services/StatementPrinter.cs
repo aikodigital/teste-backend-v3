@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -42,6 +43,7 @@ namespace TheatricalPlayersRefactoringKata.Services
         }
         public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
         {
+            // Cria uma lista de itens para o XML
             var items = invoice.Performances.Select(perf =>
             {
                 var play = plays[perf.PlayId];
@@ -54,25 +56,33 @@ namespace TheatricalPlayersRefactoringKata.Services
                     new XElement("EarnedCredits", credits),
                     new XElement("Seats", perf.Audience)
                 );
-            });
+            }).ToList();
 
+            // Documento XML com a declaração e os elementos necessários
             var doc = new XDocument(
+                new XDeclaration("1.0", "utf-8", null),
                 new XElement("Statement",
+                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                    new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
                     new XElement("Customer", invoice.Customer),
                     new XElement("Items", items),
-                    new XElement("AmountOwed", FormatNumber(items.Sum(i => decimal.Parse(i.Element("AmountOwed").Value)))),
+                    new XElement("AmountOwed", FormatNumber(items.Sum(i => decimal.Parse(i.Element("AmountOwed").Value, _cultureInfo)))),
                     new XElement("EarnedCredits", items.Sum(i => int.Parse(i.Element("EarnedCredits").Value)))
                 )
             );
 
-            return doc.ToString();
+            string path = Path.Combine(Path.GetTempPath(), "temp.xml");
+            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+            using (var streamWriter = new StreamWriter(fileStream, Encoding.UTF8))
+            {
+                streamWriter.Write("\ufeff");
+                doc.Save(streamWriter);
+            }
+            return File.ReadAllText(path);
         }
-
         private string FormatNumber(decimal number)
         {
             return number % 1 == 0 ? number.ToString("F0", _cultureInfo) : number.ToString("F1", _cultureInfo);
         }
-
-
     }
 }
