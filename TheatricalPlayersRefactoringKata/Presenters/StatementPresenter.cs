@@ -44,7 +44,11 @@ public class StatementPerfomance(Performance perfomance)
 
     public int Audience {
         get => _perfomance.Audience;
-    } 
+    }
+
+    public int Credits {
+        get => _perfomance.Credits;
+    }
 
     public decimal Charge {
         get => (decimal) _perfomance.Charge / 100;
