@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Models;
 
@@ -39,5 +40,39 @@ namespace TheatricalPlayersRefactoringKata.Services
 
             return result.ToString();
         }
+        public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
+        {
+            var items = invoice.Performances.Select(perf =>
+            {
+                var play = plays[perf.PlayId];
+                var calculator = _calculatorFactory.GetCalculator(play.Type);
+                var amount = calculator.CalculateAmount(play, perf);
+                var credits = calculator.CalculateVolumeCredits(play, perf);
+
+                return new XElement("Item",
+                    new XElement("AmountOwed", FormatNumber(amount)),
+                    new XElement("EarnedCredits", credits),
+                    new XElement("Seats", perf.Audience)
+                );
+            });
+
+            var doc = new XDocument(
+                new XElement("Statement",
+                    new XElement("Customer", invoice.Customer),
+                    new XElement("Items", items),
+                    new XElement("AmountOwed", FormatNumber(items.Sum(i => decimal.Parse(i.Element("AmountOwed").Value)))),
+                    new XElement("EarnedCredits", items.Sum(i => int.Parse(i.Element("EarnedCredits").Value)))
+                )
+            );
+
+            return doc.ToString();
+        }
+
+        private string FormatNumber(decimal number)
+        {
+            return number % 1 == 0 ? number.ToString("F0", _cultureInfo) : number.ToString("F1", _cultureInfo);
+        }
+
+
     }
 }
