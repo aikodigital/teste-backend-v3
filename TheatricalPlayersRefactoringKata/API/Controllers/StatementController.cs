@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TheatricalPlayersRefactoringKata.API.Models;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Data.Dto;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -44,13 +45,28 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             try
             {
                 AssociatePlayIds(request);
-                return GenerateStatement("xml", request, "statement.xml");
+
+                var xmlInvoice = MapToXmlInvoice(request.Invoice);
+                return GenerateStatement("xml", xmlInvoice, "statement.xml");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao gerar extrato.");
                 return StatusCode(500, "Erro ao gerar extrato. Tente novamente mais tarde.");
             }
+        }
+
+        private XmlInvoice MapToXmlInvoice(Invoice invoice)
+        {
+            return new XmlInvoice
+            {
+                Customer = invoice.Customer,
+                Performances = invoice.Performances.Select(p => new XmlPerformance
+                {
+                    PlayId = p.PlayId,
+                    Audience = p.Audience
+                }).ToList()
+            };
         }
 
         private void AssociatePlayIds(StatementRequest request)
@@ -61,7 +77,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             {
                 if (playDictionary.TryGetValue(performance.Genre, out var playId))
                 {
-                    performance.PlayId = playId;
+                    performance.UpdatePlayId(playId);
                 }
                 else
                 {
@@ -70,17 +86,14 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             }
         }
 
-        private IActionResult GenerateStatement(string format, StatementRequest request, string fileName)
+        private IActionResult GenerateStatement(string format, object data, string fileName)
         {
             try
             {
-                if (request == null || request.Invoice == null || request.Plays == null)
+                if (data == null)
                 {
-                    return BadRequest("Request, Invoice, ou Plays não podem ser nulos.");
+                    return BadRequest("Os dados não podem ser nulos.");
                 }
-
-                var generator = _statementGeneratorFactory(format);
-                var statement = generator.Generate(request.Invoice, request.Plays);
 
                 var filePath = Path.Combine("C:\\Users\\User\\Documents\\TheatricalPlayersRefactoringKata\\arquivos", format);
 
@@ -91,14 +104,15 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 
                 if (format == "xml")
                 {
-                    var xmlSerializer = new XmlSerializer(typeof(StatementRequest));
+                    var xmlSerializer = new XmlSerializer(data.GetType());
                     using (var writer = new StreamWriter(Path.Combine(filePath, fileName)))
                     {
-                        xmlSerializer.Serialize(writer, request);
+                        xmlSerializer.Serialize(writer, data);
                     }
                 }
                 else if (format == "text")
                 {
+                    var statement = data as string;
                     System.IO.File.WriteAllText(Path.Combine(filePath, fileName), statement);
                 }
 

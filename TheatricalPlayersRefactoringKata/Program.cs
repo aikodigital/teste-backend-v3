@@ -8,13 +8,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Services;
 using TheatricalPlayersRefactoringKata.Infrastructure;
 using TheatricalPlayersRefactoringKata.Infrastructure.Configuration;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
 using TheatricalPlayersRefactoringKata.Infrastructure.Converters;
-using TheatricalPlayersRefactoringKata.Core.UseCases;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -40,21 +38,22 @@ namespace TheatricalPlayersRefactoringKata
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API dos Jogadores Teatrais", Version = "v1" });
             });
 
-            builder.Services.AddScoped<IPerformanceCalculator, TragedyCalculator>();
-            builder.Services.AddScoped<IPerformanceCalculator, ComedyCalculator>();
-            builder.Services.AddScoped<IPerformanceCalculator, HistoricalCalculator>();
+            builder.Services.AddScoped<TragedyCalculator>();
+            builder.Services.AddScoped<ComedyCalculator>();
+            builder.Services.AddScoped<HistoricalCalculator>();
 
-            builder.Services.AddScoped<StatementGenerator, TextStatementGenerator>();
-            builder.Services.AddScoped<StatementGenerator, XmlStatementGenerator>();
+            builder.Services.AddScoped<TextStatementGenerator>();
+            builder.Services.AddScoped<XmlStatementGenerator>();
 
             builder.Services.AddScoped<Func<string, IStatementGenerator>>(sp => key =>
             {
-                return key.ToLower() switch
+                IStatementGenerator generator = key.ToLower() switch
                 {
-                    "text" => sp.GetRequiredService<TextStatementGenerator>() as IStatementGenerator,
-                    "xml" => sp.GetRequiredService<XmlStatementGenerator>() as IStatementGenerator,
+                    "text" => sp.GetRequiredService<TextStatementGenerator>(),
+                    "xml" => sp.GetRequiredService<XmlStatementGenerator>(),
                     _ => throw new KeyNotFoundException($"O gerador para o tipo '{key}' não foi encontrado.")
                 };
+                return generator;
             });
 
             builder.Services.AddScoped<StatementProcessingService>(sp =>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace TheatricalPlayersRefactoringKata.Core.Entities
 {
@@ -10,6 +11,12 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
         public string Customer { get; private set; }
         public List<Performance> Performances { get; private set; }
 
+        public Invoice()
+        {
+            Performances = new List<Performance>();
+        }
+
+        [JsonConstructor]
         public Invoice(string customer, List<Performance> performances)
         {
             Id = Guid.NewGuid();
@@ -17,17 +24,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
             Performances = performances ?? new List<Performance>();
         }
 
-        public void AddPerformance(Performance performance)
-        {
-            Performances.Add(performance);
-        }
-
-        public void RemovePerformance(Performance performance)
-        {
-            Performances.Remove(performance);
-        }
-
-        public decimal TotalAmount => Performances.Sum(p => p.Audience * 100);
+        public decimal TotalAmount => Performances.Sum(p => p.Audience * p.Play.Price);
 
         public int TotalCredits => Performances.Sum(p => Math.Max(p.Audience - 30, 0));
     }

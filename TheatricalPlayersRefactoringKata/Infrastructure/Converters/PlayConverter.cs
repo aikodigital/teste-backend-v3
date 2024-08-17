@@ -36,7 +36,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Converters
 
         private Genre ConvertToGenre(string genreString)
         {
-            if (Enum.TryParse<Genre>(genreString, out var genre))
+            if (Enum.TryParse<Genre>(genreString, ignoreCase: true, out var genre))
             {
                 return genre;
             }

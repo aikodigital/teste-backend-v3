@@ -12,7 +12,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Factories
     {
         public static IPerformanceCalculator CreateCalculator(string genre)
         {
-            return genre switch
+            return genre.ToLower() switch
             {
                 "tragedy" => new TragedyCalculator(),
                 "comedy" => new ComedyCalculator(),

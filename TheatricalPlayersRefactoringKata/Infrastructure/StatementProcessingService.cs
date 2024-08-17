@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using TheatricalPlayersRefactoringKata.Application.Request;
+using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Data.Dto;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure
 {
@@ -45,7 +47,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
                 {
                     var playsList = request.Plays.ToList();
 
-                    var xmlContent = _statementGenerator.Generate(request.Invoice, playsList);
+                    var xmlInvoice = MapToXmlInvoice(request.Invoice);
+                    var xmlContent = _statementGenerator.Generate(request.Invoice, playsList); // Alterado para usar Invoice diretamente
                     var filePath = Path.Combine(_outputDirectory, $"{request.Invoice.Customer}.xml");
 
                     await File.WriteAllTextAsync(filePath, xmlContent);
@@ -58,6 +61,24 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
                     throw new InvalidOperationException("Ocorreu um erro ao processar o extrato.", ex);
                 }
             }
+        }
+
+        private XmlInvoice MapToXmlInvoice(Invoice invoice)
+        {
+            if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+
+            return new XmlInvoice
+            {
+                Customer = invoice.Customer,
+                TotalAmount = invoice.TotalAmount,
+                TotalCredits = invoice.TotalCredits,
+                Performances = invoice.Performances.Select(p => new XmlPerformance
+                {
+                    PlayId = p.PlayId,
+                    Audience = p.Audience,
+                    Genre = p.Genre.ToString()
+                }).ToList()
+            };
         }
     }
 }
