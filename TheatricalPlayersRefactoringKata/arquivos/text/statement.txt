@@ -1,6 +1,5 @@
-Extrato para Cliente Exemplo
-  Hamlet: R$ 290,00 (55 espectadores)
-  As You Like It: R$ 305,00 (35 espectadores)
-  Othello: R$ 130,00 (40 espectadores)
-Valor total devido é R$ 725,00
-Você ganhou 47 créditos
+Extrato para João Silva
+------------------------------
+------------------------------
+Valor Total: R$ 0,00
+Créditos Totais: 0

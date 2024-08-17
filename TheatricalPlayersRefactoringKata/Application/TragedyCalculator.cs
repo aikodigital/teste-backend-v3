@@ -2,42 +2,23 @@
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Application
+namespace TheatricalPlayersRefactoringKata.Core.Services
 {
-    public class TragedyCalculator : IPlayTypeCalculator
+    public class TragedyCalculator : IPerformanceCalculator
     {
-        public bool CanHandle(string playType)
+        public decimal CalculatePrice(Performance performance)
         {
-            return playType == "tragédia";
+            decimal basePrice = Math.Max(1000, Math.Min(4000, performance.Lines)) / 10m;
+            if (performance.Audience > 30)
+            {
+                basePrice += 10 * (performance.Audience - 30);
+            }
+            return basePrice;
         }
 
-        public decimal CalculateAmount(Play play, Performance performance)
+        public int CalculateCredits(Performance performance)
         {
-            try
-            {
-                var baseAmount = play.Price / 10;
-                if (performance.Audience > 30)
-                {
-                    baseAmount += 10 * (performance.Audience - 30);
-                }
-                return baseAmount;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Erro ao calcular o valor para tragédia.", ex);
-            }
-        }
-
-        public int CalculateCredits(Play play, Performance performance)
-        {
-            try
-            {
-                return Math.Max(performance.Audience - 30, 0);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Erro ao calcular os créditos para tragédia.", ex);
-            }
+            return Math.Max(performance.Audience - 30, 0);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using TheatricalPlayersRefactoringKata.Core.Interfaces;
+﻿using System;
 using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Infrastructure;
-using TheatricalPlayersRefactoringKata.API.Models;
 using System.IO;
-using System;
+using System.Linq;
+using System.Xml.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using TheatricalPlayersRefactoringKata.API.Models;
+using TheatricalPlayersRefactoringKata.Core.Entities;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -13,57 +14,101 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     [Route("api/[controller]")]
     public class StatementController : ControllerBase
     {
-        private readonly IStatementGenerator _textStatementGenerator;
-        private readonly IStatementGenerator _xmlStatementGenerator;
+        private readonly Func<string, IStatementGenerator> _statementGeneratorFactory;
         private readonly ILogger<StatementController> _logger;
-        private readonly IEnumerable<IPlayTypeCalculator> _calculators;
 
-        public StatementController(
-            IStatementGenerator textStatementGenerator,
-            IEnumerable<IPlayTypeCalculator> calculators,
-            ILogger<StatementController> logger)
+        public StatementController(Func<string, IStatementGenerator> statementGeneratorFactory, ILogger<StatementController> logger)
         {
-            _textStatementGenerator = textStatementGenerator;
-            _calculators = calculators;
-            _xmlStatementGenerator = new XmlStatementGenerator(calculators);
+            _statementGeneratorFactory = statementGeneratorFactory;
             _logger = logger;
         }
 
         [HttpPost("text")]
-        public ActionResult<string> GenerateTextStatement([FromBody] StatementRequest request)
+        public IActionResult GenerateTextStatement([FromBody] StatementRequest request)
         {
             try
             {
-                var statement = _textStatementGenerator.Generate(request.Invoice, request.Plays);
-
-                var filePath = Path.Combine("C:\\Users\\User\\Documents\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\arquivos\\text", "statement.txt");
-                System.IO.File.WriteAllText(filePath, statement);
-
-                return Ok(statement);
+                AssociatePlayIds(request);
+                return GenerateStatement("text", request, "statement.txt");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao gerar o extrato em texto.");
-                return StatusCode(500, "Ocorreu um erro ao gerar o extrato em texto. Por favor, tente novamente mais tarde.");
+                _logger.LogError(ex, "Erro ao gerar extrato.");
+                return StatusCode(500, "Erro ao gerar extrato. Tente novamente mais tarde.");
             }
         }
 
         [HttpPost("xml")]
-        public ActionResult<string> GenerateXmlStatement([FromBody] StatementRequest request)
+        public IActionResult GenerateXmlStatement([FromBody] StatementRequest request)
         {
             try
             {
-                var statement = _xmlStatementGenerator.Generate(request.Invoice, request.Plays);
-
-                var filePath = Path.Combine("C:\\Users\\User\\Documents\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\arquivos\\xml", "statement.xml");
-                System.IO.File.WriteAllText(filePath, statement);
-
-                return Ok(statement);
+                AssociatePlayIds(request);
+                return GenerateStatement("xml", request, "statement.xml");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao gerar o extrato em XML.");
-                return StatusCode(500, "Ocorreu um erro ao gerar o extrato em XML. Por favor, tente novamente mais tarde.");
+                _logger.LogError(ex, "Erro ao gerar extrato.");
+                return StatusCode(500, "Erro ao gerar extrato. Tente novamente mais tarde.");
+            }
+        }
+
+        private void AssociatePlayIds(StatementRequest request)
+        {
+            var playDictionary = request.Plays.ToDictionary(p => p.Type, p => p.PlayId);
+
+            foreach (var performance in request.Invoice.Performances)
+            {
+                if (playDictionary.TryGetValue(performance.Genre, out var playId))
+                {
+                    performance.PlayId = playId;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Play not found for genre: {performance.Genre}");
+                }
+            }
+        }
+
+        private IActionResult GenerateStatement(string format, StatementRequest request, string fileName)
+        {
+            try
+            {
+                if (request == null || request.Invoice == null || request.Plays == null)
+                {
+                    return BadRequest("Request, Invoice, ou Plays não podem ser nulos.");
+                }
+
+                var generator = _statementGeneratorFactory(format);
+                var statement = generator.Generate(request.Invoice, request.Plays);
+
+                var filePath = Path.Combine("C:\\Users\\User\\Documents\\TheatricalPlayersRefactoringKata\\arquivos", format);
+
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+                if (format == "xml")
+                {
+                    var xmlSerializer = new XmlSerializer(typeof(StatementRequest));
+                    using (var writer = new StreamWriter(Path.Combine(filePath, fileName)))
+                    {
+                        xmlSerializer.Serialize(writer, request);
+                    }
+                }
+                else if (format == "text")
+                {
+                    System.IO.File.WriteAllText(Path.Combine(filePath, fileName), statement);
+                }
+
+                var fileContent = System.IO.File.ReadAllBytes(Path.Combine(filePath, fileName));
+                return File(fileContent, "application/octet-stream", fileName);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao gerar extrato.");
+                return StatusCode(500, "Erro ao gerar extrato. Tente novamente mais tarde.");
             }
         }
     }

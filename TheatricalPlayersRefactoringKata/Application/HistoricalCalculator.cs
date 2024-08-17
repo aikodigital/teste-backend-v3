@@ -1,62 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Application
+namespace TheatricalPlayersRefactoringKata.Core.Services
 {
-    public class HistoricalCalculator : IPlayTypeCalculator
+    public class HistoricalCalculator : IPerformanceCalculator
     {
-        private readonly IEnumerable<IPlayTypeCalculator> _calculators;
+        private readonly IPerformanceCalculator _tragedyCalculator = new TragedyCalculator();
+        private readonly IPerformanceCalculator _comedyCalculator = new ComedyCalculator();
 
-        public HistoricalCalculator(IEnumerable<IPlayTypeCalculator> calculators)
+        public decimal CalculatePrice(Performance performance)
         {
-            _calculators = calculators;
+            return _tragedyCalculator.CalculatePrice(performance) + _comedyCalculator.CalculatePrice(performance);
         }
 
-        public bool CanHandle(string playType)
+        public int CalculateCredits(Performance performance)
         {
-            return playType == "histórica";
-        }
-
-        public decimal CalculateAmount(Play play, Performance performance)
-        {
-            try
-            {
-                var amount = 0m;
-                foreach (var calculator in _calculators)
-                {
-                    if (calculator.CanHandle(play.Type))
-                    {
-                        amount += calculator.CalculateAmount(play, performance);
-                    }
-                }
-                return amount;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Erro ao calcular o valor para histórica.", ex);
-            }
-        }
-
-        public int CalculateCredits(Play play, Performance performance)
-        {
-            try
-            {
-                var credits = 0;
-                foreach (var calculator in _calculators)
-                {
-                    if (calculator.CanHandle(play.Type))
-                    {
-                        credits += calculator.CalculateCredits(play, performance);
-                    }
-                }
-                return credits;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Erro ao calcular os créditos para histórica.", ex);
-            }
+            return _tragedyCalculator.CalculateCredits(performance) + _comedyCalculator.CalculateCredits(performance);
         }
     }
 }
