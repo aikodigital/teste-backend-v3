@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
+using TheatricalPlayersRefactoringKata.Domain.Services.Calculators;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -22,9 +23,7 @@ public class StatementPrinter
             switch (play.Genre) 
             {
                 case Genre.Tragedy:
-                    if (perf.Audience > 30) {
-                        baseAmount += 1000 * (perf.Audience - 30);
-                    }
+                    baseAmount = TragedyAmountCalculator.Calculate(perf, play, baseAmount);
                     break;
                 case Genre.Comedy:
                     if (perf.Audience > 20) {
