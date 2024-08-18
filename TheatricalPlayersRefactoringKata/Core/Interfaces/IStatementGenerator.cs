@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 
-public interface IStatementGenerator
+namespace TheatricalPlayersRefactoringKata.Core.Interfaces
 {
-    string Generate(Invoice invoice, List<Play> plays);
+    public interface IStatementGenerator
+    {
+        string Generate(Invoice invoice, Dictionary<Guid, Play> plays);
+    }
 }

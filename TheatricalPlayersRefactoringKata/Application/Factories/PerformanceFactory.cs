@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Services;
 
 namespace TheatricalPlayersRefactoringKata.Application.Factories
 {
-    public static class PerformanceFactory
+    public class PerformanceFactory
     {
-        public static IPerformanceCalculator CreateCalculator(string genre)
+        private readonly IServiceProvider _serviceProvider;
+
+        public PerformanceFactory(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public IPerformanceCalculator CreateCalculator(string genre)
         {
             return genre.ToLower() switch
             {
-                "tragedy" => new TragedyCalculator(),
-                "comedy" => new ComedyCalculator(),
-                "historical" => new HistoricalCalculator(),
+                "tragedy" => _serviceProvider.GetRequiredService<TragedyCalculator>(),
+                "comedy" => _serviceProvider.GetRequiredService<ComedyCalculator>(),
+                "historical" => _serviceProvider.GetRequiredService<HistoricalCalculator>(),
                 _ => throw new ArgumentException($"Genre '{genre}' not supported")
             };
         }

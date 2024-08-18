@@ -1,63 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
-using TheatricalPlayersRefactoringKata.Application.Factories;
+using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Core.Entities;
-using TheatricalPlayersRefactoringKata.Core.UseCases;
-using TheatricalPlayersRefactoringKata.Data.Dto;
+using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
+namespace TheatricalPlayersRefactoringKata.Infrastructure
 {
-    public class XmlStatementGenerator : StatementGenerator, IStatementGenerator
+    public class XmlStatementGenerator : IStatementGenerator
     {
-        public string Generate(Invoice invoice, List<Play> plays)
-        {
-            var xmlInvoice = MapToXmlInvoice(invoice);
+        private readonly Dictionary<string, IPerformanceCalculator> _calculators;
 
-            var xmlSerializer = new XmlSerializer(typeof(XmlInvoice));
-            using (var stringWriter = new StringWriter())
+        public XmlStatementGenerator(IEnumerable<IPerformanceCalculator> calculators)
+        {
+            _calculators = calculators.ToDictionary(c => c.GetType().Name.Replace("Calculator", ""), c => c);
+        }
+
+        public string Generate(Invoice invoice, Dictionary<Guid, Play> plays)
+        {
+            if (invoice == null)
+                throw new ArgumentNullException(nameof(invoice), "O parâmetro 'invoice' não pode ser nulo.");
+
+            if (plays == null)
+                throw new ArgumentNullException(nameof(plays), "O parâmetro 'plays' não pode ser nulo.");
+
+            var totalAmount = 0m;
+            var totalCredits = 0;
+
+            var root = new XElement("invoice",
+                new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
+                new XElement("customer", invoice.Customer)
+            );
+
+            var performancesElement = new XElement("performances");
+
+            foreach (var perf in invoice.Performances)
             {
-                xmlSerializer.Serialize(stringWriter, xmlInvoice);
-                return stringWriter.ToString();
+                if (!plays.TryGetValue(perf.PlayId, out var play))
+                    throw new KeyNotFoundException($"A peça com o ID '{perf.PlayId}' não foi encontrada.");
+
+                if (!_calculators.TryGetValue(play.Type.ToString(), out var calculator))
+                    throw new ArgumentException($"Nenhum calculador disponível para o tipo de peça: {play.Type}");
+
+                var amount = calculator.CalculatePrice(perf);
+                var credits = calculator.CalculateCredits(perf);
+
+                totalAmount += amount;
+                totalCredits += credits;
+
+                performancesElement.Add(new XElement("performance",
+                    new XElement("playId", perf.PlayId),
+                    new XElement("audience", perf.Audience),
+                    new XElement("amount", amount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)),
+                    new XElement("credits", credits)
+                ));
             }
-        }
 
-        private XmlInvoice MapToXmlInvoice(Invoice invoice)
-        {
-            if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+            root.Add(new XElement("totalAmount", totalAmount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)));
+            root.Add(new XElement("totalCredits", totalCredits));
 
-            return new XmlInvoice
-            {
-                Customer = invoice.Customer,
-                TotalAmount = invoice.TotalAmount,
-                TotalCredits = invoice.TotalCredits,
-                Performances = invoice.Performances.Select(p => new XmlPerformance
-                {
-                    PlayId = p.PlayId,
-                    Audience = p.Audience,
-                    Genre = p.Genre.ToString()
-                }).ToList()
-            };
-        }
+            root.Add(performancesElement);
 
-        protected override string GenerateHeader(Invoice invoice)
-        {
-            return $"<invoice customer=\"{invoice.Customer}\">\n";
-        }
-
-        protected override string GeneratePerformanceDetail(Performance performance)
-        {
-            var genreString = performance.Genre.ToString();
-            var calculator = PerformanceFactory.CreateCalculator(genreString);
-            decimal price = calculator.CalculatePrice(performance);
-            return $"\t<performance play=\"{performance.PlayId}\" seats=\"{performance.Audience}\" price=\"{price}\" />\n";
-        }
-
-        protected override string GenerateFooter(Invoice invoice)
-        {
-            return $"<total amount=\"{invoice.TotalAmount}\" credits=\"{invoice.TotalCredits}\" />\n</invoice>\n";
+            return root.ToString();
         }
     }
 }

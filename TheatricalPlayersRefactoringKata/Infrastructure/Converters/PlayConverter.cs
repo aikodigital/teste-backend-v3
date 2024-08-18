@@ -13,14 +13,18 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Converters
             {
                 var root = doc.RootElement;
 
-                var playId = root.TryGetProperty("playId", out var playIdElement) ? playIdElement.GetGuid() : (Guid?)null;
-                var name = root.TryGetProperty("name", out var nameElement) ? nameElement.GetString() : throw new JsonException("Missing 'name' property.");
-                var type = root.TryGetProperty("type", out var typeElement) ? ConvertToGenre(typeElement.GetString()) : throw new JsonException("Missing or invalid 'type' property.");
-                var price = root.TryGetProperty("price", out var priceElement) ? priceElement.GetDecimal() : throw new JsonException("Missing 'price' property.");
+                var playId = root.TryGetProperty("playId", out var playIdElement) ? playIdElement.GetGuid() : Guid.NewGuid();
+                var name = root.GetProperty("name").GetString();
+                var typeString = root.GetProperty("type").GetString();
+                var price = root.GetProperty("price").GetDecimal();
+                var audience = root.TryGetProperty("audience", out var audienceElement) ? audienceElement.GetInt32() : 0;
 
-                var play = new Play(name, type, price, playId);
+                if (!Enum.TryParse<Genre>(typeString, true, out var genre))
+                {
+                    throw new JsonException($"Genre '{typeString}' is invalid.");
+                }
 
-                return play;
+                return new Play(playId, name, genre, price, audience);
             }
         }
 
@@ -31,16 +35,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Converters
             writer.WriteString("name", value.Name);
             writer.WriteString("type", value.Type.ToString());
             writer.WriteNumber("price", value.Price);
+            writer.WriteNumber("audience", value.Audience);
             writer.WriteEndObject();
-        }
-
-        private Genre ConvertToGenre(string genreString)
-        {
-            if (Enum.TryParse<Genre>(genreString, ignoreCase: true, out var genre))
-            {
-                return genre;
-            }
-            throw new JsonException("Invalid genre value.");
         }
     }
 }

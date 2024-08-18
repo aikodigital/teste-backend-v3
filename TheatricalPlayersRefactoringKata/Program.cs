@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Core.Services;
-using TheatricalPlayersRefactoringKata.Infrastructure;
-using TheatricalPlayersRefactoringKata.Infrastructure.Configuration;
-using TheatricalPlayersRefactoringKata.Infrastructure.Services;
+using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Infrastructure.Converters;
+using TheatricalPlayersRefactoringKata.Infrastructure.Services;
+using TheatricalPlayersRefactoringKata.Application.Factories;
+using TheatricalPlayersRefactoringKata.Infrastructure;
+using System.Linq;
+using TheatricalPlayersRefactoringKata.Core.Entities;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -28,48 +29,42 @@ namespace TheatricalPlayersRefactoringKata
             });
 
             builder.Services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new PlayConverter());
-                });
+               .AddJsonOptions(options =>
+               {
+                   options.JsonSerializerOptions.Converters.Add(new GenreConverter());
+                   options.JsonSerializerOptions.Converters.Add(new PlayConverter());
+               });
 
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API dos Jogadores Teatrais", Version = "v1" });
             });
 
-            builder.Services.AddScoped<TragedyCalculator>();
-            builder.Services.AddScoped<ComedyCalculator>();
-            builder.Services.AddScoped<HistoricalCalculator>();
+            builder.Services.AddTransient<TragedyCalculator>();
+            builder.Services.AddTransient<ComedyCalculator>();
+            builder.Services.AddTransient<HistoricalCalculator>();
 
-            builder.Services.AddScoped<TextStatementGenerator>();
-            builder.Services.AddScoped<XmlStatementGenerator>();
-
-            builder.Services.AddScoped<Func<string, IStatementGenerator>>(sp => key =>
+            builder.Services.AddSingleton<Dictionary<string, IPerformanceCalculator>>(serviceProvider =>
             {
-                IStatementGenerator generator = key.ToLower() switch
+                var calculators = serviceProvider.GetServices<IPerformanceCalculator>();
+                return calculators.ToDictionary(c => c.GetType().Name.Replace("Calculator", ""), c => c);
+            });
+
+            builder.Services.AddTransient<Func<string, IStatementGenerator>>(serviceProvider => key =>
+            {
+                if (key == "xml")
                 {
-                    "text" => sp.GetRequiredService<TextStatementGenerator>(),
-                    "xml" => sp.GetRequiredService<XmlStatementGenerator>(),
-                    _ => throw new KeyNotFoundException($"O gerador para o tipo '{key}' não foi encontrado.")
-                };
-                return generator;
+                    return new XmlStatementGenerator(serviceProvider.GetServices<IPerformanceCalculator>());
+                }
+                throw new KeyNotFoundException($"O gerador para o tipo '{key}' não foi encontrado.");
             });
 
-            builder.Services.AddScoped<StatementProcessingService>(sp =>
-            {
-                var outputDirectories = sp.GetRequiredService<IConfiguration>()
-                                          .GetSection("OutputDirectories")
-                                          .Get<OutputDirectories>();
+            builder.Services.AddTransient<TextStatementGenerator>();
+            builder.Services.AddTransient<XmlStatementGenerator>();
 
-                var statementGeneratorFunc = sp.GetRequiredService<Func<string, IStatementGenerator>>();
+            builder.Services.AddTransient<PerformanceFactory>();
 
-                return new StatementProcessingService(
-                    statementGeneratorFunc("xml"),
-                    outputDirectories.XmlOutputDirectory,
-                    sp.GetRequiredService<ILogger<StatementProcessingService>>()
-                );
-            });
+            builder.Services.AddSingleton<Dictionary<string, Play>>();
 
             var app = builder.Build();
 

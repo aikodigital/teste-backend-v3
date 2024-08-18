@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace TheatricalPlayersRefactoringKata.Core.Entities
 {
@@ -8,14 +9,19 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
         public string Name { get; private set; }
         public Genre Type { get; private set; }
         public decimal Price { get; private set; }
+        public int Audience { get; private set; }
 
-        public Play(string name, Genre type, decimal price, Guid? playId = null)
+        [JsonConstructor]
+        public Play(Guid playId, string name, Genre type, decimal price, int audience)
         {
-            PlayId = playId ?? Guid.NewGuid();
+            PlayId = playId;
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Type = type;
             Price = price >= 0 ? price : throw new ArgumentOutOfRangeException(nameof(price));
+            Audience = audience;
         }
+
+        public Play(string name, Genre type, decimal price) : this(Guid.NewGuid(), name, type, price, 0) { }
 
         public void UpdateName(string name)
         {
@@ -31,6 +37,12 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
         {
             if (price < 0) throw new ArgumentOutOfRangeException(nameof(price));
             Price = price;
+        }
+
+        public void UpdateAudience(int audience)
+        {
+            if (audience < 0) throw new ArgumentOutOfRangeException(nameof(audience));
+            Audience = audience;
         }
     }
 }

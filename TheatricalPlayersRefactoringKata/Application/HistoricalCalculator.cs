@@ -6,8 +6,16 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
 {
     public class HistoricalCalculator : IPerformanceCalculator
     {
-        private readonly IPerformanceCalculator _tragedyCalculator = new TragedyCalculator();
-        private readonly IPerformanceCalculator _comedyCalculator = new ComedyCalculator();
+        private readonly TragedyCalculator _tragedyCalculator;
+        private readonly ComedyCalculator _comedyCalculator;
+
+        public HistoricalCalculator(
+            TragedyCalculator tragedyCalculator,
+            ComedyCalculator comedyCalculator)
+        {
+            _tragedyCalculator = tragedyCalculator ?? throw new ArgumentNullException(nameof(tragedyCalculator));
+            _comedyCalculator = comedyCalculator ?? throw new ArgumentNullException(nameof(comedyCalculator));
+        }
 
         public decimal CalculatePrice(Performance performance)
         {

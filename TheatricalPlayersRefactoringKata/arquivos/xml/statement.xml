@@ -1,5 +1,19 @@
-<Statement>
-  <Customer>string</Customer>
-  <TotalAmount>R$ 0,00</TotalAmount>
-  <TotalCredits>0</TotalCredits>
-</Statement>
+<invoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <customer>John Doe</customer>
+  <totalAmount>200.00</totalAmount>
+  <totalCredits>0</totalCredits>
+  <performances>
+    <performance>
+      <playId>1a2b3c4d-1234-5678-9abc-def012345678</playId>
+      <audience>0</audience>
+      <amount>100.00</amount>
+      <credits>0</credits>
+    </performance>
+    <performance>
+      <playId>1a2b3c4d-1234-5678-9abc-def012345678</playId>
+      <audience>0</audience>
+      <amount>200.00</amount>
+      <credits>0</credits>
+    </performance>
+  </performances>
+</invoice>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using TheatricalPlayersRefactoringKata.Application.Request;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Data.Dto;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure
@@ -45,10 +47,10 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
             {
                 try
                 {
-                    var playsList = request.Plays.ToList();
+                    var playDictionary = request.Plays.ToDictionary(p => p.PlayId, p => p);
 
-                    var xmlInvoice = MapToXmlInvoice(request.Invoice);
-                    var xmlContent = _statementGenerator.Generate(request.Invoice, playsList); // Alterado para usar Invoice diretamente
+                    var xmlInvoice = MapToXmlInvoice(request.Invoice, playDictionary);
+                    var xmlContent = _statementGenerator.Generate(request.Invoice, playDictionary); // Alterado para usar Dictionary diretamente
                     var filePath = Path.Combine(_outputDirectory, $"{request.Invoice.Customer}.xml");
 
                     await File.WriteAllTextAsync(filePath, xmlContent);
@@ -63,7 +65,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
             }
         }
 
-        private XmlInvoice MapToXmlInvoice(Invoice invoice)
+        private XmlInvoice MapToXmlInvoice(Invoice invoice, Dictionary<Guid, Play> playDictionary)
         {
             if (invoice == null) throw new ArgumentNullException(nameof(invoice));
 

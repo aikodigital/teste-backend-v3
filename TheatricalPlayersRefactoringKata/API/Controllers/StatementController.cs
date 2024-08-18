@@ -5,9 +5,12 @@ using System.Linq;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using TheatricalPlayersRefactoringKata.API.Models;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Data.Dto;
+using TheatricalPlayersRefactoringKata.Infrastructure.Configuration;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -17,20 +20,55 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     {
         private readonly Func<string, IStatementGenerator> _statementGeneratorFactory;
         private readonly ILogger<StatementController> _logger;
+        private readonly FileSettings _fileSettings;
+        private readonly Dictionary<string, IPerformanceCalculator> _calculators;
+        private readonly Dictionary<string, Play> _plays;
 
-        public StatementController(Func<string, IStatementGenerator> statementGeneratorFactory, ILogger<StatementController> logger)
+        public StatementController(
+             Func<string, IStatementGenerator> statementGeneratorFactory,
+             ILogger<StatementController> logger,
+             IOptions<FileSettings> fileSettings,
+             Dictionary<string, IPerformanceCalculator> calculators,
+             Dictionary<string, Play> plays)
         {
             _statementGeneratorFactory = statementGeneratorFactory;
             _logger = logger;
+            _fileSettings = fileSettings.Value;
+            _calculators = calculators;
+            _plays = plays;
         }
 
+
         [HttpPost("text")]
-        public IActionResult GenerateTextStatement([FromBody] StatementRequest request)
+        public ActionResult<string> GenerateTextStatement([FromBody] StatementRequest request)
         {
+            if (request == null || request.Invoice == null)
+            {
+                _logger.LogError("Request data is missing.");
+                return BadRequest("Invalid data.");
+            }
+
             try
             {
                 AssociatePlayIds(request);
-                return GenerateStatement("text", request, "statement.txt");
+
+                var playDictionary = request.Plays.ToDictionary(play => play.Value.PlayId, play => play.Value);
+
+                var statementGenerator = _statementGeneratorFactory("text");
+                var statement = statementGenerator.Generate(request.Invoice, playDictionary);
+
+                var filePath = Path.Combine("C:\\Users\\User\\Documents\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\arquivos\\text", "statement.txt");
+
+                var directory = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                System.IO.File.WriteAllText(filePath, statement);
+                var fileContent = System.IO.File.ReadAllBytes(filePath);
+
+                return File(fileContent, "text/plain", "statement.txt");
             }
             catch (Exception ex)
             {
@@ -40,14 +78,35 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpPost("xml")]
-        public IActionResult GenerateXmlStatement([FromBody] StatementRequest request)
+        public ActionResult<string> GenerateXmlStatement([FromBody] StatementRequest request)
         {
+            if (request == null || request.Invoice == null)
+            {
+                _logger.LogError("Request data is missing.");
+                return BadRequest("Invalid data.");
+            }
+
             try
             {
                 AssociatePlayIds(request);
 
-                var xmlInvoice = MapToXmlInvoice(request.Invoice);
-                return GenerateStatement("xml", xmlInvoice, "statement.xml");
+                var playDictionary = request.Plays.ToDictionary(play => play.Value.PlayId, play => play.Value);
+
+                var statementGenerator = _statementGeneratorFactory("xml");
+                var statement = statementGenerator.Generate(request.Invoice, playDictionary);
+
+                var filePath = Path.Combine("C:\\Users\\User\\Documents\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\arquivos\\xml", "statement.xml");
+
+                var directory = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                System.IO.File.WriteAllText(filePath, statement);
+                var fileContent = System.IO.File.ReadAllBytes(filePath);
+
+                return File(fileContent, "application/xml", "statement.xml");
             }
             catch (Exception ex)
             {
@@ -58,71 +117,39 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 
         private XmlInvoice MapToXmlInvoice(Invoice invoice)
         {
+            if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+
             return new XmlInvoice
             {
                 Customer = invoice.Customer,
+                TotalAmount = invoice.TotalAmount,
+                TotalCredits = invoice.TotalCredits,
                 Performances = invoice.Performances.Select(p => new XmlPerformance
                 {
                     PlayId = p.PlayId,
-                    Audience = p.Audience
+                    Audience = p.Audience,
+                    Amount = _calculators[_plays[p.Genre.ToString()].Type.ToString()].CalculatePrice(p),
+                    Credits = _calculators[_plays[p.Genre.ToString()].Type.ToString()].CalculateCredits(p),
+                    Genre = p.Genre.ToString()
                 }).ToList()
             };
         }
 
         private void AssociatePlayIds(StatementRequest request)
         {
-            var playDictionary = request.Plays.ToDictionary(p => p.Type, p => p.PlayId);
-
             foreach (var performance in request.Invoice.Performances)
             {
-                if (playDictionary.TryGetValue(performance.Genre, out var playId))
+                var matchingPlay = request.Plays.Values.FirstOrDefault(play => play.Type == performance.Genre);
+
+                if (matchingPlay != null)
                 {
-                    performance.UpdatePlayId(playId);
+                    performance.UpdatePlayId(matchingPlay.PlayId);
                 }
                 else
                 {
+                    _logger.LogError($"Play not found for genre: {performance.Genre}");
                     throw new InvalidOperationException($"Play not found for genre: {performance.Genre}");
                 }
-            }
-        }
-
-        private IActionResult GenerateStatement(string format, object data, string fileName)
-        {
-            try
-            {
-                if (data == null)
-                {
-                    return BadRequest("Os dados não podem ser nulos.");
-                }
-
-                var filePath = Path.Combine("C:\\Users\\User\\Documents\\TheatricalPlayersRefactoringKata\\arquivos", format);
-
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                }
-
-                if (format == "xml")
-                {
-                    var xmlSerializer = new XmlSerializer(data.GetType());
-                    using (var writer = new StreamWriter(Path.Combine(filePath, fileName)))
-                    {
-                        xmlSerializer.Serialize(writer, data);
-                    }
-                }
-                else if (format == "text")
-                {
-                    var statement = data as string;
-                    System.IO.File.WriteAllText(Path.Combine(filePath, fileName), statement);
-                }
-
-                var fileContent = System.IO.File.ReadAllBytes(Path.Combine(filePath, fileName));
-                return File(fileContent, "application/octet-stream", fileName);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao gerar extrato.");
-                return StatusCode(500, "Erro ao gerar extrato. Tente novamente mais tarde.");
             }
         }
     }

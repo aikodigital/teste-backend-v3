@@ -11,6 +11,12 @@ namespace TheatricalPlayersRefactoringKata.Data.Dto
         [XmlElement("audience")]
         public int Audience { get; set; }
 
+        [XmlElement("amount")]
+        public decimal Amount { get; set; }
+
+        [XmlElement("credits")]
+        public int Credits { get; set; }
+
         [XmlElement("genre")]
         public string Genre { get; set; }
     }

@@ -10,6 +10,6 @@ namespace TheatricalPlayersRefactoringKata.API.Models
         public Invoice Invoice { get; set; }
 
         [JsonPropertyName("plays")]
-        public List<Play> Plays { get; set; }
+        public Dictionary<string, Play> Plays { get; set; }
     }
 }
