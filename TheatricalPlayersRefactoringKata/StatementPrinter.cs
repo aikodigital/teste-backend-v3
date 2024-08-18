@@ -54,7 +54,7 @@ public class StatementPrinter
             ));
         }
         XDocument doc = new XDocument(
-            new XDeclaration("1.0", "utf-8", null),
+            new XDeclaration("1.0", "utf-8", null), // TODO corrigir declaração nao sendo retornada no doc
             new XElement("Statement",
                 new XAttribute(XNamespace.Xmlns + "xsi", xml),
                 new XAttribute(XNamespace.Xmlns + "xsd", xsd),
