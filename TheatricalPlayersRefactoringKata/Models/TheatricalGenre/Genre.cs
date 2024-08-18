@@ -1,6 +1,6 @@
 using System;
 
-namespace TheatricalPlayersRefactoringKata.TheatricalGenre
+namespace TheatricalPlayersRefactoringKata.Models.TheatricalGenre
 {
     public abstract class Genre
     {

@@ -1,7 +1,7 @@
 using System;
 using TheatricalPlayersRefactoringKata.Enums;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Play
     {

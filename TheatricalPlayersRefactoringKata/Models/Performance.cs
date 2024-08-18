@@ -1,6 +1,6 @@
 using System;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Performance
     {

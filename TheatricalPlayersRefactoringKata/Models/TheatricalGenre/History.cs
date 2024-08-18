@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata.TheatricalGenre
+namespace TheatricalPlayersRefactoringKata.Models.TheatricalGenre
 {
     public class History : Genre
     {

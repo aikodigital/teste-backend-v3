@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-namespace TheatricalPlayersRefactoringKata
+
+namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Statement
     {

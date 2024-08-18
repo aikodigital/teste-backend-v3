@@ -5,9 +5,10 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Enums;
-using TheatricalPlayersRefactoringKata.TheatricalGenre;
+using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Models.TheatricalGenre;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Services
 {
     public class StatementProcessor
     {
