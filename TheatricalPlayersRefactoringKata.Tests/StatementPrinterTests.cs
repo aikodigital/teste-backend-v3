@@ -23,9 +23,9 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance("hamlet", 55, new Play("Hamlet", 4024, PlayType.Tragedy)),
+                new Performance("as-like", 35, new Play("As You Like It", 2670, PlayType.Comedy)),
+                new Performance("othello", 40, new Play("Othello", 3560, PlayType.Tragedy)),
             }
         );
 
@@ -51,12 +51,12 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new Performance("hamlet", 55, new Play("Hamlet", 4024, PlayType.Tragedy)),
+                new Performance("as-like", 35, new Play("As You Like It", 2670, PlayType.Comedy)),
+                new Performance("othello", 40, new Play("Othello", 3560, PlayType.Tragedy)),
+                new Performance("henry-v", 20, new Play("Henry V", 3227, PlayType.History)),
+                new Performance("john", 39, new Play("King John", 2648, PlayType.History)),
+                new Performance("henry-v", 20, new Play("Henry V", 3227, PlayType.History))
             }
         );
 

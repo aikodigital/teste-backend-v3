@@ -17,7 +17,7 @@ public class StatementPrinter
 
         foreach(var perf in invoice.Performances) 
         {
-            var play = plays[perf.PlayId];
+            var play = perf.Play;
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
@@ -37,8 +37,8 @@ public class StatementPrinter
                     break;
                 case PlayType.History:
                     //regra de negócio para gênero histórico
-                    var tragedyValue = lines * 10;
-                    var comedyValue = lines * 10;
+                    var tragedyValue = thisAmount;
+                    var comedyValue = thisAmount;
 
                     if (perf.Audience > 30) tragedyValue += 1000 * (perf.Audience - 30);
                     if (perf.Audience > 20) comedyValue += 10000 + 500 * (perf.Audience - 20);
