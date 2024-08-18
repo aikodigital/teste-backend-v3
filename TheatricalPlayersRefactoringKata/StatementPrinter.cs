@@ -36,11 +36,8 @@ public class StatementPrinter
                     throw new Exception("unknown type: " + play.Genre);
             }
             // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if (Genre.Comedy == play.Genre) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            volumeCredits += perf.CalculateVolumeCredits(play.Genre);
 
-            // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(baseAmount / 100), perf.Audience);
             totalAmount += baseAmount;
         }
