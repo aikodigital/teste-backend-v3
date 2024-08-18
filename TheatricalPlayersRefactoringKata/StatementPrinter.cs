@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Xml.Linq;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -30,7 +32,7 @@ public class StatementPrinter
         return result;
     }
 
-    public XDocument GenerateXmlStatement(Invoice invoice, Dictionary<string, Play> plays)
+    public string GenerateXmlStatement(Invoice invoice, Dictionary<string, Play> plays)
     {
         decimal totalAmount = 0;
         int volumeCredits = 0;
@@ -54,17 +56,26 @@ public class StatementPrinter
             ));
         }
         XDocument doc = new XDocument(
-            new XDeclaration("1.0", "utf-8", null), // TODO corrigir declaração nao sendo retornada no doc
-            new XElement("Statement",
-                new XAttribute(XNamespace.Xmlns + "xsi", xml),
-                new XAttribute(XNamespace.Xmlns + "xsd", xsd),
-                new XElement("Customer", invoice.Customer),
-                new XElement("Items", items),
-                new XElement("AmountOwed", totalAmount / 100),
-                new XElement("EarnedCredits", volumeCredits = CalculateVolumeCredits(invoice, plays))
-            )
-        );
-        return doc;
+           new XDeclaration("1.0", "utf-8", null), 
+           new XElement("Statement",
+               new XAttribute(XNamespace.Xmlns + "xsi", xml),
+               new XAttribute(XNamespace.Xmlns + "xsd", xsd),
+               new XElement("Customer", invoice.Customer),
+               new XElement("Items", items),
+               new XElement("AmountOwed", totalAmount / 100),
+               new XElement("EarnedCredits", volumeCredits = CalculateVolumeCredits(invoice, plays))
+           )
+       );
+
+        using (var memoryStream = new MemoryStream())
+        {
+            using (var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(true)))
+            {
+                doc.Save(streamWriter);
+            }
+
+            return Encoding.UTF8.GetString(memoryStream.ToArray());
+        }
     }
 
     private decimal CalculatePlayAmount(Play play, Performance perf)
