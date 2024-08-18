@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Xml.Linq;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -27,6 +28,43 @@ public class StatementPrinter
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount / 100);
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
+    }
+
+    public XDocument GenerateXmlStatement(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        decimal totalAmount = 0;
+        int volumeCredits = 0;
+
+        XNamespace xml = "http://www.w3.org/2001/XMLSchema-instance";
+        XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
+
+        var items = new List<XElement>();
+
+        foreach (var perf in invoice.Performances)
+        {
+            var play = plays[perf.PlayId];
+            decimal thisAmount = CalculatePlayAmount(play, perf);
+            totalAmount += thisAmount;
+            int creditsForPlay = CalculateVolumeCreditsForPerformance(perf, play);
+
+            items.Add(new XElement("Item",
+                new XElement("AmountOwed", thisAmount / 100),
+                new XElement("EarnedCredits", creditsForPlay),
+                new XElement("Seats", perf.Audience)
+            ));
+        }
+        XDocument doc = new XDocument(
+            new XDeclaration("1.0", "utf-8", null),
+            new XElement("Statement",
+                new XAttribute(XNamespace.Xmlns + "xsi", xml),
+                new XAttribute(XNamespace.Xmlns + "xsd", xsd),
+                new XElement("Customer", invoice.Customer),
+                new XElement("Items", items),
+                new XElement("AmountOwed", totalAmount / 100),
+                new XElement("EarnedCredits", volumeCredits = CalculateVolumeCredits(invoice, plays))
+            )
+        );
+        return doc;
     }
 
     private decimal CalculatePlayAmount(Play play, Performance perf)
