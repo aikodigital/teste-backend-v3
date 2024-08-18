@@ -31,7 +31,14 @@ namespace TheatricalPlayersRefactoringKata.Services.InvoicePrice
                     throw new Exception("unknown type: " + playType);
             }
 
-            return 0;
+            return thisAmount;
+        }
+
+        public static int Credits(int audience, bool isComedy)
+        {
+            var volumeCredits = Math.Max(audience - 30, 0);
+            if(isComedy) volumeCredits += (int)Math.Floor((decimal)audience / 5);
+            return volumeCredits;
         }
 
         private static int TragedyUseCase(int thisAmount, int audience)
@@ -59,5 +66,7 @@ namespace TheatricalPlayersRefactoringKata.Services.InvoicePrice
             thisAmount = tragedyValue + comedyValue;
             return thisAmount;
         }
+
+        //implementação da lógica para futuros gêneros
     }
 }
