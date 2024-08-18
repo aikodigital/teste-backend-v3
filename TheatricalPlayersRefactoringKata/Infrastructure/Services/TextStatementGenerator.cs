@@ -21,34 +21,17 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
             return GenerateStatement(invoice, plays);
         }
 
-        protected string GenerateStatement(Invoice invoice, Dictionary<Guid, Play> plays)
-        {
-            var result = $"Statement for {invoice.Customer}\n";
-
-            foreach (var performance in invoice.Performances)
-            {
-                var play = plays[performance.PlayId];
-                var genreString = play.Type.ToString();
-                var calculator = _performanceFactory.CreateCalculator(genreString);
-                decimal price = calculator.CalculatePrice(performance);
-                result += $"{play.Name}: {price:C} ({performance.Audience} seats)\n";
-            }
-
-            result += $"Amount owed is {invoice.TotalAmount:C}\nYou earned {invoice.TotalCredits} credits\n";
-            return result;
-        }
-
         protected override string GenerateHeader(Invoice invoice)
         {
             return $"Statement for {invoice.Customer}\n";
         }
 
-        protected override string GeneratePerformanceDetail(Performance performance)
+        protected override string GeneratePerformanceDetail(Performance performance, Dictionary<Guid, Play> plays)
         {
-            var genreString = performance.Genre.ToString();
-            var calculator = _performanceFactory.CreateCalculator(genreString);
+            var play = plays[performance.PlayId];
+            var calculator = _performanceFactory.CreateCalculator(play.Type.ToString());
             decimal price = calculator.CalculatePrice(performance);
-            return $"{performance.Play.Name}: {price:C} ({performance.Audience} seats)\n";
+            return $"  {play.Name}: {price:C} ({performance.Audience} seats)\n";
         }
 
         protected override string GenerateFooter(Invoice invoice)

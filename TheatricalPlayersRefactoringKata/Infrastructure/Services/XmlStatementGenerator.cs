@@ -27,13 +27,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
             var totalAmount = 0m;
             var totalCredits = 0;
 
-            var root = new XElement("invoice",
+            var root = new XElement("Statement",
                 new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
                 new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
-                new XElement("customer", invoice.Customer)
+                new XElement("Customer", invoice.Customer)
             );
 
-            var performancesElement = new XElement("performances");
+            var itemsElement = new XElement("Items");
 
             foreach (var perf in invoice.Performances)
             {
@@ -49,18 +49,16 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
                 totalAmount += amount;
                 totalCredits += credits;
 
-                performancesElement.Add(new XElement("performance",
-                    new XElement("playId", perf.PlayId),
-                    new XElement("audience", perf.Audience),
-                    new XElement("amount", amount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)),
-                    new XElement("credits", credits)
+                itemsElement.Add(new XElement("Item",
+                    new XElement("AmountOwed", amount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)),
+                    new XElement("EarnedCredits", credits),
+                    new XElement("Seats", perf.Audience)
                 ));
             }
 
-            root.Add(new XElement("totalAmount", totalAmount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)));
-            root.Add(new XElement("totalCredits", totalCredits));
-
-            root.Add(performancesElement);
+            root.Add(new XElement("AmountOwed", totalAmount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)));
+            root.Add(new XElement("EarnedCredits", totalCredits));
+            root.Add(itemsElement);
 
             return root.ToString();
         }
