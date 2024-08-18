@@ -23,14 +23,14 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55, new Play("Hamlet", 4024, PlayType.Tragedy)),
-                new Performance("as-like", 35, new Play("As You Like It", 2670, PlayType.Comedy)),
-                new Performance("othello", 40, new Play("Othello", 3560, PlayType.Tragedy)),
+                new Performance(55, new Play("Hamlet", 4024, PlayType.Tragedy)),
+                new Performance(35, new Play("As You Like It", 2670, PlayType.Comedy)),
+                new Performance(40, new Play("Othello", 3560, PlayType.Tragedy)),
             }
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }
@@ -51,17 +51,17 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55, new Play("Hamlet", 4024, PlayType.Tragedy)),
-                new Performance("as-like", 35, new Play("As You Like It", 2670, PlayType.Comedy)),
-                new Performance("othello", 40, new Play("Othello", 3560, PlayType.Tragedy)),
-                new Performance("henry-v", 20, new Play("Henry V", 3227, PlayType.History)),
-                new Performance("john", 39, new Play("King John", 2648, PlayType.History)),
-                new Performance("henry-v", 20, new Play("Henry V", 3227, PlayType.History))
+                new Performance(55, plays["hamlet"]),
+                new Performance(35, plays["as-like"]),
+                new Performance(40, plays["othello"]),
+                new Performance(20, plays["henry-v"]),
+                new Performance(39, plays["john"]),
+                new Performance(20, plays["henry-v"])
             }
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }
