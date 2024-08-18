@@ -14,5 +14,12 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
             Lines = lines;
             this.Genre = Genre;
         }
+
+        public int CalculateBaseAmount()
+        {
+            if (Lines < 1000) Lines = 1000;
+            if (Lines > 4000) Lines = 4000;
+            return Lines * 10;
+        }
     }
 }
