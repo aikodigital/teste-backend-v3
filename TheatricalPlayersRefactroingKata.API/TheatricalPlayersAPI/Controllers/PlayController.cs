@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 using System.Text.Json.Serialization;
 using TheatricalPlayersRefactoringKata.App.Validations.Invoices.Register;
 using TheatricalPlayersRefactoringKata.App.Validations.Plays.Register;

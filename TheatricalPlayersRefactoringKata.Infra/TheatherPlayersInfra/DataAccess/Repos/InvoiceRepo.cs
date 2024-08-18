@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Domain.Repos;
 
 namespace TheatherPlayersInfra.DataAccess.Repos;
 
-internal class InvoiceRepo : IInvoice
+internal class InvoiceRepo : IInvoice, IInvoicesReadOnlyRepository
 {
     private readonly TheatherPlayersDbContext _dbContext;
     public InvoiceRepo(TheatherPlayersDbContext dbContext)
@@ -27,6 +27,9 @@ internal class InvoiceRepo : IInvoice
             .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Customer == name);
     }
-
+    public async Task<List<Invoice>> GenerateReport(Invoice invoice)
+    {
+        return await _dbContext.Invoices.AsNoTracking().Where(invoice => invoice.Customer == invoice.Customer).ToListAsync();
+    }
 }
 

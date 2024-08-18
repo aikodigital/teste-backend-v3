@@ -26,6 +26,6 @@ internal class PlayRepo : IPlay
             .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Id == id);
     }
-
+ 
 }
 
