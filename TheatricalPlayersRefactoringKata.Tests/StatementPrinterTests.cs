@@ -12,27 +12,34 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        var playCategories = new Dictionary<string, IPlayCategory>
+        {
+            { "tragedy", new TragedyCategory() },
+            { "comedy", new ComedyCategory() }
+        };
 
-        Invoice invoice = new Invoice(
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+            { "as-like", new Play("As You Like It", 2670, "comedy") },
+            { "othello", new Play("Othello", 3560, "tragedy") }
+        };
+
+        var invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance("othello", 40)
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
+        var statementPrinter = new StatementPrinter(playCategories);
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
     }
-
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
