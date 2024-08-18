@@ -33,6 +33,12 @@ public class StatementPrinter
                     }
                     thisAmount += 300 * perf.Audience;
                     break;
+                case "historical":
+                    if (perf.Audience > 50) {
+                        thisAmount += 11000 + 500 * (perf.Audience - 50);
+                    }
+                    thisAmount += 300 * perf.Audience;
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
