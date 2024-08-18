@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Services.Calculators;
@@ -7,17 +7,24 @@ namespace TheatricalPlayersRefactoringKata.Application;
 
 public class StatementPrinter
 {
+    private readonly IStatementFormatter _formatter;
+
+    public StatementPrinter(IStatementFormatter formatter)
+    {
+        _formatter = formatter;
+    }
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
+        var performanceAmounts = new Dictionary<Performance, int>();
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
 
         foreach(var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
             var baseAmount = play.CalculateBaseAmount();
+
             switch (play.Genre) 
             {
                 case Genre.Tragedy:
@@ -29,14 +36,12 @@ public class StatementPrinter
                 default:
                     throw new Exception("unknown type: " + play.Genre);
             }
-            // add volume credits
-            volumeCredits += perf.CalculateVolumeCredits(play.Genre);
 
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(baseAmount / 100), perf.Audience);
+            performanceAmounts[perf] = baseAmount;
+            volumeCredits += perf.CalculateVolumeCredits(play.Genre);
             totalAmount += baseAmount;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-        result += String.Format("You earned {0} credits\n", volumeCredits);
-        return result;
+
+        return _formatter.Format(invoice, plays, performanceAmounts, volumeCredits, totalAmount);
     }
 }
