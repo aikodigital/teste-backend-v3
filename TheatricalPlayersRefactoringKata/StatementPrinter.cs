@@ -26,10 +26,7 @@ public class StatementPrinter
                     baseAmount = TragedyAmountCalculator.Calculate(perf, play, baseAmount);
                     break;
                 case Genre.Comedy:
-                    if (perf.Audience > 20) {
-                        baseAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    baseAmount += 300 * perf.Audience;
+                    baseAmount = ComedyAmountCalculator.Calculate(perf, play, baseAmount);
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Genre);
