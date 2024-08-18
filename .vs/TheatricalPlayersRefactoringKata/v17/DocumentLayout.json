@@ -3,24 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\ichargestrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\ichargestrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\asyncreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\asyncreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\tragedycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\tragedycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\historycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\historycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\tragedychargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\tragedychargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\historychargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\historychargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\collectionchargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\collectionchargetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\ichargestrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\ichargestrategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\collectionchargy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\collectionchargy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\historycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\historycharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\renan\\source\\repos\\teste-backend-v3\\theatricalplayersrefactoringkata\\theatricalplayersrefactoringkata.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -34,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,27 +62,94 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AsyncReportService.cs",
+              "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\AsyncReportService.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\AsyncReportService.cs",
+              "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\AsyncReportService.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\AsyncReportService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T04:22:27.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HistoryChargeTests.cs",
+              "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\HistoryChargeTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\HistoryChargeTests.cs",
+              "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\HistoryChargeTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\HistoryChargeTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T03:55:04.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CollectionChargeTests.cs",
+              "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\CollectionChargeTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\CollectionChargeTests.cs",
+              "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\CollectionChargeTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\CollectionChargeTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T03:52:21.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "StatementPrinterTests.cs",
+              "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAgwD8AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T03:12:28.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TragedyChargeTests.cs",
+              "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\TragedyChargeTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\TragedyChargeTests.cs",
+              "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\TragedyChargeTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\TragedyChargeTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T03:16:50.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "HistoryCharge.cs",
               "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\HistoryCharge.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\HistoryCharge.cs",
               "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\HistoryCharge.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata\\HistoryCharge.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T03:11:09.825Z"
+              "WhenOpened": "2024-08-17T03:11:09.825Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "CollectionChargy.cs",
               "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\CollectionChargy.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\CollectionChargy.cs",
               "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\CollectionChargy.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata\\CollectionChargy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T03:10:23.527Z"
+              "WhenOpened": "2024-08-17T03:10:23.527Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,13 +159,14 @@
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\TragedyCharge.cs",
               "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\TragedyCharge.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata\\TragedyCharge.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T03:08:58.674Z"
+              "WhenOpened": "2024-08-17T03:08:58.674Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "IChargeStrategy.cs",
               "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\IChargeStrategy.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\IChargeStrategy.cs",
@@ -91,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "TheatricalPlayersRefactoringKata.csproj",
               "DocumentMoniker": "C:\\Users\\renan\\Source\\Repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
@@ -103,13 +191,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "StatementPrinter.cs",
               "DocumentMoniker": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
               "ToolTip": "C:\\Users\\renan\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABMAAAAAAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADEAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-17T01:31:51.385Z",
               "EditorCaption": ""

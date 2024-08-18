@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheatricalPlayersRefactoringKata
 {
-    internal class CollectionChargy : IChargeStrategy
+    public class CollectionChargy : IChargeStrategy
     {
         public int CalculateBilling(Performance performance, Play play)
         {
