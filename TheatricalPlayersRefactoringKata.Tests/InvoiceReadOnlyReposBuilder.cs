@@ -1,9 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Repos;
 
@@ -17,7 +12,7 @@ public class InvoiceReadOnlyReposBuilder
         _repos = new Mock<IInvoicesReadOnlyRepository>();
     }
 
-    public InvoiceReadOnlyReposBuilder FilterByMonth(Invoice invoice)
+    public InvoiceReadOnlyReposBuilder GenerateReport(Invoice invoice, string customerName)
     {
         _repos.Setup(repos => repos.GenerateReport(invoice.ReturnsAsync(expenses);
 

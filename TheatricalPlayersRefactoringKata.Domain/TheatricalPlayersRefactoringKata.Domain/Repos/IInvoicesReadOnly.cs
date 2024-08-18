@@ -3,5 +3,5 @@
 namespace TheatricalPlayersRefactoringKata.Domain.Repos;
 public interface IInvoicesReadOnlyRepository
 {
-    Task<List<Invoice>> GenerateReport(Invoice invoice);
+    Task<List<Invoice>> GenerateReport(Invoice invoice, string customerName);
 }

@@ -27,9 +27,9 @@ internal class InvoiceRepo : IInvoice, IInvoicesReadOnlyRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Customer == name);
     }
-    public async Task<List<Invoice>> GenerateReport(Invoice invoice)
+    public async Task<List<Invoice>> GenerateReport(Invoice invoice, string customerName)
     {
-        return await _dbContext.Invoices.AsNoTracking().Where(invoice => invoice.Customer == invoice.Customer).ToListAsync();
+        return await _dbContext.Invoices.AsNoTracking().Where(invoice => invoice.Customer == customerName).ToListAsync();
     }
 }
 
