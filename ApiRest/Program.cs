@@ -2,7 +2,7 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 using TheatricalPlayersRefactoringKata.API.Repositories;
-using TheatricalPlayersRefactoringKata.infra;
+using TheatricalPlayersRefactoringKata.API.infra;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

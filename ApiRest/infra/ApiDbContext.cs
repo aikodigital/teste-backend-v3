@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata.infra
+namespace TheatricalPlayersRefactoringKata.API.infra
 {
     public class ApiDbContext : DbContext
     {

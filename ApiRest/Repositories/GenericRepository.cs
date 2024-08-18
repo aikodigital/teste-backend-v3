@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
-using TheatricalPlayersRefactoringKata.infra;
+using TheatricalPlayersRefactoringKata.API.infra;
 
 namespace TheatricalPlayersRefactoringKata.API.Repositories
 {

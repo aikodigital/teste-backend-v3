@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
-using TheatricalPlayersRefactoringKata.infra;
+using TheatricalPlayersRefactoringKata.API.infra;
 using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.API.Repositories
