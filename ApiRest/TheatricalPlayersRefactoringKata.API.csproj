@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\TheatricalPlayersRefactoringKataController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>

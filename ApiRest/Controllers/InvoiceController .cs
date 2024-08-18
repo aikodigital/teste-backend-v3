@@ -46,7 +46,7 @@ public class InvoiceController : ControllerBase
                 Invoice = invoice
             };
 
-            //invoice.Performances.Add(performance);
+            invoice.Performances.Add(performance);
         }
 
         _db.Invoices.Add(invoice);

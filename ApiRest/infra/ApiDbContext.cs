@@ -42,9 +42,6 @@ namespace TheatricalPlayersRefactoringKata.infra
             base.OnModelCreating(modelBuilder);
         }
 
-
-
-
         public ApiDbContext(IConfiguration configuration, DbContextOptions options) : base(options)
         {
                 _configuration = configuration;

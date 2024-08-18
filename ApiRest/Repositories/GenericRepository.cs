@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.API.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ApiDbContext _context;
+        protected readonly ApiDbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApiDbContext context)

@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 using TheatricalPlayersRefactoringKata.API.Repositories;
 using TheatricalPlayersRefactoringKata.infra;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,6 @@ builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IPerformanceRepository, PerformanceRepository>();
 builder.Services.AddScoped<IPlayRepository, PlayRepository>();
 
-
 // CORS
 builder.Services.AddCors(options =>
 {
@@ -53,6 +53,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ApiDbContext>();
 
 var app = builder.Build();
+
+// Aplica as migrações automaticamente quando o aplicativo é iniciado
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
+    dbContext.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {

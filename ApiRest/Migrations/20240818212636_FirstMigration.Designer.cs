@@ -12,7 +12,7 @@ using TheatricalPlayersRefactoringKata.infra;
 namespace TheatricalPlayersRefactoringKata.API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240818052334_FirstMigration")]
+    [Migration("20240818212636_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
