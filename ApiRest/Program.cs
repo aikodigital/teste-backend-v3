@@ -1,10 +1,19 @@
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
+using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
+using TheatricalPlayersRefactoringKata.API.Repositories;
 using TheatricalPlayersRefactoringKata.infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Configurar JsonSerializerOptions
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +31,12 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+// Register repositories
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IPerformanceRepository, PerformanceRepository>();
+builder.Services.AddScoped<IPlayRepository, PlayRepository>();
+
 
 // CORS
 builder.Services.AddCors(options =>

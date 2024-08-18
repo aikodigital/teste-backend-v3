@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TheatricalPlayersRefactoringKata.infra;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.DTOs;
+using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -10,11 +9,11 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     [Route("[controller]")]
     public class PerformanceController : ControllerBase
     {
-        private readonly ApiDbContext _db;
+        private readonly IPerformanceRepository _performanceRepository;
 
-        public PerformanceController(ApiDbContext db)
+        public PerformanceController(IPerformanceRepository performanceRepository)
         {
-            _db = db;
+            _performanceRepository = performanceRepository;
         }
 
         [HttpPost]
@@ -23,20 +22,19 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         {
             var performance = new Performance
             {
-                PlayName = performanceDto.PlayName,
+                PlayId = performanceDto.PlayId,
                 Audience = performanceDto.Audience
             };
 
-            _db.Performances.Add(performance);
-            await _db.SaveChangesAsync();
+            await _performanceRepository.AddAsync(performance);
 
             return CreatedAtAction(nameof(GetPerformance), new { id = performance.Id }, performance);
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPerformance(int id)
         {
-            var performance = await _db.Performances.FindAsync(id);
+            var performance = await _performanceRepository.GetByIdAsync(id);
             if (performance == null)
             {
                 return NotFound();
@@ -48,7 +46,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllPerformances()
         {
-            var performances = await _db.Performances.ToListAsync();
+            var performances = await _performanceRepository.GetAllAsync();
             return Ok(performances);
         }
     }

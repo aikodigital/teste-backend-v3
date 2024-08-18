@@ -12,7 +12,7 @@ using TheatricalPlayersRefactoringKata.infra;
 namespace TheatricalPlayersRefactoringKata.API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240818025402_FirstMigration")]
+    [Migration("20240818052334_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,37 +54,33 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PlayName")
-                        .HasColumnType("text");
+                    b.Property<string>("PlayId")
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
 
-                    b.HasIndex("PlayName");
+                    b.HasIndex("PlayId");
 
                     b.ToTable("Performances");
                 });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Models.Play", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("Lines")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -100,9 +96,9 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
 
                     b.HasOne("TheatricalPlayersRefactoringKata.Models.Play", "Play")
                         .WithMany()
-                        .HasForeignKey("PlayName")
+                        .HasForeignKey("PlayId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Performance_PlayName");
+                        .HasConstraintName("FK_Performance_PlayId");
 
                     b.Navigation("Invoice");
 

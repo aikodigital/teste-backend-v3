@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata.Models;
 public class Performance
 {
     public int Id { get; set; }
-    public string PlayName { get; set; }  // Referência ao Name do Play
+    public string PlayId { get; set; }  // Referência ao Name do Play
     public int Audience { get; set; }
     public int? InvoiceId { get; set; }
     public virtual Play Play { get; set; }
@@ -18,7 +18,7 @@ public class Performance
 
     public Performance(string playName, int audience)
     {
-        PlayName = playName;
+        PlayId = playName;
         Audience = audience;
     }
 }

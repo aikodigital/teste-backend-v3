@@ -14,7 +14,7 @@ namespace TheatricalPlayersRefactoringKata.infra
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Play>()
-                .HasKey(p => p.Id);
+                .HasKey(p => p.Name);
 
             modelBuilder.Entity<Play>()
                 .HasIndex(p => p.Name)
@@ -26,9 +26,10 @@ namespace TheatricalPlayersRefactoringKata.infra
             modelBuilder.Entity<Performance>()
                 .HasOne(p => p.Play)
                 .WithMany()
-                .HasForeignKey(p => p.PlayName)
+                .HasForeignKey(p => p.PlayId)
+                .HasPrincipalKey(p => p.Name)  // Mapeando PlayId para o campo Name
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Performance_PlayName");
+                .HasConstraintName("FK_Performance_PlayId");
 
             modelBuilder.Entity<Invoice>()
                 .HasKey(i => i.Id);
@@ -40,6 +41,8 @@ namespace TheatricalPlayersRefactoringKata.infra
 
             base.OnModelCreating(modelBuilder);
         }
+
+
 
 
         public ApiDbContext(IConfiguration configuration, DbContextOptions options) : base(options)

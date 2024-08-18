@@ -32,20 +32,21 @@ public class InvoiceController : ControllerBase
 
         foreach (var performanceDto in invoiceDto.Performances)
         {
-            var play = _db.Plays.SingleOrDefault(p => p.Name == performanceDto.PlayName);
+            var play = _db.Plays.SingleOrDefault(p => p.Name == performanceDto.PlayId);
+
             if (play == null)
             {
-                return BadRequest($"Play with name {performanceDto.PlayName} not found.");
+                return BadRequest($"Play with ID {performanceDto.PlayId} not found.");
             }
 
             var performance = new Performance
             {
-                PlayName = play.Name,
+                PlayId = play.Name,  // Associar o Play usando o ID
                 Audience = performanceDto.Audience,
                 Invoice = invoice
             };
 
-            invoice.Performances.Add(performance);
+            //invoice.Performances.Add(performance);
         }
 
         _db.Invoices.Add(invoice);
@@ -53,7 +54,7 @@ public class InvoiceController : ControllerBase
 
         return CreatedAtAction(nameof(GetInvoice), new { id = invoice.Id }, invoice);
     }
-
+    [ApiExplorerSettings(IgnoreApi = true)]
     [HttpGet("{id}")]
     public IActionResult GetInvoice(int id)
     {

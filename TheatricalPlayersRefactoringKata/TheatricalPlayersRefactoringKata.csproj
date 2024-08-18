@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\PerformanceSummaryDto.cs" />
+    <Compile Remove="DTOs\StatementDto.cs" />
+    <Compile Remove="DTOs\StatementRequestDto.cs" />
+    <Compile Remove="Models\PerformanceSummary.cs" />
+    <Compile Remove="Models\Statement.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>

@@ -2,7 +2,7 @@
 
 namespace TheatricalPlayersRefactoringKata.Calculators
 {
-    internal class PlayCalculatorFactory
+    public class PlayCalculatorFactory
     {
         public IPlayCalculator GetCalculator(string playType)
         {
