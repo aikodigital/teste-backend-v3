@@ -11,11 +11,11 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     public class TheatricalPlayersRefactoringKataController : ControllerBase
     {
         private ApiDbContext _db;
-        //private readonly StatementPrinter _statementPrinter;
+        private readonly StatementPrinter _statementPrinter;
 
-        public TheatricalPlayersRefactoringKataController(ApiDbContext db)//, StatementPrinter statementPrinter)
+        public TheatricalPlayersRefactoringKataController(ApiDbContext db, StatementPrinter statementPrinter)
         {
-            //_db = db;
+            _db = db;
         }
     }
 }

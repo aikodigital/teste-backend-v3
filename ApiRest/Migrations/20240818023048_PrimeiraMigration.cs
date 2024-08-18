@@ -28,8 +28,8 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Lines = table.Column<int>(type: "integer", nullable: false),
-                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Lines = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,25 +42,24 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PlayId = table.Column<string>(type: "text", nullable: false),
+                    PlayName = table.Column<string>(type: "text", nullable: true),
                     Audience = table.Column<int>(type: "integer", nullable: false),
-                    InvoiceId = table.Column<int>(type: "integer", nullable: false)
+                    InvoiceId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Performances", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Performance_PlayName",
+                        column: x => x.PlayName,
+                        principalTable: "Plays",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Performances_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
                         principalTable: "Invoices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Performances_Plays_PlayId",
-                        column: x => x.PlayId,
-                        principalTable: "Plays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -69,9 +68,15 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
                 column: "InvoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Performances_PlayId",
+                name: "IX_Performances_PlayName",
                 table: "Performances",
-                column: "PlayId");
+                column: "PlayName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Plays_Name",
+                table: "Plays",
+                column: "Name",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -80,10 +85,10 @@ namespace TheatricalPlayersRefactoringKata.API.Migrations
                 name: "Performances");
 
             migrationBuilder.DropTable(
-                name: "Invoices");
+                name: "Plays");
 
             migrationBuilder.DropTable(
-                name: "Plays");
+                name: "Invoices");
         }
     }
 }

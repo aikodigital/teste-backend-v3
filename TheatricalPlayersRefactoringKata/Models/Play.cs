@@ -1,33 +1,34 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TheatricalPlayersRefactoringKata.Models;
-
-public class Play
+namespace TheatricalPlayersRefactoringKata.Models
 {
-    [Key]
-    public string Id { get; set; }
-
-    [Required]
-    [MaxLength(100)]
-    public string Name { get; set; }
-
-    public int Lines { get; set; }
-
-    [Required]
-    [MaxLength(50)]
-    public string Type { get; set; }
-
-    public Play()
+    public class Play
     {
-        Id = Guid.NewGuid().ToString();
-    }
+        [Key]
+        public string Id { get; set; }
 
-    public Play(string name, int lines, string type)
-    {
-        Id = Guid.NewGuid().ToString();
-        Name = name;
-        Lines = lines;
-        Type = type;
+        [Required]
+        [MaxLength(100)]
+        public string Name { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Type { get; set; }
+
+        public int Lines { get; set; }
+
+        public Play()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        public Play(string name, int lines, string type)
+        {
+            Id = Guid.NewGuid().ToString();
+            Name = name;
+            Lines = lines;
+            Type = type;
+        }
     }
 }

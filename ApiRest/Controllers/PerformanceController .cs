@@ -10,7 +10,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     [Route("[controller]")]
     public class PerformanceController : ControllerBase
     {
-        private ApiDbContext _db;
+        private readonly ApiDbContext _db;
 
         public PerformanceController(ApiDbContext db)
         {
@@ -19,27 +19,24 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreatePerformance([FromBody] PerformanceDto performanceDto)
+        public async Task<IActionResult> CreatePerformance([FromBody] PerformanceDto performanceDto)
         {
-            if (performanceDto == null)
-            {
-                return BadRequest("Performance data is null.");
-            }
             var performance = new Performance
             {
-                PlayId = performanceDto.PlayId,
+                PlayName = performanceDto.PlayName,
                 Audience = performanceDto.Audience
             };
+
             _db.Performances.Add(performance);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetPerformance), new { id = performance.Id }, performance);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPerformance(int id)
+        public async Task<IActionResult> GetPerformance(int id)
         {
-            var performance = _db.Performances.Find(id);
+            var performance = await _db.Performances.FindAsync(id);
             if (performance == null)
             {
                 return NotFound();

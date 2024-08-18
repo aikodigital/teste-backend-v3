@@ -7,34 +7,39 @@ namespace TheatricalPlayersRefactoringKata.infra
     public class ApiDbContext : DbContext
     {
         private IConfiguration _configuration;
-        public DbSet<Play>? Plays { get; set; }
-        public DbSet<Performance>? Performances { get; set; }
-        public DbSet<Invoice>? Invoices { get; set; }
+        public DbSet<Play> Plays { get; set; }
+        public DbSet<Performance> Performances { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Play>()
                 .HasKey(p => p.Id);
 
+            modelBuilder.Entity<Play>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
+
             modelBuilder.Entity<Performance>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Performance>()
+                .HasOne(p => p.Play)
+                .WithMany()
+                .HasForeignKey(p => p.PlayName)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Performance_PlayName");
 
             modelBuilder.Entity<Invoice>()
                 .HasKey(i => i.Id);
 
-            modelBuilder.Entity<Performance>()
-                .HasOne(p => p.Play)
-                .WithMany() 
-                .HasForeignKey(p => p.PlayId);
-
-            modelBuilder.Entity<Performance>()
-                .HasOne(p => p.Invoice)
-                .WithMany(i => i.Performances)
+            modelBuilder.Entity<Invoice>()
+                .HasMany(i => i.Performances)
+                .WithOne(p => p.Invoice)
                 .HasForeignKey(p => p.InvoiceId);
 
             base.OnModelCreating(modelBuilder);
         }
-
 
 
         public ApiDbContext(IConfiguration configuration, DbContextOptions options) : base(options)

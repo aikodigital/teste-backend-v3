@@ -21,7 +21,7 @@ namespace TheatricalPlayersRefactoringKata.Formatters
 
             foreach (var perf in invoice.Performances)
             {
-                var play = plays[perf.PlayId];
+                var play = plays[perf.PlayName];
                 var calculator = _calculatorFactory.GetCalculator(play.Type);
                 var thisAmount = calculator.CalculateAmount(play, perf);
                 var credits = calculator.CalculateVolumeCredits(play, perf);

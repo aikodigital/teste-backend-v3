@@ -5,30 +5,20 @@ namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Performance
 {
-    [Key]
     public int Id { get; set; }
-
-    [Required]
-    public string PlayId { get; set; } // Play Name
-
-    [ForeignKey(nameof(PlayId))]
-    public Play Play { get; set; }
-
+    public string PlayName { get; set; }  // Referência ao Name do Play
     public int Audience { get; set; }
-
-    [Required]
-    public int InvoiceId { get; set; }
-
-    [ForeignKey(nameof(InvoiceId))]
-    public Invoice Invoice { get; set; }
+    public int? InvoiceId { get; set; }
+    public virtual Play Play { get; set; }
+    public virtual Invoice Invoice { get; set; }
 
     public Performance()
     {
     }
 
-    public Performance(string playId, int audience)
+    public Performance(string playName, int audience)
     {
-        PlayId = playId;
+        PlayName = playName;
         Audience = audience;
     }
 }

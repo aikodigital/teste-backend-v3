@@ -5,6 +5,6 @@ namespace TheatricalPlayersRefactoringKata.DTOs
     public class InvoiceDto
     {
         public string Customer { get; set; }
-        public List<int> PerformanceIds { get; set; }
+        public List<PerformanceDto> Performances { get; set; }
     }
 }

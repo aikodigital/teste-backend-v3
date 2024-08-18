@@ -1,67 +1,81 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.DTOs;
 using TheatricalPlayersRefactoringKata.infra;
 using TheatricalPlayersRefactoringKata.Models;
-using TheatricalPlayersRefactoringKata.DTOs;
 
-namespace TheatricalPlayersRefactoringKata.API.Controllers
+[ApiController]
+[Route("[controller]")]
+public class InvoiceController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class InvoiceController : ControllerBase
-    {
-        private ApiDbContext _db;
+    private readonly ApiDbContext _db;
 
-        public InvoiceController(ApiDbContext db)
+    public InvoiceController(ApiDbContext db)
+    {
+        _db = db;
+    }
+
+    [HttpPost]
+    [Route("create")]
+    public IActionResult CreateInvoice([FromBody] InvoiceDto invoiceDto)
+    {
+        if (invoiceDto == null)
         {
-            _db = db;
+            return BadRequest("Invoice data is null.");
         }
 
-        [HttpPost]
-        [Route("create")]
-        public IActionResult CreateInvoice([FromBody] InvoiceDto invoiceDto)
+        var invoice = new Invoice
         {
-            if (invoiceDto == null)
+            Customer = invoiceDto.Customer,
+            Performances = new List<Performance>()
+        };
+
+        foreach (var performanceDto in invoiceDto.Performances)
+        {
+            var play = _db.Plays.SingleOrDefault(p => p.Name == performanceDto.PlayName);
+            if (play == null)
             {
-                return BadRequest("Invoice data is null.");
+                return BadRequest($"Play with name {performanceDto.PlayName} not found.");
             }
 
-            var performances = _db.Performances.Where(p => invoiceDto.PerformanceIds.Contains(p.Id)).ToList();
-
-            if (performances.Count != invoiceDto.PerformanceIds.Count)
+            var performance = new Performance
             {
-                return BadRequest("One or more performance IDs are invalid.");
-            }
-
-            var invoice = new Invoice
-            {
-                Customer = invoiceDto.Customer,
-                Performances = performances
+                PlayName = play.Name,
+                Audience = performanceDto.Audience,
+                Invoice = invoice
             };
 
-            _db.Invoices.Add(invoice);
-            _db.SaveChanges();
-
-            return CreatedAtAction(nameof(GetInvoice), new { id = invoice.Id }, invoice);
+            invoice.Performances.Add(performance);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetInvoice(int id)
+        _db.Invoices.Add(invoice);
+        _db.SaveChanges();
+
+        return CreatedAtAction(nameof(GetInvoice), new { id = invoice.Id }, invoice);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetInvoice(int id)
+    {
+        var invoice = _db.Invoices
+            .Include(i => i.Performances)
+            .ThenInclude(p => p.Play)
+            .FirstOrDefault(i => i.Id == id);
+        if (invoice == null)
         {
-            var invoice = _db.Invoices.Include(i => i.Performances).FirstOrDefault(i => i.Id == id);
-            if (invoice == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(invoice);
+            return NotFound();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllInvoices()
-        {
-            var invoices = await _db.Invoices.Include(i => i.Performances).ToListAsync();
-            return Ok(invoices);
-        }
+        return Ok(invoice);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllInvoices()
+    {
+        var invoices = await _db.Invoices
+            .Include(i => i.Performances)
+            .ThenInclude(p => p.Play)
+            .ToListAsync();
+        return Ok(invoices);
     }
 }
