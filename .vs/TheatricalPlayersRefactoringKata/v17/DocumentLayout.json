@@ -1,0 +1,82 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\lucas.parra\\onedrive - rolamentos cbf ltda\\documentos\\projetos_pessoais\\aspnetfundamentals\\testaiko\\theatricalplayersrefactoringkata\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\lucas.parra\\onedrive - rolamentos cbf ltda\\documentos\\projetos_pessoais\\aspnetfundamentals\\testaiko\\theatricalplayersrefactoringkata\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\lucas.parra\\onedrive - rolamentos cbf ltda\\documentos\\projetos_pessoais\\aspnetfundamentals\\testaiko\\theatricalplayersrefactoringkata\\theatricalplayersrefactoringkata.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\theatricalplayersrefactoringkata.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\Properties\\launchSettings.json",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-19T15:09:57.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TheatricalPlayersRefactoringKata",
+              "DocumentMoniker": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
+              "ToolTip": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-19T15:09:18.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\Program.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Program.cs",
+              "ToolTip": "C:\\Users\\lucas.parra\\OneDrive - Rolamentos CBF Ltda\\Documentos\\Projetos_Pessoais\\AspNetFundamentals\\testAiko\\TheatricalPlayersRefactoringKata\\Program.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T15:06:50.276Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
