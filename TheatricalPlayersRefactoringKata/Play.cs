@@ -1,3 +1,5 @@
+using TheatricalPlayersRefactoringKata.Factories;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Play
@@ -14,5 +16,11 @@ public class Play
         this._name = name;
         this._lines = lines;
         this._type = type;
+    }
+
+    public int Perform(int thisAmount, int audience)
+    {
+        var strategy = PlayStrategyFactory.GetStrategy(this._type);
+        return strategy.Execute(thisAmount, audience);
     }
 }
