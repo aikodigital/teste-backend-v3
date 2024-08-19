@@ -3,13 +3,19 @@
 public class CalculoValorBaseHistory : ICalculoValoresBasePeça
 {
     private readonly CalculoValorBaseComedy _calculoValorBaseComedy;
-    private readonly CalculoValorBaseHistory _calculoValorBaseHistory;
+    private readonly CalculoValorBaseTragedy _calculoValorBaseTragedy;
 
-    public int CalculaValoresBase(Performance perf, Play play)
+    public CalculoValorBaseHistory()
     {
-        var result = _calculoValorBaseComedy.CalculaValoresBase(perf, play);
+        _calculoValorBaseComedy = new CalculoValorBaseComedy();
+        _calculoValorBaseTragedy = new CalculoValorBaseTragedy();
+    }
 
-        result += _calculoValorBaseHistory.CalculaValoresBase(perf, play);
+    public decimal CalculaValoresBase(Performance perf, Play play)
+    {
+        decimal result = _calculoValorBaseComedy.CalculaValoresBase(perf, play);
+
+        result += _calculoValorBaseTragedy.CalculaValoresBase(perf, play);
 
         return result;
     }

@@ -2,5 +2,5 @@
 
 public interface ICalculoValoresBasePeça
 {
-    int CalculaValoresBase(Performance perf, Play play);
+    decimal CalculaValoresBase(Performance perf, Play play);
 }

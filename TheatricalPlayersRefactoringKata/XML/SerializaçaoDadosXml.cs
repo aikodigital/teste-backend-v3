@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Calculo_Credito;
 using TheatricalPlayersRefactoringKata.Factory;
-using System.Threading.Tasks;
 using System.Xml;
+using System.IO;
+using System.Xml.Schema;
 
 namespace TheatricalPlayersRefactoringKata.XML;
 
@@ -18,47 +19,73 @@ public class SerializaçaoDadosXml : ISerializaçaoDados
         _creditoEspectador = creditoEspectador;
     }
 
-    public XmlDocument SerializandoDados(Invoice invoice, Dictionary<string, Play> plays)
+    public string SerializandoDados(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        decimal totalAmount = 0.00m;
         var volumeCredits = 0;
+        var caminhoXml = "TheatricalPlayers.xml";
 
-        XmlWriter writer = XmlWriter.Create("TheatricalPlayers.xml");
+        XmlWriterSettings settings = new XmlWriterSettings();
+        settings.Indent = true;
+        settings.ConformanceLevel = ConformanceLevel.Document;
 
-        writer.WriteStartDocument();
-        writer.WriteElementString("Customer", invoice.Customer);
-        writer.WriteStartElement("items");
-
-        foreach (var perf in invoice.Performances)
+        using (StringWriter stringWriter = new StringWriter())
         {
-            var play = plays[perf.PlayId];
-            var thisAmount = 0;
-            var credits = 0;
+            using (XmlWriter writer = XmlWriter.Create(caminhoXml, settings))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Statement");
+                writer.WriteElementString("Customer", invoice.Customer);
+                writer.WriteStartElement("items");
 
-            var calculoEmRelacaoAoTipo = _factory.FabricaDeTypes(play);
+                foreach (var perf in invoice.Performances)
+                {
+                    var play = plays[perf.PlayId];
+                    decimal thisAmount = 0.00m;
+                    var credits = 0;
 
-            thisAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
+                    var calculoEmRelacaoAoTipo = _factory.FabricaDeTypes(play);
 
-            credits += _creditoEspectador.CalculaCredito(perf, play);
+                    thisAmount += calculoEmRelacaoAoTipo.CalculaValoresBase(perf, play);
 
-            writer.WriteStartAttribute("item");
-            writer.WriteElementString("AmountOwed", Convert.ToString(thisAmount));
-            writer.WriteElementString("EarnedCredits", Convert.ToString(credits));
-            writer.WriteElementString("Seats", Convert.ToString(perf.Audience));
-            writer.WriteEndAttribute();
+                    credits += _creditoEspectador.CalculaCredito(perf, play);
 
-            totalAmount += thisAmount;
-            volumeCredits += credits;
+                    writer.WriteStartElement("item");
+                    writer.WriteElementString("AmountOwed", Convert.ToString(thisAmount));
+                    writer.WriteElementString("EarnedCredits", Convert.ToString(credits));
+                    writer.WriteElementString("Seats", Convert.ToString(perf.Audience));
+                    writer.WriteEndElement();
+
+                    totalAmount += thisAmount;
+                    volumeCredits += credits;
+                }
+
+                writer.WriteEndElement();
+                writer.WriteElementString("AmountOwed", Convert.ToString(totalAmount));
+                writer.WriteElementString("EarnedCredits", Convert.ToString(volumeCredits));
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+
+            ValidaçaoXmlSchema(stringWriter.ToString());
+
+            return stringWriter.ToString();
         }
+    }
 
-        writer.WriteEndElement();
-        writer.WriteElementString("AmountOwed", Convert.ToString(totalAmount));
-        writer.WriteElementString("EarnedCredits", Convert.ToString(volumeCredits));
-        writer.WriteEndDocument();
+    private void ValidaçaoXmlSchema(string conteudoXml)
+    {
+        XmlSchemaSet schema = new XmlSchemaSet();
 
-        XmlDocument xmlDocument = new XmlDocument();
-        xmlDocument.Load("TheatricalPlayers.xml");
+        XmlReaderSettings readerSettings = new XmlReaderSettings();
+        readerSettings.Schemas = schema;
 
-        return xmlDocument;
+        using(StringReader stringReader = new StringReader(conteudoXml))
+        {
+            using(XmlReader reader = XmlReader.Create(stringReader, readerSettings))
+            {
+                while (reader.Read()) { }
+            }
+        }
     }
 }

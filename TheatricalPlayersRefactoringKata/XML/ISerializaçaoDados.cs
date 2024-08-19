@@ -5,5 +5,5 @@ namespace TheatricalPlayersRefactoringKata.XML;
 
 public interface ISerializaçaoDados
 {
-    XmlDocument SerializandoDados(Invoice invoice, Dictionary<string, Play> plays);
+    string SerializandoDados(Invoice invoice, Dictionary<string, Play> plays);
 }

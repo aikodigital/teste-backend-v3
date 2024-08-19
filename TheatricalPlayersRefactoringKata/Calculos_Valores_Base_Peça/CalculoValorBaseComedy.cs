@@ -4,12 +4,12 @@ namespace TheatricalPlayersRefactoringKata.Calculos_Valores_Base_Peça;
 
 public class CalculoValorBaseComedy : ICalculoValoresBasePeça
 {
-    private readonly int valorAcrescentadoAposNumeroBaseEspectadores = 100;
-    private readonly int valorAdicionadoPorEspectadorAcimaDoNumeroDePessoasBase = 5;
-    private readonly int valorBaseCalculadoPorEspectador = 3;
+    private readonly decimal valorAcrescentadoAposNumeroBaseEspectadores = 100.00m;
+    private readonly decimal valorAdicionadoPorEspectadorAcimaDoNumeroDePessoasBase = 5.00m;
+    private readonly decimal valorBaseCalculadoPorEspectador = 3.00m;
     private readonly int numeroDePessoasBaseNaPlateia = 20;
 
-    public int CalculaValoresBase(Performance perf, Play play)
+    public decimal CalculaValoresBase(Performance perf, Play play)
     {
         var lines = play.Lines;
 
@@ -19,7 +19,7 @@ public class CalculoValorBaseComedy : ICalculoValoresBasePeça
         if (lines > Constantes.maxLines)
             lines = Constantes.maxLines;
 
-        var result = lines / Constantes.valorASerDivididoPelasLinhas;
+        decimal result = (decimal)lines / Constantes.valorASerDivididoPelasLinhas;
 
         if (perf.Audience > numeroDePessoasBaseNaPlateia)
         {
