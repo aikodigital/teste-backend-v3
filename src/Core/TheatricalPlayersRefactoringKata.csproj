@@ -4,4 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\API\Models\Invoice.cs" />
+    <Compile Include="..\API\Models\Performance.cs" />
+    <Compile Include="..\API\Models\Play.cs" />
+  </ItemGroup>
 </Project>
