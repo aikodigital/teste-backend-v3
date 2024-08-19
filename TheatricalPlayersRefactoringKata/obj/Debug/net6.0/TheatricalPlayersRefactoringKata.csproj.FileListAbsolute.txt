@@ -1,0 +1,12 @@
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\bin\Debug\net6.0\TheatricalPlayersRefactoringKata.deps.json
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\bin\Debug\net6.0\TheatricalPlayersRefactoringKata.dll
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\bin\Debug\net6.0\TheatricalPlayersRefactoringKata.pdb
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.GeneratedMSBuildEditorConfig.editorconfig
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.AssemblyInfoInputs.cache
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.AssemblyInfo.cs
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.csproj.CoreCompileInputs.cache
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.sourcelink.json
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.dll
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\refint\TheatricalPlayersRefactoringKata.dll
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\TheatricalPlayersRefactoringKata.pdb
+d:\GitHub_Projetos\teste-backend-v3\TheatricalPlayersRefactoringKata\obj\Debug\net6.0\ref\TheatricalPlayersRefactoringKata.dll
