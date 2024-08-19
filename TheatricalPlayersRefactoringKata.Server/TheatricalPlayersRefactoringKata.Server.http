@@ -1,6 +1,44 @@
 @TheatricalPlayersRefactoringKata_Server_HostAddress = https://localhost:3000
 
+### Get a specific play by name
 GET {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/play/Hamlet
 Accept: application/json
+
+### Get all plays
+GET {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/play
+Accept: application/json
+
+### Create a new play
+POST {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/play
+Content-Type: application/json
+
+{
+    "Play": {
+        "Name": "As You Like It",
+        "Lines": 2670,
+        "Type": "Comedy"
+    }
+}
+
+### Delete a play
+DELETE {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/play/As You Like It
+Accept: application/json
+
+### Simulate invoice
+POST {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/invoice
+Content-Type: application/json
+
+{
+    "Invoice": {
+        "Customer": "BigCo",
+        "Performances": [
+            {
+                "PlayId": "As You Like It",
+                "Audience": 55
+            }
+        ],
+        "OutputWritterType": "xml"
+    }
+}
 
 ###

@@ -12,14 +12,14 @@ public class Invoice
 
     public Invoice(string customer, List<Performance> performance)
     {
-        this._customer = customer;
-        this._performances = performance;
+        _customer = customer;
+        _performances = performance;
     }
 
     public Invoice(string customer, List<Performance> performance, InvoiceResults results)
     {
-        this._customer = customer;
-        this._performances = performance;
-        this._results = results;
+        _customer = customer;
+        _performances = performance;
+        _results = results;
     }
 }

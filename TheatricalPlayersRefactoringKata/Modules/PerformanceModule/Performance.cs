@@ -10,16 +10,16 @@ public class Performance
     public int Audience { get => _audience; set => _audience = value; }
     public PerformanceResults? Results { get => _results; set => _results = value; }
 
-    public Performance(string playID, int audience)
+    public Performance(string playId, int audience)
     {
-        this._playId = playID;
-        this._audience = audience;
+        _playId = playId;
+        _audience = audience;
     }
 
-    public Performance(string playID, int audience, PerformanceResults results)
+    public Performance(string playId, int audience, PerformanceResults results)
     {
-        this._playId = playID;
-        this._audience = audience;
-        this._results = results;
+        _playId = playId;
+        _audience = audience;
+        _results = results;
     }
 }

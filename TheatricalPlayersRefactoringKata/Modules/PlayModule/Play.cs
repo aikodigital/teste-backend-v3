@@ -12,8 +12,8 @@ public class Play
 
     public Play(string name, int lines, AbstractPlayType type)
     {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+        _name = name;
+        _lines = lines;
+        _type = type;
     }
 }

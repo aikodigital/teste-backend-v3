@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata.Services
 {
     public class StatementPrinter
     {
-        public string Print(Invoice invoice, Dictionary<string, Play> plays, OutputWritter outputWritter, string filePath)
+        public string? Print(Invoice invoice, Dictionary<string, Play> plays, OutputWritter outputWritter, string? filePath)
         {
             CultureInfo cultureInfo = new CultureInfo("en-US");
 
@@ -42,16 +42,22 @@ namespace TheatricalPlayersRefactoringKata.Services
                 TotalEarnedCredits = totalEarnedCredits
             };
 
-            try
+            // Generate the output and revert it back to a string
+            byte[] output = outputWritter.GenerateOutput(invoice, cultureInfo);
+
+            if (filePath != null)
             {
-                File.WriteAllBytes(filePath, outputWritter.GenerateOutput(invoice, cultureInfo));
-            }
-            catch (Exception exception)
-            {
-                Console.Error.WriteLine($"Failed to write output to {filePath} with error: {exception.Message}");
+                try
+                {
+                    File.WriteAllBytes(filePath, output);
+                }
+                catch (Exception exception)
+                {
+                    Console.Error.WriteLine($"Failed to write output to {filePath} with error: {exception.Message}");
+                }
             }
 
-            return Encoding.UTF8.GetString(File.ReadAllBytes(filePath));
+            return Encoding.UTF8.GetString(output);
         }
     }
 }

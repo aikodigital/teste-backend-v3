@@ -2,9 +2,9 @@ namespace TheatricalPlayersRefactoringKata.Server.Database.Repositories.Entities
 {
     public class PlayEntity
     {
-        public string Name { get; set; } = string.Empty;
-        public int Lines { get; set; } = 0;
-        public string Type { get; set; } = string.Empty;
+        public required string Name { get; set; }
+        public required int Lines { get; set; }
+        public required string Type { get; set; }
 
         public PlayEntity()
         { }

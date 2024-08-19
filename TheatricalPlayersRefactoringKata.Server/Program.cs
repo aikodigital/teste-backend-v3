@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 using TheatricalPlayersRefactoringKata.Server.Database;
 using TheatricalPlayersRefactoringKata.Server.Database.Repositories;
+using TheatricalPlayersRefactoringKata.Server.Mappers;
+using AutoMapper;
 
 namespace TheatricalPlayersRefactoringKata.Server
 {
@@ -12,7 +14,7 @@ namespace TheatricalPlayersRefactoringKata.Server
     {
         private static readonly int PORT = 3000;
 
-        public static void Main(string[] args)
+        public static void Main(string[] arguments)
         {
             // Load environment variables from .env file
             Env.Load(
@@ -21,7 +23,7 @@ namespace TheatricalPlayersRefactoringKata.Server
                 )
             );
 
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(arguments);
 
             // Construct the database URL
             StringBuilder databaseUrl = new StringBuilder()
@@ -39,6 +41,14 @@ namespace TheatricalPlayersRefactoringKata.Server
             {
                 options.UseMySql(databaseUrl.ToString(), new MySqlServerVersion(new Version(8, 0, 21)));
             });
+
+            // Configure AutoMapper
+            builder.Services.AddSingleton(
+                new MapperConfiguration(configure =>
+                {
+                    configure.AddProfile(new PlayMappingProfile());
+                    configure.AddProfile(new PerformanceMappingProfile());
+                }).CreateMapper());
 
             // Register repositories
             builder.Services.AddScoped<PlayRepository>();

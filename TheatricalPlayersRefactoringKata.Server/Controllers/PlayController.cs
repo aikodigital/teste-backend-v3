@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-
+using TheatricalPlayersRefactoringKata.Server.Database.DTOs.Play;
 using TheatricalPlayersRefactoringKata.Server.Database.Repositories;
 using TheatricalPlayersRefactoringKata.Server.Database.Repositories.Entities.Play;
+using TheatricalPlayersRefactoringKata.Server.DTOs.Play;
 
 namespace TheatricalPlayersRefactoringKata.Server.Controllers
 {
@@ -9,23 +11,61 @@ namespace TheatricalPlayersRefactoringKata.Server.Controllers
     [Route("api/[controller]")]
     public class PlayController : ControllerBase
     {
-        private readonly PlayRepository _playRepository;
+        private readonly PlayRepository _repository;
+        private readonly IMapper _mapper;
 
-        public PlayController(PlayRepository playRepository)
+        public PlayController(PlayRepository repository, IMapper mapper)
         {
-            _playRepository = playRepository;
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreatePlayRequest request)
+        {
+            if (await _repository.GetByTitle(request.Play.Name) != null)
+            {
+                return BadRequest("Play already exists");
+            }
+
+            // Map to entity and insert to database
+            await _repository.Insert(_mapper.Map<PlayEntity>(request.Play));
+
+            return CreatedAtAction(nameof(Get), new { name = request.Play.Name }, new CreatePlayResponse { });
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> Delete(string name)
+        {
+            PlayEntity? play = await _repository.GetByTitle(name);
+            if (play == null)
+            {
+                return NotFound();
+            }
+
+            // Delete from database
+            await _repository.Delete(play);
+
+            return NoContent();
         }
 
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            PlayEntity? play = await _playRepository.GetByTitle(name);
+            PlayEntity? play = await _repository.GetByTitle(name);
             if (play == null)
             {
                 return NotFound();
             }
 
             return Ok(play);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            IEnumerable<PlayEntity> plays = await _repository.GetAll();
+            return Ok(plays);
         }
     }
 }
