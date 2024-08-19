@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Application;
@@ -13,56 +15,33 @@ public class StatementPrinterTests
 {
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
-    {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, Genre.Tragedy));
-        plays.Add("as-like", new Play("As You Like It", 2670, Genre.Comedy));
-        plays.Add("othello", new Play("Othello", 3560, Genre.Tragedy));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-            }
-        );
-
-        var statementFormatter = new TextStatementFormatter();
-        var statementPrinter = new StatementPrinter(statementFormatter);
-        var result = statementPrinter.Print(invoice, plays);
-
-        Approvals.Verify(result);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, Play>
-        {
-            { "hamlet", new Play("Hamlet", 4024, Genre.Tragedy) },
-            { "as-like", new Play("As You Like It", 2670, Genre.Comedy) },
-            { "othello", new Play("Othello", 3560, Genre.Tragedy) },
-            { "henry-v", new Play("Henry V", 3227, Genre.History) },
-            { "john", new Play("King John", 2648, Genre.History) },
-            { "richard-iii", new Play("Richard III", 3718, Genre.History) }
-        };
+        var hamlet = new Play(Guid.NewGuid(), "Hamlet", 4024, Genre.Tragedy);
+        var asYouLikeIt = new Play(Guid.NewGuid(), "As You Like It", 2670, Genre.Comedy);
+        var othello = new Play(Guid.NewGuid(), "Othello", 3560, Genre.Tragedy);
+        var henryV = new Play(Guid.NewGuid(), "Henry V", 3227, Genre.History);
+        var kingJohn = new Play(Guid.NewGuid(), "King John", 2648, Genre.History);
+        var richardIII = new Play(Guid.NewGuid(), "Richard III", 3718, Genre.History);
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
-            }
-        );
+        var invoice = new Invoice(Guid.NewGuid(), "BigCo", new List<Performance>()
+        {
+            new Performance(hamlet.Id, hamlet, 55),
+            new Performance(asYouLikeIt.Id, asYouLikeIt, 35),
+            new Performance(othello.Id, othello, 40),
+            new Performance(henryV.Id, henryV, 20),
+            new Performance(kingJohn.Id, kingJohn, 39),
+            new Performance(henryV.Id, henryV, 20)
+        });
+
+        var plays = new Dictionary<Guid, Play>
+    {
+        { hamlet.Id, hamlet },
+        { asYouLikeIt.Id, asYouLikeIt },
+        { othello.Id, othello },
+        { henryV.Id, henryV },
+        { kingJohn.Id, kingJohn }
+    };
 
         var statementFormatter = new TextStatementFormatter();
         var statementPrinter = new StatementPrinter(statementFormatter);
@@ -75,28 +54,31 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
-        var plays = new Dictionary<string, Play>
-        {
-            { "hamlet", new Play("Hamlet", 4024, Genre.Tragedy) },
-            { "as-like", new Play("As You Like It", 2670, Genre.Comedy) },
-            { "othello", new Play("Othello", 3560, Genre.Tragedy) },
-            { "henry-v", new Play("Henry V", 3227, Genre.History) },
-            { "john", new Play("King John", 2648, Genre.History) },
-            { "richard-iii", new Play("Richard III", 3718, Genre.History) }
-        };
+        var hamlet = new Play(Guid.NewGuid(), "Hamlet", 4024, Genre.Tragedy);
+        var asYouLikeIt = new Play(Guid.NewGuid(), "As You Like It", 2670, Genre.Comedy);
+        var othello = new Play(Guid.NewGuid(), "Othello", 3560, Genre.Tragedy);
+        var henryV = new Play(Guid.NewGuid(), "Henry V", 3227, Genre.History);
+        var kingJohn = new Play(Guid.NewGuid(), "King John", 2648, Genre.History);
+        var richardIII = new Play(Guid.NewGuid(), "Richard III", 3718, Genre.History);
 
-        var invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
-            }
-        );
+        var invoice = new Invoice(Guid.NewGuid(), "BigCo", new List<Performance>()
+        {
+            new Performance(hamlet.Id, hamlet, 55),
+            new Performance(asYouLikeIt.Id, asYouLikeIt, 35),
+            new Performance(othello.Id, othello, 40),
+            new Performance(henryV.Id, henryV, 20),
+            new Performance(kingJohn.Id, kingJohn, 39),
+            new Performance(henryV.Id, henryV, 20)
+        });
+
+        var plays = new Dictionary<Guid, Play>
+    {
+        { hamlet.Id, hamlet },
+        { asYouLikeIt.Id, asYouLikeIt },
+        { othello.Id, othello },
+        { henryV.Id, henryV },
+        { kingJohn.Id, kingJohn }
+    };
 
         var statementFormatter = new XmlStatementFormatter();
         var statementPrinter = new StatementPrinter(statementFormatter);
