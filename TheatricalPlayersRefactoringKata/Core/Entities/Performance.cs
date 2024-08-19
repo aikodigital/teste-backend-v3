@@ -1,5 +1,4 @@
-namespace TheatricalPlayersRefactoringKata;
-
+namespace TheatricalPlayersRefactoringKata.Core.Entities;
 public class Performance
 {
     private string _playId;
