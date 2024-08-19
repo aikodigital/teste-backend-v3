@@ -9,6 +9,12 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         public int Lines { get; set; }
         public Genre Genre { get; set; }
 
+        public List<Performance> Performances { get; set; }
+
+        public Play()
+        {
+        }
+
         public Play(Guid id,string name, int lines, Genre Genre)
         {
             Id = id;

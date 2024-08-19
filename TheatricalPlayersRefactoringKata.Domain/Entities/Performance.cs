@@ -10,6 +10,11 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         public int Audience { get; set; }
         public int Credits { get; set; }
 
+        public List<Invoice> Invoices { get; set; }
+        
+        public Performance()
+        {
+        }
 
         public Performance(Guid playId, Play play, int audience)
         {
