@@ -18,12 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -32,7 +28,7 @@
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
               "ToolTip": "C:\\dev\\testes\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ViewState": "AQIAAHEAAAAAAAAAAAAIwIMAAAAhAAAA",
+              "ViewState": "AQIAADsAAAAAAAAAAAAAwAQAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-18T12:38:09.33Z",
               "EditorCaption": ""
@@ -45,7 +41,7 @@
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
               "ToolTip": "C:\\dev\\testes\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata\\StatementPrinter.cs",
-              "ViewState": "AQIAAMUAAAAAAAAAAAAIwNUAAAArAAAA",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwEcAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-18T12:35:24.005Z",
               "EditorCaption": ""

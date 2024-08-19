@@ -5,6 +5,9 @@ using System.Threading;
 using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
 using System.IO;
+using System.Text;
+using System.Xml;
+using System.Text.Unicode;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -66,15 +69,8 @@ public class StatementPrinter
         return result;
     }
 
-    public double AmountBaseTragedy(int lines)
-    {
-        return lines / (double)10;
-    }
-    public double AmountBaseComedy(int lines, int audiance)
-    {
-        double amount = ((lines / (double)10) + (3 * audiance));
-        return amount;
-    }
+    public double AmountBaseTragedy(int lines) =>  lines / (double)10;    
+    public double AmountBaseComedy(int lines, int audiance) => ((lines / (double)10) + (3 * audiance));    
     public int AdditionalAmountTragedyOver30(int audiance) => 10 * (audiance - 30);
     public int AdditionalAmountComedyOver20(int audiance) => (100 + (5 * (audiance - 20)));
     public int AddCredits(int audiance) => (1 * (audiance - 30));
@@ -148,14 +144,9 @@ public class StatementPrinter
 
         double totalAmount = 0;
 
-        var document = new XDocument(new XDeclaration(version: "1.0", encoding: "utf-8", standalone: null), new XElement("Statement",
+        var document = new XDocument(new XDeclaration("1.0" , UTF8Encoding.UTF8.ToString(), null), new XElement("Statement",
                     new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
                     new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema")));
-
-        //var xmlStatement = new XElement("Statement",
-        //            new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-        //            new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"));
-
 
         var xmlCustomer = new XElement("Customer", invoice.Customer.Name);
         var xmlItems = new XElement("Items");
@@ -213,10 +204,20 @@ public class StatementPrinter
         document.Root.Add(xmlTotal);
         document.Root.Add(xmlTotalCredits);
 
-        string result = string.Format(cultureInfo,$"{document.Declaration.ToString()}");
-        result += string.Format(document.ToString());
-        //string path = @"C://dev/testes/test.xml";
-        
+        string path = $"{Path.GetTempPath()}/teste.txt";
+
+        string result;
+
+        using(StreamWriter sw = new StreamWriter(path, false ,new UTF8Encoding(false)))
+        {
+            document.Save(sw);
+        }
+
+        using(StreamReader sr = new StreamReader(path))
+        {
+            result = sr.ReadToEnd();
+        }        
+
         return result;
     }
 }

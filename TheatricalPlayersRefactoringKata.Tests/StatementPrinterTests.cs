@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using ApprovalUtilities.Utilities;
 using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
-using TheatricalPlayersRefactoringKata;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
@@ -35,19 +32,6 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
-
-    //var plays = new Dictionary<string, Play>();
-    //plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-    //plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-    //plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-
-    //Invoice invoice = new Invoice(custumer,new List<Performance>
-    //    {
-    //        new Performance("hamlet", 55),
-    //        new Performance("as-like", 35),
-    //        new Performance("othello", 40),
-    //    }
-    //);
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
@@ -80,27 +64,6 @@ public class StatementPrinterTests
         Approvals.Verify(result);
     }
 
-    //Invoice invoice = new Invoice(
-    //    "BigCo",
-    //    new List<Performance>
-    //    {
-    //        new Performance("hamlet", 55),
-    //        new Performance("as-like", 35),
-    //        new Performance("othello", 40),
-    //        new Performance("henry-v", 20),
-    //        new Performance("john", 39),
-    //        new Performance("henry-v", 20)
-    //    }
-    //);
-
-    //var plays = new Dictionary<string, Play>();
-    //plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-    //plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-    //plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-    //plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-    //plays.Add("john", new Play("King John", 2648, "history"));
-    //plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
-
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
@@ -127,6 +90,7 @@ public class StatementPrinterTests
         var invoice = new Invoice(custumer, performances);
 
         StatementPrinter statementPrinter = new StatementPrinter();
+
         var result = statementPrinter.Printer(invoice);
 
         Approvals.Verify(result);
