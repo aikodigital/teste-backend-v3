@@ -1,0 +1,6 @@
+@TheaterInvoiceAPI_HostAddress = http://localhost:5110
+
+GET {{TheaterInvoiceAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
