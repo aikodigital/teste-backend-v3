@@ -7,6 +7,8 @@ using TheatricalPlayersRefactoringKata.Server.Database;
 using TheatricalPlayersRefactoringKata.Server.Database.Repositories;
 using TheatricalPlayersRefactoringKata.Server.Mappers;
 using AutoMapper;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace TheatricalPlayersRefactoringKata.Server
 {
@@ -76,7 +78,27 @@ namespace TheatricalPlayersRefactoringKata.Server
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSwaggerGen(generator =>
+            {
+                generator.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Theatrical Players",
+                    Version = "v1",
+                    Description = "API para gerenciar peças de teatro e performances.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Guilherme Daghlian",
+                        Email = "guilherme.daghlian@gmail.com",
+                    },
+                });
+
+                // Include XML comments
+                string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                
+                generator.IncludeXmlComments(xmlPath);
+            });
 
             // Configure the web application
             WebApplication app = builder.Build();

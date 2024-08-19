@@ -23,7 +23,13 @@ namespace TheatricalPlayersRefactoringKata.Server.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Simula as performances e retorna o extrato da fatura no formato especificado.
+        /// </summary>
+        /// <param name="request"></param>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SimulateInvoiceResponse))]
         public async Task<IActionResult> Simulate([FromBody] SimulateInvoiceRequest request)
         {
             AbstractOutputWritter? outputWritter = AbstractOutputWritter.FromString(request.Invoice.OutputWritterType);
