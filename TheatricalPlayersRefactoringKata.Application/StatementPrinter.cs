@@ -33,6 +33,9 @@ public class StatementPrinter
                 case Genre.Comedy:
                     baseAmount = ComedyAmountCalculator.Calculate(perf, play, baseAmount);
                     break;
+                case Genre.History:
+                    baseAmount = HistoryAmountCalculator.Calculate(perf, play, baseAmount);
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Genre);
             }
