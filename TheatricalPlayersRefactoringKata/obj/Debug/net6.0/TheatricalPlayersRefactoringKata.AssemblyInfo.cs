@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheatricalPlayersRefactoringKata")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cfc73319051a532f7d51f34732f4dc04c439875d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2824ec254cd8fc4acc7e7fb7ecbacfbdcb5efa1e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheatricalPlayersRefactoringKata")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheatricalPlayersRefactoringKata")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

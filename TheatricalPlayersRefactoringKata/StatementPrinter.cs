@@ -6,58 +6,83 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
+    private const int MIN_LINES = 1000;
+    private const int MAX_LINES = 4000;
+    private const int BASE_COST_PERLINE = 10;
+    private const int TRAGEDY_EXTRA_COST_PER_AUDIENCE = 1000;
+    private const int COMEDY_BASE_COST = 10000;
+    private const int COMEDY_EXTRA_COST_PER_AUDIENCE = 500;
+    private const int COMEDY_ADDITIONAL_COST_PER_AUDIENCE = 300;
+    private const int COMEDY_BONUS_THRES_HOLD = 20;
+    private const int CREDIT_THRES_HOLD = 30;
+    private const int COMEDY_BONUS_FACTOR = 5;
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = $"Statement for {invoice.Customer}\n";
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        var result = string.Format("Statement for {0}\n", invoice.Customer);
+        var cultureInfo = new CultureInfo("en-US");
 
         foreach (var perf in invoice.Performances)
         {
             var play = plays[perf.PlayId];
-            var thisAmount = CalculateAmount(perf, play);
-            totalAmount += thisAmount;
-
-            volumeCredits += CalculateVolumeCredits(perf, play);
+            var thisAmount = CalculateAmount(play, perf);
+            volumeCredits += CalculateVolumeCredits(play, perf);
 
             result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount / 100m, perf.Audience);
+            totalAmount += thisAmount;
         }
 
         result += string.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount / 100m);
-        result += $"You earned {volumeCredits} credits\n";
-
+        result += string.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
 
-    private int CalculateAmount(Performance perf, Play play)
+    private int CalculateAmount(Play play, Performance perf)
     {
-        var lines = Math.Clamp(play.Lines, 1000, 4000);
-        var baseAmount = lines * 10;
+        var lines = Math.Clamp(play.Lines, MIN_LINES, MAX_LINES);
+        var thisAmount = lines * BASE_COST_PERLINE;
 
-        return play.Type switch
+        switch (play.Type)
         {
-            "tragedy" => baseAmount + (perf.Audience > 30 ? 1000 * (perf.Audience - 30) : 0),
-            "comedy" => baseAmount + 300 * perf.Audience + (perf.Audience > 20 ? 10000 + 500 * (perf.Audience - 20) : 0),
-            "history" => CalculateHistoryAmount(perf, lines),
-            _ => throw new Exception("Unknown type: " + play.Type)
-        };
+            case "tragedy":
+                if (perf.Audience > CREDIT_THRES_HOLD)
+                {
+                    thisAmount += TRAGEDY_EXTRA_COST_PER_AUDIENCE * (perf.Audience - CREDIT_THRES_HOLD);
+                }
+                break;
+
+            case "comedy":
+                if (perf.Audience > COMEDY_BONUS_THRES_HOLD)
+                {
+                    thisAmount += COMEDY_BASE_COST + COMEDY_EXTRA_COST_PER_AUDIENCE * (perf.Audience - COMEDY_BONUS_THRES_HOLD);
+                }
+                thisAmount += COMEDY_ADDITIONAL_COST_PER_AUDIENCE * perf.Audience;
+                break;
+
+            case "history":
+                var tragedyAmount = CalculateAmount(new Play("tragedy", lines, "tragedy"), perf);
+                var comedyAmount = CalculateAmount(new Play("comedy", lines, "comedy"), perf);
+                thisAmount = tragedyAmount + comedyAmount;
+                break;
+
+            default:
+                throw new Exception("unknown type: " + play.Type);
+        }
+
+        return thisAmount;
     }
 
-    private int CalculateHistoryAmount(Performance perf, int lines)
+    private int CalculateVolumeCredits(Play play, Performance perf)
     {
-        var tragedyAmount = lines * 10 + (perf.Audience > 30 ? 1000 * (perf.Audience - 30) : 0);
-        var comedyAmount = lines * 10 + 300 * perf.Audience + (perf.Audience > 20 ? 10000 + 500 * (perf.Audience - 20) : 0);
-        return tragedyAmount + comedyAmount;
-    }
+        var credits = Math.Max(perf.Audience - CREDIT_THRES_HOLD, 0);
 
-    private int CalculateVolumeCredits(Performance perf, Play play)
-    {
-        var credits = Math.Max(perf.Audience - 30, 0);
         if (play.Type == "comedy")
         {
-            credits += (int)Math.Floor((decimal)perf.Audience / 5);
+            credits += (int)Math.Floor((decimal)perf.Audience / COMEDY_BONUS_FACTOR);
         }
+
         return credits;
     }
 }
