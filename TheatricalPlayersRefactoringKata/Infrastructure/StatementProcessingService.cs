@@ -18,16 +18,18 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
         private readonly IStatementGenerator _statementGenerator;
         private readonly string _outputDirectory;
         private readonly ILogger<StatementProcessingService> _logger;
+        private readonly Dictionary<string, IPerformanceCalculator> _calculators;  
 
         public StatementProcessingService(
             IStatementGenerator statementGenerator,
             string outputDirectory,
-            ILogger<StatementProcessingService> logger)
+            ILogger<StatementProcessingService> logger,
+            Dictionary<string, IPerformanceCalculator> calculators) 
         {
             _statementGenerator = statementGenerator ?? throw new ArgumentNullException(nameof(statementGenerator));
             _outputDirectory = outputDirectory ?? throw new ArgumentNullException(nameof(outputDirectory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
+            _calculators = calculators ?? throw new ArgumentNullException(nameof(calculators));
             Directory.CreateDirectory(_outputDirectory);
 
             Task.Run(() => ProcessQueueAsync());
@@ -47,10 +49,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
             {
                 try
                 {
-                    var playDictionary = request.Plays.ToDictionary(p => p.PlayId, p => p);
-
-                    var xmlInvoice = MapToXmlInvoice(request.Invoice, playDictionary);
-                    var xmlContent = _statementGenerator.Generate(request.Invoice, playDictionary); // Alterado para usar Dictionary diretamente
+                    var xmlInvoice = MapToXmlInvoice(request.Invoice, request.Plays);
+                    var xmlContent = _statementGenerator.Generate(request.Invoice, request.Plays);
                     var filePath = Path.Combine(_outputDirectory, $"{request.Invoice.Customer}.xml");
 
                     await File.WriteAllTextAsync(filePath, xmlContent);
@@ -72,13 +72,15 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
             return new XmlInvoice
             {
                 Customer = invoice.Customer,
-                TotalAmount = invoice.TotalAmount,
-                TotalCredits = invoice.TotalCredits,
+                TotalAmount = invoice.Performances.Sum(p => _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p)),
+                TotalCredits = invoice.Performances.Sum(p => _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p)),
                 Performances = invoice.Performances.Select(p => new XmlPerformance
                 {
                     PlayId = p.PlayId,
                     Audience = p.Audience,
-                    Genre = p.Genre.ToString()
+                    Amount = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p),
+                    Credits = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p),
+                    Genre = playDictionary[p.PlayId].Genre.ToString()
                 }).ToList()
             };
         }

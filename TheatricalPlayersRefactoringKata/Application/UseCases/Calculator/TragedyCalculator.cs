@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Core.Services
 {
-    public class ComedyCalculator : IPerformanceCalculator
+    public class TragedyCalculator : IPerformanceCalculator
     {
         public decimal CalculatePrice(Performance performance)
         {
@@ -21,9 +21,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
 
         public int CalculateCredits(Performance performance)
         {
-            int credits = Math.Max(performance.Audience - 30, 0);
-            credits += (int)Math.Floor(performance.Audience / 5m);
-            return credits;
+            return Math.Max(performance.Audience - 30, 0);
         }
     }
 }

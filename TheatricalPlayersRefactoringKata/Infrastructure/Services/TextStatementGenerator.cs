@@ -29,7 +29,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
         protected override string GeneratePerformanceDetail(Performance performance, Dictionary<Guid, Play> plays)
         {
             var play = plays[performance.PlayId];
-            var calculator = _performanceFactory.CreateCalculator(play.Type.ToString());
+            var calculator = _performanceFactory.CreateCalculator(play.Genre.ToString());
             decimal price = calculator.CalculatePrice(performance);
             return $"  {play.Name}: {price:C} ({performance.Audience} seats)\n";
         }

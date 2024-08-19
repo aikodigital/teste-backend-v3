@@ -1,19 +1,15 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Core.Services;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
+using TheatricalPlayersRefactoringKata.Core.Services;
 using TheatricalPlayersRefactoringKata.Infrastructure.Converters;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using TheatricalPlayersRefactoringKata.Application.Factories;
 using TheatricalPlayersRefactoringKata.Infrastructure;
-using System.Linq;
-using TheatricalPlayersRefactoringKata.Core.Entities;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -29,11 +25,11 @@ namespace TheatricalPlayersRefactoringKata
             });
 
             builder.Services.AddControllers()
-               .AddJsonOptions(options =>
-               {
-                   options.JsonSerializerOptions.Converters.Add(new GenreConverter());
-                   options.JsonSerializerOptions.Converters.Add(new PlayConverter());
-               });
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new GenreConverter());
+                    options.JsonSerializerOptions.Converters.Add(new PlayConverter());
+                });
 
             builder.Services.AddSwaggerGen(c =>
             {
@@ -42,29 +38,19 @@ namespace TheatricalPlayersRefactoringKata
 
             builder.Services.AddTransient<TragedyCalculator>();
             builder.Services.AddTransient<ComedyCalculator>();
+            builder.Services.AddTransient<IPerformanceCalculator, TragedyCalculator>();
+            builder.Services.AddTransient<IPerformanceCalculator, ComedyCalculator>();
+
             builder.Services.AddTransient<HistoricalCalculator>();
 
-            builder.Services.AddSingleton<Dictionary<string, IPerformanceCalculator>>(serviceProvider =>
-            {
-                var calculators = serviceProvider.GetServices<IPerformanceCalculator>();
-                return calculators.ToDictionary(c => c.GetType().Name.Replace("Calculator", ""), c => c);
-            });
-
-            builder.Services.AddTransient<Func<string, IStatementGenerator>>(serviceProvider => key =>
-            {
-                if (key == "xml")
-                {
-                    return new XmlStatementGenerator(serviceProvider.GetServices<IPerformanceCalculator>());
-                }
-                throw new KeyNotFoundException($"O gerador para o tipo '{key}' não foi encontrado.");
-            });
+            builder.Services.AddTransient<IPerformanceCalculatorFactory, PerformanceCalculatorFactory>();
 
             builder.Services.AddTransient<TextStatementGenerator>();
             builder.Services.AddTransient<XmlStatementGenerator>();
+            builder.Services.AddScoped<IStatementGenerator, TextStatementGenerator>();
+            builder.Services.AddScoped<IStatementGenerator, XmlStatementGenerator>();
 
             builder.Services.AddTransient<PerformanceFactory>();
-
-            builder.Services.AddSingleton<Dictionary<string, Play>>();
 
             var app = builder.Build();
 
@@ -87,7 +73,6 @@ namespace TheatricalPlayersRefactoringKata
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-
             app.MapControllers();
 
             await app.RunAsync();
