@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
 {
     public class TextStatementFormatter : IStatementFormatter
     {
-        public string Format(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
+        public string Format(Invoice invoice, Dictionary<Guid, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
         {
             CultureInfo cultureInfo = new CultureInfo("en-US");
             var result = string.Format("Statement for {0}\n", invoice.Customer);

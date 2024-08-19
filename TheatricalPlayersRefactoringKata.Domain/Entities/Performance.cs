@@ -4,14 +4,17 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
 {
     public class Performance
     {
-        public string PlayId { get; set; }
+        public Guid Id { get; set; }
+        public Guid PlayId { get; set; }
+        public Play Play { get; set; }
         public int Audience { get; set; }
         public int Credits { get; set; }
 
 
-        public Performance(string playId, int audience)
+        public Performance(Guid playId, Play play, int audience)
         {
-            PlayId = playId;
+            PlayId = play.Id;
+            Play = play;
             Audience = audience;
         }
 

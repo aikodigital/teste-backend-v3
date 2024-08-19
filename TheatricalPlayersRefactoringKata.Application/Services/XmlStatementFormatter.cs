@@ -7,7 +7,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
 {
     public class XmlStatementFormatter : IStatementFormatter
     {
-        public string Format(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
+        public string Format(Invoice invoice, Dictionary<Guid, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
         {
             List<XElement> items = new() { };
 

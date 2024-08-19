@@ -14,7 +14,7 @@ public class StatementPrinter
         _formatter = formatter;
     }
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public string Print(Invoice invoice, Dictionary<Guid, Play> plays)
     {
         var performanceAmounts = new Dictionary<Performance, int>();
         var totalAmount = 0;
