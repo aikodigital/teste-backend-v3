@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Infrastructure.Utils;
 
-namespace TheatricalPlayersRefactoringKata.Application.Services
+namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
 {
     public class XmlStatementFormatter : IStatementFormatter
     {

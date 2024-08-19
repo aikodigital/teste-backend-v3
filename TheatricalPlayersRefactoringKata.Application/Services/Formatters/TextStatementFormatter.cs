@@ -2,7 +2,7 @@
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 
-namespace TheatricalPlayersRefactoringKata.Application.Services
+namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
 {
     public class TextStatementFormatter : IStatementFormatter
     {
@@ -26,17 +26,17 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
 
         private string FormatPerformanceLine(CultureInfo cultureInfo, Performance perf, Play play, decimal baseAmount)
         {
-            return String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(baseAmount / 100), perf.Audience);
+            return string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(baseAmount / 100), perf.Audience);
         }
 
         private static string FormatVolumeCredits(int volumeCredits)
         {
-            return String.Format("You earned {0} credits\n", volumeCredits);
+            return string.Format("You earned {0} credits\n", volumeCredits);
         }
 
         private static string FormatTotalAmount(decimal totalAmount, CultureInfo cultureInfo)
         {
-            return String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
+            return string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         }
     }
 }
