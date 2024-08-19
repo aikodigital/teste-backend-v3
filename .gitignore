@@ -2,3 +2,5 @@
 [Oo]bj/
 
 *.received.txt
+/TheatricalPlayersRefactroingKata.API/TheatricalPlayersAPI/appsettings.Development.json
+/.vs/

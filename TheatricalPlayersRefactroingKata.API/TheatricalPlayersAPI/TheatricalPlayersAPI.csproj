@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App\TheatricalPlayersRefactoringKata.App.csproj" />
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj" />
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj" />
+    <ProjectReference Include="..\..\TheatricalPlayersRefactoringKata.Infra\TheatherPlayersInfra\TheatherPlayersInfra.csproj" />
+  </ItemGroup>
+
+</Project>
