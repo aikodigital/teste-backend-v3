@@ -4,7 +4,6 @@ using Xunit;
 
 using TheatricalPlayersRefactoringKata.Modules;
 using TheatricalPlayersRefactoringKata.Services;
-using Xunit.Abstractions;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 

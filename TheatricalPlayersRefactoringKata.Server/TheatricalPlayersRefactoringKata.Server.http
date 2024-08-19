@@ -1,0 +1,6 @@
+@TheatricalPlayersRefactoringKata_Server_HostAddress = https://localhost:3000
+
+GET {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/play/Hamlet
+Accept: application/json
+
+###

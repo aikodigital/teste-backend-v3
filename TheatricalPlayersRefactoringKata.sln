@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{F806275F-AACC-4ECF-89AB-A03614D2B954}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Server", "TheatricalPlayersRefactoringKata.Server\TheatricalPlayersRefactoringKata.Server.csproj", "{3626490C-E05C-4DC9-AC2D-88B52B018970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F806275F-AACC-4ECF-89AB-A03614D2B954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F806275F-AACC-4ECF-89AB-A03614D2B954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F806275F-AACC-4ECF-89AB-A03614D2B954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3626490C-E05C-4DC9-AC2D-88B52B018970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3626490C-E05C-4DC9-AC2D-88B52B018970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3626490C-E05C-4DC9-AC2D-88B52B018970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3626490C-E05C-4DC9-AC2D-88B52B018970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
