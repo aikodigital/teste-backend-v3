@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Server.Mappers
 {
     public class PlayTypeResolver : IValueResolver<PlayEntity, Play, AbstractPlayType>
     {
-        public AbstractPlayType Resolve(PlayEntity source, Play destination, AbstractPlayType destMember, ResolutionContext context)
+        public AbstractPlayType Resolve(PlayEntity source, Play destination, AbstractPlayType _, ResolutionContext __)
         {
             return AbstractPlayType.FromString(source.Type);
         }

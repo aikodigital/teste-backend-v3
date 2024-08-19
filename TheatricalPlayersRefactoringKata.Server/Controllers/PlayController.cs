@@ -28,6 +28,11 @@ namespace TheatricalPlayersRefactoringKata.Server.Controllers
                 return BadRequest("Play already exists");
             }
 
+            if (AbstractPlayType.FromString(request.Play.Type) == null)
+            {
+                return BadRequest("Invalid play type");
+            }
+
             // Map to entity and insert to database
             await _repository.Insert(_mapper.Map<PlayEntity>(request.Play));
 
@@ -43,7 +48,6 @@ namespace TheatricalPlayersRefactoringKata.Server.Controllers
                 return NotFound();
             }
 
-            // Delete from database
             await _repository.Delete(play);
 
             return NoContent();

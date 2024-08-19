@@ -8,14 +8,14 @@ public interface PlayType
 
 public abstract class AbstractPlayType : PlayType
 {
-    public static AbstractPlayType FromString(string type)
+    public static AbstractPlayType? FromString(string type)
     {
         return type switch
         {
             "Comedy" => new Comedy(),
             "Tragedy" => new Tragedy(),
             "History" => new History(),
-            _ => throw new ArgumentException($"Unknown play type {type}")
+            _ => null
         };
     }
 
