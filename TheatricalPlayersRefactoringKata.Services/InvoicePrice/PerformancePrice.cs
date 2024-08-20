@@ -67,6 +67,6 @@ namespace TheatricalPlayersRefactoringKata.Services.InvoicePrice
             return thisAmount;
         }
 
-        //implementação da lógica para futuros gêneros
+        //implementation for future genres use cases
     }
 }

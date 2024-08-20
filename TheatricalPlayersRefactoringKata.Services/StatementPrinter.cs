@@ -41,7 +41,6 @@ public class StatementPrinter
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
         var document = new XmlDocument();
-        //document.AppendChild(document.CreateXmlDeclaration("1.0", "utf-8", ""));
 
         var statement = document.CreateElement("Statement");
         statement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -100,5 +99,6 @@ public class StatementPrinter
         }
     }
 
+    //implementation for future print methods
 
 }
