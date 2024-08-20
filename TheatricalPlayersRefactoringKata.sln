@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
