@@ -108,5 +108,25 @@ namespace TheatricalPlayersRefactoringKata.Tests
 
             Approvals.Verify(result);
         }
+
+        [Fact]
+        [UseReporter(typeof(DiffReporter))]
+        public void CreditsTest()
+        {
+            //int audience, bool isComedy
+            var credits1 = PerformancePrice.Credits(29, false);
+            var credits2 = PerformancePrice.Credits(30, false);
+            var credits3 = PerformancePrice.Credits(31, false);
+            var credits4 = PerformancePrice.Credits(45, false);
+
+            var credits5 = PerformancePrice.Credits(29, true);
+            var credits6 = PerformancePrice.Credits(30, true);
+            var credits7 = PerformancePrice.Credits(31, true);
+            var credits8 = PerformancePrice.Credits(45, true);
+
+            string result = credits1.ToString() + " " + credits2.ToString() + " " + credits3.ToString() + " " + credits4.ToString() + "\n" +
+                            credits5.ToString() + " " + credits6.ToString() + " " + credits7.ToString() + " " + credits8.ToString();
+            Approvals.Verify(result);
+        }
     }
 }
