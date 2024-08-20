@@ -8,6 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         public string Name { get; set; }
         public int Lines { get; set; }
         public Genre Genre { get; set; }
+        public int Amount { get; set; }
 
         public List<Performance> Performances { get; set; }
 
@@ -27,7 +28,8 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         {
             if (Lines < 1000) Lines = 1000;
             if (Lines > 4000) Lines = 4000;
-            return Lines * 10;
+            Amount = Lines * 10;
+            return Amount;
         }
     }
 }

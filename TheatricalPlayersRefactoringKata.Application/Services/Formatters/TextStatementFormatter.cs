@@ -6,20 +6,21 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
 {
     public class TextStatementFormatter : IStatementFormatter
     {
-        public string Format(Invoice invoice, Dictionary<Guid, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
+        public string Format(Invoice invoice)
+
         {
             CultureInfo cultureInfo = new CultureInfo("en-US");
             var result = string.Format("Statement for {0}\n", invoice.Customer);
 
             foreach (var perf in invoice.Performances)
             {
-                var play = plays[perf.PlayId];
-                var baseAmount = performanceAmounts[perf];
+                var play = perf.Play;
+                var baseAmount = play.Amount;
                 result += FormatPerformanceLine(cultureInfo, perf, play, baseAmount);
             }
 
-            result += FormatTotalAmount(totalAmount, cultureInfo);
-            result += FormatVolumeCredits(volumeCredits);
+            result += FormatTotalAmount(invoice.TotalAmount, cultureInfo);
+            result += FormatVolumeCredits(invoice.TotalCredits);
             return result;
 
         }

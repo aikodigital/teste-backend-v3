@@ -7,14 +7,15 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
 {
     public class XmlStatementFormatter : IStatementFormatter
     {
-        public string Format(Invoice invoice, Dictionary<Guid, Play> plays, Dictionary<Performance, int> performanceAmounts, int volumeCredits, decimal totalAmount)
+        public string Format(Invoice invoice)
+
         {
             List<XElement> items = new() { };
 
             foreach (var perf in invoice.Performances)
             {
-                var play = plays[perf.PlayId];
-                decimal baseAmount = performanceAmounts[perf];
+                var play = perf.Play;
+                decimal baseAmount = play.Amount;
 
                 var element = new XElement("Item",
                     new XElement("AmountOwed", Convert.ToDecimal(baseAmount / 100)),
@@ -32,8 +33,8 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
                     new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
                     new XElement("Customer", invoice.Customer),
                     new XElement("Items", items),
-                    new XElement("AmountOwed", Convert.ToDecimal(totalAmount / 100)),
-                    new XElement("EarnedCredits", volumeCredits)
+                    new XElement("AmountOwed", Convert.ToDecimal(invoice.TotalAmount / 100)),
+                    new XElement("EarnedCredits", invoice.TotalCredits)
                 )
             );
 

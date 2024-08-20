@@ -1,4 +1,5 @@
-﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
+﻿using System.Numerics;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Services.Calculators;
@@ -14,37 +15,34 @@ public class StatementPrinter
         _formatter = formatter;
     }
 
-    public string Print(Invoice invoice, Dictionary<Guid, Play> plays)
+    public string Print(Invoice invoice)
     {
-        var performanceAmounts = new Dictionary<Performance, int>();
-        var totalAmount = 0;
-        var volumeCredits = 0;
-
         foreach(var perf in invoice.Performances) 
         {
-            var play = plays[perf.PlayId];
-            var baseAmount = play.CalculateBaseAmount();
+            var play = perf.Play;
+            int amount = 0;
 
             switch (play.Genre) 
             {
                 case Genre.Tragedy:
-                    baseAmount = TragedyAmountCalculator.Calculate(perf, play, baseAmount);
+                    amount = TragedyAmountCalculator.Calculate(perf, play);
                     break;
                 case Genre.Comedy:
-                    baseAmount = ComedyAmountCalculator.Calculate(perf, play, baseAmount);
+                    amount = ComedyAmountCalculator.Calculate(perf, play);
                     break;
                 case Genre.History:
-                    baseAmount = HistoryAmountCalculator.Calculate(perf, play, baseAmount);
+                    amount = HistoryAmountCalculator.Calculate(perf, play);
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Genre);
             }
 
-            performanceAmounts[perf] = baseAmount;
-            volumeCredits += perf.CalculateVolumeCredits(play.Genre);
-            totalAmount += baseAmount;
+            play.Amount = amount;
+            invoice.TotalCredits += perf.CalculateVolumeCredits(play.Genre);
+            invoice.TotalAmount += amount;
         }
 
-        return _formatter.Format(invoice, plays, performanceAmounts, volumeCredits, totalAmount);
+        return _formatter.Format(invoice);
+
     }
 }
