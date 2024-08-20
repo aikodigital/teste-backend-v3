@@ -1,6 +1,6 @@
 using TheatricalPlayersRefactoringKata;
 
-public interface IPlayGenre {
+public interface IGenreStrategy {
 
     int CalculatePlayCredits(Performance perf);
     double CalculatePlayAmount(Performance perf);

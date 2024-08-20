@@ -2,7 +2,7 @@
 using System;
 using TheatricalPlayersRefactoringKata;
 
-public class TragedyGenre : IPlayGenre {
+public class TragedyGenreStrategy : IGenreStrategy {
 
     public int CalculatePlayCredits(Performance perf) {
         int volumeCredits = Math.Max(perf.Audience - 30, 0); 
