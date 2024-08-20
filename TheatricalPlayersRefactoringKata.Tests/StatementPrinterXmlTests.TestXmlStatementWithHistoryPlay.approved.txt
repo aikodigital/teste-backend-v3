@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<statement>
+  <customer>BigCo</customer>
+  <performance play="Henry V" amount="¤705.40" audience="20" />
+  <performance play="King John" amount="¤931.60" audience="39" />
+  <totalAmount>¤1,637.00</totalAmount>
+  <volumeCredits>9</volumeCredits>
+</statement>

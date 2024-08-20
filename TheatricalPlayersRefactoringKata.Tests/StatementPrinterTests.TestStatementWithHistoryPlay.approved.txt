@@ -1,0 +1,5 @@
+﻿Statement for BigCo
+  Henry V: $705.40 (20 seats)
+  King John: $931.60 (39 seats)
+Amount owed is $1,637.00
+You earned 9 credits

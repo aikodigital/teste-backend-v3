@@ -1,52 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
+using System.Xml;
+using TheatricalPlayersRefactoringKata.Strategies;
 
 namespace TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
+    private readonly Dictionary<string, IPlayStrategy> _strategies;
+
+    public StatementPrinter()
+    {
+        _strategies = new Dictionary<string, IPlayStrategy>
+        {
+            { "tragedy", new TragedyPlayStrategy() },
+            { "comedy", new ComedyPlayStrategy() },
+            { "history", new HistoryPlayStrategy() }
+        };
+    }
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        double totalAmount = 0;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
-        foreach(var perf in invoice.Performances) 
+        foreach (var perf in invoice.Performances)
         {
             var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
-            switch (play.Type) 
-            {
-                case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Type);
-            }
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            var strategy = _strategies[play.Type];
 
-            // print line for this order
+            double thisAmount = strategy.CalculateAmount(perf.Audience, play.Lines);
+            volumeCredits += strategy.CalculateCredits(perf.Audience);
+
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             totalAmount += thisAmount;
         }
+
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
+    }
+
+    public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        double totalAmount = 0;
+        var volumeCredits = 0;
+        var xmlDocument = new XmlDocument();
+        var root = xmlDocument.CreateElement("statement");
+        xmlDocument.AppendChild(root);
+
+        var customerElement = xmlDocument.CreateElement("customer");
+        customerElement.InnerText = invoice.Customer;
+        root.AppendChild(customerElement);
+
+        foreach (var perf in invoice.Performances)
+        {
+            var play = plays[perf.PlayId];
+            var strategy = _strategies[play.Type];
+
+            double thisAmount = strategy.CalculateAmount(perf.Audience, play.Lines);
+            volumeCredits += strategy.CalculateCredits(perf.Audience);
+
+            var performanceElement = xmlDocument.CreateElement("performance");
+            performanceElement.SetAttribute("play", play.Name);
+            performanceElement.SetAttribute("amount", Convert.ToDecimal(thisAmount / 100).ToString("C", CultureInfo.InvariantCulture));
+            performanceElement.SetAttribute("audience", perf.Audience.ToString());
+            root.AppendChild(performanceElement);
+
+            totalAmount += thisAmount;
+        }
+
+        var totalAmountElement = xmlDocument.CreateElement("totalAmount");
+        totalAmountElement.InnerText = Convert.ToDecimal(totalAmount / 100).ToString("C", CultureInfo.InvariantCulture);
+        root.AppendChild(totalAmountElement);
+
+        var volumeCreditsElement = xmlDocument.CreateElement("volumeCredits");
+        volumeCreditsElement.InnerText = volumeCredits.ToString();
+        root.AppendChild(volumeCreditsElement);
+
+        return BeautifyXml(xmlDocument);
+    }
+
+    private string BeautifyXml(XmlDocument doc)
+    {
+        StringBuilder sb = new StringBuilder();
+        using (var writer = XmlWriter.Create(sb, new XmlWriterSettings { Indent = true }))
+        {
+            doc.Save(writer);
+        }
+        return sb.ToString();
     }
 }
