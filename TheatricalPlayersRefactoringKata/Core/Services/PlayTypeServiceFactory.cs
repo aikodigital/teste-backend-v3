@@ -1,15 +1,19 @@
 using System;
+using TheatricalPlayersRefactoringKata.Core.Services.PlayTypeServices;
 
-public class PlayTypeServiceFactory
+namespace TheatricalPlayersRefactoringKata.Core.Services;
+
+public static class PlayTypeServiceFactory
 {
-    public IPlayTypeService Create(string type)
+    public static IPlayTypeService GetService(string playType)
     {
-        return type switch
+        return playType.ToLower() switch
         {
             "tragedy" => new TragedyPlayTypeService(),
             "comedy" => new ComedyPlayTypeService(),
             "historical" => new HistoricalPlayTypeService(),
-            _ => throw new ArgumentException($"Unknown play type: {type}")
+            _ => throw new ArgumentException($"Unknown play type: {playType}")
         };
     }
 }
+
