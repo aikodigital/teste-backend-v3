@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Invoice
     {
-        public string Customer { get; } // Customer name (e.g "BigCo")
-        public List<Performance> Performances { get; } // List of performances in the invoice
+        public string Customer { get; set; } // Customer name (e.g "BigCo")
+        public List<Performance> Performances { get; set; } // List of performances in the invoice
 
         /// <summary>
         /// Represents an invoice for a series of theatrical performances.
@@ -25,5 +24,8 @@ namespace TheatricalPlayersRefactoringKata.Models
             Customer = customer;
             Performances = performances;
         }
+
+        // Added default constructor for deserialization
+        public Invoice() { }
     }
 }

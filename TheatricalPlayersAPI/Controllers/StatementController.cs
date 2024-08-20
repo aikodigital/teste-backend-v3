@@ -8,62 +8,55 @@ namespace TheatricalPlayersAPI.Controllers
     [Route("api/[controller]")]
     public class StatementController : ControllerBase
     {
-        // Inject the StatementProcessor service
-        private readonly StatementProcessor _statementProcessor;
-
-        // Constructor to inject the StatementProcessor service
-        public StatementController(StatementProcessor statementProcessor)
-        {
-            _statementProcessor = statementProcessor;
-        }
-
         // In-memory volatile storage for statements [temporary]
         private static List<Statement> statements = new List<Statement>();
 
         // POST: api/statement/process
+        // This endpoint queues an invoice for processing and returns immediately
         [HttpPost("process")]
-        public IActionResult QueueInvoice([FromBody] Invoice invoice)
+        public IActionResult QueueInvoice([FromBody] InvoiceRequest request)
         {
-            if (invoice == null)
+            if (request.Invoice == null || request.Plays == null || request.Plays.Count == 0)
             {
-                return BadRequest("Invalid invoice data.");
+                return BadRequest("Invalid invoice or plays data.");
             }
 
-            // Add invoice to queue
-            _statementProcessor.QueueInvoice(invoice);
-            
-            // Return immediately, processing happens asynchronously
-            return Ok("Invoice queued for processing.");
-        }
+            // Create a new instance of StatementProcessor with the provided plays
+            var processor = new StatementProcessor(request.Plays, "OutputDirectoryPath");
 
-        // Endpoint to trigger processing of all enqueued invoices
-        [HttpPost("process/all")]
-        public async Task<IActionResult> ProcessAllInvoices()
-        {
-            await _statementProcessor.ProcessInvoicesAsync();
-            return Ok("All queued invoices have been processed.");
+            // Queue and process the invoice
+            processor.QueueInvoice(request.Invoice);
+            processor.ProcessInvoicesAsync().Wait();
+
+            // Generate the statement and store it in memory
+            var statement = processor.ProcessInvoiceAsync(request.Invoice).Result;
+            statements.Add(statement);
+
+            return Ok("Invoice queued for processing and statement generated.");
         }
 
         // GET: api/statement/{statementId}
+        // This endpoint retrieves a statement by its ID
         [HttpGet("{statementId}")]
         public IActionResult GetStatement(int statementId)
         {
             var statement = statements.Find(s => s.StatementID == statementId);
             if (statement == null)
             {
-                return NotFound("Statement not found");
+                return NotFound("Statement not found.");
             }
             return Ok(statement);
         }
 
         // GET: api/statement/{statementId}/xml
+        // This endpoint retrieves a statement in XML format by its ID
         [HttpGet("{statementId}/xml")]
         public IActionResult GetStatementAsXml(int statementId)
         {
             var statement = statements.Find(s => s.StatementID == statementId);
             if (statement == null)
             {
-                return NotFound("Statement not found");
+                return NotFound("Statement not found.");
             }
 
             var xml = StatementPrinter.XmlPrint(statement);
@@ -71,10 +64,18 @@ namespace TheatricalPlayersAPI.Controllers
         }
 
         // GET: api/statements
+        // This endpoint retrieves all statements in memory
         [HttpGet]
         public IActionResult GetAllStatements()
         {
             return Ok(statements);
         }
+    }
+
+    // Class to encapsulate Invoice and Plays in the request
+    public class InvoiceRequest
+    {
+        public required Invoice Invoice { get; set; }
+        public required Dictionary<string, Play> Plays { get; set; }
     }
 }
