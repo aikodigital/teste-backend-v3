@@ -4,9 +4,9 @@ using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Services
 {
-    public class BillProvider
+    public static class BillProvider
     {
-        public IPlayCalculator GetCalculatorByType(string playType) => playType switch
+        public static IPlayCalculator GetCalculatorByType(string playType) => playType.ToLower() switch
         {
             "tragedy" => new TragedyCalculator(),
             "comedy" => new ComedyCalculator(),

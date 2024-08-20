@@ -1,5 +1,6 @@
 ﻿using System;
 using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Calculators
 {
@@ -11,7 +12,7 @@ namespace TheatricalPlayersRefactoringKata.Calculators
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
 
-            decimal baseAmount = lines / 10;
+            decimal baseAmount = lines / 10m;
             if (audience > 30)
             {
                 baseAmount += 10 * (audience - 30);
