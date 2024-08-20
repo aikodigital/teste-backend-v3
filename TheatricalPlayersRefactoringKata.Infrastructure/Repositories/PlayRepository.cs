@@ -26,5 +26,11 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<Play?> GetPlayById(Guid playId)
+        {
+            return await _context.Plays
+                .FirstOrDefaultAsync(p => p.Id == playId);
+        }
     }
 }

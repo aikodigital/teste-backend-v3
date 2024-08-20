@@ -6,5 +6,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Repositories
     {
         Task CreatePlay(Play play);
         Task<IEnumerable<Play>> GetPlays();
+        Task<Play> GetPlayById(Guid playId);
     }
 }
