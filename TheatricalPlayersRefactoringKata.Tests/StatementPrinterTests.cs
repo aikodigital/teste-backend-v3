@@ -33,8 +33,8 @@ public class StatementPrinterTests
             }
         );
 
-        var statementPrinter = new BillController();
-        var result = (statementPrinter.GetTextBillingStatement(invoice) as OkObjectResult).Value;
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.PrintText(invoice, plays);
 
         Approvals.Verify(result);
     }
@@ -66,8 +66,8 @@ public class StatementPrinterTests
             }
         );
 
-        var statementPrinter = new BillController();
-        var result = (statementPrinter.GetTextBillingStatement(invoice) as OkObjectResult).Value;
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.PrintText(invoice, plays);
 
         Approvals.Verify(result);
     }

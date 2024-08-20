@@ -1,55 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
+using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Models;
+using System.Text;
+using System.Linq;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
 public class StatementPrinter
 {
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public static IPlayCalculator GetCalculatorByType(string playType) => playType.ToLower() switch
     {
-        var totalAmount = 0;
-        var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        "tragedy" => new TragedyCalculator(),
+        "comedy" => new ComedyCalculator(),
+        "history" => new HistoryCalculator(),
+        _ => throw new Exception("unknown type: " + playType),
+    };
 
-        foreach (var perf in invoice.Performances)
+    public string PrintText(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        var billingStatement = new StringBuilder($"Statement for {invoice.Customer}\n");
+        try
         {
-            var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
-            switch (play.Type)
-            {
-                case "tragedy":
-                    if (perf.Audience > 30)
-                    {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    if (perf.Audience > 20)
-                    {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Type);
-            }
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            decimal totalAmount = 0m;
+            decimal volumeCredits = 0;
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+            IPlayCalculator billTypeCalculator;
 
-            // print line for this order
-            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
-            totalAmount += thisAmount;
+            foreach (Performance perf in invoice.Performances)
+            {
+                var play = plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId).Value;
+
+                if (play is null) throw new ArgumentOutOfRangeException($"{perf.PlayId} is not a valid Play.");
+
+                billTypeCalculator = GetCalculatorByType(play.Type);
+                decimal thisAmount = billTypeCalculator.CalculateAmount(play, perf.Audience);
+                volumeCredits += billTypeCalculator.CalculateCredits(play, perf.Audience);
+
+                billingStatement.AppendLine(cultureInfo, $"  {play.Name}: {thisAmount:C} ({perf.Audience} seats)");
+                totalAmount += thisAmount;
+            }
+            billingStatement.AppendLine(cultureInfo, $"Amount owed is {totalAmount:C}");
+            billingStatement.AppendLine($"You earned {volumeCredits} credits");
         }
-        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-        result += string.Format("You earned {0} credits\n", volumeCredits);
-        return result;
+        catch { throw; }
+        return billingStatement.ToString();
     }
 }
