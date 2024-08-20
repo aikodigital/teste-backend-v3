@@ -10,7 +10,7 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        double totalAmount = 0;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
@@ -21,7 +21,7 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            double thisAmount = lines * 10;
 
             //call factory and perform the right strategy
             thisAmount = play.Perform(thisAmount, perf.Audience);
@@ -41,7 +41,7 @@ public class StatementPrinter
     }
     public string PrintXML(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        double totalAmount = 0;
         var volumeCredits = 0;
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
@@ -73,7 +73,7 @@ public class StatementPrinter
         {
             var play = plays[perf.PlayId];
             var lines = Math.Max(1000, Math.Min(4000, play.Lines));
-            var thisAmount = lines * 10;
+            double thisAmount = lines * 10;
             
             // call factory and perform the right strategy
             thisAmount = play.Perform(thisAmount, perf.Audience);

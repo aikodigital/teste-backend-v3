@@ -18,7 +18,7 @@ public class Play
         this._type = type;
     }
 
-    public int Perform(int thisAmount, int audience)
+    public double Perform(double thisAmount, int audience)
     {
         var strategy = PlayStrategyFactory.GetStrategy(this._type);
         return strategy.Execute(thisAmount, audience);

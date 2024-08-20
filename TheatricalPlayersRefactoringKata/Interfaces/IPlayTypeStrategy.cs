@@ -2,6 +2,6 @@
 {
     public interface IPlayTypeStrategy
     {
-        int Execute(int thisAmount, int audience);
+        double Execute(double thisAmount, int audience);
     }
 }

@@ -4,9 +4,9 @@ namespace TheatricalPlayersRefactoringKata.Strategies
 {
     public class TragedyStrategy : IPlayTypeStrategy
     {
-        public int Execute(int thisAmount, int audience)
+        public double Execute(double thisAmount, int audience)
         {
-            int result = thisAmount;
+            var result = thisAmount;
 
             if (audience > 30)
             {
