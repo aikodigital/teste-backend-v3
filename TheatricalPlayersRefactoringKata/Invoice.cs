@@ -4,15 +4,32 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class Invoice
 {
-    private string _customer;
-    private List<Performance> _performances;
+    public string Customer { get; private set; }
+    public List<Performance> Performances { get; private set; }
 
-    public string Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
-
-    public Invoice(string customer, List<Performance> performance)
+    public Invoice(string customer, List<Performance> performances)
     {
-        this._customer = customer;
-        this._performances = performance;
+        Customer = customer;
+        Performances = performances;
+    }
+
+    public decimal TotalAmount()
+    {
+        decimal totalAmount = 0;
+        foreach (var performance in Performances)
+        {
+            totalAmount += performance.CalculateAmount();
+        }
+        return totalAmount;
+    }
+
+    public int TotalCredits()
+    {
+        int totalCredits = 0;
+        foreach (var performance in Performances)
+        {
+            totalCredits += performance.CalculateCredits();
+        }
+        return totalCredits;
     }
 }

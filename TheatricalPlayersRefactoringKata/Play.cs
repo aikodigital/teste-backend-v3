@@ -74,7 +74,7 @@ public class HistoryPlay : Play
 {
     public HistoryPlay(string name, int lines) : base(name, lines) { }
 
-    public override decimal CalculateAmount(int audien  ce)
+    public override decimal CalculateAmount(int audience)
     {
         decimal tragedyAmount = new TragedyPlay(Name, Lines).CalculateAmount(audience);
         decimal comedyAmount = new ComedyPlay(Name, Lines).CalculateAmount(audience);
