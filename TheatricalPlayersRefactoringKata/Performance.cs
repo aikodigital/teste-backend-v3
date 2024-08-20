@@ -1,6 +1,6 @@
 namespace TheatricalPlayersRefactoringKata;
 
-public class Performance
+public class Performance 
 {
     private string _playId;
     private int _audience;
