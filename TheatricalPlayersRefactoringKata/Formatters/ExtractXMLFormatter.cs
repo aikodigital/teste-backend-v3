@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Formatters
 {
     public class ExtractXMLFormatter : IExtractFormatter
     {
-        
+        //Generate statement in format XML
         public string Formatter(Invoice invoice, Dictionary<string, Play> plays)
         {
 
@@ -24,22 +25,23 @@ namespace TheatricalPlayersRefactoringKata
             foreach (var perf in invoice.Performances)
             {
                 var play = plays[perf.PlayId];
-
+                //Calculate the total value of the audience
                 double thisAmount = play.Calculate(perf.Audience);
                 totalAmount += thisAmount;
+                // Add volume credits
                 double thisVolumeCredits = play.VolumeCredits(perf.Audience);
                 volumeCredits += thisVolumeCredits;
 
                 statementElement.Element("Item")?.Add(new XElement("Item",
                     new XElement("AmountOwed", thisAmount),
-                    new XElement("EarnedCredits", thisVolumeCredits), 
+                    new XElement("EarnedCredits", thisVolumeCredits),
                     new XElement("Seats", perf.Audience)));
             }
-
+            //Final result
             statementElement.Add(new XElement("AmountOwed", totalAmount));
             statementElement.Add(new XElement("VolumeCredits", volumeCredits));
 
             return statementElement.ToString();
         }
     }
-    }
+}

@@ -5,10 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Categorys
 {
+    //classes with tragedy type methods
     public class TypeTragedy : IType
     {
+        //specific calculation of the value of the tragedy type
         public double Calculate(int audience, int lines)
         {
             return CalculateByType.Tragedy(audience, lines);
@@ -19,6 +21,7 @@ namespace TheatricalPlayersRefactoringKata
             return "comedy";
         }
 
+        //specific calculation of the credit tragedy type
         public int VolumeCredits(int audience)
         {
 
