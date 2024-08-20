@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheaterInvoiceAPI\TheaterInvoiceAPI.csproj" />
+    <ProjectReference Include="..\TheatricalInvoiceAPI\TheatricalInvoiceAPI.csproj" />
   </ItemGroup>
 
 </Project>

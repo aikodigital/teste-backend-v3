@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace TheaterInvoiceAPI.Tests
+namespace TheatricalInvoiceAPI.Tests
 {
-    public class InvoiceApiTests : IClassFixture<WebApplicationFactory<TheaterInvoiceAPI.Program>>
+    public class InvoiceApiTests : IClassFixture<WebApplicationFactory<TheatricalInvoiceAPI.Program>>
     {
         private readonly HttpClient _client;
 
-        public InvoiceApiTests(WebApplicationFactory<TheaterInvoiceAPI.Program> factory)
+        public InvoiceApiTests(WebApplicationFactory<TheatricalInvoiceAPI.Program> factory)
         {
             _client = factory.CreateClient();
         }

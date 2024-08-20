@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata;
 
-namespace TheaterInvoiceAPI.Controllers
+namespace TheatricalInvoiceAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

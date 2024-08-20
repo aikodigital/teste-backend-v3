@@ -1,4 +1,4 @@
-namespace TheaterInvoiceAPI.Tests;
+namespace TheatricalInvoiceAPI.Tests;
 
 public class UnitTest1
 {
