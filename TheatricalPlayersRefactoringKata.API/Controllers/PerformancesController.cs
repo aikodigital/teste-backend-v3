@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using TheatricalPlayersRefactoringKata.Application.DTOs.PerformanceDTOs;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
@@ -17,6 +18,8 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Creates a new performance.")]
         public async Task<IActionResult> Create(PerformanceRequest performanceRequest)
         {
             if (!ModelState.IsValid)
@@ -30,6 +33,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Retrieves all performances.")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid)

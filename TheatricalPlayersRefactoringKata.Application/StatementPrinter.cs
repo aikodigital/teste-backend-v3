@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Services.Calculators;

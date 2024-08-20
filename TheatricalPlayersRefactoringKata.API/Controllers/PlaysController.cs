@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using TheatricalPlayersRefactoringKata.Application.DTOs.PlayDTOs;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
@@ -17,6 +18,8 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Creates a new play.")]
         public async Task<IActionResult> Create(PlayRequest playRequest)
         {
             if (!ModelState.IsValid)
@@ -30,6 +33,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Retrieves all plays.")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid)
