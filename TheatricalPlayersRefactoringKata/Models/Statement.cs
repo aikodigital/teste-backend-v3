@@ -5,10 +5,11 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Statement
     {
-        public string Customer { get; private set; }
+        public int StatementID { get; set; } // Primary Key
+        public string Customer { get; set; }
         public decimal TotalAmount { get; set; }
         public int VolumeCredits { get; set; }
-        public List<StatementLine> Lines { get; private set; }
+        public List<StatementLine> Lines { get; set; }
 
         /// <summary>
         /// Represents a statement for a customer

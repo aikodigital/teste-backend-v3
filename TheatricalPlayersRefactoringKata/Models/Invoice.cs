@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Invoice
     {
-        public string Customer { get; }
-        public List<Performance> Performances { get; }
+        public string Customer { get; } // Customer name (e.g "BigCo")
+        public List<Performance> Performances { get; } // List of performances in the invoice
 
         /// <summary>
         /// Represents an invoice for a series of theatrical performances.

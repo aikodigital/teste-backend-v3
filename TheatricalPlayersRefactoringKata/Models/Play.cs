@@ -1,13 +1,16 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using TheatricalPlayersRefactoringKata.Enums;
 
 namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Play
     {
-        public string Name { get; }
-        public int Lines { get; }
-        public TheatricalType Type { get; }
+        [Key]
+        public string PlayId { get; set; }  // Play ID (e.g "as-like")
+        public string Name { get; } // Play name (e.g "As You Like It")
+        public int Lines { get; } // Number of lines in the play
+        public TheatricalType Type { get; } // Type of the play (e.g Tragedy, Comedy)
 
         /// <summary>
         /// Represents a play in a theatrical performance.
