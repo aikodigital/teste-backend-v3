@@ -26,5 +26,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Performance>> GetPerformancesByIds(List<Guid> performanceId)
+        {
+            return await _context.Performances
+                .AsNoTracking()
+                .Where(p => performanceId.Contains(p.Id))
+                .ToListAsync();
+        }
     }
 }
