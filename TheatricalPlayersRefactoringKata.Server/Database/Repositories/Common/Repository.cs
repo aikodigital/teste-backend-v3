@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace TheatricalPlayersRefactoringKata.Server.Database.Repositories.Common
 {
@@ -13,10 +14,11 @@ namespace TheatricalPlayersRefactoringKata.Server.Database.Repositories.Common
             _dbSet = context.Set<T>();
         }
 
-        public async Task Insert(T entity)
+        public async Task<T> Insert(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            EntityEntry<T> entry = await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entry.Entity;
         }
 
         public async Task Update(T entity)

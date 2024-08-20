@@ -35,10 +35,22 @@ Content-Type: application/json
             {
                 "PlayId": "As You Like It",
                 "Audience": 55
+            },
+            {
+                "PlayId": "As You Like It",
+                "Audience": 100
             }
         ],
         "OutputWritterType": "xml"
     }
 }
+
+### Get all invoices of a customer
+GET {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/invoice/history/byCustomer/BigCo
+Accept: application/json
+
+### Get all invoices by invoice id
+GET {{TheatricalPlayersRefactoringKata_Server_HostAddress}}/api/invoice/history/byId/1
+Accept: application/json
 
 ###

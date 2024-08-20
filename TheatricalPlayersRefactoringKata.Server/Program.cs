@@ -1,14 +1,14 @@
 using DotNetEnv;
+using AutoMapper;
+using System.Reflection;
 using System.Net;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 using TheatricalPlayersRefactoringKata.Server.Database;
 using TheatricalPlayersRefactoringKata.Server.Database.Repositories;
 using TheatricalPlayersRefactoringKata.Server.Mappers;
-using AutoMapper;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
 
 namespace TheatricalPlayersRefactoringKata.Server
 {
@@ -50,10 +50,14 @@ namespace TheatricalPlayersRefactoringKata.Server
                 {
                     configure.AddProfile(new PlayMappingProfile());
                     configure.AddProfile(new PerformanceMappingProfile());
+                    configure.AddProfile(new InvoiceHistoryMappingProfile());
+                    configure.AddProfile(new PerformanceHistoryMappingProfile());
                 }).CreateMapper());
 
             // Register repositories
             builder.Services.AddScoped<PlayRepository>();
+            builder.Services.AddScoped<PerformanceHistoryRepository>();
+            builder.Services.AddScoped<InvoiceHistoryRepository>();
 
             // Configure Kestrel to listen on port {PORT} with HTTPS
             builder.WebHost.ConfigureKestrel(serverOptions =>
@@ -96,7 +100,7 @@ namespace TheatricalPlayersRefactoringKata.Server
                 // Include XML comments
                 string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                
+
                 generator.IncludeXmlComments(xmlPath);
             });
 

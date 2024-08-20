@@ -10,23 +10,23 @@ public class PlayEntityTypeConfiguration : IEntityTypeConfiguration<PlayEntity>
         builder.ToTable("Plays");
 
         // (Name) Primary key
-        builder.HasKey(play => play.Name);
+        builder.HasKey(entity => entity.Name);
 
         // (Name) Unique index
-        builder.HasIndex(play => play.Name)
+        builder.HasIndex(entity => entity.Name)
             .IsUnique();
 
         // (Name) Properties
-        builder.Property(play => play.Name)
+        builder.Property(entity => entity.Name)
             .IsRequired()
             .HasMaxLength(255);
 
         // (Lines) Properties
-        builder.Property(play => play.Lines)
+        builder.Property(entity => entity.Lines)
             .IsRequired();
 
         // (Type) Properties
-        builder.Property(play => play.Type)
+        builder.Property(entity => entity.Type)
             .IsRequired()
             .HasMaxLength(255);
     }

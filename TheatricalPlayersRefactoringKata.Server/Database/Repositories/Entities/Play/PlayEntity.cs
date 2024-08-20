@@ -8,12 +8,5 @@ namespace TheatricalPlayersRefactoringKata.Server.Database.Repositories.Entities
 
         public PlayEntity()
         { }
-
-        public PlayEntity(string name, int lines, string type)
-        {
-            Name = name;
-            Lines = lines;
-            Type = type;
-        }
     }
 }
