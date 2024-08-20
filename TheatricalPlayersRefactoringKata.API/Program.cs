@@ -18,6 +18,8 @@ builder.Services.AddScoped<IPlayRepository, PlayRepository>();
 builder.Services.AddScoped<IPlayService, PlayService>();
 builder.Services.AddScoped<IPerformanceRepository, PerformanceRepository>();
 builder.Services.AddScoped<IPerformanceService, PerformanceService>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
