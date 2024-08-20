@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TheatricalPlayersRefactoringKata.Enums;
 
@@ -14,6 +15,7 @@ public class Play
     public string Name { get => _name; set => _name = value; }
     public int Lines { get => _lines; set => _lines = value; }
     public PlayType Type { get => _type; set => _type = value; }
+    public List<Performance> Performances { get; set; }
 
     public Play(string name, int lines, PlayType type)
     {

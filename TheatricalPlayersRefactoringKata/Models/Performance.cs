@@ -13,6 +13,7 @@ public class Performance
     [ForeignKey("InvoiceId")]
     [InverseProperty("Invoice")]
     public int InvoiceId {  get; set; }
+    public Invoice Invoice { get; set; }
 
     [ForeignKey("PlayId")]
     [InverseProperty("Play")]
