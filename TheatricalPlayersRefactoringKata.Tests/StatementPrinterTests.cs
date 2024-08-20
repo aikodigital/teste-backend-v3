@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -12,24 +13,23 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        var plays = new List<Play>()
+        {
+        new TragedyPlay("Hamlet", 4024),
+        new ComedyPlay("As You Like It", 2670),
+        new HistoryPlay("Othello", 3560)
+        };
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-            }
-        );
+        var performances = new List<Performance>{
+            new Performance(plays[0], 55),
+            new Performance(plays[1], 35),
+            new Performance(plays[2], 40)
+        };
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var invoice = new Invoice("BigCo", performances);
+        var statementPrinter = new StatementPrinter();
 
+        var result = statementPrinter.Print(invoice);
         Approvals.Verify(result);
     }
 
@@ -37,30 +37,57 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        var plays = new List<Play>
+        {
+            new TragedyPlay("Hamlet", 4024),
+            new ComedyPlay("As You Like It", 2670),
+            new TragedyPlay("Othello", 3560),
+            new HistoryPlay("Henry V", 3227),
+            new HistoryPlay("King John", 2648)
+        };
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
-            }
-        );
+        var performances = new List<Performance>
+        {
+            new Performance(plays[0], 55),
+            new Performance(plays[1], 35),
+            new Performance(plays[2], 40),
+            new Performance(plays[3], 20),
+            new Performance(plays[4], 39)
+        };
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var invoice = new Invoice("BigCo", performances);
+        var statementPrinter = new StatementPrinter();
 
+        var result = statementPrinter.Print(invoice);
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        var plays = new List<Play>
+        {
+            new TragedyPlay("Hamlet", 4024),
+            new ComedyPlay("As You Like It", 2670),
+            new TragedyPlay("Othello", 3560),
+            new HistoryPlay("Henry V", 3227),
+            new HistoryPlay("King John", 2648)
+        };
+
+        var performances = new List<Performance>
+        {
+            new Performance(plays[0], 55),
+            new Performance(plays[1], 35),
+            new Performance(plays[2], 40),
+            new Performance(plays[3], 20),
+            new Performance(plays[4], 39)
+        };
+
+        var invoice = new Invoice("BigCo", performances);
+        var xmlStatementPrinter = new XmlStatementPrinter();
+
+        var result = xmlStatementPrinter.Print(invoice);
         Approvals.Verify(result);
     }
 }

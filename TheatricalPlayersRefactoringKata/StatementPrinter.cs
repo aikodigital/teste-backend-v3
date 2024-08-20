@@ -12,6 +12,10 @@ public class StatementPrinter
 
         foreach (var performance in invoice.Performances)
         {
+            if (performance.Play == null)
+            {
+                throw new InvalidOperationException("A peça associada à performance não foi encontrada.");
+            }
             result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n",
                 performance.Play.Name,
                 performance.CalculateAmount() / 100,

@@ -33,7 +33,7 @@ public class TragedyPlay : Play
     public override decimal CalculateAmount(int audience)
     {
         decimal amount = Lines * 10;
-        if (audience >= 30)
+        if (audience > 30)
         {
             amount += 1000 * (audience - 30);
         }
