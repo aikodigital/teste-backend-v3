@@ -1,43 +1,32 @@
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Core.Services;
+
+public class StatementService
 {
-    public class StatementService
+    public string GenerateStatement(Invoice invoice, Dictionary<string, Play> plays)
     {
-        private readonly Dictionary<string, IPlayTypeService> _playTypeServices;
+        var totalAmount = 0;
+        var volumeCredits = 0;
+        var result = "";
 
-        public StatementService(Dictionary<string, IPlayTypeService> playTypeServices)
+        foreach (var perf in invoice.Performances)
         {
-            _playTypeServices = playTypeServices;
+            var play = plays[perf.PlayId];
+            var service = PlayTypeServiceFactory.GetService(play.Type);
+                
+            var thisAmount = service.CalculateAmount(perf, play);
+
+            volumeCredits += service.CalculateVolumeCredits(perf);
+
+            result += $"  {play.Name}: {thisAmount / 100:C} ({perf.Audience} seats)\n";
+            totalAmount += thisAmount;
         }
 
-        public string GenerateStatement(Invoice invoice, Dictionary<string, Play> plays)
-        {
-            var totalAmount = 0;
-            var volumeCredits = 0;
-            var result = $"Statement for {invoice.Customer}\n";
-            CultureInfo cultureInfo = new CultureInfo("en-US");
-
-            foreach (var perf in invoice.Performances)
-            {
-                var play = plays[perf.PlayId];
-                var playTypeService = _playTypeServices[play.Type];
-
-                var thisAmount = playTypeService.CalculateAmount(perf, play);
-                volumeCredits += playTypeService.CalculateVolumeCredits(perf);
-
-                // print line for this order
-                result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
-                totalAmount += thisAmount;
-            }
-
-            result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-            result += $"You earned {volumeCredits} credits\n";
-
-            return result;
-        }
+        result += $"Amount owed is {totalAmount / 100:C}\n";
+        result += $"You earned {volumeCredits} credits\n";
+        return result;
     }
 }
+
