@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
@@ -10,13 +12,11 @@ using TheatricalPlayersRefactoringKata.Services;
 namespace TheatricalPlayersRefactoringKata.Controllers
 {
     [ApiController]
-    [Tags("Billl")]
     [Route("billing")]
     public class BillController : ControllerBase
     {
-        [HttpPost]
-        [Route("txt")]
-        public IActionResult GetTextBillingStatement([FromBody] Invoice invoice)
+        [HttpPost("txt")]
+        public async Task<IActionResult> GetTextBillingStatement([FromBody] Invoice invoice)
         {
             IPlayCalculator billTypeCalculator;
 
@@ -48,6 +48,9 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
             billingStatement.AppendLine(cultureInfo, $"Amount owed is {totalAmount:C}");
             billingStatement.AppendLine($"You earned {volumeCredits} credits");
+
+            string path = Path.Combine(Environment.CurrentDirectory, "orders", $"{DateTime.Now:ddMMyyHHmmss}_{invoice.Customer}_order.txt");
+            await System.IO.File.WriteAllTextAsync(path, billingStatement.ToString());
 
             return Ok(billingStatement.ToString());
         }

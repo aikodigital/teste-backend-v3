@@ -1,27 +1,30 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
-using TheatricalPlayersRefactoringKata.Services;
+using TheatricalPlayersRefactoringKata.Calculators;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 // Configuração Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-//builder.Services.AddSwaggerGen(c =>
-//{
-//    c.SwaggerDoc("v1", new OpenApiInfo
-//    {
-//        Title = "Aiko Theatre API",
-//        Version = "v1",
-//        Description = "Atividade de refatoração de código proposta pela Aiko.",
-//    });
-//});
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Aiko Theatre API",
+        Version = "v1",
+        Description = "Atividade de refatoração de código proposta pela Aiko.",
+    });
+});
 
-builder.Services.AddControllers();
+
+builder.Services.AddScoped<TragedyCalculator>();
+builder.Services.AddScoped<ComedyCalculator>();
+builder.Services.AddScoped<HistoryCalculator>();
+
 
 var app = builder.Build();
 
