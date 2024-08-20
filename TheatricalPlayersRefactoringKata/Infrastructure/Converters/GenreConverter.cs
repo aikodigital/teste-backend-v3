@@ -14,7 +14,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Converters
             {
                 return genre;
             }
-            throw new JsonException("Invalid genre value.");
+            throw new JsonException("Valor de gênero inválido.");
         }
 
         public override void Write(Utf8JsonWriter writer, Genre value, JsonSerializerOptions options)

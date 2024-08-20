@@ -6,7 +6,6 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
     {
         private int _audience;
         private int _lines;
-
         public Guid PlayId { get; private set; }
         public Genre Genre { get; private set; }
         public int Audience => _audience;
@@ -19,9 +18,10 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
         public Performance(Genre genre, int audience, int lines, Play play, decimal price)
         {
             Genre = genre;
-            if (audience < 0) throw new ArgumentOutOfRangeException(nameof(audience), "Audience cannot be negative.");
-            if (lines < 0) throw new ArgumentOutOfRangeException(nameof(lines), "Lines cannot be negative.");
-            Play = play ?? throw new ArgumentNullException(nameof(play), "Play object cannot be null.");
+            if (audience < 0) throw new ArgumentOutOfRangeException(nameof(audience), "O Audience não pode ser negativo.");
+            if (lines < 1000 || lines > 4000)
+                throw new ArgumentOutOfRangeException(nameof(lines), "O número de linhas deve estar entre 1000 e 4000.");
+            Play = play ?? throw new ArgumentNullException(nameof(play), "Play não pode ser nulo.");
             Price = price;
 
             _audience = audience;
@@ -31,13 +31,14 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
 
         public void UpdateAudience(int audience)
         {
-            if (audience < 0) throw new ArgumentOutOfRangeException(nameof(audience), "Audience cannot be negative.");
+            if (audience < 0) throw new ArgumentOutOfRangeException(nameof(audience), "Audience não pode ser negativo.");
             _audience = audience;
         }
 
         public void UpdateLines(int lines)
         {
-            if (lines < 0) throw new ArgumentOutOfRangeException(nameof(lines), "Lines cannot be negative.");
+            if (lines < 1000 || lines > 4000)
+                throw new ArgumentOutOfRangeException(nameof(lines), "O número de linhas deve estar entre 1000 e 4000.");
             _lines = lines;
         }
 

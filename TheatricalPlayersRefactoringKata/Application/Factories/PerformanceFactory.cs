@@ -5,7 +5,7 @@ using TheatricalPlayersRefactoringKata.Core.Services;
 
 namespace TheatricalPlayersRefactoringKata.Application.Factories
 {
-    public class PerformanceFactory
+    public class PerformanceFactory : IPerformanceCalculatorFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -21,7 +21,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Factories
                 "tragedy" => _serviceProvider.GetRequiredService<TragedyCalculator>(),
                 "comedy" => _serviceProvider.GetRequiredService<ComedyCalculator>(),
                 "historical" => _serviceProvider.GetRequiredService<HistoricalCalculator>(),
-                _ => throw new ArgumentException($"Genre '{genre}' not supported")
+                _ => throw new ArgumentException($"Gênero '{genre}' não suportado")
             };
         }
     }

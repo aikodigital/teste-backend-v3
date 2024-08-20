@@ -9,11 +9,10 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
         public decimal CalculatePrice(Performance performance)
         {
             decimal basePrice = Math.Max(1000, Math.Min(4000, performance.Lines)) / 10m;
-            basePrice += 3 * performance.Audience;
 
-            if (performance.Audience > 20)
+            if (performance.Audience > 30)
             {
-                basePrice += 100 + 5 * (performance.Audience - 20);
+                basePrice += 10 * (performance.Audience - 30);
             }
 
             return basePrice;

@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
     {
         public decimal CalculatePrice(Performance performance)
         {
-            decimal basePrice = 300;
+            decimal basePrice = Math.Max(1000, Math.Min(4000, performance.Lines)) / 10m;
             basePrice += 3 * performance.Audience;
 
             if (performance.Audience > 20)
@@ -22,7 +22,9 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
         public int CalculateCredits(Performance performance)
         {
             int credits = Math.Max(performance.Audience - 30, 0);
+
             credits += (int)Math.Floor(performance.Audience / 5m);
+
             return credits;
         }
     }

@@ -12,11 +12,11 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
         public int Audience { get; private set; }
 
         [JsonConstructor]
-        public Play(Guid playId, string name, Genre Genre, decimal price, int audience)
+        public Play(Guid playId, string name, Genre genre, decimal price, int audience)
         {
             PlayId = playId;
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Genre = Genre;
+            Genre = genre;
             Price = price >= 0 ? price : throw new ArgumentOutOfRangeException(nameof(price));
             Audience = audience;
         }
@@ -51,7 +51,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities
             {
                 Genre.Tragedy => performance.Audience > 30 ? 40000 + 1000 * (performance.Audience - 30) : 40000,
                 Genre.Comedy => 30000 + 300 * performance.Audience + 100 * Math.Max(0, performance.Audience - 20),
-                _ => throw new InvalidOperationException($"Unknown play genre: {play.Genre}")
+                _ => throw new InvalidOperationException($"Gênero de play desconhecido: {play.Genre}")
             };
         }
     }

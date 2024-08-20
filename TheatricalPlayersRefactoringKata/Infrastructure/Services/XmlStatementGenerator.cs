@@ -1,68 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
-using System.Linq;
-using TheatricalPlayersRefactoringKata.Core.Services;
+using Microsoft.Extensions.Logging;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure
 {
     public class XmlStatementGenerator : IStatementGenerator
     {
+        private readonly IEnumerable<IPlayTypeCalculator> _calculators;
+        private readonly ILogger<XmlStatementGenerator> _logger;
+
+        public XmlStatementGenerator(IEnumerable<IPlayTypeCalculator> calculators, ILogger<XmlStatementGenerator> logger)
+        {
+            _calculators = calculators ?? throw new ArgumentNullException(nameof(calculators), "O parâmetro calculators não pode ser nulo.");
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger), "O parâmetro logger não pode ser nulo.");
+        }
+
         public string Generate(Invoice invoice, Dictionary<Guid, Play> plays)
         {
-            if (!invoice.Performances.Any())
-            {
-                Console.WriteLine("A fatura não contém performances.");
-                return string.Empty;
-            }
+            if (invoice == null)
+                throw new ArgumentNullException(nameof(invoice), "O parâmetro invoice não pode ser nulo.");
 
-            var statement = new XElement("Statement",
-                new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-                new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
+            if (plays == null)
+                throw new ArgumentNullException(nameof(plays), "O parâmetro plays não pode ser nulo.");
+
+            var root = new XElement("Statement",
                 new XElement("Customer", invoice.Customer),
-                new XElement("Items",
-                    invoice.Performances.Select(performance =>
-                    {
-                        var amountOwed = CalculateAmountOwed(performance, plays);
-                        var earnedCredits = CalculateCredits(performance, plays);
-
-                        Console.WriteLine($"Performance: {performance.PlayId}, Amount Owed: {amountOwed}, Earned Credits: {earnedCredits}, Audience: {performance.Audience}");
-
-                        return new XElement("Item",
-                            new XElement("AmountOwed", amountOwed),
-                            new XElement("EarnedCredits", earnedCredits),
-                            new XElement("Seats", performance.Audience)
-                        );
-                    })
-                )
+                new XElement("Items")
             );
 
-            return statement.ToString();
-        }
+            decimal totalAmount = 0;
+            int totalCredits = 0;
 
-        private decimal CalculateAmountOwed(Performance performance, Dictionary<Guid, Play> plays)
-        {
-            if (plays.TryGetValue(performance.PlayId, out var play))
+            foreach (var perf in invoice.Performances)
             {
-                return play.Price;
+                if (!plays.TryGetValue(perf.PlayId, out var play))
+                {
+                    _logger.LogWarning($"ID da peça não encontrado: {perf.PlayId}");
+                    throw new KeyNotFoundException($"A peça com o ID '{perf.PlayId}' não foi encontrada.");
+                }
+
+                var calculator = _calculators.FirstOrDefault(c => c.CanHandle(play.Genre.ToString()));
+
+                if (calculator == null)
+                    throw new ArgumentException($"Nenhum calculador disponível para o tipo de peça: {play.Genre}");
+
+                try
+                {
+                    var amount = calculator.CalculateAmount(play, perf);
+                    var credits = calculator.CalculateCredits(play, perf);
+
+                    totalAmount += amount;
+                    totalCredits += credits;
+
+                    root.Element("Items").Add(new XElement("Item",
+                        new XElement("AmountOwed", amount),
+                        new XElement("EarnedCredits", credits),
+                        new XElement("Seats", perf.Audience)
+                    ));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Erro ao gerar o extrato.");
+                    throw new InvalidOperationException("Erro ao gerar o extrato.", ex);
+                }
             }
 
-            Console.WriteLine($"Play not found for PlayId: {performance.PlayId}");
-            return 0;
-        }
+            root.Add(new XElement("AmountOwed", totalAmount));
+            root.Add(new XElement("EarnedCredits", totalCredits));
 
-        private int CalculateCredits(Performance performance, Dictionary<Guid, Play> plays)
-        {
-            if (plays.TryGetValue(performance.PlayId, out var play))
-            {
-                var calculator = new ComedyCalculator(); 
-                return calculator.CalculateCredits(performance);
-            }
-
-            Console.WriteLine($"Play not found for PlayId: {performance.PlayId}");
-            return 0;
+            return root.ToString();
         }
     }
 }

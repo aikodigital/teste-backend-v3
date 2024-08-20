@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
-using TheatricalPlayersRefactoringKata.Data.Dto;
 
 namespace TheatricalPlayersRefactoringKata.Data.Dto
 {
@@ -14,7 +14,7 @@ namespace TheatricalPlayersRefactoringKata.Data.Dto
         public decimal TotalAmount { get; set; }
 
         [XmlElement("totalCredits")]
-        public int TotalCredits { get; set; } 
+        public int TotalCredits { get; set; }
 
         [XmlArray("performances")]
         [XmlArrayItem("performance")]

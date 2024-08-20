@@ -27,7 +27,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
                         _serviceProvider.GetRequiredService<ComedyCalculator>()
                     );
                 default:
-                    throw new ArgumentException($"Invalid genre: {genre}", nameof(genre));
+                    throw new ArgumentException($"Gênero inválido: {genre}", nameof(genre));
             }
         }
     }

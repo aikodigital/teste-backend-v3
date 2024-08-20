@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using TheatricalPlayersRefactoringKata.Core.Services;
 using Microsoft.Extensions.Logging;
-using TheatricalPlayersRefactoringKata.Infrastructure;
 using System;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
@@ -53,13 +52,13 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         {
             if (request == null || request.Invoice == null)
             {
-                return BadRequest("Invalid data.");
+                return BadRequest("Dados inválidos.");
             }
 
             try
             {
                 var statement = _xmlStatementGenerator.Generate(request.Invoice, request.Plays);
-                _logger.LogInformation($"Statement generated: {statement}");
+                _logger.LogInformation($"Declaração gerada: {statement}");
 
                 var filePath = Path.Combine("C:\\Users\\User\\Documents\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\arquivos\\xml", "statement.xml");
 

@@ -33,7 +33,7 @@ namespace TheatricalPlayersRefactoringKata
 
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API dos Jogadores Teatrais", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Theatrical Players API", Version = "v1" });
             });
 
             builder.Services.AddTransient<TragedyCalculator>();
@@ -60,7 +60,7 @@ namespace TheatricalPlayersRefactoringKata
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API dos Jogadores Teatrais V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Theatrical Players API V1");
                     c.RoutePrefix = string.Empty;
                 });
             }

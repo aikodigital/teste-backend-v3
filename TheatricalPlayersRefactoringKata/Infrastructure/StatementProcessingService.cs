@@ -18,13 +18,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
         private readonly IStatementGenerator _statementGenerator;
         private readonly string _outputDirectory;
         private readonly ILogger<StatementProcessingService> _logger;
-        private readonly Dictionary<string, IPerformanceCalculator> _calculators;  
+        private readonly Dictionary<string, IPerformanceCalculator> _calculators;
 
         public StatementProcessingService(
             IStatementGenerator statementGenerator,
             string outputDirectory,
             ILogger<StatementProcessingService> logger,
-            Dictionary<string, IPerformanceCalculator> calculators) 
+            Dictionary<string, IPerformanceCalculator> calculators)
         {
             _statementGenerator = statementGenerator ?? throw new ArgumentNullException(nameof(statementGenerator));
             _outputDirectory = outputDirectory ?? throw new ArgumentNullException(nameof(outputDirectory));
@@ -38,7 +38,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
         public void QueueInvoice(InvoiceRequest request)
         {
             if (request == null)
-                throw new ArgumentNullException(nameof(request), "O parâmetro 'request' não pode ser nulo.");
+                throw new ArgumentNullException(nameof(request), "O parâmetro request não pode ser nulo.");
 
             _invoiceQueue.Add(request);
         }
@@ -68,20 +68,28 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure
         private XmlInvoice MapToXmlInvoice(Invoice invoice, Dictionary<Guid, Play> playDictionary)
         {
             if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+            if (playDictionary == null) throw new ArgumentNullException(nameof(playDictionary));
+
+            var totalAmount = invoice.Performances.Sum(p =>
+                _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p));
+            var totalCredits = invoice.Performances.Sum(p =>
+                _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p));
+
+            var performances = invoice.Performances.Select(p => new XmlPerformance
+            {
+                PlayId = p.PlayId,
+                Audience = p.Audience,
+                Amount = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p),
+                Credits = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p),
+                Genre = playDictionary[p.PlayId].Genre.ToString()
+            }).ToList();
 
             return new XmlInvoice
             {
                 Customer = invoice.Customer,
-                TotalAmount = invoice.Performances.Sum(p => _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p)),
-                TotalCredits = invoice.Performances.Sum(p => _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p)),
-                Performances = invoice.Performances.Select(p => new XmlPerformance
-                {
-                    PlayId = p.PlayId,
-                    Audience = p.Audience,
-                    Amount = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculatePrice(p),
-                    Credits = _calculators[playDictionary[p.PlayId].Genre.ToString()].CalculateCredits(p),
-                    Genre = playDictionary[p.PlayId].Genre.ToString()
-                }).ToList()
+                TotalAmount = totalAmount,
+                TotalCredits = totalCredits,
+                Performances = performances
             };
         }
     }

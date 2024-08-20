@@ -9,9 +9,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Services
         private readonly IPerformanceCalculator _tragedyCalculator;
         private readonly IPerformanceCalculator _comedyCalculator;
 
-        public HistoricalCalculator(
-            IPerformanceCalculator tragedyCalculator,
-            IPerformanceCalculator comedyCalculator)
+        public HistoricalCalculator(IPerformanceCalculator tragedyCalculator, IPerformanceCalculator comedyCalculator)
         {
             _tragedyCalculator = tragedyCalculator ?? throw new ArgumentNullException(nameof(tragedyCalculator));
             _comedyCalculator = comedyCalculator ?? throw new ArgumentNullException(nameof(comedyCalculator));
