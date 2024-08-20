@@ -17,10 +17,6 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(p => p.PerformanceId)
-                .HasColumnName("performance_id")
-                .IsRequired();
-
             builder.HasMany(inv => inv.Performances)
                 .WithMany(per => per.Invoices)
                 .UsingEntity(x => x.ToTable("tb_invoice_performance"));
