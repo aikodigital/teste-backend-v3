@@ -24,6 +24,10 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Configurations
             builder.Property(p => p.Genre)
                 .HasColumnName("genre")
                 .IsRequired();
+
+            builder.Property(p => p.Amount)
+                .HasColumnName("amount")
+                .IsRequired();
         }
     }
 }
