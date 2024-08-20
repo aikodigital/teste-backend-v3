@@ -23,7 +23,6 @@ public class StatementService
             result += $"  {play.Name}: {thisAmount / 100:C} ({perf.Audience} seats)\n";
             totalAmount += thisAmount;
         }
-
         result += $"Amount owed is {totalAmount / 100:C}\n";
         result += $"You earned {volumeCredits} credits\n";
         return result;
