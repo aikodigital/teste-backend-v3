@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Application;
-using TheatricalPlayersRefactoringKata.Application.Services;
+using TheatricalPlayersRefactoringKata.Application.Services.Formatters;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using Xunit;
@@ -34,18 +33,9 @@ public class StatementPrinterTests
             new Performance(henryV.Id, henryV, 20)
         });
 
-        var plays = new Dictionary<Guid, Play>
-    {
-        { hamlet.Id, hamlet },
-        { asYouLikeIt.Id, asYouLikeIt },
-        { othello.Id, othello },
-        { henryV.Id, henryV },
-        { kingJohn.Id, kingJohn }
-    };
-
         var statementFormatter = new TextStatementFormatter();
         var statementPrinter = new StatementPrinter(statementFormatter);
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }
@@ -71,18 +61,9 @@ public class StatementPrinterTests
             new Performance(henryV.Id, henryV, 20)
         });
 
-        var plays = new Dictionary<Guid, Play>
-    {
-        { hamlet.Id, hamlet },
-        { asYouLikeIt.Id, asYouLikeIt },
-        { othello.Id, othello },
-        { henryV.Id, henryV },
-        { kingJohn.Id, kingJohn }
-    };
-
         var statementFormatter = new XmlStatementFormatter();
         var statementPrinter = new StatementPrinter(statementFormatter);
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }
