@@ -1,0 +1,6 @@
+@TheatricalPlayersAPI_HostAddress = http://localhost:5001
+
+GET {{TheatricalPlayersAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
