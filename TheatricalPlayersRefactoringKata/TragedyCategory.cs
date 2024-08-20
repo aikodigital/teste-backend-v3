@@ -1,20 +1,19 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata;
+
 
 public class TragedyCategory : IPlayCategory
 {
     public decimal CalculateAmount(int audience, int lines)
     {
-        decimal baseAmount = Math.Max(1000, Math.Min(4000, lines)) / 10;
-        if (audience > 30)
-        {
-            baseAmount += 10 * (audience - 30);
-        }
-        return baseAmount;
+        decimal baseAmount = Math.Max(100.0m, Math.Min(400.0m, lines / 10.0m));
+
+        decimal additionalAmount = (audience > 30) ? 10.0m * (audience - 30) : 0.0m;
+
+        return baseAmount + additionalAmount;
     }
 
     public int CalculateCredits(int audience)
     {
-        return Math.Max(audience - 30, 0);
+        return (audience > 30) ? (audience - 30) : 0;
     }
 }

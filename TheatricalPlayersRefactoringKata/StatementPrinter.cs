@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
@@ -13,26 +14,30 @@ public class StatementPrinter
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0m;
-        var volumeCredits = 0;
-        var result = $"Statement for {invoice.Customer}\n";
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        var result = new StringBuilder();
+        result.AppendLine($"Statement for {invoice.Customer}");
 
-        foreach (var perf in invoice.Performances)
+        decimal totalAmount = 0;
+        int totalCredits = 0;
+
+        var culture = new CultureInfo("en-US");
+
+        foreach (var performance in invoice.Performances)
         {
-            var play = plays[perf.PlayId];
-            var category = _playCategories[play.Type];
-            var thisAmount = category.CalculateAmount(perf.Audience, play.Lines);
-            var thisCredits = category.CalculateCredits(perf.Audience);
+            var play = plays[performance.PlayId];
+            var category = _playCategories[play.Category];
+            decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
+            int thisCredits = category.CalculateCredits(performance.Audience);
 
-            volumeCredits += thisCredits;
+            result.AppendLine($"  {play.Title}: {thisAmount.ToString("C2", culture)} ({performance.Audience} seats)");
 
-            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount, perf.Audience);
             totalAmount += thisAmount;
+            totalCredits += thisCredits;
         }
 
-        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount);
-        result += $"You earned {volumeCredits} credits\n";
-        return result;
+        result.AppendLine($"Amount owed is {totalAmount.ToString("C2", culture)}");
+        result.AppendLine($"You earned {totalCredits} credits");
+
+        return result.ToString();
     }
 }

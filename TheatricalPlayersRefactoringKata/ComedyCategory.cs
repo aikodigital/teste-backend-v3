@@ -1,21 +1,27 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata;
 
 public class ComedyCategory : IPlayCategory
 {
     public decimal CalculateAmount(int audience, int lines)
     {
-        decimal baseAmount = Math.Max(1000, Math.Min(4000, lines)) / 10;
-        decimal thisAmount = baseAmount + 3 * audience;
+        decimal baseAmount = Math.Max(100.0m, Math.Min(400.0m, lines / 10.0m));
+
+        decimal additionalAmount = 3.0m * audience;
+
         if (audience > 20)
         {
-            thisAmount += 100 + 5 * (audience - 20);
+            additionalAmount += 100.0m + 5.0m * (audience - 20);
         }
-        return thisAmount;
+
+        return baseAmount + additionalAmount;
     }
 
     public int CalculateCredits(int audience)
     {
-        return Math.Max(audience - 30, 0) + (int)Math.Floor((decimal)audience / 5);
+        int baseCredits = (audience > 30) ? (audience - 30) : 0;
+        int bonusCredits = audience / 5;
+
+        return baseCredits + bonusCredits;
     }
 }
