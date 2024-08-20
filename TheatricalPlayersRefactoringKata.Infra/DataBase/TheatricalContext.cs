@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Infra.DataBase
 {
-    internal class TheatricalContext : DbContext
+    public class TheatricalContext : DbContext
     {
         public TheatricalContext(DbContextOptions<TheatricalContext> options) : base(options) { }
 

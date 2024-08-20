@@ -16,8 +16,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MySql.Data" Version="6.10.9" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.3" />
+    <PackageReference Include="MySql.Data" Version="9.0.0" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.30" />
   </ItemGroup>
 
   <ItemGroup>
