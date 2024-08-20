@@ -1,0 +1,10 @@
+﻿<Statement Customer="BigCo">
+  <Performance Play="Hamlet" Amount="$650.00" Seats="55" />
+  <Performance Play="As You Like It" Amount="$547.00" Seats="35" />
+  <Performance Play="Othello" Amount="$456.00" Seats="40" />
+  <Performance Play="Henry V" Amount="$705.40" Seats="20" />
+  <Performance Play="King John" Amount="$931.60" Seats="39" />
+  <Performance Play="Henry V" Amount="$705.40" Seats="20" />
+  <TotalAmount>$3,995.40</TotalAmount>
+  <Credits>56</Credits>
+</Statement>
