@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Console", "TheatricalPlayersRefactoringKata.Console\TheatricalPlayersRefactoringKata.Console.csproj", "{985E46F5-E16D-49ED-A331-6B9976AC1262}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Services", "TheatricalPlayersRefactoringKata.Services\TheatricalPlayersRefactoringKata.Services.csproj", "{0476506D-6C91-42D8-923B-04C6B430B7F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Services", "TheatricalPlayersRefactoringKata.Services\TheatricalPlayersRefactoringKata.Services.csproj", "{0476506D-6C91-42D8-923B-04C6B430B7F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infra", "TheatricalPlayersRefactoringKata.Infra\TheatricalPlayersRefactoringKata.Infra.csproj", "{91350149-855D-4595-A0FA-80E07F9DDC87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7DC36FC-CAD2-4776-BE2B-E123672ED74E}
 	EndGlobalSection
 EndGlobal
