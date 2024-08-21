@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata;
-
-namespace TheatricalPlayersRefactoringKata.Models;
+namespace TheatricalPlayersRefactoringKata;
 
 public class Performance
 {
