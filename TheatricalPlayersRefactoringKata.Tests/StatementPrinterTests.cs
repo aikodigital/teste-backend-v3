@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
+using TheatricalPlayersRefactoringKata.Domain.Entity;
+using TheatricalPlayersRefactoringKata.Application.StatementPrinter;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
@@ -28,7 +30,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.TextPrint(invoice, plays);
 
         Approvals.Verify(result);
     }
@@ -59,7 +61,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.TextPrint(invoice, plays);
 
         Approvals.Verify(result);
     }
