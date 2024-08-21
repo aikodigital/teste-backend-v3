@@ -8,10 +8,10 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class Comedy
 {
-    public int CalculateAmount(int lines, int audience)
+    public decimal CalculateAmount(int lines, int audience)
     {
         var baseCalculator = new Base();
-        var baseAmount = baseCalculator.CalculateBaseAmount(lines);
+        decimal baseAmount = baseCalculator.CalculateBaseAmount(lines);
         if (audience > 20) {
             baseAmount += 10000 + 500 * (audience - 20);
         }

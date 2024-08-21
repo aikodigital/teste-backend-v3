@@ -9,16 +9,16 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class History
 {
-    public int CalculateAmount(int lines, int audience)
+    public decimal CalculateAmount(int lines, int audience)
     {
-    var tragedy = new Tragedy();
-    var tragedyAmount = tragedy.CalculateAmount(lines, audience);
+        var tragedy = new Tragedy();
+        decimal tragedyAmount = tragedy.CalculateAmount(lines, audience);
 
-    var comedy = new Comedy();
-    var comedyAmount = comedy.CalculateAmount(lines, audience);
+        var comedy = new Comedy();
+        decimal comedyAmount = comedy.CalculateAmount(lines, audience);
 
-    var thisAmount = tragedyAmount + comedyAmount;
+        decimal thisAmount = tragedyAmount + comedyAmount;
 
-    return thisAmount;
+        return thisAmount;
     }
 }

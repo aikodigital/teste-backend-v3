@@ -8,12 +8,12 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class Base
 {
-    public int CalculateBaseAmount(int lines)
+    public decimal CalculateBaseAmount(int lines)
     {
         if (lines < 1000) lines = 1000;
         if (lines > 4000) lines = 4000;
 
-        var baseAmount = lines * 10;
+        decimal baseAmount = lines * 10;
 
         return baseAmount;
     }
