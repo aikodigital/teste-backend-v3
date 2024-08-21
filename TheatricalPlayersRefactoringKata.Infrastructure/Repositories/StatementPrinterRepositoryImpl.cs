@@ -19,7 +19,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
         private readonly CultureInfo _cultureInfo;
 
         public StatementPrinterRepositoryImpl(Dictionary<Enum, IGenreStrategy> genres, CultureInfo cultureInfo) {
-            _genres = genres ?? throw new ArgumentNullException(nameof(genres));
+            _genres = genres ?? [];
             _cultureInfo = cultureInfo ?? CultureInfo.InvariantCulture;
         }
 
