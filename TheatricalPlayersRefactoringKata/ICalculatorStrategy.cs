@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata;
 
 public interface ICalculatorStrategy
@@ -50,6 +51,16 @@ public class HistoricalCalculator : ICalculatorStrategy
 {
     private readonly TragedyCalculator _tragedyCalculator = new TragedyCalculator();
     private readonly ComedyCalculator _comedyCalculator = new ComedyCalculator();
+    private List<ICalculatorStrategy> calculatorStrategies;
+
+    public HistoricalCalculator()
+    {
+    }
+
+    public HistoricalCalculator(List<ICalculatorStrategy> calculatorStrategies)
+    {
+        this.calculatorStrategies = calculatorStrategies;
+    }
 
     public decimal CalculateAmount(Performance performance, Play play)
     {

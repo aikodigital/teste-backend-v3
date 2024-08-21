@@ -1,30 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
     private readonly Dictionary<string, ICalculatorStrategy> _calculatorStrategies;
 
-    public StatementPrinter()
+    public StatementPrinter(Dictionary<string, ICalculatorStrategy> calculatorStrategies)
     {
-        _calculatorStrategies = new Dictionary<string, ICalculatorStrategy>
-        {
-            { "tragedy", new TragedyCalculator() },
-            { "comedy", new ComedyCalculator() },
-            { "historical", new HistoricalCalculator() }
-        };
+        _calculatorStrategies = calculatorStrategies ?? throw new ArgumentNullException(nameof(calculatorStrategies));
     }
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
+        if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+        if (plays == null) throw new ArgumentNullException(nameof(plays));
+
         var totalAmount = 0m;
         var totalCredits = 0;
         var result = $"Statement for {invoice.Customer}\n";
 
         foreach (var performance in invoice.Performances)
         {
-            var play = plays[performance.PlayId];
-            var calculator = _calculatorStrategies[play.Type];
+            if (!plays.TryGetValue(performance.PlayId, out var play))
+            {
+                throw new ArgumentException($"Play with ID {performance.PlayId} not found.", nameof(plays));
+            }
+
+            if (!_calculatorStrategies.TryGetValue(play.Type, out var calculator))
+            {
+                throw new ArgumentException($"Calculator strategy for type {play.Type} not found.", nameof(_calculatorStrategies));
+            }
+
             var amount = calculator.CalculateAmount(performance, play);
             var credits = calculator.CalculateCredits(performance, play);
 
