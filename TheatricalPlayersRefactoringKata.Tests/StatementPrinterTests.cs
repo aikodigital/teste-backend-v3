@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.entities;
+using TheatricalPlayersRefactoringKata.Core;
+using TheatricalPlayersRefactoringKata.Core.Entities;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -21,14 +22,13 @@ public class StatementPrinterTests
         var invoice = new Invoice(
             "BigCo",
             [
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40)
+                new Performance(plays["hamlet"], 55),
+                new Performance(plays["as-like"], 35),
+                new Performance(plays["othello"], 40)
             ]
         );
 
-        var statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
     }
@@ -49,17 +49,16 @@ public class StatementPrinterTests
         var invoice = new Invoice(
             "BigCo",
             [
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new Performance(plays["hamlet"], 55),
+                new Performance(plays["as-like"], 35),
+                new Performance(plays["othello"], 40),
+                new Performance(plays["henry-v"], 20),
+                new Performance(plays["john"], 39),
+                new Performance(plays["henry-v"], 20)
             ]
         );
 
-        var statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
     }
