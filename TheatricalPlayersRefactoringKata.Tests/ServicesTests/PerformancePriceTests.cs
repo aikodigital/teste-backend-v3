@@ -9,7 +9,7 @@ using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Services.InvoicePrice;
 using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests
+namespace TheatricalPlayersRefactoringKata.Tests.ServicesTests
 {
     public class PerformancePriceTests
     {
