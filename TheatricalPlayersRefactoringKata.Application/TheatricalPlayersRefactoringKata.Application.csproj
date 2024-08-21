@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

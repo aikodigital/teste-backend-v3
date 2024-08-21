@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj" />
   </ItemGroup>
 
 </Project>
