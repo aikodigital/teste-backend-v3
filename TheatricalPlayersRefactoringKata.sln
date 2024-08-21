@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Console", "TheatricalPlayersRefactoringKata.Console\TheatricalPlayersRefactoringKata.Console.csproj", "{985E46F5-E16D-49ED-A331-6B9976AC1262}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Services", "TheatricalPlayersRefactoringKata.Services\TheatricalPlayersRefactoringKata.Services.csproj", "{0476506D-6C91-42D8-923B-04C6B430B7F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infra", "TheatricalPlayersRefactoringKata.Infra\TheatricalPlayersRefactoringKata.Infra.csproj", "{91350149-855D-4595-A0FA-80E07F9DDC87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Api", "TheatricalPlayersRefactoringKata.Api\TheatricalPlayersRefactoringKata.Api.csproj", "{CE069273-F251-4811-A152-94D56A5098F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +29,27 @@ Global
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{985E46F5-E16D-49ED-A331-6B9976AC1262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{985E46F5-E16D-49ED-A331-6B9976AC1262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{985E46F5-E16D-49ED-A331-6B9976AC1262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{985E46F5-E16D-49ED-A331-6B9976AC1262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0476506D-6C91-42D8-923B-04C6B430B7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91350149-855D-4595-A0FA-80E07F9DDC87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE069273-F251-4811-A152-94D56A5098F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE069273-F251-4811-A152-94D56A5098F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE069273-F251-4811-A152-94D56A5098F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE069273-F251-4811-A152-94D56A5098F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7DC36FC-CAD2-4776-BE2B-E123672ED74E}
 	EndGlobalSection
 EndGlobal
