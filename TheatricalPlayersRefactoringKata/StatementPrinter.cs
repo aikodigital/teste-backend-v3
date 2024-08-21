@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System;
+using TheatricalPlayersRefactoringKata.Utilities;
 
 namespace TheatricalPlayersRefactoringKata.Printing;
 
 public class StatementPrinter
 {
+
+    private readonly IStatementFormatter _formatter;
+    public StatementPrinter() : this(new XmlStatementFormatter()) { }
+
+    public StatementPrinter(IStatementFormatter formatter)
+    {
+        _formatter = formatter;
+    }
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
         double totalAmount = 0;
@@ -28,5 +38,10 @@ public class StatementPrinter
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         result += String.Format("You earned {0} credits\n", totalVolumeCredits);
         return result;
+    }
+
+    public string PrintAsXml(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        return _formatter.FormatStatement(invoice, plays);
     }
 }
