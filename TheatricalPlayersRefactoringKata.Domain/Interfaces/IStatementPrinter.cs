@@ -5,5 +5,5 @@ namespace TheatricalPlayersRefactoringKata.Domain.Interfaces;
 public interface IStatementPrinter
 {
     public string TextPrint(Invoice invoice, Dictionary<string, Play> plays);
-    public string XmlPrint();
+    public string XmlPrint(Invoice invoice, Dictionary<string, Play> plays);
 }
