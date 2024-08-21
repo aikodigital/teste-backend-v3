@@ -1,7 +1,25 @@
+using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // add services to the container
 builder.Services.AddControllers();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register the StatementProcessor service
 builder.Services.AddEndpointsApiExplorer();

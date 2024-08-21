@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersAPI.Data;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
 
@@ -8,13 +10,16 @@ namespace TheatricalPlayersAPI.Controllers
     [Route("api/[controller]")]
     public class StatementController : ControllerBase
     {
-        // In-memory volatile storage for statements [temporary]
-        private static List<Statement> statements = new List<Statement>();
+        private readonly ApplicationDbContext _context;
 
-        // POST: api/statement/process
-        // This endpoint queues an invoice for processing and returns immediately
+        // Constructor to inject the ApplicationDbContext
+        public StatementController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost("process")]
-        public IActionResult QueueInvoice([FromBody] InvoiceRequest request)
+        public async Task<IActionResult> QueueInvoice([FromBody] InvoiceRequest request)
         {
             if (request.Invoice == null || request.Plays == null || request.Plays.Count == 0)
             {
@@ -24,23 +29,27 @@ namespace TheatricalPlayersAPI.Controllers
             // Create a new instance of StatementProcessor with the provided plays
             var processor = new StatementProcessor(request.Plays, "OutputDirectoryPath");
 
-            // Queue and process the invoice
-            processor.QueueInvoice(request.Invoice);
-            processor.ProcessInvoicesAsync().Wait();
+            // Queue and process the invoice without awaiting
+            processor.QueueInvoice(request.Invoice); // No await here
 
-            // Generate the statement and store it in memory
-            var statement = processor.ProcessInvoiceAsync(request.Invoice).Result;
-            statements.Add(statement);
+            // Process invoices asynchronously
+            await processor.ProcessInvoicesAsync();
+
+            // Generate the statement
+            var statement = await processor.ProcessInvoiceAsync(request.Invoice);
+
+            // Store the statement in the database
+            _context.Statements.Add(statement);
+            await _context.SaveChangesAsync();
 
             return Ok("Invoice queued for processing and statement generated.");
         }
 
         // GET: api/statement/{statementId}
-        // This endpoint retrieves a statement by its ID
         [HttpGet("{statementId}")]
-        public IActionResult GetStatement(int statementId)
+        public async Task<IActionResult> GetStatement(int statementId)
         {
-            var statement = statements.Find(s => s.StatementID == statementId);
+            var statement = await _context.Statements.FindAsync(statementId);
             if (statement == null)
             {
                 return NotFound("Statement not found.");
@@ -49,11 +58,10 @@ namespace TheatricalPlayersAPI.Controllers
         }
 
         // GET: api/statement/{statementId}/xml
-        // This endpoint retrieves a statement in XML format by its ID
         [HttpGet("{statementId}/xml")]
-        public IActionResult GetStatementAsXml(int statementId)
+        public async Task<IActionResult> GetStatementAsXml(int statementId)
         {
-            var statement = statements.Find(s => s.StatementID == statementId);
+            var statement = await _context.Statements.FindAsync(statementId);
             if (statement == null)
             {
                 return NotFound("Statement not found.");
@@ -64,10 +72,10 @@ namespace TheatricalPlayersAPI.Controllers
         }
 
         // GET: api/statements
-        // This endpoint retrieves all statements in memory
         [HttpGet]
-        public IActionResult GetAllStatements()
+        public async Task<IActionResult> GetAllStatements()
         {
+            var statements = await _context.Statements.ToListAsync();
             return Ok(statements);
         }
     }

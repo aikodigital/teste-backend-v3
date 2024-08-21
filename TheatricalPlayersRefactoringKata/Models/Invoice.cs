@@ -5,8 +5,12 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Invoice
     {
+        public int Id { get; set; } // Invoice ID
         public string Customer { get; set; } // Customer name (e.g "BigCo")
         public List<Performance> Performances { get; set; } // List of performances in the invoice
+
+        // Added default constructor for deserialization
+        public Invoice() { }
 
         /// <summary>
         /// Represents an invoice for a series of theatrical performances.
@@ -25,7 +29,5 @@ namespace TheatricalPlayersRefactoringKata.Models
             Performances = performances;
         }
 
-        // Added default constructor for deserialization
-        public Invoice() { }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersAPI", "TheatricalPlayersAPI.csproj", "{24D4A331-6A8D-436A-AB82-A6800249BDBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersAPI", "TheatricalPlayersAPI.csproj", "{AB976CB8-05B0-44C4-A92A-AE02F6E5E49E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{24D4A331-6A8D-436A-AB82-A6800249BDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24D4A331-6A8D-436A-AB82-A6800249BDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24D4A331-6A8D-436A-AB82-A6800249BDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24D4A331-6A8D-436A-AB82-A6800249BDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB976CB8-05B0-44C4-A92A-AE02F6E5E49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB976CB8-05B0-44C4-A92A-AE02F6E5E49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB976CB8-05B0-44C4-A92A-AE02F6E5E49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB976CB8-05B0-44C4-A92A-AE02F6E5E49E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

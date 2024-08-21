@@ -4,8 +4,11 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Performance
     {
+        public int Id { get; set; } // Performance ID
         public string PlayId { get; set; } // ID of the play (e.g "as-like")
         public int Audience { get; set;} // Number of audience members
+
+        public Performance() { }
 
         /// <summary>
         /// Represents a performance of a play.

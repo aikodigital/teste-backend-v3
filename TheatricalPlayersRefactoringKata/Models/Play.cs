@@ -6,11 +6,12 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Play
     {
-        [Key]
-        public string PlayId { get; set; }  // Play ID (e.g "as-like")
-        public string Name { get; } // Play name (e.g "As You Like It")
-        public int Lines { get; } // Number of lines in the play
-        public TheatricalType Type { get; } // Type of the play (e.g Tragedy, Comedy)
+        public int Id { get; set; } // Play ID
+        public string Name { get; set; } // Play name (e.g "As You Like It")
+        public int Lines { get; set; } // Number of lines in the play
+        public TheatricalType Type { get; set; } // Type of the play (e.g Tragedy, Comedy)
+
+        public Play() { }
 
         /// <summary>
         /// Represents a play in a theatrical performance.
