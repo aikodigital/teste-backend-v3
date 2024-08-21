@@ -5,8 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<TheatricalContext>(o =>
-    o.UseMySQL(builder.Configuration.GetConnectionString("LocalHostConnection")));
+//builder.Services.AddDbContext<TheatricalContext>(o =>
+//    o.UseMySQL(builder.Configuration.GetConnectionString("LocalHostConnection")));
+var connectionString = builder.Configuration.GetConnectionString("LocalHostConnection");
+builder.Services.AddDbContextFactory<TheatricalContext>(o => 
+        o.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

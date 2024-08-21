@@ -29,5 +29,5 @@ public class Performance
         _play = play;
 
     }
-
+    public Performance() { }
 }

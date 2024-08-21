@@ -8,7 +8,8 @@ namespace TheatricalPlayersRefactoringKata.Infra.DataBase
         public TheatricalContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TheatricalContext>();
-            optionsBuilder.UseMySQL("Server=localhost;Port=3307;User=root;Password=M@r1ll10n;Database=theatricalplayersdb");
+            var connectionString = "Server=localhost;Port=3307;User=root;Password=M@r1ll10n;Database=theatricalplayersdb";
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
             return new TheatricalContext(optionsBuilder.Options);
         }

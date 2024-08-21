@@ -23,4 +23,5 @@ public class Play
         _lines = lines;
         _type = type;
     }
+    public Play() { }
 }
