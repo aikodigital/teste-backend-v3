@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Utils;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
-using TheatricalPlayersRefactoringKata.Infrastructure.Utils;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Formatters
 {

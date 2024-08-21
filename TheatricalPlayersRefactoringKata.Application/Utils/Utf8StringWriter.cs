@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TheatricalPlayersRefactoringKata.Infrastructure.Utils
+namespace TheatricalPlayersRefactoringKata.Application.Utils
 {
     public class Utf8StringWriter : StringWriter
     {
