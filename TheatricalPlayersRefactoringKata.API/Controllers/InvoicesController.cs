@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using TheatricalPlayersRefactoringKata.Application.DTOs.InvoiceDTOs;
+using TheatricalPlayersRefactoringKata.Application.DTOs.PerformanceDTOs;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 
@@ -12,10 +14,12 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     public class InvoicesController : ControllerBase
     {
         private readonly IInvoiceService _invoiceService;
+        private readonly IValidator<InvoiceRequest> _invoiceValidator;
 
-        public InvoicesController(IInvoiceService invoiceService)
+        public InvoicesController(IInvoiceService invoiceService, IValidator<InvoiceRequest> invoiceValidator)
         {
             _invoiceService = invoiceService;
+            _invoiceValidator = invoiceValidator;
         }
 
         [HttpPost]
@@ -24,8 +28,9 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             Description = "Creates a new invoice based on the provided data.")]
         public async Task<IActionResult> Create(InvoiceRequest invoiceRequest)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            var validationResult = await _invoiceValidator.ValidateAsync(invoiceRequest);
+            if (!validationResult.IsValid)
+                return BadRequest(string.Join(", ", validationResult.Errors));
 
             var response = await _invoiceService.CreateInvoice(invoiceRequest);
 

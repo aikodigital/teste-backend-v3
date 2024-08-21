@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using TheatricalPlayersRefactoringKata.Application.DTOs.PlayDTOs;
@@ -11,10 +12,12 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     public class PlaysController : ControllerBase
     {
         private readonly IPlayService _playService;
+        private readonly IValidator<PlayRequest> _playValidator;
 
-        public PlaysController(IPlayService playService)
+        public PlaysController(IPlayService playService, IValidator<PlayRequest> playValidator)
         {
             _playService = playService;
+            _playValidator = playValidator;
         }
 
         [HttpPost]
@@ -22,8 +25,9 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             Summary = "Creates a new play.")]
         public async Task<IActionResult> Create(PlayRequest playRequest)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            var validationResult = await _playValidator.ValidateAsync(playRequest);
+            if (!validationResult.IsValid)
+                return BadRequest(string.Join(", ", validationResult.Errors));
 
             var response = await _playService.CreatePlay(playRequest);
 

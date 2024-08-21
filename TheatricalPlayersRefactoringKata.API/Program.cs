@@ -1,9 +1,14 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Application.DTOs.InvoiceDTOs;
+using TheatricalPlayersRefactoringKata.Application.DTOs.PerformanceDTOs;
+using TheatricalPlayersRefactoringKata.Application.DTOs.PlayDTOs;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Domain.Repositories;
 using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
+using TheatricalPlayersRefactoringKata.Infrastructure.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +29,11 @@ builder.Services.AddScoped<IPerformanceService, PerformanceService>();
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
+
+// Fluent Validation
+builder.Services.AddScoped<IValidator<PlayRequest>, PlayValidation>();
+builder.Services.AddScoped<IValidator<PerformanceRequest>, PerformanceValidation>();
+builder.Services.AddScoped<IValidator<InvoiceRequest>, InvoiceValidation>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using TheatricalPlayersRefactoringKata.Application.DTOs.PerformanceDTOs;
@@ -11,10 +12,12 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     public class PerformancesController : ControllerBase
     {
         private readonly IPerformanceService _performanceService;
+        private readonly IValidator<PerformanceRequest> _perfValidator;
 
-        public PerformancesController(IPerformanceService performanceService)
+        public PerformancesController(IPerformanceService performanceService, IValidator<PerformanceRequest> perfValidator)
         {
             _performanceService = performanceService;
+            _perfValidator = perfValidator;
         }
 
         [HttpPost]
@@ -22,8 +25,9 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             Summary = "Creates a new performance.")]
         public async Task<IActionResult> Create(PerformanceRequest performanceRequest)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            var validationResult = await _perfValidator.ValidateAsync(performanceRequest);
+            if (!validationResult.IsValid)
+                return BadRequest(string.Join(", ", validationResult.Errors));
 
             var response = await _performanceService.CreatePerformance(performanceRequest);
 
