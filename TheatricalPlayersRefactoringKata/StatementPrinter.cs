@@ -39,7 +39,7 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
-    public string PrintXML(Invoice invoice, Dictionary<string, Play> plays)
+    public XDocument PrintXML(Invoice invoice, Dictionary<string, Play> plays)
     {
         double totalAmount = 0;
         var volumeCredits = 0;
@@ -47,58 +47,59 @@ public class StatementPrinter
 
         // create XML document
         var xDocument = new XDocument(
+            new XDeclaration("1.0", "utf-8", null),
             new XElement("Statement",
+                new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
                 new XElement("Customer", invoice.Customer),
-                new XElement("Performances",
+                new XElement("Items",
                     from perf in invoice.Performances
                     let play = plays[perf.PlayId]
                     let lines = Math.Max(1000, Math.Min(4000, play.Lines))
                     let thisAmount = play.Perform(lines * 10, perf.Audience)
-                    let amountFormatted = $"{thisAmount / 100:C}"
-                    let seatsFormatted = perf.Audience.ToString()
+                    let thisCredits = Math.Max(perf.Audience - 30, 0) + 
+                        (play.Type == "comedy" ? (int)Math.Floor((decimal)perf.Audience / 5) : 0)
 
-                    select new XElement("Performance",
-                        new XElement("PlayName", play.Name),
-                        new XElement("Amount", amountFormatted),
-                        new XElement("Seats", seatsFormatted)
+                    select new XElement("Item",
+                        new XElement("AmountOwed", thisAmount/100),
+                        new XElement("EarnedCredits", thisCredits),
+                        new XElement("Seats", perf.Audience)
                     )
                 ),
-                new XElement("TotalAmount", $"{totalAmount / 100:C}"),
-                new XElement("VolumeCredits", volumeCredits)
+                new XElement("AmountOwed", totalAmount),
+                new XElement("EarnedCredits", volumeCredits)
             )
         );
 
         
         foreach (var perf in invoice.Performances)
         {
+            var thisCredits = 0;
             var play = plays[perf.PlayId];
-            var lines = Math.Max(1000, Math.Min(4000, play.Lines));
-            double thisAmount = lines * 10;
-            
-            // call factory and perform the right strategy
-            thisAmount = play.Perform(thisAmount, perf.Audience);
-
             // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-
-
+            thisCredits = Math.Max(perf.Audience - 30, 0);
             // add extra credit for every ten comedy attendees
             if (play.Type == "comedy")
-                volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+                thisCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            
+            // add price to total
+            var lines = Math.Max(1000, Math.Min(4000, play.Lines));
+            totalAmount += play.Perform(lines * 10, perf.Audience);
 
-            totalAmount += thisAmount;
+            volumeCredits += thisCredits;
         }
 
         // update XML document with final amounts and credits
-        var totalAmountElement = xDocument.Root.Element("TotalAmount");
-        var volumeCreditsElement = xDocument.Root.Element("VolumeCredits");
+        var totalAmountElement = xDocument.Root.Element("AmountOwed");
+        var volumeCreditsElement = xDocument.Root.Element("EarnedCredits");
 
         if (totalAmountElement != null)
-            totalAmountElement.Value = $"{totalAmount / 100:C}";
+            totalAmountElement.Value = string.Format(cultureInfo, "{0}", totalAmount / 100);
 
         if (volumeCreditsElement != null)
             volumeCreditsElement.Value = volumeCredits.ToString();
 
-        return xDocument.ToString();
+        return xDocument;
     }
+
 }

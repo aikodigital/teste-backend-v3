@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -15,5 +16,7 @@ public class Invoice
         this._customer = customer;
         this._performances = performance;
     }
+
+
 
 }
