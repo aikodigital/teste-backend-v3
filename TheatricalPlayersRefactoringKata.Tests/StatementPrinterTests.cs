@@ -18,6 +18,7 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
+        //Arrange
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
         plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
@@ -36,6 +37,7 @@ public class StatementPrinterTests
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.Print(invoice, plays);
 
+        //Assert
         Approvals.Verify(result);
     }
 
@@ -43,6 +45,7 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
+        //Arrange
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
         plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
@@ -67,14 +70,15 @@ public class StatementPrinterTests
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.Print(invoice, plays);
 
+        //Assert
         Approvals.Verify(result);
     }
 
-    //Test fail because the first line "﻿<?xml version="1.0" encoding="utf-8"?>
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
+        //Arrange
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
         plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
@@ -99,6 +103,7 @@ public class StatementPrinterTests
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.PrintXML(invoice, plays);
 
+        //Assert
         Approvals.Verify(result);
     }
     [Theory]
@@ -107,6 +112,7 @@ public class StatementPrinterTests
     [InlineData("history", 50, 20)]
     public void Test_PrintXML_EarnedCredits(string playType, int audience, int expectedCredits)
     {
+        //Arrange
         var invoice = new Invoice(
             "BigCo",
             new List<Performance>
@@ -120,9 +126,17 @@ public class StatementPrinterTests
         };
 
         var statementPrinter = new StatementPrinter();
+
         var xmlString = statementPrinter.PrintXML(invoice, plays);
+
+        //remove BOM
+        xmlString = xmlString.TrimStart('\uFEFF');
+
+        //String to XML
         XDocument result = XDocument.Parse(xmlString);
         var earnedCreditsElement = result.Descendants("EarnedCredits").FirstOrDefault();
+
+        //Assert
         Assert.NotNull(earnedCreditsElement);
         Assert.Equal(expectedCredits.ToString(), earnedCreditsElement.Value);
     }
@@ -133,6 +147,7 @@ public class StatementPrinterTests
     [InlineData("history", 50, 120000)]
     public void Test_PrintXML_AmountOwed(string playType, int audience, double expectedAmount)
     {
+        //Arrange
         var invoice = new Invoice(
             "BigCo",
             new List<Performance>
@@ -146,10 +161,18 @@ public class StatementPrinterTests
         };
 
         var statementPrinter = new StatementPrinter();
+        
         var xmlString = statementPrinter.PrintXML(invoice, plays);
+
+        //remove BOM
+        xmlString = xmlString.TrimStart('\uFEFF');
+
+        //String to XML
         XDocument result = XDocument.Parse(xmlString);
 
         var amountOwedElement = result.Descendants("AmountOwed").FirstOrDefault();
+
+        //Assert
         Assert.NotNull(amountOwedElement);
         Assert.Equal(string.Format("{0}", expectedAmount / 100), amountOwedElement.Value);
     }

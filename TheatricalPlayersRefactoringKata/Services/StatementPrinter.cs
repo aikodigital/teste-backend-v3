@@ -16,68 +16,59 @@ public class StatementPrinter
     {
         double totalAmount = 0;
         var volumeCredits = 0;
+
         var result = string.Format("Statement for {0}\n", invoice.Customer);
+
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
         foreach (var perf in invoice.Performances)
         {
             var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            double thisAmount = lines * 10;
+
+            double thisAmount = baseAmount(play);
 
             //call factory and perform the right strategy
             thisAmount = play.Perform(thisAmount, perf.Audience);
 
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            
+            // calculate credits
+            volumeCredits += calculateCredits(perf, play);
 
             // print line for this order
             result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+            
             totalAmount += thisAmount;
         }
+
         result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         result += string.Format("You earned {0} credits\n", volumeCredits);
+       
         return result;
     }
     public string PrintXML(Invoice invoice, Dictionary<string, Play> plays)
     {
         double totalAmount = 0;
         var volumeCredits = 0;
+
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
         var items = new XElement("Items");
 
-
-
-
         foreach (var perf in invoice.Performances)
         {
-
 
             var thisCredits = 0;
             var play = plays[perf.PlayId];
 
+            double thisAmount = baseAmount(play);
 
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            double thisAmount = lines * 10;
-
-            //call factory and perform the right strategy
+            // call factory and perform the right strategy
             thisAmount = play.Perform(thisAmount, perf.Audience);
 
-            // add volume credits
-            thisCredits = Math.Max(perf.Audience - 30, 0);
+            // calculate credits
+            thisCredits = calculateCredits(perf, play);
 
-            // add extra credit for every ten comedy attendees
-            if (play.Type == "comedy")
-                thisCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-
-            //add item to XML
+            // add item to XML
             items.Add(
                 new XElement("Item",
                     new XElement("AmountOwed", thisAmount / 100),
@@ -115,6 +106,27 @@ public class StatementPrinter
 
             return Encoding.UTF8.GetString(memoryStream.ToArray());
         }
+    }
+
+    internal int baseAmount(Play play)
+    {
+        var lines = play.Lines;
+        if (lines < 1000) lines = 1000;
+        if (lines > 4000) lines = 4000;
+        return lines * 10;
+    }
+    internal int calculateCredits(Performance perf, Play play)
+    {
+        int thisCredits = 0;
+
+        // add volume credits
+        thisCredits = Math.Max(perf.Audience - 30, 0);
+
+        // add extra credit for every ten comedy attendees
+        if (play.Type == "comedy")
+            thisCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+
+        return thisCredits;
     }
 
 }
