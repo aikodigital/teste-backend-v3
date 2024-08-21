@@ -11,7 +11,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Core.Strategy {
             return 0;
         }
 
-        public double CalculatePlayAmount(Performance perf) {
+        public double CalculatePlayAmount(Performance perf, double thisAmount) {
             return 0;
         }
     }

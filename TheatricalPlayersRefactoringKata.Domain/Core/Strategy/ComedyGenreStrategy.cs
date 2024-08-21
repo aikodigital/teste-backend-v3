@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheatricalPlayersRefactoringKata.Domain.Core.Strategy
-{
-    public class ComedyGenreStrategy : IGenreStrategy
-    {
+namespace TheatricalPlayersRefactoringKata.Domain.Core.Strategy {
+    public class ComedyGenreStrategy : IGenreStrategy {
 
-        public int CalculatePlayCredits(Performance perf)
-        {
+        public int CalculatePlayCredits(Performance perf) {
             int volumeCredits = Math.Max(perf.Audience - 30, 0);
 
             // add extra credit for every ten comedy attendees
@@ -18,12 +15,9 @@ namespace TheatricalPlayersRefactoringKata.Domain.Core.Strategy
             return volumeCredits;
         }
 
-        public double CalculatePlayAmount(Performance perf)
-        {
-            double thisAmount = 0;
+        public double CalculatePlayAmount(Performance perf, double thisAmount) {
 
-            if (perf.Audience > 20)
-            {
+            if (perf.Audience > 20) {
                 thisAmount += 10000 + 500 * (perf.Audience - 20);
             }
             thisAmount += 300 * perf.Audience;

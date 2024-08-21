@@ -50,7 +50,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
 
                 double thisAmount = PlayCalculationUtils.CalculatePlayLines(perf, play);
 
-                thisAmount = genre!.CalculatePlayAmount(perf);
+                thisAmount = genre!.CalculatePlayAmount(perf, thisAmount);
                 volumeCredits += genre.CalculatePlayCredits(perf);
 
                 // print line for this order

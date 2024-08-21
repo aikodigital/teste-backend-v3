@@ -10,9 +10,7 @@ public class TragedyGenreStrategy : IGenreStrategy {
         return volumeCredits;
     }
 
-    public double CalculatePlayAmount(Performance perf) {
-
-        double thisAmount = 0;
+    public double CalculatePlayAmount(Performance perf, double thisAmount) {
 
         if (perf.Audience > 30) {
             thisAmount += 1000 * (perf.Audience - 30);
