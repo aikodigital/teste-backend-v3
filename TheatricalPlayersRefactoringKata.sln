@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Infrastructure", "TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{969929CC-9BB0-4A7B-8378-10261F5F728D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{325B75D0-AD77-49F7-8B73-CB348A5E425E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{325B75D0-AD77-49F7-8B73-CB348A5E425E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
