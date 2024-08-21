@@ -5,7 +5,6 @@ using Xunit;
 using TheatricalPlayersRefactoringKata.Domain.Entity;
 using TheatricalPlayersRefactoringKata.Application.StatementPrinter;
 using TheatricalPlayersRefactoringKata.Application.Genres;
-using TheatricalPlayersRefactoringKata.Domain.Enum;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
@@ -16,9 +15,9 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Tragedy("Hamlet", 4024, EnumGenres.Tragedy));
-        plays.Add("as-like", new Comedy("As You Like It", 2670, EnumGenres.Comedy));
-        plays.Add("othello", new Tragedy("Othello", 3560, EnumGenres.Tragedy));
+        plays.Add("hamlet", new Tragedy("Hamlet", 4024));
+        plays.Add("as-like", new Comedy("As You Like It", 2670));
+        plays.Add("othello", new Tragedy("Othello", 3560));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -41,12 +40,12 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Tragedy("Hamlet", 4024, EnumGenres.Tragedy));
-        plays.Add("as-like", new Comedy("As You Like It", 2670, EnumGenres.Comedy));
-        plays.Add("othello", new Tragedy("Othello", 3560, EnumGenres.Tragedy));
-        plays.Add("henry-v", new History("Henry V", 3227, EnumGenres.History));
-        plays.Add("john", new History("King John", 2648, EnumGenres.History));
-        plays.Add("richard-iii", new History("Richard III", 3718, EnumGenres.History));
+        plays.Add("hamlet", new Tragedy("Hamlet", 4024));
+        plays.Add("as-like", new Comedy("As You Like It", 2670));
+        plays.Add("othello", new Tragedy("Othello", 3560));
+        plays.Add("henry-v", new History("Henry V", 3227));
+        plays.Add("john", new History("King John", 2648));
+        plays.Add("richard-iii", new History("Richard III", 3718));
 
         Invoice invoice = new Invoice(
             "BigCo",

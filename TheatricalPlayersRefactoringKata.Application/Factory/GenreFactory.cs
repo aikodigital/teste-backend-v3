@@ -10,11 +10,11 @@ public static class GenreFactory
         switch (type)
         {
             case EnumGenres.Comedy:
-                return new Comedy(name, lines, type);
+                return new Comedy(name, lines);
             case EnumGenres.Tragedy:
-                return new Tragedy(name, lines, type);
+                return new Tragedy(name, lines);
             case EnumGenres.History:
-                return new History(name, lines, type);
+                return new History(name, lines);
             default:
                 throw new ArgumentException("Invalid genre type.");
         }

@@ -5,9 +5,10 @@ namespace TheatricalPlayersRefactoringKata.Application.Genres;
 
 public class Tragedy : Play
 {
-    public Tragedy(string name, int lines, EnumGenres type)
-        : base(name, lines, type)
+    public Tragedy(string name, int lines)
+        : base(name, lines)
     {
+        Type = EnumGenres.Tragedy;
     }
     
     public override decimal CalculateAmount(int audience)

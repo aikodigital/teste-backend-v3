@@ -6,12 +6,11 @@ public abstract class Play
 {
     public string Name { get; private set; }
     public int Lines { get; private set; }
-    public EnumGenres Type { get; private set; }
+    public EnumGenres Type { get; protected set; }
 
-    public Play(string name, int lines, EnumGenres type) {
+    public Play(string name, int lines) {
         Name = name;
         Lines = Math.Clamp(lines, 1000, 4000);
-        Type = type;
     }
     
     public abstract decimal CalculateAmount(int audience);

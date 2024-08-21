@@ -8,11 +8,13 @@ public class History : Play
     private readonly Tragedy _tragedy;
     private readonly Comedy _comedy;
 
-    public History(string name, int lines, EnumGenres type)
-        : base(name, lines, type)
+    public History(string name, int lines)
+        : base(name, lines)
     {
-        _tragedy = new Tragedy(name, lines, type);
-        _comedy = new Comedy(name, lines, type);
+        Type = EnumGenres.History;
+
+        _tragedy = new Tragedy(name, lines);
+        _comedy = new Comedy(name, lines);
     }
     
     public override decimal CalculateAmount(int audience)
