@@ -1,6 +1,6 @@
 using TheatricalPlayersRefactoringKata.Factories;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Play
 {
@@ -12,15 +12,16 @@ public class Play
     public int Lines { get => _lines; set => _lines = value; }
     public string Type { get => _type; set => _type = value; }
 
-    public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+    public Play(string name, int lines, string type)
+    {
+        _name = name;
+        _lines = lines;
+        _type = type;
     }
 
     public double Perform(double thisAmount, int audience)
     {
-        var strategy = PlayStrategyFactory.GetStrategy(this._type);
+        var strategy = PlayStrategyFactory.GetStrategy(_type);
         return strategy.Execute(thisAmount, audience);
     }
 }

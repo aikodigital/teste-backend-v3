@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -95,8 +98,8 @@ public class StatementPrinterTests
 
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.PrintXML(invoice, plays);
-        var formattedXml = result.ToString();
-        Approvals.Verify(formattedXml);
+
+        Approvals.Verify(result);
     }
     [Theory]
     [InlineData("comedy", 40, 18)]
@@ -117,8 +120,8 @@ public class StatementPrinterTests
         };
 
         var statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXML(invoice, plays);
-
+        var xmlString = statementPrinter.PrintXML(invoice, plays);
+        XDocument result = XDocument.Parse(xmlString);
         var earnedCreditsElement = result.Descendants("EarnedCredits").FirstOrDefault();
         Assert.NotNull(earnedCreditsElement);
         Assert.Equal(expectedCredits.ToString(), earnedCreditsElement.Value);
@@ -143,7 +146,8 @@ public class StatementPrinterTests
         };
 
         var statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXML(invoice, plays);
+        var xmlString = statementPrinter.PrintXML(invoice, plays);
+        XDocument result = XDocument.Parse(xmlString);
 
         var amountOwedElement = result.Descendants("AmountOwed").FirstOrDefault();
         Assert.NotNull(amountOwedElement);
