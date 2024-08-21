@@ -40,7 +40,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             Description = "Generates a statement in either XML or TXT format and returns it as a downloadable file.")]
         public async Task<IActionResult> GenerateStatement(Guid invoiceId, Formats format)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !Enum.IsDefined(typeof(Formats), format))
                 return BadRequest();
 
             var formattedContent = await _invoiceService.GenerateStatement(invoiceId, format);

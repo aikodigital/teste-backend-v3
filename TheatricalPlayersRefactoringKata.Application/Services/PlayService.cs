@@ -3,6 +3,7 @@ using TheatricalPlayersRefactoringKata.Application.DTOs;
 using TheatricalPlayersRefactoringKata.Application.DTOs.PlayDTOs;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services
@@ -18,7 +19,15 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
 
         public async Task<ServiceResponse<PlayResponse>> CreatePlay(PlayRequest playRequest)
         {
-            var response = new ServiceResponse<PlayResponse>(); 
+            var response = new ServiceResponse<PlayResponse>();
+
+            if (!Enum.IsDefined(typeof(Genre), playRequest.Genre))
+            {
+                response.Message = "Invalid genre specified.";
+                response.Status = HttpStatusCode.BadRequest;
+                return response;
+            }
+
             var play = new Play()
             {
                 Name = playRequest.Name,
