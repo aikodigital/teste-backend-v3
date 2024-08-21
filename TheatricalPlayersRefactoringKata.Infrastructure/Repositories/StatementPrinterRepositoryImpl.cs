@@ -4,7 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Domain.Common.Result;
 using TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IRepositories;
+using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Utils;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
@@ -21,14 +23,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             _cultureInfo = cultureInfo ?? CultureInfo.InvariantCulture;
         }
 
-        public string Print(Invoice invoice, Dictionary<string, Play> plays) {
+        public Result<string> Print(Invoice invoice, Dictionary<string, Play> plays) {
 
             if (invoice == null) {
-                throw new ArgumentNullException(nameof(invoice));
+                return Result<string>.Failure(Error.Validation("Invoice data is null", ErrorType.Validation.ToString()));
             }
 
-            if (plays == null) {
-                throw new ArgumentNullException(nameof(plays));
+            if (plays == null && plays!.Count == 0) {
+                return Result<string>.Failure(Error.Validation("Plays data is null", ErrorType.Validation.ToString()));
             }
 
             double totalAmount = 0;
@@ -38,17 +40,17 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             foreach (var perf in invoice.Performances) {
                 Play play = plays[perf.PlayId];
 
-                if (!plays.TryGetValue(perf.PlayId, out play)) {
-                    throw new KeyNotFoundException($"Play with ID {perf.PlayId} not found.");
+                if (!plays.TryGetValue(perf.PlayId, out play!)) {
+                    Result<string>.Failure(Error.NotFound($"Play with ID {perf.PlayId} not found.", ErrorType.NotFound.ToString()));
                 }
 
                 if (!_genres.TryGetValue(play.Type, out var genre)) {
-                    throw new KeyNotFoundException($"Genre strategy for {play.Type} not found.");
+                    Result<string>.Failure(Error.NotFound($"Genre strategy for {play.Type} not found.", ErrorType.NotFound.ToString()));
                 }
 
                 double thisAmount = PlayCalculationUtils.CalculatePlayLines(perf, play);
 
-                thisAmount = genre.CalculatePlayAmount(perf);
+                thisAmount = genre!.CalculatePlayAmount(perf);
                 volumeCredits += genre.CalculatePlayCredits(perf);
 
                 // print line for this order
@@ -57,7 +59,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             }
             result += string.Format(_cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
             result += string.Format("You earned {0} credits\n", volumeCredits);
-            return result;
+            return Result<string>.Success(result);
+            ;
         }
 
     }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TheatricalPlayersRefactoringKata.Application.Enums {
-    public enum EnumPlayGenre {
+    public enum PlayGenre {
         Comedy,
         Tragedy,
         Historical,

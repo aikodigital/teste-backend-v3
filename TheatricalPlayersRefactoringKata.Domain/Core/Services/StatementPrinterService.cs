@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Domain.Common.Result;
 using TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IRepositories;
 using TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IServices;
 using TheatricalPlayersRefactoringKata.Domain.Utils;
@@ -14,7 +15,7 @@ public class StatementPrinterService : IStatementPrinterService {
         _repository = Repository;
     }
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays) {
+    public Result<string> Print(Invoice invoice, Dictionary<string, Play> plays) {
         return _repository.Print(invoice, plays);
     }
 
