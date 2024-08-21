@@ -1,12 +1,18 @@
-using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Entity;
+using TheatricalPlayersRefactoringKata.Domain.Enum;
 
 namespace TheatricalPlayersRefactoringKata.Application.Genres;
 
-public class Tragedy : IPlay
+public class Tragedy : Play
 {
-    public decimal CalculateAmount(int lines, int audience)
+    public Tragedy(string name, int lines, EnumGenres type)
+        : base(name, lines, type)
     {
-        decimal amount = (decimal)lines / 10;
+    }
+    
+    public override decimal CalculateAmount(int audience)
+    {
+        decimal amount = (decimal)Lines / 10;
         if (audience > 30)
         {
             amount += 10 * (audience - 30);
@@ -14,7 +20,7 @@ public class Tragedy : IPlay
         return amount;
     }
 
-    public decimal CalculateCredits(int audience)
+    public override decimal CalculateCredits(int audience)
     {
         return Math.Max(audience - 30, 0);
     }

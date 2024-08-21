@@ -1,29 +1,29 @@
-using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Entity;
+using TheatricalPlayersRefactoringKata.Domain.Enum;
 
 namespace TheatricalPlayersRefactoringKata.Application.Genres;
 
-public class History : IPlay
+public class History : Play
 {
     private readonly Tragedy _tragedy;
     private readonly Comedy _comedy;
 
-    public History()
+    public History(string name, int lines, EnumGenres type)
+        : base(name, lines, type)
     {
-        _tragedy = new Tragedy();
-        _comedy = new Comedy();
+        _tragedy = new Tragedy(name, lines, type);
+        _comedy = new Comedy(name, lines, type);
     }
     
-    public decimal CalculateAmount(int lines, int audience)
+    public override decimal CalculateAmount(int audience)
     {
-        decimal tragedyPrice = _tragedy.CalculateAmount(audience, lines);
-        decimal comedyPrice = _comedy.CalculateAmount(audience, lines);
+        decimal tragedyPrice = _tragedy.CalculateAmount(audience);
+        decimal comedyPrice = _comedy.CalculateAmount(audience);
         return tragedyPrice + comedyPrice;
     }
 
-    public decimal CalculateCredits(int audience)
+    public override decimal CalculateCredits(int audience)
     {
-        decimal tragedyCredits = _tragedy.CalculateCredits(audience);
-        decimal comedyCredits = _comedy.CalculateCredits(audience);
-        return tragedyCredits + comedyCredits;
+        return Math.Max(audience - 30, 0);
     }
 }

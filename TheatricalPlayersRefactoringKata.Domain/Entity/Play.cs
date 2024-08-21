@@ -1,18 +1,19 @@
+using TheatricalPlayersRefactoringKata.Domain.Enum;
+
 namespace TheatricalPlayersRefactoringKata.Domain.Entity;
 
-public class Play
+public abstract class Play
 {
-    private string _name;
-    private int _lines;
-    private string _type;
+    public string Name { get; private set; }
+    public int Lines { get; private set; }
+    public EnumGenres Type { get; private set; }
 
-    public string Name { get => _name; set => _name = value; }
-    public int Lines { get => _lines; set => _lines = value; }
-    public string Type { get => _type; set => _type = value; }
-
-    public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+    public Play(string name, int lines, EnumGenres type) {
+        Name = name;
+        Lines = Math.Clamp(lines, 1000, 4000);
+        Type = type;
     }
+    
+    public abstract decimal CalculateAmount(int audience);
+    public abstract decimal CalculateCredits(int audience);
 }

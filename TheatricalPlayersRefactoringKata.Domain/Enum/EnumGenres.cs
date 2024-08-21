@@ -1,6 +1,6 @@
 namespace TheatricalPlayersRefactoringKata.Domain.Enum;
 
-public enum Genres
+public enum EnumGenres
 {
     Comedy,
     Tragedy,
