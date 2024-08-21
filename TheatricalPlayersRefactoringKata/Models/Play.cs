@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
 namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Play
@@ -15,5 +18,16 @@ public class Play
         _name = name;
         _lines = lines;
         _type = type;
+    }
+
+    public static void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<Play>().HasKey(x => x.Name);
+
+        builder.Entity<Play>()
+               .HasOne<PlayTypes>()
+               .WithMany()
+               .HasForeignKey(e => e.Type)
+               .IsRequired();
     }
 }

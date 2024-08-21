@@ -2,9 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Data.Common;
 using TheatricalPlayersRefactoringKata.Calculators;
+using TheatricalPlayersRefactoringKata.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddControllers();
 
