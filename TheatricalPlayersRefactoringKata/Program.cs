@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using System.Data.Common;
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Data;
+using TheatricalPlayersRefactoringKata.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<TragedyCalculator>();
 builder.Services.AddScoped<ComedyCalculator>();
 builder.Services.AddScoped<HistoryCalculator>();
+
+builder.Services.AddScoped<IPlayTypeRepository, PlayTypeRepository>();
+
 
 
 var app = builder.Build();

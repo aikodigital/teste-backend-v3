@@ -11,7 +11,7 @@ namespace TheatricalPlayersRefactoringKata.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("DataSource=app.db;Cache=Shared");
+            options.UseSqlite("DataSource=app.db;Cache=Shared;Foreign Keys=False");
 
             if (Debugger.IsAttached)
                 options.LogTo(Console.WriteLine, LogLevel.Information);
