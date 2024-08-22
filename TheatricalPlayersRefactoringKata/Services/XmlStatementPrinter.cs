@@ -22,7 +22,8 @@ namespace TheatricalPlayersRefactoringKata.Services
                 IndentChars = "  ",
                 NewLineChars = "\r\n",
                 NewLineHandling = NewLineHandling.Replace,
-                Encoding = Encoding.UTF8
+                Encoding = Encoding.UTF8,
+                OmitXmlDeclaration = false
             };
 
             var stringBuilder = new StringBuilder();
@@ -30,7 +31,11 @@ namespace TheatricalPlayersRefactoringKata.Services
             using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlSettings))
             {
                 xmlWriter.WriteStartDocument();
+
                 xmlWriter.WriteStartElement("Statement");
+
+                xmlWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
+                xmlWriter.WriteAttributeString("xmlns", "xsd", null, "http://www.w3.org/2001/XMLSchema");
 
                 xmlWriter.WriteElementString("Customer", invoice.Customer);
 
@@ -48,7 +53,7 @@ namespace TheatricalPlayersRefactoringKata.Services
                     int thisCredits = category.CalculateCredits(performance.Audience);
 
                     xmlWriter.WriteStartElement("Item");
-                    xmlWriter.WriteElementString("AmountOwed", thisAmount.ToString("0.##"));
+                    xmlWriter.WriteElementString("AmountOwed", thisAmount.ToString("0.##").Replace(',', '.'));
                     xmlWriter.WriteElementString("EarnedCredits", thisCredits.ToString());
                     xmlWriter.WriteElementString("Seats", performance.Audience.ToString());
                     xmlWriter.WriteEndElement();
@@ -59,7 +64,7 @@ namespace TheatricalPlayersRefactoringKata.Services
 
                 xmlWriter.WriteEndElement();
 
-                xmlWriter.WriteElementString("AmountOwed", totalAmount.ToString("0.##"));
+                xmlWriter.WriteElementString("AmountOwed", totalAmount.ToString("0.##").Replace(',', '.'));
                 xmlWriter.WriteElementString("EarnedCredits", totalCredits.ToString());
 
                 xmlWriter.WriteEndElement();

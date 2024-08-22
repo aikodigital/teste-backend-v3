@@ -1,75 +1,52 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+using ApprovalTests;
+using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
+using Xunit;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Tests
 {
-    public class XmlStatementPrinter
+    public class XmlStatementPrinterTests
     {
-        private readonly Dictionary<string, IPlayCategory> _playCategories;
-
-        public XmlStatementPrinter(Dictionary<string, IPlayCategory> playCategories)
+        [Fact]
+        [UseReporter(typeof(DiffReporter))]
+        public void TestXmlStatementExample()
         {
-            _playCategories = playCategories;
-        }
-
-        public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
-        {
-            var xmlSettings = new XmlWriterSettings
+            var playCategories = new Dictionary<string, IPlayCategory>
             {
-                Indent = true,
-                IndentChars = "  ",
-                NewLineChars = "\r\n",
-                NewLineHandling = NewLineHandling.Replace,
-                Encoding = System.Text.Encoding.UTF8
+                { "tragedy", new TragedyCategory() },
+                { "comedy", new ComedyCategory() },
+                { "history", new HistoricalCategory() }
             };
 
-            var stringBuilder = new StringBuilder();
-
-            using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlSettings))
+            var plays = new Dictionary<string, Play>
             {
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("Statement");
+                { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+                { "as-like", new Play("As You Like It", 2670, "comedy") },
+                { "othello", new Play("Othello", 3560, "tragedy") },
+                { "henry-v", new Play("Henry V", 3227, "history") },
+                { "john", new Play("King John", 2648, "history") },
+                { "richard-iii", new Play("Richard III", 3718, "history") }
+            };
 
-                xmlWriter.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                xmlWriter.WriteAttributeString("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
-
-                xmlWriter.WriteElementString("Customer", invoice.Customer);
-
-                xmlWriter.WriteStartElement("Items");
-
-                decimal totalAmount = 0;
-                int totalCredits = 0;
-
-                foreach (var performance in invoice.Performances)
+            var invoice = new Invoice(
+                "BigCo",
+                new List<Performance>
                 {
-                    var play = plays[performance.PlayId];
-                    var category = _playCategories[play.Category];
-
-                    decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
-                    int thisCredits = category.CalculateCredits(performance.Audience);
-
-                    xmlWriter.WriteStartElement("Item");
-                    xmlWriter.WriteElementString("AmountOwed", thisAmount.ToString("0.##").Replace(',', '.'));
-                    xmlWriter.WriteElementString("EarnedCredits", thisCredits.ToString());
-                    xmlWriter.WriteElementString("Seats", performance.Audience.ToString());
-                    xmlWriter.WriteEndElement();
-
-                    totalAmount += thisAmount;
-                    totalCredits += thisCredits;
+                    new Performance("hamlet", 55),
+                    new Performance("as-like", 35),
+                    new Performance("othello", 40),
+                    new Performance("henry-v", 20),
+                    new Performance("john", 39),
+                    new Performance("henry-v", 20),
                 }
+            );
 
-                xmlWriter.WriteEndElement();
+            var xmlStatementPrinter = new XmlStatementPrinter(playCategories);
+            var result = xmlStatementPrinter.PrintXml(invoice, plays);
 
-                xmlWriter.WriteElementString("AmountOwed", totalAmount.ToString("0.##").Replace(',', '.'));
-                xmlWriter.WriteElementString("EarnedCredits", totalCredits.ToString());
-
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteEndDocument();
-            }
-
-            return stringBuilder.ToString();
+            Approvals.Verify(result);
         }
     }
 }
