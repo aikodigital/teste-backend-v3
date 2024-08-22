@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Domain.Enum;
 
 namespace TheatricalPlayersRefactoringKata.Application.Genres;
 
-public class Tragedy : Play
+public class Tragedy : Domain.Entity.Play
 {
     public Tragedy(string name, int lines)
         : base(name, lines)

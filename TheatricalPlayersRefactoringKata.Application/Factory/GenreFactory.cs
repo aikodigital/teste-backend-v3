@@ -5,7 +5,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Factory;
 
 public static class GenreFactory
 {
-    public static Play CreatePlay(string name, int lines, EnumGenres type)
+    public static Domain.Entity.Play CreatePlay(string name, int lines, EnumGenres type)
     {
         switch (type)
         {

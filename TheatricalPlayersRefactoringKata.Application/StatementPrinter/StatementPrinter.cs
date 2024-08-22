@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Application.StatementPrinter;
 
 public class StatementPrinter : IStatementPrinter
 {
-    public string TextPrint(Invoice invoice, Dictionary<string, Play> plays)
+    public string TextPrint(Invoice invoice, Dictionary<string, Domain.Entity.Play> plays)
     {
         decimal totalAmount = 0;
         decimal volumeCredits = 0;
@@ -37,7 +37,7 @@ public class StatementPrinter : IStatementPrinter
         return result;
     }
 
-    public string XmlPrint(Invoice invoice, Dictionary<string, Play> plays)
+    public string XmlPrint(Invoice invoice, Dictionary<string, Domain.Entity.Play> plays)
     {
         var root = new XElement("Statement",
             new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),

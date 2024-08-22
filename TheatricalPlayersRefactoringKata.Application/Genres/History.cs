@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Domain.Enum;
 
 namespace TheatricalPlayersRefactoringKata.Application.Genres;
 
-public class History : Play
+public class History : Domain.Entity.Play
 {
     private readonly Tragedy _tragedy;
     private readonly Comedy _comedy;
