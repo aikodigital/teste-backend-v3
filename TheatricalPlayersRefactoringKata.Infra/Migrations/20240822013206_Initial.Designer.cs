@@ -9,7 +9,7 @@ using TheatricalPlayersRefactoringKata.Infra.Context;
 
 namespace TheatricalPlayersRefactoringKata.Infra.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20240822013206_Initial")]
     partial class Initial
     {

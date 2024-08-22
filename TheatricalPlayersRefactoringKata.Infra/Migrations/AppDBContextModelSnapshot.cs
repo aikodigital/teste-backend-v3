@@ -8,7 +8,7 @@ using TheatricalPlayersRefactoringKata.Infra.Context;
 
 namespace TheatricalPlayersRefactoringKata.Infra.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class AppDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

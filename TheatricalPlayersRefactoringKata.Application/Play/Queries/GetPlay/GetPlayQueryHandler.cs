@@ -14,7 +14,7 @@ public class GetPlayQueryHandler
 
     public PlayDTO Handle(GetPlayQuery playQuery)
     {
-        var play = _playRepository.GetPlayById(playQuery.Id);
+        var play = _playRepository.GetPlay(playQuery.Name);
 
         return new PlayDTO(play.Name, play.Lines, play.Type);
     }

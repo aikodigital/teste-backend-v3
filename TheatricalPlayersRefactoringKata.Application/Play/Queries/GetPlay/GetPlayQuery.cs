@@ -2,10 +2,10 @@ namespace TheatricalPlayersRefactoringKata.Application.Play.Queries.GetPlay;
 
 public class GetPlayQuery
 {
-    public Guid Id { get; private set; }
+    public string Name { get; private set; }
 
-    public GetPlayQuery(Guid id)
+    public GetPlayQuery(string name)
     {
-        Id = id;
+        Name = name;
     }
 }

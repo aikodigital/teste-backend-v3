@@ -4,19 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TheatricalPlayersRefactoringKata.Infra.Context;
 
-public class AppDBContext : DbContext
+public class AppDbContext : DbContext
 {
-    private DbSet<Play> Play { get; set; }
+    public DbSet<Play> Plays { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Data Source=TheatricalPlayersRefactoringKata.Infra.db");
-        base.OnConfiguring(optionsBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Play>().HasNoKey()
+        modelBuilder.Entity<Play>()
+            .HasNoKey();
+        
+        modelBuilder.Entity<Play>()
             .HasDiscriminator<string>("PlayType")
             .HasValue<Tragedy>("Tragedy")
             .HasValue<Comedy>("Comedy")
@@ -24,5 +27,4 @@ public class AppDBContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
-
 }
