@@ -12,7 +12,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Utils {
             int lines = play.Lines;
             lines = lines < 1000 ? 1000 : lines > 4000 ? 4000 : lines;
 
-            double thisAmount = lines / 10; // revisar se é divisão ou multiplicação
+            double thisAmount = lines * 10;
 
             return thisAmount;
         }

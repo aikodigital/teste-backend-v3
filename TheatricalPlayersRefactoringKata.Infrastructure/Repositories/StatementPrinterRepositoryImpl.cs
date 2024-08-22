@@ -11,14 +11,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
         // adicionar context do banco de dados para persistência dos dados no banco
 
         private readonly Dictionary<Enum, IGenreStrategy> _genres;
-        private readonly CultureInfo _cultureInfo;
 
-        public StatementPrinterRepositoryImpl(Dictionary<Enum, IGenreStrategy> genres, CultureInfo cultureInfo) {
-            _genres = genres ?? [];
-            _cultureInfo = cultureInfo ?? CultureInfo.InvariantCulture;
+
+        public StatementPrinterRepositoryImpl(Dictionary<Enum, IGenreStrategy> genres) {
+            _genres = genres ?? new Dictionary<Enum, IGenreStrategy>();
         }
 
         public Result<string> Print(Invoice invoice, Dictionary<string, Play> plays) {
+            CultureInfo cultureInfo = new("en-US");
 
             if (invoice == null) {
                 return Result<string>.Failure(Error.Validation("Invoice data is null", ErrorType.Validation.ToString()));
@@ -34,6 +34,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
 
             foreach (var perf in invoice.Performances) {
                 Play play = plays[perf.PlayId];
+                double thisAmount = PlayCalculationUtils.CalculatePlayLines(perf, play);
 
                 if (!plays.TryGetValue(perf.PlayId, out play!)) {
                     Result<string>.Failure(Error.NotFound($"Play with ID {perf.PlayId} not found.", ErrorType.NotFound.ToString()));
@@ -43,16 +44,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
                     Result<string>.Failure(Error.NotFound($"Genre strategy for {play.Type} not found.", ErrorType.NotFound.ToString()));
                 }
 
-                double thisAmount = PlayCalculationUtils.CalculatePlayLines(perf, play);
-
                 thisAmount = genre!.CalculatePlayAmount(perf, thisAmount);
                 volumeCredits += genre.CalculatePlayCredits(perf);
 
                 // print line for this order
-                result += string.Format(_cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+                result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
                 totalAmount += thisAmount;
             }
-            result += string.Format(_cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
+            result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
             result += string.Format("You earned {0} credits\n", volumeCredits);
             return Result<string>.Success(result);
             ;

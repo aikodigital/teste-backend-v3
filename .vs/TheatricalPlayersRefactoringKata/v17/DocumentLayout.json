@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Projects\\.NET\\teste-backend-v3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.testxmlstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.testxmlstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\core\\services\\statementprinterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\core\\services\\statementprinterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.testtextstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.testtextstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.teststatementexamplelegacy.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.teststatementexamplelegacy.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StatementPrinterTests.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T03:09:24.974Z",
+              "DocumentIndex": 2,
+              "Title": "StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-08-22T03:51:46.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "StatementPrinterService.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Services\\StatementPrinterService.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Core\\Services\\StatementPrinterService.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Services\\StatementPrinterService.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Core\\Services\\StatementPrinterService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAmAAAAAAAAAA==",
+              "Title": "StatementPrinterTests.TestTextStatementExample.approved.txt",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-08-22T03:51:45.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StatementPrinterTests.TestXmlStatementExample.approved.txt",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-08-22T03:51:43.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StatementPrinterTests.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwCsAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T03:09:28.073Z"
+              "WhenOpened": "2024-08-22T03:49:27.636Z",
+              "EditorCaption": ""
             }
           ]
         }
