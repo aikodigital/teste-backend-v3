@@ -19,6 +19,7 @@ namespace TheatricalPlayersRefactoringKata.Models
         {
             builder.Entity<StatementLog>().HasKey(e => e.Id);
             builder.Entity<StatementLog>().HasIndex(e => new { e.DtInclusao, e.PlayId, e.Costumer }).IsUnique();
+            builder.Entity<StatementLog>().Property(e => e.Costumer).IsRequired();
 
             builder.Entity<StatementLog>()
                    .HasOne<Play>()
