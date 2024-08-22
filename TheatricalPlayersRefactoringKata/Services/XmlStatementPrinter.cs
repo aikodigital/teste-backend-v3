@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Services
 {
     public class XmlStatementPrinter
     {
@@ -21,7 +22,7 @@ namespace TheatricalPlayersRefactoringKata
                 IndentChars = "  ",
                 NewLineChars = "\r\n",
                 NewLineHandling = NewLineHandling.Replace,
-                Encoding = System.Text.Encoding.UTF8
+                Encoding = Encoding.UTF8
             };
 
             var stringBuilder = new StringBuilder();

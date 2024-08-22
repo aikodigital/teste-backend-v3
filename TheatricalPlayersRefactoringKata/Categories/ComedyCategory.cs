@@ -1,5 +1,5 @@
 ﻿using System;
-namespace TheatricalPlayersRefactoringKata;
+
 
 public class ComedyCategory : IPlayCategory
 {
@@ -19,7 +19,7 @@ public class ComedyCategory : IPlayCategory
 
     public int CalculateCredits(int audience)
     {
-        int baseCredits = (audience > 30) ? (audience - 30) : 0;
+        int baseCredits = audience > 30 ? audience - 30 : 0;
         int bonusCredits = audience / 5;
 
         return baseCredits + bonusCredits;

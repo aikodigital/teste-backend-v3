@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using TheatricalPlayersRefactoringKata;
+using TheatricalPlayersRefactoringKata.Models;
 
 public class StatementPrinter
 {

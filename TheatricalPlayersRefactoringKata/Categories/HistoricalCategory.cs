@@ -1,5 +1,4 @@
 ﻿using System;
-namespace TheatricalPlayersRefactoringKata;
 
 public class HistoricalCategory : IPlayCategory
 {
