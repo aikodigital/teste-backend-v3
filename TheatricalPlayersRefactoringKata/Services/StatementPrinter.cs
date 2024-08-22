@@ -1,43 +1,57 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Globalization;
 using System.Text;
-using TheatricalPlayersRefactoringKata.Models;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Data;
 
-public class StatementPrinter
+namespace TheatricalPlayersRefactoringKata.Services
 {
-    private readonly Dictionary<string, IPlayCategory> _playCategories;
-
-    public StatementPrinter(Dictionary<string, IPlayCategory> playCategories)
+    public class StatementPrinter
     {
-        _playCategories = playCategories;
-    }
+        private readonly ApplicationDbContext _context;
+        private readonly Dictionary<string, IPlayCategory> _playCategories;
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
-    {
-        var result = new StringBuilder();
-        result.AppendLine($"Statement for {invoice.Customer}");
-
-        decimal totalAmount = 0;
-        int totalCredits = 0;
-
-        var culture = new CultureInfo("en-US");
-
-        foreach (var performance in invoice.Performances)
+        public StatementPrinter(ApplicationDbContext context, Dictionary<string, IPlayCategory> playCategories)
         {
-            var play = plays[performance.PlayId];
-            var category = _playCategories[play.Category];
-            decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
-            int thisCredits = category.CalculateCredits(performance.Audience);
-
-            result.AppendLine($"  {play.Title}: {thisAmount.ToString("C2", culture)} ({performance.Audience} seats)");
-
-            totalAmount += thisAmount;
-            totalCredits += thisCredits;
+            _context = context;
+            _playCategories = playCategories;
         }
 
-        result.AppendLine($"Amount owed is {totalAmount.ToString("C2", culture)}");
-        result.AppendLine($"You earned {totalCredits} credits");
+        public async Task<string> PrintStatementAsync(int invoiceId, CultureInfo culture)
+        {
+            var invoice = await _context.Invoices
+                .Include(i => i.Performances)
+                .ThenInclude(p => p.Play)
+                .FirstOrDefaultAsync(i => i.Id == invoiceId);
 
-        return result.ToString();
+            if (invoice == null)
+                throw new ArgumentException("Invoice not found");
+
+            var result = new StringBuilder();
+            result.AppendLine($"Statement for {invoice.CustomerName}");
+
+            decimal totalAmount = 0;
+            int totalCredits = 0;
+
+            foreach (var performance in invoice.Performances)
+            {
+                var play = performance.Play;
+                var category = _playCategories[play.Category];
+                decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
+                int thisCredits = category.CalculateCredits(performance.Audience);
+
+                totalAmount += thisAmount;
+                totalCredits += thisCredits;
+
+                result.AppendLine($"  {play.Title}: {thisAmount.ToString("C2", culture)} ({performance.Audience} seats)");
+            }
+
+            result.AppendLine($"Amount owed is {totalAmount.ToString("C2", culture)}");
+            result.AppendLine($"You earned {totalCredits} credits");
+
+            return result.ToString();
+        }
     }
 }

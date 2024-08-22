@@ -1,15 +1,14 @@
-namespace TheatricalPlayersRefactoringKata.Models;
+using System.Collections.Generic;
 
-public class Play
+namespace TheatricalPlayersRefactoringKata.Data
 {
-    public string Title { get; }
-    public int Lines { get; }
-    public string Category { get; }
-
-    public Play(string title, int lines, string category)
+    public class Play
     {
-        Title = title;
-        Lines = lines;
-        Category = category;
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Category { get; set; }
+        public int Lines { get; set; }
+
+        public List<Performance> Performances { get; set; } = new List<Performance>();
     }
 }

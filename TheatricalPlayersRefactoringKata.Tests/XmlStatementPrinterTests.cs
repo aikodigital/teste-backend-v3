@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Data;
+
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -35,7 +36,7 @@ namespace TheatricalPlayersRefactoringKata
                 xmlWriter.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
                 xmlWriter.WriteAttributeString("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
 
-                xmlWriter.WriteElementString("Customer", invoice.Customer);
+                xmlWriter.WriteElementString("Customer", invoice.CustomerName);
 
                 xmlWriter.WriteStartElement("Items");
 
@@ -44,7 +45,7 @@ namespace TheatricalPlayersRefactoringKata
 
                 foreach (var performance in invoice.Performances)
                 {
-                    var play = plays[performance.PlayId];
+                    var play = performance.Play;
                     var category = _playCategories[play.Category];
 
                     decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
