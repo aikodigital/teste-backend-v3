@@ -1,28 +1,17 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using Microsoft.EntityFrameworkCore;
-using TheatricalPlayersRefactoringKata.Data;
-using TheatricalPlayersRefactoringKata.Services;
+using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
     public class StatementPrinterTests
     {
-        private readonly ApplicationDbContext _context;
-        private readonly StatementPrinter _statementPrinter;
-
-        public StatementPrinterTests()
+        [Fact]
+        [UseReporter(typeof(DiffReporter))]
+        public void TestStatementExampleLegacy()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
-                .Options;
-
-            _context = new ApplicationDbContext(options);
-
             var playCategories = new Dictionary<string, IPlayCategory>
             {
                 { "tragedy", new TragedyCategory() },
@@ -30,66 +19,65 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 { "history", new HistoricalCategory() }
             };
 
-            _statementPrinter = new StatementPrinter(_context, playCategories);
-
-            SeedDatabase();
-        }
-
-        private void SeedDatabase()
-        {
-            var plays = new List<Play>
+            var plays = new Dictionary<string, Play>
             {
-                new Play { Title = "Hamlet", Category = "tragedy", Lines = 4024 },
-                new Play { Title = "As You Like It", Category = "comedy", Lines = 2670 },
-                new Play { Title = "Othello", Category = "tragedy", Lines = 3560 },
-                new Play { Title = "Henry V", Category = "history", Lines = 3227 },
-                new Play { Title = "King John", Category = "history", Lines = 2648 },
-                new Play { Title = "Richard III", Category = "history", Lines = 3718 }
+                { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+                { "as-like", new Play("As You Like It", 2670, "comedy") },
+                { "othello", new Play("Othello", 3560, "tragedy") }
             };
 
-            var invoice = new Invoice
-            {
-                CustomerName = "BigCo",
-                Performances = new List<Performance>
+            var invoice = new Invoice(
+                "BigCo",
+                new List<Performance>
                 {
-                    new Performance { Play = plays[0], Audience = 55 },
-                    new Performance { Play = plays[1], Audience = 35 },
-                    new Performance { Play = plays[2], Audience = 40 },
-                    new Performance { Play = plays[3], Audience = 20 },
-                    new Performance { Play = plays[4], Audience = 39 },
-                    new Performance { Play = plays[5], Audience = 20 }
+                    new Performance("hamlet", 55),
+                    new Performance("as-like", 35),
+                    new Performance("othello", 40)
                 }
-            };
+            );
 
-            _context.Plays.AddRange(plays);
-            _context.Invoices.Add(invoice);
-            _context.SaveChanges();
-        }
-
-        [Fact]
-        [UseReporter(typeof(DiffReporter))]
-        public async Task TestStatementExampleLegacy()
-        {
-            var invoice = await _context.Invoices
-                .Include(i => i.Performances)
-                .ThenInclude(p => p.Play)
-                .FirstOrDefaultAsync(i => i.CustomerName == "BigCo");
-
-            var result = await _statementPrinter.PrintStatementAsync(invoice.Id, CultureInfo.InvariantCulture);
+            var statementPrinter = new StatementPrinter(playCategories);
+            var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }
 
         [Fact]
         [UseReporter(typeof(DiffReporter))]
-        public async Task TestTextStatementExample()
+        public void TestTextStatementExample()
         {
-            var invoice = await _context.Invoices
-                .Include(i => i.Performances)
-                .ThenInclude(p => p.Play)
-                .FirstOrDefaultAsync(i => i.CustomerName == "BigCo");
+            var playCategories = new Dictionary<string, IPlayCategory>
+            {
+                { "tragedy", new TragedyCategory() },
+                { "comedy", new ComedyCategory() },
+                { "history", new HistoricalCategory() }
+            };
 
-            var result = await _statementPrinter.PrintStatementAsync(invoice.Id, CultureInfo.InvariantCulture);
+            var plays = new Dictionary<string, Play>
+            {
+                { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+                { "as-like", new Play("As You Like It", 2670, "comedy") },
+                { "othello", new Play("Othello", 3560, "tragedy") },
+                { "henry-v", new Play("Henry V", 3227, "history") },
+                { "john", new Play("King John", 2648, "history") },
+                { "richard-iii", new Play("Richard III", 3718, "history") }
+            };
+
+            var invoice = new Invoice(
+                "BigCo",
+                new List<Performance>
+                {
+                    new Performance("hamlet", 55),
+                    new Performance("as-like", 35),
+                    new Performance("othello", 40),
+                    new Performance("henry-v", 20),
+                    new Performance("john", 39),
+                    new Performance("henry-v", 20) 
+                }
+            );
+
+            var statementPrinter = new StatementPrinter(playCategories);
+            var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }

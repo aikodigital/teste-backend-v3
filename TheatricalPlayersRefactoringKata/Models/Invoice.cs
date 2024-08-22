@@ -1,11 +1,19 @@
 using System.Collections.Generic;
 
-namespace TheatricalPlayersRefactoringKata.Data
+namespace TheatricalPlayersRefactoringKata.Models;
+
+public class Invoice
 {
-    public class Invoice
+    private string _customer;
+    private List<Performance> _performances;
+
+    public string Customer { get => _customer; set => _customer = value; }
+    public List<Performance> Performances { get => _performances; set => _performances = value; }
+
+    public Invoice(string customer, List<Performance> performance)
     {
-        public int Id { get; set; }
-        public string CustomerName { get; set; }
-        public List<Performance> Performances { get; set; } = new List<Performance>();
+        _customer = customer;
+        _performances = performance;
     }
+
 }

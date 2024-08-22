@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Data
 {
@@ -12,18 +13,5 @@ namespace TheatricalPlayersRefactoringKata.Data
         public DbSet<Play> Plays { get; set; }
         public DbSet<Performance> Performances { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Invoice>()
-                        .HasMany(i => i.Performances)
-                        .WithOne(p => p.Invoice)
-                        .HasForeignKey(p => p.InvoiceId);
-
-            modelBuilder.Entity<Play>()
-                        .HasMany(p => p.Performances)
-                        .WithOne(pf => pf.Play)
-                        .HasForeignKey(pf => pf.PlayId);
-        }
     }
 }
