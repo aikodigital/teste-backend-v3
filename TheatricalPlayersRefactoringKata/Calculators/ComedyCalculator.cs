@@ -1,9 +1,9 @@
 ﻿using System;
 using TheatricalPlayersRefactoringKata.Core;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Calculators
 {
-    // Classe que faz o cálculo para peças de comédia
     public class ComedyCalculator : ICalculator
     {
         public int CalculateAmount(Performance performance, Play play)

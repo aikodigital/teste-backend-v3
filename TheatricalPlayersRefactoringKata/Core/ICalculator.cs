@@ -1,4 +1,5 @@
 ﻿using System;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Core
 {

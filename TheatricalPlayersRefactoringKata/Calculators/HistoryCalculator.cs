@@ -1,5 +1,6 @@
 ﻿using System;
 using TheatricalPlayersRefactoringKata.Core;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -7,17 +8,12 @@ namespace TheatricalPlayersRefactoringKata
     {
         public int CalculateAmount(Performance performance, Play play)
         {
-            int thisAmount = play.Lines * 10;
-            if (performance.Audience > 30)
-            {
-                thisAmount += 500 * (performance.Audience - 30);
-            }
-            return thisAmount;
+            return play.Lines * 15;
         }
 
         public int CalculateCredits(Performance performance)
         {
-            return Math.Max(performance.Audience - 30, 0);
+            return Math.Max(performance.Audience - 20, 0);
         }
     }
 }

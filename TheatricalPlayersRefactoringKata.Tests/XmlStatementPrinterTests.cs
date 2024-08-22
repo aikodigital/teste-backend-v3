@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
@@ -10,7 +11,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
     {
         [Fact]
         [UseReporter(typeof(DiffReporter))]
-        public void TestXmlStatementExample()
+        public void TestXmlStatementGeneration()
         {
             var plays = new Dictionary<string, Play>
             {
@@ -35,8 +36,8 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            var statementPrinter = new StatementPrinter();
-            var result = statementPrinter.Print(invoice, plays, "xml");
+            var statementPrinter = new XmlStatementPrinter();
+            var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }

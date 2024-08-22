@@ -1,5 +1,7 @@
 ﻿using System;
+using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Calculators;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Core
 {

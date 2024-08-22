@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Core;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata
 {

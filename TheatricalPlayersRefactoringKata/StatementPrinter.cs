@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using TheatricalPlayersRefactoringKata.Core;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -26,10 +27,8 @@ namespace TheatricalPlayersRefactoringKata
                 var calculator = CalculatorFactory.CreateCalculator(play);
                 var thisAmount = calculator.CalculateAmount(perf, play);
 
-                // Adicionando créditos
                 volumeCredits += calculator.CalculateCredits(perf);
 
-                // Imprimindo linha da performance
                 result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount / 100.0, perf.Audience);
                 totalAmount += thisAmount;
             }
