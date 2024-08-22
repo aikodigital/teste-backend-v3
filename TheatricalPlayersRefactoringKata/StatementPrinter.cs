@@ -6,8 +6,6 @@ using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
 using System.IO;
 using System.Text;
-using System.Xml;
-using System.Text.Unicode;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -69,68 +67,100 @@ public class StatementPrinter
         return result;
     }
 
-    public double AmountBaseTragedy(int lines) =>  lines / (double)10;    
-    public double AmountBaseComedy(int lines, int audiance) => ((lines / (double)10) + (3 * audiance));    
-    public int AdditionalAmountTragedyOver30(int audiance) => 10 * (audiance - 30);
-    public int AdditionalAmountComedyOver20(int audiance) => (100 + (5 * (audiance - 20)));
-    public int AddCredits(int audiance) => (1 * (audiance - 30));
-    public int AddBonusCredit(int audiance)
+    public double AmountBaseTragedy(int lines) => lines > 0 ? lines / (double)10 : throw new Exception("Lines must be greater than 0");
+    public double AmountBaseComedy(int lines, int audience) => lines > 0 && audience >= 0 ? ((lines / (double)10) + (3 * audience)) : throw new Exception("Lines must be greater than 0 and Audience must be equal or greater than 0");
+    public int AdditionalAmountTragedyOver30(int audience) => audience > 30 ? (10 * (audience - 30)) : throw new Exception("Audience must be greater than 30 to this method");
+    public int AdditionalAmountComedyOver20(int audience) => audience > 20 ? (100 + (5 * (audience - 20))) : throw new Exception("Audience must be greater than 20 to this method");
+    public int AddCredits(int audience) => audience > 30 ? (1 * (audience - 30)) : throw new Exception("Audience must be greater than 30 to this method");
+    public int AddBonusCredit(int audience)
     {
-        var calc = MathF.Floor(audiance / 5);
-        var amount = (int)calc;
-        return amount;
-    }
-    public double ComedyCalc(double amount, int lines, int audiance, Invoice invoice)
-    {
-        amount = AmountBaseComedy(lines, audiance);
-
-        invoice.Customer.Credits += AddBonusCredit(audiance);
-        invoice.Customer.PartialCredits += AddBonusCredit(audiance);
-
-        if (audiance > 20)
-            amount += AdditionalAmountComedyOver20(audiance);
-
-        if (audiance > 30)
+        if (audience >= 0)
         {
-            invoice.Customer.Credits += AddCredits(audiance);
-            invoice.Customer.PartialCredits += AddCredits(audiance);
-        }            
-
-        return amount;
-    }
-    public double TragedyCalc(double amount, int lines, int audiance, Invoice invoice)
-    {
-        amount = AmountBaseTragedy(lines);
-
-        if (audiance > 30)
+            var calc = MathF.Floor(audience / 5);
+            var amount = (int)calc;
+            return amount;
+        }
+        else
         {
-            amount += AdditionalAmountTragedyOver30(audiance);
-            invoice.Customer.Credits += AddCredits(audiance);
-            invoice.Customer.PartialCredits += AddCredits(audiance);
+            throw new Exception("Audience must be equal or greater than 0");
         }
 
-        return amount;
     }
-    public double HistoryCalc(double amount, int lines, int audiance, Invoice invoice)
+    public double ComedyCalc(double amount, int lines, int audience, Invoice invoice)
     {
-        amount = AmountBaseTragedy(lines);
-
-        if (audiance > 30)
-            amount += AdditionalAmountTragedyOver30(audiance);
-            
-
-        amount += AmountBaseComedy(lines, audiance);
-
-        if (audiance > 20)
-            amount += AdditionalAmountComedyOver20(audiance);
-
-        if (audiance > 30)
+        if (lines > 0 && audience >= 0 && invoice is not null)
         {
-            invoice.Customer.Credits += AddCredits(audiance);
-            invoice.Customer.PartialCredits += AddCredits(audiance);
-        }            
+            amount = AmountBaseComedy(lines, audience);
 
-        return amount;
+            invoice.Customer.Credits += AddBonusCredit(audience);
+            invoice.Customer.PartialCredits += AddBonusCredit(audience);
+
+            if (audience > 20)
+                amount += AdditionalAmountComedyOver20(audience);
+
+            if (audience > 30)
+            {
+                invoice.Customer.Credits += AddCredits(audience);
+                invoice.Customer.PartialCredits += AddCredits(audience);
+            }
+
+            return amount;
+        }
+        else
+        {
+            throw new Exception("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method");
+        }
+
+    }
+    public double TragedyCalc(double amount, int lines, int audience, Invoice invoice)
+    {
+        if (lines > 0 && audience >= 0 && invoice is not null)
+        {
+            amount = AmountBaseTragedy(lines);
+
+            if (audience > 30)
+            {
+                amount += AdditionalAmountTragedyOver30(audience);
+                invoice.Customer.Credits += AddCredits(audience);
+                invoice.Customer.PartialCredits += AddCredits(audience);
+            }
+
+            return amount;
+        }
+        else
+        {
+            throw new Exception("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method");
+        }
+
+    }
+    public double HistoryCalc(double amount, int lines, int audience, Invoice invoice)
+    {
+        if (lines > 0 && audience >= 0 && invoice is not null)
+        {
+            amount = AmountBaseTragedy(lines);
+
+            if (audience > 30)
+                amount += AdditionalAmountTragedyOver30(audience);
+
+
+            amount += AmountBaseComedy(lines, audience);
+
+            if (audience > 20)
+                amount += AdditionalAmountComedyOver20(audience);
+
+            if (audience > 30)
+            {
+                invoice.Customer.Credits += AddCredits(audience);
+                invoice.Customer.PartialCredits += AddCredits(audience);
+            }
+
+            return amount;
+        }
+        else
+        {
+            throw new Exception("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method");
+        }
+
     }
 
     public string Printer(Invoice invoice)

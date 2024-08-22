@@ -1,4 +1,6 @@
-﻿namespace TheatricalPlayersRefactoringKata.Models
+﻿using System;
+
+namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Customer
     {
@@ -11,11 +13,11 @@
 
         public double PartialCredits { get => _partialCredits; set => _partialCredits = value; }
 
-        public Customer(string name, double credits, double partialCredits)
+        public Customer(string name, double credits)
         {
-            _name = name;
-            _credits = credits;
-            _partialCredits = partialCredits;
+            _name = name.Length >= 3 ? name : throw new ArgumentException("Name should be greater than 3 characters");
+            _credits = credits >= 0 ? credits : throw new ArgumentException("Credits should be greater than 0");
+            _partialCredits = 0;
         }
     }
 }
