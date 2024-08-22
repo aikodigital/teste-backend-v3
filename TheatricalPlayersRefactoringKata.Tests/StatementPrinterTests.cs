@@ -20,6 +20,13 @@ public class StatementPrinterTests
             { "othello", new Play("Othello", 3560, "tragedy") }
         };
 
+        var playTypes = new[]
+        {
+            new PlayTypes {Name = "tragedy"},
+            new PlayTypes {Name = "comedy"},
+            new PlayTypes {Name = "history"}
+        };
+
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
@@ -30,8 +37,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintText(invoice, plays);
+        StatementPrinter statementPrinter = new StatementPrinter(plays, playTypes);
+        var result = statementPrinter.PrintText(invoice);
 
         Approvals.Verify(result);
     }
@@ -50,6 +57,13 @@ public class StatementPrinterTests
             { "richard-iii", new Play("Richard III", 3718, "history") }
         };
 
+        var playTypes = new[]
+        {
+            new PlayTypes {Name = "tragedy"},
+            new PlayTypes {Name = "comedy"},
+            new PlayTypes {Name = "history"}
+        };
+
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
@@ -63,8 +77,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintText(invoice, plays);
+        StatementPrinter statementPrinter = new StatementPrinter(plays, playTypes);
+        var result = statementPrinter.PrintText(invoice);
 
         Approvals.Verify(result);
     }
@@ -83,6 +97,13 @@ public class StatementPrinterTests
             { "richard-iii", new Play("Richard III", 3718, "history") }
         };
 
+        var playTypes = new[]
+        {
+            new PlayTypes {Name = "tragedy"},
+            new PlayTypes {Name = "comedy"},
+            new PlayTypes {Name = "history"}
+        };
+
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
@@ -96,8 +117,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXml(invoice, plays);
+        StatementPrinter statementPrinter = new StatementPrinter(plays, playTypes);
+        var result = statementPrinter.PrintXml(invoice);
 
         Approvals.Verify(result);
     }

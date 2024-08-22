@@ -30,10 +30,17 @@ namespace TheatricalPlayersRefactoringKata.Controllers
                 { "richard-iii", new Play("Richard III", 3718, "history") }
             };
 
+            var playTypes = new[]
+            {
+                new PlayTypes {Name = "tragedy"},
+                new PlayTypes {Name = "comedy"},
+                new PlayTypes {Name = "history"}
+            };
+
             try
             {
-                var statement = new StatementPrinter();
-                string txtStatement = statement.PrintText(invoice, plays);
+                var statement = new StatementPrinter(plays, playTypes);
+                string txtStatement = statement.PrintText(invoice);
 
                 string dirPath = Path.Combine(Environment.CurrentDirectory, "statements", "txt");
                 if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
@@ -61,11 +68,17 @@ namespace TheatricalPlayersRefactoringKata.Controllers
                 { "john", new Play("King John", 2648, "history") },
                 { "richard-iii", new Play("Richard III", 3718, "history") }
             };
+            var playTypes = new[]
+            {
+                new PlayTypes {Name = "tragedy"},
+                new PlayTypes {Name = "comedy"},
+                new PlayTypes {Name = "history"}
+            };
 
             try
             {
-                var statement = new StatementPrinter();
-                string xmlStatement = statement.PrintXml(invoice, plays);
+                var statement = new StatementPrinter(plays, playTypes);
+                string xmlStatement = statement.PrintXml(invoice);
 
                 string dirPath = Path.Combine(Environment.CurrentDirectory, "statements", "xml");
                 if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);

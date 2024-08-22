@@ -8,20 +8,35 @@ using System.Text;
 using System.Linq;
 using System.Xml.Linq;
 using System.IO;
+using System.Numerics;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
 public class StatementPrinter
 {
-    public static IPlayCalculator GetCalculatorByType(string playType) => playType.ToLower() switch
+    private readonly PlayTypes[] PlayTypes;
+    private readonly Dictionary<string, Play> Plays;
+    public StatementPrinter(Dictionary<string, Play> plays, PlayTypes[] playTypes) 
     {
-        "tragedy" => new TragedyCalculator(),
-        "comedy" => new ComedyCalculator(),
-        "history" => new HistoryCalculator(),
-        _ => throw new Exception("unknown type: " + playType),
-    };
+        Plays = plays;
+        PlayTypes = playTypes;
+    }
 
-    public string PrintText(Invoice invoice, Dictionary<string, Play> plays)
+    private IPlayCalculator GetCalculatorByType(string playType)
+    {
+        if (!PlayTypes.Any(p => p.Name.ToLower() == playType.ToLower()))
+            throw new ArgumentOutOfRangeException($"unknown type: {playType}");
+
+        switch (playType.ToLower())
+        {
+            case "tragedy": return new TragedyCalculator();
+            case "comedy": return new ComedyCalculator();
+            case "history": return new HistoryCalculator();
+            default: throw new NotImplementedException($"calculator not implemented for type: {playType}");
+        }
+    }
+
+    public string PrintText(Invoice invoice)
     {
         var billingStatement = new StringBuilder($"Statement for {invoice.Customer}\n");
         try
@@ -29,15 +44,14 @@ public class StatementPrinter
             decimal totalAmount = 0m;
             decimal volumeCredits = 0;
             CultureInfo cultureInfo = new CultureInfo("en-US");
-            IPlayCalculator playTypeCalculator;
 
             foreach (Performance perf in invoice.Performances)
             {
-                var play = plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId).Value;
+                var play = Plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId).Value;
 
                 if (play is null) throw new ArgumentOutOfRangeException($"{perf.PlayId} is not a valid Play.");
 
-                playTypeCalculator = GetCalculatorByType(play.Type);
+                var playTypeCalculator = GetCalculatorByType(play.Type);
                 decimal thisAmount = playTypeCalculator.CalculateAmount(play, perf.Audience);
                 volumeCredits += playTypeCalculator.CalculateCredits(play, perf.Audience);
 
@@ -51,7 +65,7 @@ public class StatementPrinter
         return billingStatement.ToString();
     }
 
-    public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
+    public string PrintXml(Invoice invoice)
     {
         try
         {
@@ -60,7 +74,7 @@ public class StatementPrinter
 
             XElement[] items = invoice.Performances.Select(perf =>
             {
-                Play? play = plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId.ToLower()).Value;
+                Play? play = Plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId.ToLower()).Value;
 
                 if (play is null) throw new ArgumentOutOfRangeException($"{perf.PlayId} is not a valid Play.");
 
@@ -88,7 +102,7 @@ public class StatementPrinter
                                  new XElement("EarnedCredits", volumeCredits)
                                         )
                             );
-            
+
             string xmlString = string.Empty;
             using (var stream = new MemoryStream())
             using (var writer = new StreamWriter(stream, Encoding.UTF8))
