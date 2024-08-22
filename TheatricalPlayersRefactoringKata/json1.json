@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=TheatricalPlayers;Username=postgres;Password=Tyranitar123@"
+  }
+}
+
