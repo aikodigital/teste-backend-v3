@@ -6,7 +6,7 @@ using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Core.Printers;
 
-public class XmlStatementPrinter: IStatementPrinter
+public abstract class XmlStatementPrinter: IStatementPrinter
 {
     public static string Print(Invoice invoice)
     {
@@ -18,7 +18,9 @@ public class XmlStatementPrinter: IStatementPrinter
         {
             doc.Save(streamWriter);
         }
-
+        
+        XmlSave(doc);
+        
         return Encoding.UTF8.GetString(memoryStream.ToArray());
     }
 
@@ -61,5 +63,18 @@ public class XmlStatementPrinter: IStatementPrinter
         doc.Add(statement);
 
         return Task.FromResult(doc);
+    }
+    
+    private static void XmlSave(XDocument doc)
+    {
+        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
+        var path = Path.Combine(root, "Archives");
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        
+        var fileName = Path.Combine(path, "statement.xml");
+        doc.Save(fileName);
     }
 }

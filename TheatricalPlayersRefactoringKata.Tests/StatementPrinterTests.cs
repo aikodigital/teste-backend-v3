@@ -1,5 +1,6 @@
 #region
 
+using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -7,6 +8,7 @@ using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Printers;
+using TheatricalPlayersRefactoringKata.Core.Services;
 using Xunit;
 
 #endregion
@@ -21,19 +23,16 @@ public class StatementPrinterTests
     {
         var plays = new Dictionary<string, Play>
         {
-            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
-            { "as-like", new Play("As You Like It", 2670, "comedy") },
-            { "othello", new Play("Othello", 3560, "tragedy") }
+            { "hamlet", new Play("Hamlet", 4024, Genre.Tragedy) },
+            { "as-like", new Play("As You Like It", 2670, Genre.Comedy) },
+            { "othello", new Play("Othello", 3560, Genre.Tragedy) }
         };
 
-        var invoice = new Invoice(
-            "BigCo",
-            [
-                new Performance(plays["hamlet"], 55),
-                new Performance(plays["as-like"], 35),
-                new Performance(plays["othello"], 40)
-            ]
-        );
+        var invoice = new Invoice([
+                new Performance(plays["hamlet"], 55, [], new Guid()),
+                new Performance(plays["as-like"], 35, [], new Guid()),
+                new Performance(plays["othello"], 40, [], new Guid())
+            ], "BigCo");
 
         var result = TextStatementPrinter.Print(invoice);
 
@@ -46,25 +45,22 @@ public class StatementPrinterTests
     {
         var plays = new Dictionary<string, Play>
         {
-            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
-            { "as-like", new Play("As You Like It", 2670, "comedy") },
-            { "othello", new Play("Othello", 3560, "tragedy") },
-            { "henry-v", new Play("Henry V", 3227, "history") },
-            { "john", new Play("King John", 2648, "history") },
-            { "richard-iii", new Play("Richard III", 3718, "history") }
+            { "hamlet", new Play("Hamlet", 4024, Genre.Tragedy) },
+            { "as-like", new Play("As You Like It", 2670, Genre.Comedy) },
+            { "othello", new Play("Othello", 3560, Genre.Tragedy) },
+            { "henry-v", new Play("Henry V", 3227, Genre.Historical) },
+            { "john", new Play("King John", 2648, Genre.Historical) },
+            { "richard-iii", new Play("Richard III", 3718, Genre.Historical) }
         };
 
-        var invoice = new Invoice(
-            "BigCo",
-            [
-                new Performance(plays["hamlet"], 55),
-                new Performance(plays["as-like"], 35),
-                new Performance(plays["othello"], 40),
-                new Performance(plays["henry-v"], 20),
-                new Performance(plays["john"], 39),
-                new Performance(plays["henry-v"], 20)
-            ]
-        );
+        var invoice = new Invoice([
+                new Performance(plays["hamlet"], 55, [], new Guid()),
+                new Performance(plays["as-like"], 35 , [], new Guid()),
+                new Performance(plays["othello"], 40, [], new Guid()),
+                new Performance(plays["henry-v"], 20 , [], new Guid()),
+                new Performance(plays["john"], 39, [], new Guid()),
+                new Performance(plays["henry-v"], 20, [], new Guid())
+            ], "BigCo");
 
         var result = TextStatementPrinter.Print(invoice);
 
@@ -77,25 +73,22 @@ public class StatementPrinterTests
     {
         var plays = new Dictionary<string, Play>
         {
-            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
-            { "as-like", new Play("As You Like It", 2670, "comedy") },
-            { "othello", new Play("Othello", 3560, "tragedy") },
-            { "henry-v", new Play("Henry V", 3227, "history") },
-            { "john", new Play("King John", 2648, "history") },
-            { "richard-iii", new Play("Richard III", 3718, "history") }
+            { "hamlet", new Play("Hamlet", 4024, Genre.Tragedy) },
+            { "as-like", new Play("As You Like It", 2670, Genre.Comedy) },
+            { "othello", new Play("Othello", 3560, Genre.Tragedy) },
+            { "henry-v", new Play("Henry V", 3227, Genre.Historical) },
+            { "john", new Play("King John", 2648, Genre.Historical) },
+            { "richard-iii", new Play("Richard III", 3718, Genre.Historical) }
         };
 
-        var invoice = new Invoice(
-            "BigCo",
-            [
-                new Performance(plays["hamlet"], 55),
-                new Performance(plays["as-like"], 35),
-                new Performance(plays["othello"], 40),
-                new Performance(plays["henry-v"], 20),
-                new Performance(plays["john"], 39),
-                new Performance(plays["henry-v"], 20)
-            ]
-        );
+        var invoice = new Invoice([
+                new Performance(plays["hamlet"], 55, [], new Guid()),
+                new Performance(plays["as-like"], 35 , [], new Guid()),
+                new Performance(plays["othello"], 40, [], new Guid()),
+                new Performance(plays["henry-v"], 20 , [], new Guid()),
+                new Performance(plays["john"], 39, [], new Guid()),
+                new Performance(plays["henry-v"], 20, [], new Guid())
+            ], "BigCo");
 
         var result = XmlStatementPrinter.Print(invoice);
 

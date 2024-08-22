@@ -4,7 +4,7 @@ using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Core.Printers;
 
-public class TextStatementPrinter: IStatementPrinter
+public abstract class TextStatementPrinter: IStatementPrinter
 {
     public static string Print(Invoice invoice)
     {
