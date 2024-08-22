@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
 
@@ -10,6 +9,7 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    #region ApprovalTests
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -30,7 +30,7 @@ public class StatementPrinterTests
         var invoice = new Invoice(custumer, performances);
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.PrinterTxt(invoice);
 
         Approvals.Verify(result);
     }
@@ -61,7 +61,7 @@ public class StatementPrinterTests
         var invoice = new Invoice(custumer, performances);
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice);
+        var result = statementPrinter.PrinterTxt(invoice);
 
         Approvals.Verify(result);
     }
@@ -93,174 +93,14 @@ public class StatementPrinterTests
 
         StatementPrinter statementPrinter = new StatementPrinter();
 
-        var result = statementPrinter.Printer(invoice);
+        var result = statementPrinter.PrinterXml(invoice);
 
         Approvals.Verify(result);
     }
 
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void CreatePlayNullArgumentToLinesThrowArgumentException()
-    {
-        // arrange
+    #endregion
 
-        string name = "bela e a fera";
-        int lines = -4;
-        var type = EPlayType.Tragedy;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Play(name, lines, type));
-
-        // assert
-
-        Assert.Equal("Lines should be greater than 0", exception.Message);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void CreatePlayNullArgumentToNameThrowArgumentException()
-    {
-        // arrange
-
-        string name = "it";
-        int lines = 1;
-        var type = EPlayType.Tragedy;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Play(name, lines, type));
-
-        // assert
-
-        Assert.Equal("Name should be greater than 3 characters", exception.Message);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void CreatePlayNullArgumentToTypeThrowArgumentException()
-    {
-        // arrange
-
-        string name = "itAcoisa";
-        int lines = 1;
-        var type = new EPlayType();
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Play(name, lines, type));
-
-        // assert
-
-        Assert.Equal("Type should be Tragedy, Comedy or History", exception.Message);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void CreateCustomerNullArgumentToNameThrowArgumentException()
-    {
-        // arrange
-
-        string name = "it";
-        double credits = 1;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Customer(name, credits));
-
-        // assert
-
-        Assert.Equal("Name should be greater than 3 characters", exception.Message);
-    }
-
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void CreateCustomerNullArgumentToCreditsThrowArgumentException()
-    {
-        // arrange
-
-        string name = "itAcoisa";
-        int credits = -1;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Customer(name, credits));
-
-        // assert
-
-        Assert.Equal("Credits should be greater than 0", exception.Message);
-    }
-
-    [Fact]
-    public void CreatePerformanceNullArgumentToPlayThrowArgumentException()
-    {
-        // arrange
-
-        int audience = 1;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Performance(null, audience));
-
-        // assert
-
-        Assert.Equal("Play cannot be null", exception.Message);
-    }
-
-    [Fact]
-    public void CreatePerformanceNullArgumentToAudienceThrowArgumentException()
-    {
-        // arrange
-        var play = new Play("It A Coisa", 14, EPlayType.Tragedy);
-        int audience = -1;
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Performance(play, audience));
-
-        // assert
-
-        Assert.Equal("Audiance should be greater than 0", exception.Message);
-    }
-
-    [Fact]
-    public void CreateInvoiceNullArgumentToCustomerThrowArgumentException()
-    {
-        // arrange
-        var Hamlet = new Play("Hamlet", 4024, Enums.EPlayType.Tragedy);
-        var AsYouLikeIt = new Play("As You Like It", 2670, Enums.EPlayType.Comedy);
-
-        var performances = new List<Performance>
-        {
-            new Performance(Hamlet, 55),
-            new Performance(AsYouLikeIt, 35)
-        };
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Invoice(null, performances));
-
-        // assert
-
-        Assert.Equal("Customer cannot be null", exception.Message);
-    }
-
-
-    [Fact]
-    public void CreateInvoiceNullArgumentToPerformanceThrowArgumentException()
-    {
-        // arrange
-        var customer = new Customer("Customer test", 0);
-
-        // act
-
-        var exception = Assert.Throws<ArgumentException>(() => new Invoice(customer, null));
-
-        // assert
-
-        Assert.Equal("Performance list cannot be null", exception.Message);
-    }
-
+    #region ExpectedResultsTests
     [Theory]
     [InlineData(2670, 35, 372)]
     public void CalcAmountBaseComedySomeInputsReturnExpectedResult(int lines, int audience, double expectedResult)
@@ -412,23 +252,90 @@ public class StatementPrinterTests
 
         Assert.Equal(expectedResult, resultTotal);
     }
+
+    #endregion
+
+    #region NullArgumentsTests
+    [Fact]
+    public void ComedyCalcNullArgumentThrowException()
+    {
+        // arrange
+
+        var customer = new Customer("test customer", 0);
+        var play = new Play("O Paió", 2670, Enums.EPlayType.Comedy);
+        var performance = new Performance(play, 35);
+        var performances = new List<Performance>();
+        performances.Add(performance);
+
+        var teste = new StatementPrinter();
+
+        // Act
+
+        var exception = Assert.Throws<Exception>(()=>teste.ComedyCalc(0, play.Lines, performance.Audience, null));
+
+        // Assert
+
+        Assert.Equal("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method", exception.Message);
+    }
+
+    [Fact]
+    public void TragedyCalcNullArgumentThrowException()
+    {
+        // arrange
+
+        var customer = new Customer("test customer", 0);
+        var play = new Play("O Paió", 2670, Enums.EPlayType.Tragedy);
+        var performance = new Performance(play, 35);
+        var performances = new List<Performance>();
+        performances.Add(performance);
+
+        var teste = new StatementPrinter();
+
+        // Act
+
+        var exception = Assert.Throws<Exception>(() => teste.TragedyCalc(0, play.Lines, performance.Audience, null));
+
+        // Assert
+
+        Assert.Equal("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method", exception.Message);
+    }
+
+    [Fact]
+    public void HistoryCalcNullArgumentThrowException()
+    {
+        // arrange
+
+        var customer = new Customer("test customer", 0);
+        var play = new Play("O Paió", 2670, Enums.EPlayType.History);
+        var performance = new Performance(play, 35);
+        var performances = new List<Performance>();
+        performances.Add(performance);
+
+        var teste = new StatementPrinter();
+
+        // Act
+
+        var exception = Assert.Throws<Exception>(() => teste.HistoryCalc(0, play.Lines, performance.Audience, null));
+
+        // Assert
+
+        Assert.Equal("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method", exception.Message);
+    }
+
+    [Fact]
+    public void StatementPrinterTxtNullArgumentThrowException()
+    {
+        var teste = new StatementPrinter();
+        var exception = Assert.Throws<Exception>(() => teste.PrinterTxt(null));
+        Assert.Equal("Invoice cannot be null", exception.Message);
+    }
+
+    [Fact]
+    public void StatementPrinterXmlNullArgumentThrowException()
+    {
+        var teste = new StatementPrinter();
+        var exception = Assert.Throws<Exception>(() => teste.PrinterXml(null));
+        Assert.Equal("Invoice cannot be null", exception.Message);
+    }
+    #endregion
 }
-
-//var custumer = new Customer("BigCo", 0);
-
-//var Hamlet = new Play("Hamlet", 4024, Enums.EPlayType.Tragedy);
-//var AsYouLikeIt = new Play("As You Like It", 2670, Enums.EPlayType.Comedy);
-//var Othello = new Play("Othello", 3560, Enums.EPlayType.Tragedy);
-//var HenryV = new Play("Henry V", 3227, Enums.EPlayType.History);
-//var KingJohn = new Play("King John", 2648, Enums.EPlayType.History);
-//var RichardIII = new Play("Richard III", 3718, Enums.EPlayType.History);
-
-//var performances = new List<Performance>
-//        {
-//            new Performance(Hamlet, 55),
-//            new Performance(AsYouLikeIt, 35),
-//            new Performance(Othello, 40),
-//            new Performance(HenryV, 20),
-//            new Performance(KingJohn, 39),
-//            new Performance(HenryV, 20)
-//        };

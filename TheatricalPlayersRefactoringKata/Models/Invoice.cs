@@ -5,15 +5,12 @@ namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Invoice
 {
-    private Customer _customer;
-    private List<Performance> _performances;
-
-    public Customer Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
+    public Customer Customer { get; set; }
+    public List<Performance> PerformanceList { get; set; }
 
     public Invoice(Customer customer, List<Performance> performances)
     {
-        _customer = customer is not null ? customer : throw new ArgumentException("Customer cannot be null");
-        _performances = performances is not null ? performances : throw new ArgumentException("Performance list cannot be null");
+        Customer = customer is not null ? customer : throw new ArgumentException("Customer cannot be null");
+        PerformanceList = performances is not null ? performances : throw new ArgumentException("Performance list cannot be null");
     }
 }

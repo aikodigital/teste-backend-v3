@@ -4,16 +4,15 @@ namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Performance
 {
-    private Play _play;
-    private int _audience;
-
-    public Play Play { get => _play; set => _play = value; }
-    public int Audience { get => _audience; set => _audience = value; }
+    public Guid Id { get; set; }
+    public int PlayId { get; set; }
+    public Play Play { get; set; }
+    public int Audience { get; set; }
 
     public Performance(Play play, int audience)
     {
-        _play = play is not null ? play : throw new ArgumentException("Play cannot be null");
-        _audience = audience >= 0 ? audience : throw new ArgumentException("Audiance should be greater than 0");
+        Play = play is not null ? play : throw new ArgumentException("Play cannot be null");
+        Audience = audience >= 0 ? audience : throw new ArgumentException("Audiance must be greater than 0");
     }
 
 }

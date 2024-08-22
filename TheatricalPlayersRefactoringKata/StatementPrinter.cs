@@ -11,60 +11,164 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
-    public string Print(Invoice invoice)
+    public string PrinterTxt(Invoice invoice)
     {
-        const int downLimitOfLines = 1000;
-        const int upLimitOfLines = 4000;
-
-        CultureInfo cultureInfo = new CultureInfo("en-US");
-        Thread.CurrentThread.CurrentCulture = cultureInfo;
-        Thread.CurrentThread.CurrentUICulture = cultureInfo;
-
-        double totalAmount = 0;
-
-        var result = string.Format($"Statement for {invoice.Customer.Name}\n");
-
-        foreach (var performance in invoice.Performances)
+        if (invoice is not null)
         {
-            double thisAmount = 0;
+            const int downLimitOfLines = 1000;
+            const int upLimitOfLines = 4000;
 
-            if (performance.Play.Lines < downLimitOfLines)
-                performance.Play.Lines = downLimitOfLines;
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            if (performance.Play.Lines > upLimitOfLines)
-                performance.Play.Lines = upLimitOfLines;
+            double totalAmount = 0;
 
-            switch (performance.Play.Type)
+            var result = string.Format($"Statement for {invoice.Customer.Name}\n");
+
+            foreach (var performance in invoice.PerformanceList)
             {
-                case (EPlayType.Tragedy):
+                double thisAmount = 0;
 
-                    thisAmount += TragedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
+                if (performance.Play.Lines < downLimitOfLines)
+                    performance.Play.Lines = downLimitOfLines;
 
-                case (EPlayType.Comedy):
+                if (performance.Play.Lines > upLimitOfLines)
+                    performance.Play.Lines = upLimitOfLines;
 
-                    thisAmount += ComedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
+                switch (performance.Play.Type)
+                {
+                    case (EPlayType.Tragedy):
 
-                case (EPlayType.History):
+                        thisAmount += TragedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
 
-                    thisAmount += HistoryCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
+                    case (EPlayType.Comedy):
 
-                default:
+                        thisAmount += ComedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
 
-                    throw new Exception($"Unknown type:  + {performance.Play.Type}");
+                    case (EPlayType.History):
+
+                        thisAmount += HistoryCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
+
+                    default:
+
+                        throw new Exception($"Unknown type:  + {performance.Play.Type}");
+                }
+
+                result += String.Format(cultureInfo, $"  {performance.Play.Name}: {thisAmount:C} ({performance.Audience} seats)\n");
+
+                totalAmount += thisAmount;
             }
 
-            result += String.Format(cultureInfo, $"  {performance.Play.Name}: {thisAmount:C} ({performance.Audience} seats)\n");
+            result += String.Format(cultureInfo, $"Amount owed is {totalAmount:C}\n");
+            result += String.Format($"You earned {invoice.Customer.Credits} credits\n");
 
-            totalAmount += thisAmount;
+            return result;
+        }
+        else
+        {
+            throw new Exception("Invoice cannot be null");
         }
 
-        result += String.Format(cultureInfo, $"Amount owed is {totalAmount:C}\n");
-        result += String.Format($"You earned {invoice.Customer.Credits} credits\n");
+    }
 
-        return result;
+    public string PrinterXml(Invoice invoice)
+    {
+        if (invoice is not null)
+        {
+            const int downLimitOfLines = 1000;
+            const int upLimitOfLines = 4000;
+
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+            double totalAmount = 0;
+
+            var document = new XDocument(new XDeclaration("1.0", UTF8Encoding.UTF8.ToString(), null), new XElement("Statement",
+                        new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                        new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema")));
+
+            var xmlCustomer = new XElement("Customer", invoice.Customer.Name);
+            var xmlItems = new XElement("Items");
+
+            document.Root.Add(xmlCustomer);
+            document.Root.Add(xmlItems);
+
+            foreach (var performance in invoice.PerformanceList)
+            {
+                double thisAmount = 0;
+                invoice.Customer.PartialCredits = 0;
+
+                if (performance.Play.Lines < downLimitOfLines)
+                    performance.Play.Lines = downLimitOfLines;
+
+                if (performance.Play.Lines > upLimitOfLines)
+                    performance.Play.Lines = upLimitOfLines;
+
+                switch (performance.Play.Type)
+                {
+                    case (EPlayType.Tragedy):
+
+                        thisAmount += TragedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
+
+                    case (EPlayType.Comedy):
+
+                        thisAmount += ComedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
+
+                    case (EPlayType.History):
+
+                        thisAmount += HistoryCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
+                        break;
+
+                    default:
+
+                        throw new Exception($"Unknown type:  + {performance.Play.Type}");
+                }
+
+                var xmlItem = new XElement("Item");
+
+                xmlItem.Add(new XElement("AmountOwed", thisAmount));
+                xmlItem.Add(new XElement("EarnedCredits", invoice.Customer.PartialCredits));
+                xmlItem.Add(new XElement("Seats", performance.Audience));
+
+                xmlItems.Add(xmlItem);
+
+                totalAmount += thisAmount;
+            }
+
+            var xmlTotal = new XElement("AmountOwed", totalAmount);
+            var xmlTotalCredits = new XElement("EarnedCredits", invoice.Customer.Credits);
+
+            document.Root.Add(xmlTotal);
+            document.Root.Add(xmlTotalCredits);
+
+            string path = $"{Path.GetTempPath()}/teste.txt";
+
+            string result;
+
+            using (StreamWriter sw = new StreamWriter(path, false, new UTF8Encoding(false)))
+            {
+                document.Save(sw);
+            }
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                result = sr.ReadToEnd();
+            }
+
+            return result;
+        }
+        else
+        {
+            throw new Exception("Invoice cannot be null");
+        }
+
     }
 
     public double AmountBaseTragedy(int lines) => lines > 0 ? lines / (double)10 : throw new Exception("Lines must be greater than 0");
@@ -161,93 +265,5 @@ public class StatementPrinter
             throw new Exception("Lines must be greater than 0. Audience must be equal or greater than 0 and Invoice cannot be null to this method");
         }
 
-    }
-
-    public string Printer(Invoice invoice)
-    {
-        const int downLimitOfLines = 1000;
-        const int upLimitOfLines = 4000;
-
-        CultureInfo cultureInfo = new CultureInfo("en-US");
-        Thread.CurrentThread.CurrentCulture = cultureInfo;
-        Thread.CurrentThread.CurrentUICulture = cultureInfo;
-
-        double totalAmount = 0;
-
-        var document = new XDocument(new XDeclaration("1.0" , UTF8Encoding.UTF8.ToString(), null), new XElement("Statement",
-                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-                    new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema")));
-
-        var xmlCustomer = new XElement("Customer", invoice.Customer.Name);
-        var xmlItems = new XElement("Items");
-
-        document.Root.Add(xmlCustomer);
-        document.Root.Add(xmlItems);
-
-        foreach (var performance in invoice.Performances)
-        {
-            double thisAmount = 0;
-            invoice.Customer.PartialCredits = 0;
-
-            if (performance.Play.Lines < downLimitOfLines)
-                performance.Play.Lines = downLimitOfLines;
-
-            if (performance.Play.Lines > upLimitOfLines)
-                performance.Play.Lines = upLimitOfLines;
-
-            switch (performance.Play.Type)
-            {
-                case (EPlayType.Tragedy):
-
-                    thisAmount += TragedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
-
-                case (EPlayType.Comedy):
-
-                    thisAmount += ComedyCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
-
-                case (EPlayType.History):
-
-                    thisAmount += HistoryCalc(thisAmount, performance.Play.Lines, performance.Audience, invoice);
-                    break;
-
-                default:
-
-                    throw new Exception($"Unknown type:  + {performance.Play.Type}");
-            }
-
-            var xmlItem = new XElement("Item");
-
-            xmlItem.Add(new XElement("AmountOwed", thisAmount));
-            xmlItem.Add(new XElement("EarnedCredits", invoice.Customer.PartialCredits));
-            xmlItem.Add(new XElement("Seats", performance.Audience));
-
-            xmlItems.Add(xmlItem);
-
-            totalAmount += thisAmount;
-        }
-        
-        var xmlTotal = new XElement("AmountOwed", totalAmount);
-        var xmlTotalCredits = new XElement("EarnedCredits", invoice.Customer.Credits);
-
-        document.Root.Add(xmlTotal);
-        document.Root.Add(xmlTotalCredits);
-
-        string path = $"{Path.GetTempPath()}/teste.txt";
-
-        string result;
-
-        using(StreamWriter sw = new StreamWriter(path, false ,new UTF8Encoding(false)))
-        {
-            document.Save(sw);
-        }
-
-        using(StreamReader sr = new StreamReader(path))
-        {
-            result = sr.ReadToEnd();
-        }        
-
-        return result;
     }
 }
