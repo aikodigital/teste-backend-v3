@@ -1,16 +1,20 @@
 ﻿using System;
 
-public class TragedyCategory : IPlayCategory
+namespace TheatricalPlayersRefactoringKata.Categories
 {
-    public decimal CalculateAmount(int audience, int lines)
+    public class TragedyCategory : IPlayCategory
     {
-        decimal baseAmount = Math.Max(100.0m, Math.Min(400.0m, lines / 10.0m));
-        decimal additionalAmount = (audience > 30) ? 10.0m * (audience - 30) : 0.0m;
-        return baseAmount + additionalAmount;
-    }
+        public decimal CalculateAmount(int seats, int performanceId)
+        {
+            // Implementação específica para TragedyCategory
+            // Exemplo: retorno fictício, substitua pela lógica real
+            return seats * 4.0m;
+        }
 
-    public int CalculateCredits(int audience)
-    {
-        return (audience > 30) ? (audience - 30) : 0;
+        public int CalculatePoints(int seats)
+        {
+            // Implementação específica para TragedyCategory
+            return (int)Math.Floor((decimal)seats / 4);
+        }
     }
 }

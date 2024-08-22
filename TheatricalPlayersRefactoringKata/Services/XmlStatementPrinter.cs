@@ -1,76 +1,56 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+using System.IO;
+using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
 
 namespace TheatricalPlayersRefactoringKata.Services
 {
-    public class XmlStatementPrinter : IStatementXmlPrinter
+    public class XmlStatementPrinter
     {
-        private readonly Dictionary<string, IPlayCategory> _playCategories;
+        private readonly StatementCalculator _statementCalculator;
 
-        public XmlStatementPrinter(Dictionary<string, IPlayCategory> playCategories)
+        public XmlStatementPrinter(StatementCalculator statementCalculator)
         {
-            _playCategories = playCategories;
+            _statementCalculator = statementCalculator;
         }
 
-        public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
+        public string Print(Invoice invoice, Dictionary<int, Play> plays)
         {
-            var xmlSettings = new XmlWriterSettings
+            var items = new List<XElement>();
+            decimal totalAmountOwed = 0;
+            int totalEarnedCredits = 0;
+
+            foreach (var performance in invoice.Performances)
             {
-                Indent = true,
-                IndentChars = "  ",
-                NewLineChars = "\r\n",
-                NewLineHandling = NewLineHandling.Replace,
-                Encoding = Encoding.UTF8,
-                OmitXmlDeclaration = false
-            };
+                var play = plays[performance.PlayId];
+                var amountOwed = _statementCalculator.CalculateAmount(play, performance.Seats);
+                var earnedCredits = _statementCalculator.CalculatePoints(play, performance.Seats);
 
-            var stringBuilder = new StringBuilder();
+                items.Add(new XElement("Item",
+                    new XElement("AmountOwed", amountOwed),
+                    new XElement("EarnedCredits", earnedCredits),
+                    new XElement("Seats", performance.Seats)
+                ));
 
-            using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlSettings))
-            {
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("Statement");
-
-                xmlWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-                xmlWriter.WriteAttributeString("xmlns", "xsd", null, "http://www.w3.org/2001/XMLSchema");
-
-                xmlWriter.WriteElementString("Customer", invoice.Customer);
-
-                xmlWriter.WriteStartElement("Items");
-
-                decimal totalAmount = 0;
-                int totalCredits = 0;
-
-                foreach (var performance in invoice.Performances)
-                {
-                    var play = plays[performance.PlayId];
-                    var category = _playCategories[play.Category];
-
-                    decimal thisAmount = category.CalculateAmount(performance.Audience, play.Lines);
-                    int thisCredits = category.CalculateCredits(performance.Audience);
-
-                    xmlWriter.WriteStartElement("Item");
-                    xmlWriter.WriteElementString("AmountOwed", thisAmount.ToString("0.##").Replace(',', '.'));
-                    xmlWriter.WriteElementString("EarnedCredits", thisCredits.ToString());
-                    xmlWriter.WriteElementString("Seats", performance.Audience.ToString());
-                    xmlWriter.WriteEndElement();
-
-                    totalAmount += thisAmount;
-                    totalCredits += thisCredits;
-                }
-
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteElementString("AmountOwed", totalAmount.ToString("0.##").Replace(',', '.'));
-                xmlWriter.WriteElementString("EarnedCredits", totalCredits.ToString());
-
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteEndDocument();
+                totalAmountOwed += amountOwed;
+                totalEarnedCredits += earnedCredits;
             }
 
-            return stringBuilder.ToString();
+            var doc = new XDocument(
+                new XElement("Statement",
+                    new XElement("Customer", invoice.Customer),
+                    new XElement("Items", items),
+                    new XElement("AmountOwed", totalAmountOwed),
+                    new XElement("EarnedCredits", totalEarnedCredits)
+                )
+            );
+
+            using (var writer = new StringWriter())
+            {
+                doc.Save(writer);
+                return writer.ToString();
+            }
         }
     }
 }

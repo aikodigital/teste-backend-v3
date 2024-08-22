@@ -1,17 +1,20 @@
-namespace TheatricalPlayersRefactoringKata.Models;
-
-public class Performance
+namespace TheatricalPlayersRefactoringKata.Models
 {
-    private string _playId;
-    private int _audience;
-
-    public string PlayId { get => _playId; set => _playId = value; }
-    public int Audience { get => _audience; set => _audience = value; }
-
-    public Performance(string playID, int audience)
+    public class Performance
     {
-        _playId = playID;
-        _audience = audience;
-    }
+        public int Id { get; set; } // Adicione esta linha se necessário
+        public int PlayId { get; set; }
+        public Play Play { get; set; }
+        public int Seats { get; set; }
 
+        // Construtor com parâmetros
+        public Performance(int playId, int seats)
+        {
+            PlayId = playId;
+            Seats = seats;
+        }
+
+        // Construtor padrão
+        public Performance() { }
+    }
 }

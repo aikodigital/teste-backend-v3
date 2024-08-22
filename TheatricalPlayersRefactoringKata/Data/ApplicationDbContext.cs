@@ -9,8 +9,19 @@ namespace TheatricalPlayersRefactoringKata.Data
             : base(options)
         {
         }
+
         public DbSet<Play> Plays { get; set; }
         public DbSet<Performance> Performances { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Performance>()
+                .HasOne(p => p.Play)
+                .WithMany()
+                .HasForeignKey(p => p.PlayId);
+
+            // Se você tiver mais configurações para a entidade Invoice, adicione aqui
+        }
     }
 }

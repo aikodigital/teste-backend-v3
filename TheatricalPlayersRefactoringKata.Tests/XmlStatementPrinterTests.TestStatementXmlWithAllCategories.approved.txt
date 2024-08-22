@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Statement>
+  <Customer>BigCo</Customer>
+  <Items>
+    <Item>
+      <AmountOwed>220.0</AmountOwed>
+      <EarnedCredits>13</EarnedCredits>
+      <Seats>55</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>87.5</AmountOwed>
+      <EarnedCredits>18</EarnedCredits>
+      <Seats>35</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>160.0</AmountOwed>
+      <EarnedCredits>10</EarnedCredits>
+      <Seats>40</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>60.0</AmountOwed>
+      <EarnedCredits>4</EarnedCredits>
+      <Seats>20</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>117.0</AmountOwed>
+      <EarnedCredits>7</EarnedCredits>
+      <Seats>39</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>60.0</AmountOwed>
+      <EarnedCredits>4</EarnedCredits>
+      <Seats>20</Seats>
+    </Item>
+  </Items>
+  <AmountOwed>704.5</AmountOwed>
+  <EarnedCredits>56</EarnedCredits>
+</Statement>
