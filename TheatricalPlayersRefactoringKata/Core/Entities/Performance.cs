@@ -10,7 +10,7 @@ public class Performance
 {
     public Performance(IPlay play, int audience)
     {
-        Play     = play;
+        Play = play;
         Audience = audience;
         Amount = Play.CalculateAmount(Audience);
     }

@@ -11,18 +11,20 @@ public class Play : IPlay
     public Play(string name, int lines, string type)
     {
         if (lines < 0) throw new Exception("lines cannot be negative");
-        Name  = name;
+        Name = name;
         Lines = lines;
-        Type  = type;
+        Type = type;
     }
 
+    private int Lines { get; }
+
     public string Name { get; }
-    public int Lines { get; set; }
-    public string Type { get; set; }
+    public string Type { get; }
 
     public int CalculateAmount(int audience)
     {
-        return Type switch {
+        return Type switch
+        {
             "tragedy" => CalculateTragedyAmount(audience) + CalculateDefaultAmount(),
             "comedy" => CalculateComedyAmount(audience) + CalculateDefaultAmount(),
             "history" => CalculateHistoryAmount(audience),
@@ -30,19 +32,19 @@ public class Play : IPlay
         };
     }
 
-    static private int CalculateTragedyAmount(int audience)
+    private static int CalculateTragedyAmount(int audience)
     {
         return audience > 30
-                   ? 1000 * (audience - 30)
-                   : 0;
+            ? 1000 * (audience - 30)
+            : 0;
     }
 
-    static private int CalculateComedyAmount(int audience)
+    private static int CalculateComedyAmount(int audience)
     {
         var baseAmount = 300 * audience;
         return audience > 20
-                   ? 10000 + 500 * (audience - 20) + baseAmount
-                   : baseAmount;
+            ? 10000 + 500 * (audience - 20) + baseAmount
+            : baseAmount;
     }
 
     private int CalculateHistoryAmount(int audience)
@@ -55,7 +57,8 @@ public class Play : IPlay
 
     private int CalculateDefaultAmount()
     {
-        return Lines switch {
+        return Lines switch
+        {
             < 1000 => 1000 * 10,
             > 4000 => 4000 * 10,
             _ => Lines * 10
