@@ -1,52 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata;
-
-public class StatementPrinter
+namespace TheatricalPlayersRefactoringKata
 {
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public class StatementPrinter
     {
-        var totalAmount = 0;
-        var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        private readonly ICalculatorFactory _calculatorFactory;
 
-        foreach(var perf in invoice.Performances) 
+        public StatementPrinter(ICalculatorFactory calculatorFactory)
         {
-            var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
-            switch (play.Type) 
-            {
-                case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Type);
-            }
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-
-            // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
-            totalAmount += thisAmount;
+            _calculatorFactory = calculatorFactory;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-        result += String.Format("You earned {0} credits\n", volumeCredits);
-        return result;
+
+        public string Print(Invoice invoice, Dictionary<string, Play> plays)
+        {
+            var totalAmount = 0;
+            var volumeCredits = 0;
+            var result = $"Statement for {invoice.Customer}\n";
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+
+            foreach (var perf in invoice.Performances)
+            {
+                var play = plays[perf.PlayId];
+                var calculator = _calculatorFactory.GetCalculator(play.Type);
+                var thisAmount = calculator.CalculateAmount(perf);
+
+                volumeCredits += calculator.CalculateCredits(perf);
+
+                result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount / 100.0, perf.Audience);
+                totalAmount += (int)thisAmount;
+            }
+
+            result += String.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount / 100.0);
+            result += String.Format("You earned {0} credits\n", volumeCredits);
+            return result;
+        }
     }
 }
