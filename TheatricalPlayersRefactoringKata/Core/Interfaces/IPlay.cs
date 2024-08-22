@@ -2,11 +2,9 @@ namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 public interface IPlay
 {
-    public string Name { get; set; }
+    public string Name { get; }
 
-    public int Lines { get; set; } 
-
-    public string Type { get; set; }
+    public string Type { get; }
     
     public int CalculateAmount(int audience);
 }

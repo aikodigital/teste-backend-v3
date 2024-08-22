@@ -1,4 +1,8 @@
+#region
+
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.Core.Entities;
 
@@ -12,16 +16,15 @@ public class Play : IPlay
         Type  = type;
     }
 
-    public string Name { get; set; }
+    public string Name { get; }
     public int Lines { get; set; }
     public string Type { get; set; }
-    
+
     public int CalculateAmount(int audience)
     {
-        return Type switch
-        {
+        return Type switch {
             "tragedy" => CalculateTragedyAmount(audience) + CalculateDefaultAmount(),
-            "comedy"  => CalculateComedyAmount(audience) + CalculateDefaultAmount(),
+            "comedy" => CalculateComedyAmount(audience) + CalculateDefaultAmount(),
             "history" => CalculateHistoryAmount(audience),
             _ => CalculateDefaultAmount()
         };
@@ -29,13 +32,17 @@ public class Play : IPlay
 
     static private int CalculateTragedyAmount(int audience)
     {
-        return audience > 30 ? 1000 * (audience - 30) : 0;
+        return audience > 30
+                   ? 1000 * (audience - 30)
+                   : 0;
     }
 
     static private int CalculateComedyAmount(int audience)
     {
         var baseAmount = 300 * audience;
-        return audience > 20 ? (10000 + 500 * (audience - 20)) + baseAmount : baseAmount;
+        return audience > 20
+                   ? 10000 + 500 * (audience - 20) + baseAmount
+                   : baseAmount;
     }
 
     private int CalculateHistoryAmount(int audience)
