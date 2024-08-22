@@ -1,52 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-
-namespace TheatricalPlayersRefactoringKata;
+using TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
+    private readonly Dictionary<string, ICalculatorStrategy> _calculatorStrategies;
+
+    public StatementPrinter(Dictionary<string, ICalculatorStrategy> calculatorStrategies)
+    {
+        _calculatorStrategies = calculatorStrategies ?? throw new ArgumentNullException(nameof(calculatorStrategies));
+    }
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
-        var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        if (invoice == null) throw new ArgumentNullException(nameof(invoice));
+        if (plays == null) throw new ArgumentNullException(nameof(plays));
 
-        foreach(var perf in invoice.Performances) 
+        var totalAmount = 0m;
+        var totalCredits = 0;
+        var result = $"Statement for {invoice.Customer}\n";
+
+        foreach (var performance in invoice.Performances)
         {
-            var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
-            switch (play.Type) 
+            if (!plays.TryGetValue(performance.PlayId, out var play))
             {
-                case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
-                    break;
-                case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Type);
+                throw new ArgumentException($"Play with ID {performance.PlayId} not found.", nameof(plays));
             }
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
 
-            // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
-            totalAmount += thisAmount;
+            if (!_calculatorStrategies.TryGetValue(play.Type, out var calculator))
+            {
+                throw new ArgumentException($"Calculator strategy for type {play.Type} not found.", nameof(_calculatorStrategies));
+            }
+
+            var amount = calculator.CalculateAmount(performance, play);
+            var credits = calculator.CalculateCredits(performance, play);
+
+            totalAmount += amount;
+            totalCredits += credits;
+
+            result += $"  {play.Name}: {amount:C} ({performance.Audience} seats)\n";
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
-        result += String.Format("You earned {0} credits\n", volumeCredits);
+
+        result += $"Amount owed is {totalAmount:C}\n";
+        result += $"You earned {totalCredits} credits\n";
         return result;
     }
 }
