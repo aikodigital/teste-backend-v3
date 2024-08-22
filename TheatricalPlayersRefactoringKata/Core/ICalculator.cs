@@ -1,11 +1,10 @@
-﻿using System;
-using TheatricalPlayersRefactoringKata.Models;
+﻿using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata.Core
+namespace TheatricalPlayersRefactoringKata.Calculators
 {
     public interface ICalculator
     {
-        int CalculateAmount(Performance performance, Play play);
+        int CalculateAmount(Performance performance);
         int CalculateCredits(Performance performance);
     }
 }

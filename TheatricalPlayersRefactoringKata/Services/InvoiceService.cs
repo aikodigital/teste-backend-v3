@@ -1,30 +1,23 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Models;
-using TheatricalPlayersRefactoringKata.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.Services
 {
-    public class InvoiceService : IInvoiceService
+    public class InvoiceService
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly ICalculatorFactory _calculatorFactory;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository)
+        public InvoiceService(ICalculatorFactory calculatorFactory)
         {
-            _invoiceRepository = invoiceRepository;
+            _calculatorFactory = calculatorFactory;
         }
 
-        public async Task<string> GenerateInvoiceXmlAsync(InvoiceRequest invoiceRequest)
+        public void ProcessInvoice(Invoice invoice, Dictionary<string, Play> plays)
         {
-            var invoice = await _invoiceRepository.GetInvoiceAsync(invoiceRequest.InvoiceId);
-            var plays = await _invoiceRepository.GetPlaysAsync();
-            var filePath = Path.Combine(Path.GetTempPath(), $"invoice_{invoiceRequest.InvoiceId}.xml");
+            var printer = new XmlStatementPrinter(_calculatorFactory);
+            var result = printer.Print(invoice, plays);
 
-            var xmlPrinter = new XmlStatementPrinter();
-            var xmlContent = xmlPrinter.Print(invoice, plays);
-            await File.WriteAllTextAsync(filePath, xmlContent);
-
-            return filePath;
+            // Faça algo com o resultado, como salvar em arquivo ou retornar para a chamada
         }
     }
 }

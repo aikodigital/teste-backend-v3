@@ -1,20 +1,18 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Calculators;
-using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata.Core
+namespace TheatricalPlayersRefactoringKata
 {
-    public static class CalculatorFactory
+    public class CalculatorFactory : ICalculatorFactory
     {
-        public static ICalculator CreateCalculator(Play play)
+        public ICalculator GetCalculator(string type)
         {
-            return play.Type switch
+            return type switch
             {
                 "tragedy" => new TragedyCalculator(),
                 "comedy" => new ComedyCalculator(),
                 "history" => new HistoryCalculator(),
-                _ => throw new Exception("unknown type: " + play.Type),
+                _ => throw new ArgumentException("Unknown type", nameof(type)),
             };
         }
     }

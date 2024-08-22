@@ -1,27 +1,23 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Calculators
 {
     public class ComedyCalculator : ICalculator
     {
-        public int CalculateAmount(Performance performance, Play play)
+        public int CalculateAmount(Performance performance)
         {
-            int thisAmount = play.Lines * 10;
+            int amount = 30000;
             if (performance.Audience > 20)
             {
-                thisAmount += 10000 + 500 * (performance.Audience - 20);
+                amount += 10000 + 500 * (performance.Audience - 20);
             }
-            thisAmount += 300 * performance.Audience;
-            return thisAmount;
+            return amount;
         }
 
         public int CalculateCredits(Performance performance)
         {
-            int credits = Math.Max(performance.Audience - 30, 0);
-            credits += (int)Math.Floor((decimal)performance.Audience / 5);
-            return credits;
+            return (int)Math.Floor(performance.Audience / 5.0);
         }
     }
 }

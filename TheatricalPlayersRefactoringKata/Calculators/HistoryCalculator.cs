@@ -1,19 +1,17 @@
-﻿using System;
-using TheatricalPlayersRefactoringKata.Core;
-using TheatricalPlayersRefactoringKata.Models;
+﻿using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Calculators
 {
     public class HistoryCalculator : ICalculator
     {
-        public int CalculateAmount(Performance performance, Play play)
+        public int CalculateAmount(Performance performance)
         {
-            return play.Lines * 15;
+            return 40000 + 1000 * (performance.Audience - 30);
         }
 
         public int CalculateCredits(Performance performance)
         {
-            return Math.Max(performance.Audience - 20, 0);
+            return performance.Audience > 40 ? performance.Audience - 30 : 0;
         }
     }
 }

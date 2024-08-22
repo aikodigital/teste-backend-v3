@@ -2,16 +2,14 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Play
     {
-        public string Name { get; set; }
-        public int Lines { get; set; }
-        public string Type { get; set; }
+        public string Name { get; }
+        public int Cost { get; }
+        public string Type { get; }
 
-        public Play() { }
-
-        public Play(string name, int lines, string type)
+        public Play(string name, int cost, string type)
         {
             Name = name;
-            Lines = lines;
+            Cost = cost;
             Type = type;
         }
     }

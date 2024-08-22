@@ -7,11 +7,19 @@ namespace TheatricalPlayersRefactoringKata
 {
     public class AsyncStatementProcessor
     {
+        private readonly ICalculatorFactory _calculatorFactory;
+
+        public AsyncStatementProcessor(ICalculatorFactory calculatorFactory)
+        {
+            _calculatorFactory = calculatorFactory;
+        }
+
         public async Task GenerateXmlAsync(Invoice invoice, Dictionary<string, Play> plays, string filePath)
         {
-            var xmlPrinter = new XmlStatementPrinter();
-            var xmlContent = xmlPrinter.Print(invoice, plays);
-            await File.WriteAllTextAsync(filePath, xmlContent);
+            var printer = new XmlStatementPrinter(_calculatorFactory);
+            var result = printer.Print(invoice, plays);
+
+            await File.WriteAllTextAsync(filePath, result);
         }
     }
 }

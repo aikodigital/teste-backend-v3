@@ -2,10 +2,8 @@ namespace TheatricalPlayersRefactoringKata.Models
 {
     public class Performance
     {
-        public string PlayId { get; set; }
-        public int Audience { get; set; }
-
-        public Performance() { }
+        public string PlayId { get; }
+        public int Audience { get; }
 
         public Performance(string playId, int audience)
         {

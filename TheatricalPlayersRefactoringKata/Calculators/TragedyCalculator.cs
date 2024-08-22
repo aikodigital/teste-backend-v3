@@ -1,19 +1,18 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Models;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Calculators
 {
     public class TragedyCalculator : ICalculator
     {
-        public int CalculateAmount(Performance performance, Play play)
+        public int CalculateAmount(Performance performance)
         {
-            int thisAmount = play.Lines * 10;
+            int amount = 40000;
             if (performance.Audience > 30)
             {
-                thisAmount += 1000 * (performance.Audience - 30);
+                amount += 1000 * (performance.Audience - 30);
             }
-            return thisAmount;
+            return amount;
         }
 
         public int CalculateCredits(Performance performance)
