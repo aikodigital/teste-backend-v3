@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
@@ -36,7 +37,8 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            var statementPrinter = new StatementPrinter(playCategories);
+            var statementCalculator = new StatementCalculator(playCategories, plays);
+            var statementPrinter = new StatementPrinter(statementCalculator);
             var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
@@ -72,11 +74,12 @@ namespace TheatricalPlayersRefactoringKata.Tests
                     new Performance("othello", 40),
                     new Performance("henry-v", 20),
                     new Performance("john", 39),
-                    new Performance("henry-v", 20) 
+                    new Performance("henry-v", 20)
                 }
             );
 
-            var statementPrinter = new StatementPrinter(playCategories);
+            var statementCalculator = new StatementCalculator(playCategories, plays);
+            var statementPrinter = new StatementPrinter(statementCalculator);
             var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);

@@ -9,7 +9,6 @@ namespace TheatricalPlayersRefactoringKata.Data
             : base(options)
         {
         }
-
         public DbSet<Play> Plays { get; set; }
         public DbSet<Performance> Performances { get; set; }
         public DbSet<Invoice> Invoices { get; set; }

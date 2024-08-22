@@ -5,7 +5,7 @@ using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Services
 {
-    public class XmlStatementPrinter
+    public class XmlStatementPrinter : IStatementXmlPrinter
     {
         private readonly Dictionary<string, IPlayCategory> _playCategories;
 
@@ -31,7 +31,6 @@ namespace TheatricalPlayersRefactoringKata.Services
             using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlSettings))
             {
                 xmlWriter.WriteStartDocument();
-
                 xmlWriter.WriteStartElement("Statement");
 
                 xmlWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
