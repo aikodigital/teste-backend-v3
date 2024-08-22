@@ -4,7 +4,7 @@ namespace TheatricalPlayersRefactoringKata.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class InvoicesController : ControllerBase
+public class PlaysController : ControllerBase
 {
 
 }
