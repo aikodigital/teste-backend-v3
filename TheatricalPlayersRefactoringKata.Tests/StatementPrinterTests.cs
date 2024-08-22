@@ -13,8 +13,15 @@ public class StatementPrinterTests
 {
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
-    {
+    public void TestStatementExampleLegacy() {
+        Dictionary<Enum, IGenreStrategy> genres = new Dictionary<Enum, IGenreStrategy> {
+            { PlayGenre.Comedy, new ComedyGenreStrategy() },
+            { PlayGenre.Tragedy, new TragedyGenreStrategy() },
+            { PlayGenre.History, new HistoryGenreStrategy() },
+        };
+        StatementPrinterRepositoryImpl repository = new(genres);
+
+
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, PlayGenre.Tragedy));
         plays.Add("as-like", new Play("As You Like It", 2670, PlayGenre.Comedy));
