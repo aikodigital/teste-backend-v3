@@ -1,28 +1,55 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Domain", "TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{967175F2-7DC9-41A7-8676-7F7083DB67BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Application", "TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{991EBE84-7E61-42A4-86B2-52613478EDE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Infrastructure", "TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{969929CC-9BB0-4A7B-8378-10261F5F728D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{325B75D0-AD77-49F7-8B73-CB348A5E425E}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967175F2-7DC9-41A7-8676-7F7083DB67BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967175F2-7DC9-41A7-8676-7F7083DB67BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967175F2-7DC9-41A7-8676-7F7083DB67BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967175F2-7DC9-41A7-8676-7F7083DB67BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991EBE84-7E61-42A4-86B2-52613478EDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991EBE84-7E61-42A4-86B2-52613478EDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991EBE84-7E61-42A4-86B2-52613478EDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991EBE84-7E61-42A4-86B2-52613478EDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969929CC-9BB0-4A7B-8378-10261F5F728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969929CC-9BB0-4A7B-8378-10261F5F728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969929CC-9BB0-4A7B-8378-10261F5F728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969929CC-9BB0-4A7B-8378-10261F5F728D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325B75D0-AD77-49F7-8B73-CB348A5E425E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF40FA3-FC85-45B6-8993-58E9EF0B7EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67C8BDF9-2790-4993-9C09-9FD6ABF2D97B}
 	EndGlobalSection
 EndGlobal

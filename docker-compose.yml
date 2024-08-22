@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  theatricalplayersrefactoringkata.api:
+    image: ${DOCKER_REGISTRY-}theatricalplayersrefactoringkataapi
+    build:
+      context: .
+      dockerfile: TheatricalPlayersRefactoringKata.API/Dockerfile
+    ports:
+      - 1111:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - theatricalplayersrefactoringkata.db
+    networks:
+      - dev
+
+  theatricalplayersrefactoringkata.db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=THEATRICAL_DB
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    ports:
+      - 8002:5432
+    networks:
+      - dev
+
+  pg-admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "postgres@postgres.com"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+    ports:
+      - 16543:80
+    depends_on:
+      - theatricalplayersrefactoringkata.db
+    networks:
+      dev:
+    
+volumes:
+    db-data:
+
+
+networks:
+  dev:
+    driver: bridge
