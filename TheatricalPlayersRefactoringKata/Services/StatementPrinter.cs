@@ -14,9 +14,9 @@ namespace TheatricalPlayersRefactoringKata.Services;
 
 public class StatementPrinter
 {
-    private readonly PlayTypes[] PlayTypes;
+    private readonly PlayType[] PlayTypes;
     private readonly Dictionary<string, Play> Plays;
-    public StatementPrinter(Dictionary<string, Play> plays, PlayTypes[] playTypes) 
+    public StatementPrinter(Dictionary<string, Play> plays, PlayType[] playTypes) 
     {
         Plays = plays;
         PlayTypes = playTypes;

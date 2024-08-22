@@ -6,10 +6,10 @@ namespace TheatricalPlayersRefactoringKata.Repository
 {
     public interface IPlayTypeRepository
     {
-        Task<PlayTypes> GetByName(string typeName);
-        Task<IEnumerable<PlayTypes>> GetAll();
-        Task<PlayTypes> Create(PlayTypes playType);
-        Task<PlayTypes> Update(PlayTypes playType);
+        Task<PlayType> GetByName(string typeName);
+        Task<IEnumerable<PlayType>> GetAll();
+        Task<PlayType> Create(PlayType playType);
+        Task<PlayType> Update(PlayType playType);
         void DeleteByName(string typeName);
     }
 }

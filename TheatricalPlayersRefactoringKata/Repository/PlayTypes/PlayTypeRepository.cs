@@ -20,29 +20,29 @@ namespace TheatricalPlayersRefactoringKata.Repository
 
         public async void DeleteByName(string typeName)
         {
-            PlayTypes type = await GetByName(typeName);
+            PlayType type = await GetByName(typeName);
             db.PlayTypes.Remove(type);
             db.SaveChanges();
         }
 
-        public async Task<IEnumerable<PlayTypes>> GetAll() => await db.PlayTypes.ToListAsync();
+        public async Task<IEnumerable<PlayType>> GetAll() => await db.PlayTypes.ToListAsync();
 
-        public async Task<PlayTypes> Create(PlayTypes playType)
+        public async Task<PlayType> Create(PlayType playType)
         {
             await db.PlayTypes.AddAsync(playType);
             await db.SaveChangesAsync();
             return playType;
         }
 
-        public async Task<PlayTypes> GetByName(string typeName)
+        public async Task<PlayType> GetByName(string typeName)
         {
-            PlayTypes type = await db.PlayTypes.FirstOrDefaultAsync(p => p.Name.ToLower() == typeName.ToLower());
+            PlayType type = await db.PlayTypes.FirstOrDefaultAsync(p => p.Name.ToLower() == typeName.ToLower());
             return type != null ? type : throw new ArgumentOutOfRangeException($"{typeName} is not a valid type");
         }
 
-        public async Task<PlayTypes> Update(PlayTypes playType)
+        public async Task<PlayType> Update(PlayType playType)
         {
-            PlayTypes type = await db.PlayTypes.AsNoTracking().FirstOrDefaultAsync(e => e.Name.ToLower() == playType.Name.ToLower());
+            PlayType type = await db.PlayTypes.AsNoTracking().FirstOrDefaultAsync(e => e.Name.ToLower() == playType.Name.ToLower());
 
             type.Description = playType.Description;
             type.DtInclusao = playType.DtInclusao;

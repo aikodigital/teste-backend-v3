@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TheatricalPlayersRefactoringKata.Models
 {
-    public class PlayTypes
+    public class PlayType
     {
         [Key]
         public string Name { get; set; }

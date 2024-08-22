@@ -32,9 +32,9 @@ namespace TheatricalPlayersRefactoringKata.Controllers
 
             var playTypes = new[]
             {
-                new PlayTypes {Name = "tragedy"},
-                new PlayTypes {Name = "comedy"},
-                new PlayTypes {Name = "history"}
+                new PlayType {Name = "tragedy"},
+                new PlayType {Name = "comedy"},
+                new PlayType {Name = "history"}
             };
 
             try
@@ -70,9 +70,9 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             };
             var playTypes = new[]
             {
-                new PlayTypes {Name = "tragedy"},
-                new PlayTypes {Name = "comedy"},
-                new PlayTypes {Name = "history"}
+                new PlayType {Name = "tragedy"},
+                new PlayType {Name = "comedy"},
+                new PlayType {Name = "history"}
             };
 
             try

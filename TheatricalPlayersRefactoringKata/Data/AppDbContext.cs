@@ -24,7 +24,7 @@ namespace TheatricalPlayersRefactoringKata.Data
         }
 
         public DbSet<Play> Plays { get; set; }
-        public DbSet<PlayTypes> PlayTypes { get; set; }
+        public DbSet<PlayType> PlayTypes { get; set; }
         public DbSet<StatementLog> StatementLogs { get; set; }
     }
 }

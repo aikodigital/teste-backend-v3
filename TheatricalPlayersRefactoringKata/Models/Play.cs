@@ -25,7 +25,7 @@ public class Play
         builder.Entity<Play>().HasKey(x => x.Name);
 
         builder.Entity<Play>()
-               .HasOne<PlayTypes>()
+               .HasOne<PlayType>()
                .WithMany()
                .HasForeignKey(e => e.Type)
                .IsRequired();

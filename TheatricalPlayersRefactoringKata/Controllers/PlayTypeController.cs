@@ -29,7 +29,7 @@ namespace TheatricalPlayersRefactoringKata.Controllers
         {
             try
             {
-                PlayTypes type = await _playTypeRepositorio.GetByName(typeName);
+                PlayType type = await _playTypeRepositorio.GetByName(typeName);
                 return Ok(type);
             }
             catch (ArgumentOutOfRangeException ex) { return NotFound(ex.Message); }
@@ -54,7 +54,7 @@ namespace TheatricalPlayersRefactoringKata.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] PlayTypes playTypeEdited)
+        public async Task<IActionResult> Create([FromBody] PlayType playTypeEdited)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace TheatricalPlayersRefactoringKata.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] PlayTypes playTypeEdited)
+        public async Task<IActionResult> Update([FromBody] PlayType playTypeEdited)
         {
             try
             {
