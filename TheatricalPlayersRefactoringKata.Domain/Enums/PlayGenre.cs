@@ -8,6 +8,6 @@ namespace TheatricalPlayersRefactoringKata.Application.Enums {
     public enum PlayGenre {
         Comedy,
         Tragedy,
-        Historical,
+        History,
     }
 }

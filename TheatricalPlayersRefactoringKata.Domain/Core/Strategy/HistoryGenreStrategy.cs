@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Core.Strategy {
-    public class HistoricalGenreStrategy : IGenreStrategy {
+    public class HistoryGenreStrategy : IGenreStrategy {
 
         private readonly TragedyGenreStrategy _tragedyGenreObj = new();
         private readonly ComedyGenreStrategy _comedyGenreObj = new();
