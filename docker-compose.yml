@@ -1,12 +1,12 @@
 ﻿services:
   theatricalplayersrefactoringkata:
-    image: theatricalplayersrefactoringkata
+    image: ${DOCKER_REGISTRY-}theatricalplayersrefactoringkata
     build:
       context: .
       dockerfile: TheatricalPlayersRefactoringKata/Dockerfile
     ports:
-      - 5267
-      - 7015
+      - "5000:8080"
+      - "5001:8081"
     environment:
       - ENVIRONMENT=Dev
     depends_on:
@@ -16,14 +16,14 @@
     image: postgres:latest
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=admin
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=THEATRICAL
-    volumes:
-      - db-data:/var/lib/postgresql/data/
     ports:
-        - 8002:5432
+        - "5432:5432"
     networks:
         - dev
+    volumes:
+        - db-data:/var/lib/postgresql/data
   
   pg-admin:
     image: dpage/pgadmin4
@@ -31,7 +31,7 @@
       PGADMIN_DEFAULT_EMAIL: "postgres@postgres.com"
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
-      - 16543:80
+      - "16543:80"
     depends_on:
       - theatricalplayersrefactoringkata.db
     networks:

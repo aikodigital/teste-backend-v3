@@ -1,13 +1,20 @@
 #region
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TheatricalPlayersRefactoringKata.API.Data;
 
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRepositories(builder.Configuration);
+
+
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -16,9 +23,19 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
-app.Run();
+app.Run();  
