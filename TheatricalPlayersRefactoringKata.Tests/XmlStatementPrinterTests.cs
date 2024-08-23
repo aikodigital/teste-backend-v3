@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Models;
@@ -8,12 +8,11 @@ using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
-    public class StatementPrinterTests
+    public class XmlStatementPrinterTests
     {
-        
         [Fact]
         [UseReporter(typeof(DiffReporter))]
-        public void TestTextStatementExample()
+        public void TestStatementXmlWithAllCategories()
         {
             var playCategories = new Dictionary<string, IPlayCategory>
             {
@@ -29,7 +28,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 { 3, new Play("Othello", "tragedy") },
                 { 4, new Play("Henry V", "history") },
                 { 5, new Play("King John", "history") },
-                { 6, new Play("Richard III", "history") }
+                { 6, new Play("Henry V", "history") }
             };
 
             var invoice = new Invoice(
@@ -41,13 +40,13 @@ namespace TheatricalPlayersRefactoringKata.Tests
                     new Performance(3, 40),
                     new Performance(4, 20),
                     new Performance(5, 39),
-                    new Performance(4, 20)
+                    new Performance(6, 20)
                 }
             );
 
             var statementCalculator = new StatementCalculator(playCategories, plays);
-            var statementPrinter = new StatementPrinter(statementCalculator);
-            var result = statementPrinter.Print(invoice, plays);
+            var statementXmlPrinter = new XmlStatementPrinter(statementCalculator);
+            var result = statementXmlPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }

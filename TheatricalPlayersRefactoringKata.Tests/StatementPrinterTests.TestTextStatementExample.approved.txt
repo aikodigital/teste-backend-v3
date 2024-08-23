@@ -1,9 +1,15 @@
 ﻿Statement for BigCo
-  Hamlet: $650.00 (55 seats)
-  As You Like It: $547.00 (35 seats)
-  Othello: $456.00 (40 seats)
-  Henry V: $705.40 (20 seats)
-  King John: $931.60 (39 seats)
-  Henry V: $705.40 (20 seats)
-Amount owed is $3,995.40
-You earned 56 credits
+- Hamlet: R$ 350,00 (55 seats)
+  Credits: 25
+- As You Like It: R$ 380,00 (35 seats)
+  Credits: 25
+- Othello: R$ 200,00 (40 seats)
+  Credits: 10
+- Henry V: R$ 260,00 (20 seats)
+  Credits: 0
+- King John: R$ 602,00 (39 seats)
+  Credits: 9
+- Henry V: R$ 260,00 (20 seats)
+  Credits: 0
+Amount owed is R$ 2.052,00
+You earned 69 credits
