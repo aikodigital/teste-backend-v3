@@ -169,8 +169,7 @@ public class StatementPrinterTests
                 throw new Exception("Ocorreu um erro inesperado!" + ex.Message);
             }
         }
-        //var exception = Assert.Throws<ArgumentException>(() => statementPrinter.Print(invoice, plays, "html")); // Formato nao suportado
-        //Assert.Equal("Unsupported format: html", exception.Message);
+       
         
     }
 }
