@@ -9,10 +9,10 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities;
 
 public class Performance
 {
-    public Performance(Play? play, int audience, List<Invoice> invoices, Guid id)
+    public Performance(Play play, int audience, List<Invoice> invoices, Guid id)
     {
         Play = play;
-        PlayId = play!.Id;
+        PlayId = play.Id;
         Audience = audience;
         Invoices = invoices;
         Id = id;
@@ -25,11 +25,11 @@ public class Performance
 
     public Guid Id { get; }
     public Guid PlayId { get; }
-    public Play? Play { get; set; }
+    public Play? Play { get; init; }
 
     public int Audience { get; }
 
-    public int Amount { get; set; }
+    public int Amount { get; init; }
     public List<Invoice>? Invoices { get; init; }
 
     private int CalculateAmount(Play? play)

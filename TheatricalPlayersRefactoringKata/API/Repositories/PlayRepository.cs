@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.API.Data;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
-using TheatricalPlayersRefactoringKata.API.Repositories.Validators;
 using TheatricalPlayersRefactoringKata.Core.Entities;
-using TheatricalPlayersRefactoringKata.Core.Services;
 
 #endregion
 
@@ -42,8 +40,13 @@ public class PlayRepository(ApiDbContext context) : IPlayRepository
         return new OkObjectResult(new PlayResponse(play.Id, play.Name, play.Type, play.Lines));
     }
 
-    public async Task<IActionResult> UpdatePlay(Guid playId, PlayRequest play)
+    public async Task<IActionResult> UpdatePlay(Guid playId, Play play)
     {
+        if(playId != play.Id)
+        {
+            return new BadRequestResult();
+        }
+        
         var existingPlay = await context.Plays.FindAsync(playId);
         
         if (existingPlay == null)
