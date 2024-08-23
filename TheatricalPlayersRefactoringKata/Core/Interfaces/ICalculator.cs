@@ -1,10 +1,15 @@
-﻿using TheatricalPlayersRefactoringKata.Core.Entities;
+﻿#region
+
+using TheatricalPlayersRefactoringKata.Core.Entities;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 public interface ICalculator
 {
     public static abstract int CalculateAmount(Performance perf, Play? play);
+
     protected static int DefaultAmount(int lines)
     {
         return lines switch

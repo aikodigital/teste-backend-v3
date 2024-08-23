@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.API.Data;
 

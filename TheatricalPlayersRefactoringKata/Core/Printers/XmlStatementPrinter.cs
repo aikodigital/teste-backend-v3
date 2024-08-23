@@ -1,12 +1,15 @@
-﻿using System.Globalization;
+﻿#region
+
 using System.Text;
 using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
+#endregion
+
 namespace TheatricalPlayersRefactoringKata.Core.Printers;
 
-public abstract class XmlStatementPrinter: IStatementPrinter
+public abstract class XmlStatementPrinter : IStatementPrinter
 {
     public static string Print(Invoice invoice)
     {
@@ -18,9 +21,9 @@ public abstract class XmlStatementPrinter: IStatementPrinter
         {
             doc.Save(streamWriter);
         }
-        
+
         XmlSave(doc);
-        
+
         return Encoding.UTF8.GetString(memoryStream.ToArray());
     }
 
@@ -64,16 +67,13 @@ public abstract class XmlStatementPrinter: IStatementPrinter
 
         return Task.FromResult(doc);
     }
-    
+
     private static void XmlSave(XDocument doc)
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         var path = Path.Combine(root, "Archives");
-        if (!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path);
-        }
-        
+        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
         var fileName = Path.Combine(path, "statement.xml");
         doc.Save(fileName);
     }

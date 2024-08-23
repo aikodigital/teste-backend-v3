@@ -1,7 +1,5 @@
 #region
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TheatricalPlayersRefactoringKata.API.Data;
 
@@ -38,4 +36,4 @@ app.MapControllers();
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
-app.Run();  
+app.Run();

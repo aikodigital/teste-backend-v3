@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Core;
 using TheatricalPlayersRefactoringKata.Core.Entities;
-using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Printers;
 using TheatricalPlayersRefactoringKata.Core.Services;
 using Xunit;
@@ -29,10 +27,10 @@ public class StatementPrinterTests
         };
 
         var invoice = new Invoice([
-                new Performance(plays["hamlet"], 55, [], new Guid()),
-                new Performance(plays["as-like"], 35, [], new Guid()),
-                new Performance(plays["othello"], 40, [], new Guid())
-            ], "BigCo");
+            new Performance(plays["hamlet"], 55, [], new Guid()),
+            new Performance(plays["as-like"], 35, [], new Guid()),
+            new Performance(plays["othello"], 40, [], new Guid())
+        ], "BigCo");
 
         var result = TextStatementPrinter.Print(invoice);
 
@@ -54,13 +52,13 @@ public class StatementPrinterTests
         };
 
         var invoice = new Invoice([
-                new Performance(plays["hamlet"], 55, [], new Guid()),
-                new Performance(plays["as-like"], 35 , [], new Guid()),
-                new Performance(plays["othello"], 40, [], new Guid()),
-                new Performance(plays["henry-v"], 20 , [], new Guid()),
-                new Performance(plays["john"], 39, [], new Guid()),
-                new Performance(plays["henry-v"], 20, [], new Guid())
-            ], "BigCo");
+            new Performance(plays["hamlet"], 55, [], new Guid()),
+            new Performance(plays["as-like"], 35, [], new Guid()),
+            new Performance(plays["othello"], 40, [], new Guid()),
+            new Performance(plays["henry-v"], 20, [], new Guid()),
+            new Performance(plays["john"], 39, [], new Guid()),
+            new Performance(plays["henry-v"], 20, [], new Guid())
+        ], "BigCo");
 
         var result = TextStatementPrinter.Print(invoice);
 
@@ -82,13 +80,13 @@ public class StatementPrinterTests
         };
 
         var invoice = new Invoice([
-                new Performance(plays["hamlet"], 55, [], new Guid()),
-                new Performance(plays["as-like"], 35 , [], new Guid()),
-                new Performance(plays["othello"], 40, [], new Guid()),
-                new Performance(plays["henry-v"], 20 , [], new Guid()),
-                new Performance(plays["john"], 39, [], new Guid()),
-                new Performance(plays["henry-v"], 20, [], new Guid())
-            ], "BigCo");
+            new Performance(plays["hamlet"], 55, [], new Guid()),
+            new Performance(plays["as-like"], 35, [], new Guid()),
+            new Performance(plays["othello"], 40, [], new Guid()),
+            new Performance(plays["henry-v"], 20, [], new Guid()),
+            new Performance(plays["john"], 39, [], new Guid()),
+            new Performance(plays["henry-v"], 20, [], new Guid())
+        ], "BigCo");
 
         var result = XmlStatementPrinter.Print(invoice);
 

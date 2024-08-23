@@ -8,27 +8,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EntityFramework" Version="6.5.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="EntityFramework" Version="6.5.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4"/>
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.7.1"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.7.1"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="API\Data\Migrations\" />
+        <Folder Include="API\Data\Migrations\"/>
     </ItemGroup>
 
 </Project>

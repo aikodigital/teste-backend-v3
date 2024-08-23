@@ -1,4 +1,8 @@
+#region
+
 using TheatricalPlayersRefactoringKata.Core.Services;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 

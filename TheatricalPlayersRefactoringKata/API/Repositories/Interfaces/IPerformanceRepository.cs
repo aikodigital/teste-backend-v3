@@ -1,4 +1,8 @@
-﻿using TheatricalPlayersRefactoringKata.Core.Entities;
+﻿#region
+
+using TheatricalPlayersRefactoringKata.Core.Entities;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 

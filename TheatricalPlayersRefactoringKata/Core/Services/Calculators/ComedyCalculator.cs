@@ -1,9 +1,13 @@
-﻿using TheatricalPlayersRefactoringKata.Core.Entities;
+﻿#region
+
+using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
+
+#endregion
 
 namespace TheatricalPlayersRefactoringKata.Core.Services.Calculators;
 
-public abstract class ComedyCalculator:ICalculator
+public abstract class ComedyCalculator : ICalculator
 {
     public static int CalculateAmount(Performance perf, Play? play)
     {
@@ -11,6 +15,5 @@ public abstract class ComedyCalculator:ICalculator
         return perf.Audience > 20
             ? 10000 + 500 * (perf.Audience - 20) + baseAmount
             : baseAmount;
-        
     }
 }

@@ -19,11 +19,11 @@
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=THEATRICAL
     ports:
-        - "5432:5432"
+      - "5432:5432"
     networks:
-        - dev
+      - dev
     volumes:
-        - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
   
   pg-admin:
     image: dpage/pgadmin4
@@ -36,11 +36,11 @@
       - theatricalplayersrefactoringkata.db
     networks:
       dev:
-    
+
 volumes:
-      db-data:
-    
-    
+  db-data:
+
+
 networks:
   dev:
     driver: bridge

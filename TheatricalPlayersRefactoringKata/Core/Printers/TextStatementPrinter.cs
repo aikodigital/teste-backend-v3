@@ -1,10 +1,14 @@
-﻿using System.Globalization;
+﻿#region
+
+using System.Globalization;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 
+#endregion
+
 namespace TheatricalPlayersRefactoringKata.Core.Printers;
 
-public abstract class TextStatementPrinter: IStatementPrinter
+public abstract class TextStatementPrinter : IStatementPrinter
 {
     public static string Print(Invoice invoice)
     {
