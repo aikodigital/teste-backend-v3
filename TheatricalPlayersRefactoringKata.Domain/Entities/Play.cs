@@ -1,8 +1,9 @@
 using System;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata;
 
-public class Play
+public class Play : Entity
 {
     private string _name;
     private int _lines;

@@ -3,11 +3,36 @@
   "WorkspaceRootPath": "C:\\Projects\\.NET\\teste-backend-v3\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.infrastructure\\data\\theatercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|solutionrelative:theatricalplayersrefactoringkata.infrastructure\\data\\theatercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BE0F47A-F886-4A20-8814-66329366935D}|TheatricalPlayersRefactoringKata.API\\TheatricalPlayersRefactoringKata.API.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.api\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BE0F47A-F886-4A20-8814-66329366935D}|TheatricalPlayersRefactoringKata.API\\TheatricalPlayersRefactoringKata.API.csproj|solutionrelative:theatricalplayersrefactoringkata.api\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BE0F47A-F886-4A20-8814-66329366935D}|TheatricalPlayersRefactoringKata.API\\TheatricalPlayersRefactoringKata.API.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.api\\controllers\\statementprintercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BE0F47A-F886-4A20-8814-66329366935D}|TheatricalPlayersRefactoringKata.API\\TheatricalPlayersRefactoringKata.API.csproj|solutionrelative:theatricalplayersrefactoringkata.api\\controllers\\statementprintercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.infrastructure\\repositories\\statementprinterrepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|solutionrelative:theatricalplayersrefactoringkata.infrastructure\\repositories\\statementprinterrepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\core\\interfaces\\irepositories\\istatementprinterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\core\\interfaces\\irepositories\\istatementprinterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\core\\interfaces\\iservices\\istatementprinterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\core\\interfaces\\iservices\\istatementprinterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B5785FC-742B-404B-BEBD-9233A6CA7843}|TheatricalPlayersRefactoringKata.Application\\TheatricalPlayersRefactoringKata.Application.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.application\\dto\\playdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B5785FC-742B-404B-BEBD-9233A6CA7843}|TheatricalPlayersRefactoringKata.Application\\TheatricalPlayersRefactoringKata.Application.csproj|solutionrelative:theatricalplayersrefactoringkata.application\\dto\\playdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B5785FC-742B-404B-BEBD-9233A6CA7843}|TheatricalPlayersRefactoringKata.Application\\TheatricalPlayersRefactoringKata.Application.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.application\\dto\\statementdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B5785FC-742B-404B-BEBD-9233A6CA7843}|TheatricalPlayersRefactoringKata.Application\\TheatricalPlayersRefactoringKata.Application.csproj|solutionrelative:theatricalplayersrefactoringkata.application\\dto\\statementdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,32 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FileApprover.cs",
-              "DocumentMoniker": "C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
-              "ToolTip": "C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
-              "RelativeToolTip": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAuwDsAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "IStatementPrinterService.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IServices\\IStatementPrinterService.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IServices\\IStatementPrinterService.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IServices\\IStatementPrinterService.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IServices\\IStatementPrinterService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T03:21:14.771Z",
+              "WhenOpened": "2024-08-23T04:46:07.675Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "IStatementPrinterRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IRepositories\\IStatementPrinterRepository.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IRepositories\\IStatementPrinterRepository.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IRepositories\\IStatementPrinterRepository.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Core\\Interfaces\\IRepositories\\IStatementPrinterRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:46:01.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "StatementPrinterRepositoryImpl.cs",
               "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
               "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAAwHYAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T03:14:34.028Z",
+              "WhenOpened": "2024-08-23T04:41:57.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StatementDTO.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Application\\DTO\\StatementDTO.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Application\\DTO\\StatementDTO.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Application\\DTO\\StatementDTO.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Application\\DTO\\StatementDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:33:05.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayDTO.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Application\\DTO\\PlayDTO.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Application\\DTO\\PlayDTO.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Application\\DTO\\PlayDTO.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Application\\DTO\\PlayDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:32:54.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StatementPrinterController.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.API\\Controllers\\StatementPrinterController.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.API\\Controllers\\StatementPrinterController.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.API\\Controllers\\StatementPrinterController.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.API\\Controllers\\StatementPrinterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:32:50.496Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.API\\Startup.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.API\\Startup.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.API\\Startup.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.API\\Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:31:06.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TheaterContext.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Data\\TheaterContext.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Infrastructure\\Data\\TheaterContext.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Data\\TheaterContext.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Infrastructure\\Data\\TheaterContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T04:30:45.97Z",
               "EditorCaption": ""
             }
           ]

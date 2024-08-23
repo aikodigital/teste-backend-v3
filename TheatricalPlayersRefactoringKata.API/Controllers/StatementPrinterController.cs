@@ -1,28 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
+using TheatricalPlayersRefactoringKata.Application.DTO;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Common.Result;
+using TheatricalPlayersRefactoringKata.Domain.Enums;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers {
     [Route("v1/[controller]")]
     [ApiController]
     public class StatementPrinterController : ControllerBase {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<StatementPrinterController> _logger;
+        private readonly IApplicationServicePrinter _applicationService;
 
-        public StatementPrinterController(ILogger<StatementPrinterController> logger) {
-            _logger = logger;
+        public StatementPrinterController(IApplicationServicePrinter ApplicationService) {
+            _applicationService = ApplicationService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get() {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        [HttpGet(Name = "print_statement")]
+        public Result<IActionResult> PrintStatement([FromBody] InvoiceDTO invoice, Dictionary<string, PlayDTO> plays) {
+
+            if (invoice == null || invoice.Performances == null) {
+                return Result<IActionResult>.Failure(Error.Validation("The invoice data is invalid", ErrorType.Validation.ToString()), BadRequest());
+            }
+
+            if (plays == null) {
+                return Result<IActionResult>.Failure(Error.Validation("Any play data is invalid", ErrorType.Validation.ToString()), BadRequest());
+            }
+
+            Result<string> invoiceString = _applicationService.PrintText(invoice, plays);
+
+            return Result<IActionResult>.Success(Ok(invoiceString.Value));
         }
     }
 }

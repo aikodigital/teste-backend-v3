@@ -12,7 +12,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Data
 
         public TheaterContext(DbContextOptions<TheaterContext> options) : base(options) { }
 
-        public DbSet<StatementDTO> Statement { get; set; }
+        public DbSet<InvoiceDTO> Statement { get; set; }
 
     }
 }

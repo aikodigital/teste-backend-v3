@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 
 
@@ -17,6 +19,7 @@ namespace TheatricalPlayersRefactoringKata.API {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            services.AddScoped<IApplicationServicePrinter, ApplicationServicePrinter>();
 
             services.AddDbContext<TheaterContext>(options => {
                 options.UseNpgsql(Configuration.GetConnectionString("Default"),

@@ -4,26 +4,37 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
+using TheatricalPlayersRefactoringKata.Application.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Common.Result;
 using TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IRepositories;
+using TheatricalPlayersRefactoringKata.Domain.Core.Strategy;
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using TheatricalPlayersRefactoringKata.Domain.Utils;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
     public class StatementPrinterRepositoryImpl : IStatementPrinterRepository {
 
+        Dictionary<Enum, IGenreStrategy> _genres = new Dictionary<Enum, IGenreStrategy> {
+        { PlayGenre.Comedy, new ComedyGenreStrategy() },
+        { PlayGenre.Tragedy, new TragedyGenreStrategy() },
+        { PlayGenre.History, new HistoryGenreStrategy() }
+         };
+
+        public StatementPrinterRepositoryImpl(Dictionary<Enum, IGenreStrategy> genres) {
+            _genres = genres ?? new Dictionary<Enum, IGenreStrategy>();
+        }
 
         // adicionar context do banco de dados para persistência dos dados no banco
 
-        public Result<string> PrintText(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres) {
+        public Result<string> PrintText(Invoice invoice, Dictionary<string, Play> plays) {
             CultureInfo cultureInfo = new("en-US");
 
             if (invoice == null) {
-                return Result<string>.Failure(Error.Validation("Invoice data is null", ErrorType.Validation.ToString()));
+                return Result<string>.Failure(Error.Validation("Invoice data is null", ErrorType.Validation.ToString()), "");
             }
 
             if (plays == null && plays!.Count == 0) {
-                return Result<string>.Failure(Error.Validation("Plays data is null", ErrorType.Validation.ToString()));
+                return Result<string>.Failure(Error.Validation("Plays data is null", ErrorType.Validation.ToString()), "");
             }
 
             double totalAmount = 0;
@@ -35,13 +46,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
 
                 Play play = plays[perf.PlayId];
                 double thisAmount = 0;
-                (thisAmount, totalAmount, unitVolumeCredits) = CalculateAllPerfomances(plays, play, genres, perf, unitVolumeCredits, totalAmount);
+                (thisAmount, totalAmount, unitVolumeCredits) = CalculateAllPerfomances(plays, play, _genres, perf, unitVolumeCredits, totalAmount);
 
                 result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
                 totalVolumeCredits += unitVolumeCredits;
             }
 
-            string xmlString = PrintXml(invoice, plays, genres);
+            string xmlString = PrintXml(invoice, plays);
 
             string filePath = Path.Combine(Path.GetTempPath(), "invoice.xml");
             File.WriteAllText(filePath, xmlString);
@@ -52,7 +63,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             ;
         }
 
-        public string PrintXml(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres) {
+        public string PrintXml(Invoice invoice, Dictionary<string, Play> plays) {
             double totalAmount = 0;
             double totalVolumeCredits = 0;
             XDocument xmlDocument = new();
@@ -60,7 +71,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
             XElement statementEl = new(new XElement("Statement", new XAttribute(XNamespace.Xmlns + "xsi", xsi), new XAttribute(XNamespace.Xmlns + "xsd", xsd)));
 
-            XElement customerEl = new( new XElement("Customer"));
+            XElement customerEl = new(new XElement("Customer"));
             customerEl.Value = invoice.Customer;
             statementEl.Add(customerEl);
 
@@ -69,7 +80,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
                 double unitVolumeCredits = 0;
                 double thisAmount = 0;
                 Play play = plays[perf.PlayId];
-                (thisAmount, totalAmount, unitVolumeCredits) = CalculateAllPerfomances(plays, play, genres, perf, unitVolumeCredits, totalAmount);
+                (thisAmount, totalAmount, unitVolumeCredits) = CalculateAllPerfomances(plays, play, _genres, perf, unitVolumeCredits, totalAmount);
 
                 XElement itemEl = new(new XElement("Item"));
                 XElement amountEl = new(new XElement("AmountOwed", Convert.ToDecimal(thisAmount / 100)));
@@ -97,15 +108,15 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
             return IndentXml(xmlDocument);
         }
 
-        private static (double, double, double) CalculateAllPerfomances(Dictionary<string, Play> plays, Play play, Dictionary<Enum, IGenreStrategy> genres, Performance perf,  double volumeCredits, double totalAmount) {
+        private static (double, double, double) CalculateAllPerfomances(Dictionary<string, Play> plays, Play play, Dictionary<Enum, IGenreStrategy> genres, Performance perf, double volumeCredits, double totalAmount) {
             double thisAmount = PlayCalculationUtils.CalculatePlayLines(perf, play);
 
             if (!plays.TryGetValue(perf.PlayId, out play!)) {
-                Result<string>.Failure(Error.NotFound($"Play with ID {perf.PlayId} not found.", ErrorType.NotFound.ToString()));
+                Result<string>.Failure(Error.NotFound($"Play with ID {perf.PlayId} not found.", ErrorType.NotFound.ToString()), "");
             }
 
             if (!genres.TryGetValue(play.Type, out var genre)) {
-                Result<string>.Failure(Error.NotFound($"Genre strategy for {play.Type} not found.", ErrorType.NotFound.ToString()));
+                Result<string>.Failure(Error.NotFound($"Genre strategy for {play.Type} not found.", ErrorType.NotFound.ToString()), "");
             }
 
             thisAmount = genre!.CalculatePlayAmount(perf, thisAmount);
@@ -118,9 +129,9 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Repositories {
         private string IndentXml(XDocument doc) {
             string xmlString = "";
             XmlWriterSettings settings = new XmlWriterSettings {
-                Encoding = new UTF8Encoding(false), 
+                Encoding = new UTF8Encoding(false),
                 Indent = true,
-                OmitXmlDeclaration = false 
+                OmitXmlDeclaration = false
             };
 
             using (Utf8StringWriter utf8Sw = new()) {

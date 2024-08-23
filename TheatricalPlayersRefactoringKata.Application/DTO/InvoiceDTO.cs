@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace TheatricalPlayersRefactoringKata.Application.DTO
 {
-    public class PlayDTO
+    public class InvoiceDTO
     {
-        public string Name { get; set; }
-        public int Lines { get; set; }
-        public Enum Type { get; set; }
-
+        public string Customer { get; set ; }
+        public List<PerformanceDTO> Performances { get ; set; }
     }
 }
