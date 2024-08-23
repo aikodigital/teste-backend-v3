@@ -11,9 +11,9 @@ internal class PlayTypeChange
         public ICalculateStrategy calculateType;
 
 
-        public ICalculateStrategy Change(Play type)
+        public ICalculateStrategy Change(string type)
         {
-            switch (type.Type)
+            switch (type)
             {
                 case "tragedy":
                     calculateType = new CalculateTragedy();
@@ -25,7 +25,7 @@ internal class PlayTypeChange
                     calculateType = new CalculateHistory();
                     break;
                 default:
-                    throw new Exception("unknown type: " + type.Name);
+                    throw new Exception("unknown type: " + type);
             }
 
             return calculateType;

@@ -20,7 +20,7 @@ namespace TheatricalPlayersRefactoringKata.Formatters
             {
                 var play = plays[perf.PlayId];
 
-                var calculate = playtype.Change(play);
+                var calculate = playtype.Change(play.Type);
 
                 var amount = calculate.CalculateAmount(play, perf);
                 var credits = calculate.CalculateCredits(play, perf);

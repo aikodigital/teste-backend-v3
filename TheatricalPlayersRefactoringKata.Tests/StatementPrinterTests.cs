@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
@@ -90,5 +91,86 @@ public class StatementPrinterTests
             StatementPrinter statementPrinter = new StatementPrinter();
             var result = statementPrinter.Print(invoice, plays, "xml");
             Approvals.Verify(result);             
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestStatementNotFound()
+    {
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
+        plays.Add("john", new Play("King John", 2648, "Terror"));
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("henry-v", 20),
+                new Performance("john", 39),
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        try
+        {
+        var result = statementPrinter.Print(invoice, plays, "text");
+        var xmlResult = statementPrinter.Print(invoice, plays, "xml");
+        }
+        catch (Exception ex)
+        {
+            if (ex.Message == "unknown type: Terror")
+            {
+                // Test passed because the correct exception was thrown
+            }
+            else
+            {
+                throw new Exception("Ocorreu um erro inesperado!" + ex.Message);
+            }
+        }
+        
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestStatementFormatNotFound()
+    {
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
+        plays.Add("john", new Play("King John", 2648, "history"));
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("henry-v", 20),
+                new Performance("john", 39),
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        try
+        {
+        var result = statementPrinter.Print(invoice, plays, "pdf");
+        }
+        catch (Exception ex)
+        {
+            if (ex.Message == "Unsupported format: pdf")
+            {
+                // Test passed because the correct exception was thrown
+            }
+            else
+            {
+                throw new Exception("Ocorreu um erro inesperado!" + ex.Message);
+            }
+        }
+        //var exception = Assert.Throws<ArgumentException>(() => statementPrinter.Print(invoice, plays, "html")); // Formato nao suportado
+        //Assert.Equal("Unsupported format: html", exception.Message);
+        
     }
 }

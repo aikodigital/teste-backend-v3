@@ -21,7 +21,7 @@ namespace TheatricalPlayersRefactoringKata.Formatters
             var itemsElements = invoice.Performances.Select(perf => 
                 {    
                     var play = plays[perf.PlayId];
-                    var calculate = playtype.Change(play);
+                    var calculate = playtype.Change(play.Type);
                     decimal amount = calculate.CalculateAmount(play, perf);
                     int credits = calculate.CalculateCredits(play, perf);
                     volumeCredits += credits;

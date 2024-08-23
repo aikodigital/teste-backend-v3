@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using TheatricalPlayersRefactoringKata.Formatters;
 using TheatricalPlayersRefactoringKata.Interfaces;
 namespace TheatricalPlayersRefactoringKata;
@@ -20,7 +21,13 @@ public class StatementPrinter
         
     public string Print(Invoice invoice, Dictionary<string, Play> plays, string type)
     {
-        var statementType = statementFormatt[type].StatementFormat(invoice, plays);
-        return statementType;
+
+        if(statementFormatt.TryGetValue(type, out var statementType))
+        {
+             return statementType.StatementFormat(invoice, plays);
+        }
+       
+
+        throw new ArgumentException ($"Unsupported format: {type}");
     }
 }
