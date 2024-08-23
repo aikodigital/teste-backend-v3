@@ -15,6 +15,7 @@
   theatricalplayersrefactoringkata.db:
     image: postgres:latest
     environment:
+      - POSTGRES_HOST=ep-restless-shadow-a5t5e30y.us-east-2.aws.neon.tech
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=THEATRICAL
@@ -24,18 +25,7 @@
       - dev
     volumes:
       - db-data:/var/lib/postgresql/data
-  
-  pg-admin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "postgres@postgres.com"
-      PGADMIN_DEFAULT_PASSWORD: "postgres"
-    ports:
-      - "16543:80"
-    depends_on:
-      - theatricalplayersrefactoringkata.db
-    networks:
-      dev:
+
 
 volumes:
   db-data:

@@ -1,6 +1,7 @@
 ﻿#region
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.API.Data;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
@@ -14,7 +15,13 @@ public class PlayRepository(ApiDbContext context) : IPlayRepository
 {
     public async Task<IActionResult> CreatePlay(PlayRequest play)
     {
-        var newPlay = new Play(play.Name, play.Lines, play.Type);
+        var newPlay = new Play
+        {
+            Id = new Guid(),
+            Name = play.Name,
+            Type = play.Type,
+            Lines = play.Lines
+        };
 
         context.Plays.Add(newPlay);
        await context.SaveChangesAsync();
@@ -22,10 +29,17 @@ public class PlayRepository(ApiDbContext context) : IPlayRepository
         return new CreatedResult("play", newPlay);
     }
 
-    public Task<IEnumerable<PlayResponse>> GetPlays()
+    public async Task<IActionResult> GetPlays()
     {
-        var plays = context.Plays.Select(p => new PlayResponse(p.Id, p.Name, p.Type, p.Lines));
-        return Task.FromResult<IEnumerable<PlayResponse>>(plays);
+        var plays = await context.Plays.Select(p => new PlayResponse(p.Id, p.Name, p.Type, p.Lines))
+            .ToListAsync().ConfigureAwait(false);
+
+        if (plays == null)
+        {
+            return new NotFoundResult();
+        }
+        
+        return new OkObjectResult(plays);
     }
 
     public async Task<IActionResult> GetPlayById(Guid playId)

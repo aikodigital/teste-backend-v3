@@ -9,7 +9,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Services.Calculators;
 
 public abstract class ComedyCalculator : ICalculator
 {
-    public static int CalculateAmount(Performance perf, Play? play)
+    public static int CalculateAmount(Performance perf, Play play)
     {
         var baseAmount = 300 * perf.Audience + ICalculator.DefaultAmount(play.Lines);
         return perf.Audience > 20

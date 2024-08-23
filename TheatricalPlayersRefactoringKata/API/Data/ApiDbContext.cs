@@ -1,17 +1,35 @@
 ﻿#region
 
+using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 #endregion
 
 namespace TheatricalPlayersRefactoringKata.API.Data;
 
-public class ApiDbContext(DbContextOptions<ApiDbContext> options) : DbContext(options)
+public sealed class ApiDbContext : DbContext
 {
-    public DbSet<Invoice> Invoices { get; set; }
-    public DbSet<Performance> Performances { get; set; }
-    public DbSet<Play> Plays { get; set; }
+    public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options)
+    {
+        try
+        {
+            if (Database.GetService<IDatabaseCreator>() is not RelationalDatabaseCreator databaseCreator) return;
+            if (!databaseCreator.CanConnect()) databaseCreator.Create();
+            if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public Microsoft.EntityFrameworkCore.DbSet<Invoice> Invoices { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<Performance> Performances { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<Play> Plays { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,9 +60,9 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Performance>().Property(x => x.PlayId).IsRequired();
         modelBuilder.Entity<Performance>().Property(x => x.Audience).IsRequired();
         modelBuilder.Entity<Performance>().Property(x => x.Amount).IsRequired();
-        modelBuilder.Entity<Performance>().HasOne(x => x.Play).WithMany().HasForeignKey(x => x.PlayId);
-        modelBuilder.Entity<Performance>().HasMany(x => x.Invoices).WithMany(i => i.Performances)
-            .UsingEntity(x => x.ToTable("PerformanceInvoices"));
+        modelBuilder.Entity<Performance>().HasOne(per => per.Play)
+            .WithMany()
+            .HasForeignKey(per => per.PlayId);
 
         return modelBuilder;
     }
@@ -54,8 +72,6 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Invoice>().ToTable("Invoices");
         modelBuilder.Entity<Invoice>().HasKey(x => x.Id);
         modelBuilder.Entity<Invoice>().Property(x => x.Customer).HasMaxLength(30).IsRequired();
-        modelBuilder.Entity<Invoice>().HasMany(i => i.Performances).WithMany(p => p.Invoices)
-            .UsingEntity(x => x.ToTable("PerformanceInvoices"));
 
         return modelBuilder;
     }

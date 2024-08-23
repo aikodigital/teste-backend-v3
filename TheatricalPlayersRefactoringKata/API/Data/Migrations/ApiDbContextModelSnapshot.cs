@@ -34,7 +34,7 @@ namespace TheatricalPlayersRefactoringKata.API.Data.Migrations
 
                     b.HasIndex("PerformancesId");
 
-                    b.ToTable("PerformanceInvoices", (string)null);
+                    b.ToTable("InvoicePerformance");
                 });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Core.Entities.Invoice", b =>
@@ -45,8 +45,8 @@ namespace TheatricalPlayersRefactoringKata.API.Data.Migrations
 
                     b.Property<string>("Customer")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.HasKey("Id");
 
@@ -86,7 +86,8 @@ namespace TheatricalPlayersRefactoringKata.API.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer");

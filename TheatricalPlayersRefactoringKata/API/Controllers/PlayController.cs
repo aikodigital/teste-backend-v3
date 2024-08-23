@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.API.Repositories;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
+using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 using TheatricalPlayersRefactoringKata.API.Repositories.Validators;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 
@@ -12,13 +13,13 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PlayController(PlayRepository repo) : ControllerBase
+public class PlayController(IPlayRepository repo) : ControllerBase
 {
     // GET: api/<PlayController>
     [HttpGet]
-    public IEnumerable<PlayResponse> Get()
+    public async Task<IActionResult> Get()
     {
-        return repo.GetPlays().Result;
+        return await repo.GetPlays();
     }
 
     // GET api/<PlayController>/5
@@ -32,7 +33,7 @@ public class PlayController(PlayRepository repo) : ControllerBase
 
     // POST api/<PlayController>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] PlayRequest play)
+    public async Task<IActionResult> Post(PlayRequest play)
     {
         return PlayValidator.IsValid(play) ? 
             new BadRequestObjectResult("Invalid play request") : 

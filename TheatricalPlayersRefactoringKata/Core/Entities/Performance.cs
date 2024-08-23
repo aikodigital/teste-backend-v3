@@ -1,36 +1,23 @@
-#region
-
+using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Services;
 using TheatricalPlayersRefactoringKata.Core.Services.Calculators;
 
-#endregion
-
 namespace TheatricalPlayersRefactoringKata.Core.Entities;
 
-public class Performance
+public class Performance : IPerformance
 {
-    public Performance(Play play, int audience, List<Invoice> invoices, Guid id)
+    public Performance(Play play, int audience, Guid id)
     {
         Play = play;
         PlayId = play.Id;
         Audience = audience;
-        Invoices = invoices;
         Id = id;
         Amount = CalculateAmount(play);
     }
-
+    
     public Performance()
     {
     }
-
-    public Guid Id { get; }
-    public Guid PlayId { get; }
-    public Play? Play { get; init; }
-
-    public int Audience { get; }
-
-    public int Amount { get; init; }
-    public List<Invoice>? Invoices { get; init; }
 
     private int CalculateAmount(Play? play)
     {
@@ -46,7 +33,14 @@ public class Performance
     public int CalculateCredits()
     {
         var credits = Math.Max(Audience - 30, 0);
-        if (Play!.Type == Genre.Comedy) credits += (int)Math.Floor((decimal)Audience / 5);
+        if (Play.Type == Genre.Comedy) credits += (int)Math.Floor((decimal)Audience / 5);
         return credits;
     }
+
+    public Guid Id { get; }
+    public Guid PlayId { get; init; }
+    public Play Play { get; set; } = new();
+    public int Audience { get; init; } = 0;
+    public int Amount { get; init; }
+    public List<Invoice> Invoices { get; init; } = [];
 }

@@ -1,5 +1,6 @@
 #region
 
+using System.ComponentModel.DataAnnotations;
 using TheatricalPlayersRefactoringKata.Core.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Services;
 
@@ -18,18 +19,13 @@ public class Play : IPlay
         Type = type;
     }
 
-    public Play(Guid id, string name, int lines, Genre type)
+    public Play(): this("", 0, Genre.Comedy)
     {
-        if (lines < 0) throw new Exception("lines cannot be negative");
-        Id = id;
-        Name = name;
-        Lines = lines;
-        Type = type;
     }
 
-    public Guid Id { get; }
-    public int Lines { get; set; }
 
-    public string Name { get; set; }
-    public Genre Type { get; set; }
+    public Guid Id { get; init; }
+    public int Lines { get; init; }
+    public string Name { get; init; }
+    public Genre Type { get; init; }
 }

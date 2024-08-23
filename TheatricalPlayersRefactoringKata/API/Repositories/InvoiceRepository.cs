@@ -4,6 +4,7 @@ using TheatricalPlayersRefactoringKata.API.Data;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Core.Printers;
 
 namespace TheatricalPlayersRefactoringKata.API.Repositories;
 
@@ -61,8 +62,19 @@ public class InvoiceRepository(ApiDbContext context): IInvoiceRepository
         return new NoContentResult();
     }
 
-    public Task<IActionResult> GenerateStatement(Guid invoiceId, ReceiptType receiptType)
+    public async Task<IActionResult> GenerateStatement(Guid invoiceId, ReceiptType receiptType)
     {
-        throw new NotImplementedException();
+        var invoice = await context.Invoices.FindAsync(invoiceId);
+        if(invoice == null)
+        {
+            return new NotFoundResult();
+        }
+        
+        return receiptType switch
+        {
+            ReceiptType.Text => new OkObjectResult(TextStatementPrinter.Print(invoice)),
+            ReceiptType.Xml => new OkObjectResult(XmlStatementPrinter.XmlMount(invoice)),
+            _ => new BadRequestResult()
+        };
     }
 }

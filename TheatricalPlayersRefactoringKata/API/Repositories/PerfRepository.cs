@@ -16,7 +16,7 @@ public class PerfRepository(ApiDbContext context): IPerformanceRepository
             return new NotFoundResult();
         }
         
-        var newPerf= new Performance( play ,perf.Audience,[], playId);
+        var newPerf = new Performance(play, perf.Audience,new Guid());
         await context.Performances.AddAsync(newPerf);
         await context.SaveChangesAsync();
         

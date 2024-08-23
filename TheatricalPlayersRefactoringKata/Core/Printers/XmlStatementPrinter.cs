@@ -27,7 +27,7 @@ public abstract class XmlStatementPrinter : IStatementPrinter
         return Encoding.UTF8.GetString(memoryStream.ToArray());
     }
 
-    private static Task<XDocument> XmlMount(Invoice invoice)
+    public static Task<XDocument> XmlMount(Invoice invoice)
     {
         var totalAmount = 0;
         var volumeCredits = 0;

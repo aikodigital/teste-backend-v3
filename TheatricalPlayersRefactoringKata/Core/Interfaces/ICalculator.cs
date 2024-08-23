@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 public interface ICalculator
 {
-    public static abstract int CalculateAmount(Performance perf, Play? play);
+    public static abstract int CalculateAmount(Performance perf, Play play);
 
     protected static int DefaultAmount(int lines)
     {
