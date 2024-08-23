@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using TheatricalPlayersRefactoringKata.Calculators;
-using TheatricalPlayersRefactorinKata.Interfaces;
+using TheatricalPlayersRefactoringKata.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Formatters
 {

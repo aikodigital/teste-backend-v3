@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Calculators;
-using TheatricalPlayersRefactorinKata.Interfaces;
+using TheatricalPlayersRefactoringKata.Interfaces;
+using TheatricalPlayersRefactoringKata;
 namespace TheatricalPlayersRefactoringKata.Formatters
 {
    internal class StatementXml : IStatementStrategy
