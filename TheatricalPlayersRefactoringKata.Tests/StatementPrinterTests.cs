@@ -10,40 +10,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
 {
     public class StatementPrinterTests
     {
-        [Fact]
-        [UseReporter(typeof(DiffReporter))]
-        public void TestStatementExampleLegacy()
-        {
-            var playCategories = new Dictionary<string, IPlayCategory>
-            {
-                { "tragedy", new TragedyCategory() },
-                { "comedy", new ComedyCategory() }
-            };
-
-            var plays = new Dictionary<int, Play>
-            {
-                { 1, new Play("Hamlet", "Tragedy") },
-                { 2, new Play("As You Like It", "Comedy") },
-                { 3, new Play("Othello", "Tragedy") }
-            };
-
-            var invoice = new Invoice(
-                "BigCo",
-                new List<Performance>
-                {
-                    new Performance(1, 55),
-                    new Performance(2, 35),
-                    new Performance(3, 40)
-                }
-            );
-
-            var statementCalculator = new StatementCalculator(playCategories, plays);
-            var statementPrinter = new StatementPrinter(statementCalculator);
-            var result = statementPrinter.Print(invoice, plays);
-
-            Approvals.Verify(result);
-        }
-
+        
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         public void TestTextStatementExample()

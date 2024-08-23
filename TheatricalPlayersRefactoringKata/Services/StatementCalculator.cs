@@ -19,6 +19,9 @@ namespace TheatricalPlayersRefactoringKata.Services
         public string Calculate(Invoice invoice)
         {
             var result = $"Statement for {invoice.Customer}\n";
+            decimal totalAmount = 0;
+            int totalPoints = 0;
+
             foreach (var performance in invoice.Performances)
             {
                 var play = _plays[performance.PlayId];
@@ -27,10 +30,13 @@ namespace TheatricalPlayersRefactoringKata.Services
 
                 result += $"- {play.Title}: {thisAmount:C} ({performance.Seats} seats)\n";
                 result += $"  Credits: {thisPoints}\n";
+
+                totalAmount += thisAmount;
+                totalPoints += thisPoints;
             }
 
-            result += $"Total amount: {CalculateTotalAmount(invoice.Performances):C}\n";
-            result += $"Total points: {CalculateTotalPoints(invoice.Performances)}\n";
+            result += $"Amount owed is {totalAmount:C}\n";
+            result += $"You earned {totalPoints} credits\n";
 
             return result;
         }
@@ -38,7 +44,7 @@ namespace TheatricalPlayersRefactoringKata.Services
         public decimal CalculateAmount(Play play, int seats)
         {
             var category = _playCategories[play.Category];
-            return category.CalculateAmount(seats, 0);
+            return category.CalculateAmount(seats, play.Id);
         }
 
         public int CalculatePoints(Play play, int seats)

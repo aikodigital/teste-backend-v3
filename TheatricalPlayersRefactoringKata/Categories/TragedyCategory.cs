@@ -6,7 +6,6 @@ namespace TheatricalPlayersRefactoringKata.Categories
     {
         public decimal CalculateAmount(int seats, int performanceId)
         {
-            // Valor base para tragédia
             decimal baseAmount = Math.Max(1000, Math.Min(4000, seats)) / 10m;
             if (seats <= 30)
             {

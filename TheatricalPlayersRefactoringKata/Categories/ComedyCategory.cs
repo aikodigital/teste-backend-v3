@@ -20,9 +20,7 @@ namespace TheatricalPlayersRefactoringKata.Categories
         public int CalculatePoints(int seats)
         {
             int basePoints = (int)Math.Floor((decimal)seats / 3) + (int)Math.Floor((decimal)seats / 5);
-
             int bonusPoints = (int)Math.Floor((decimal)seats / 5);
-
             return basePoints + bonusPoints;
         }
     }
