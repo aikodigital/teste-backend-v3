@@ -19,6 +19,7 @@ namespace TheatricalPlayersRefactoringKata.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            PlayType.OnModelCreating(builder);
             Play.OnModelCreating(builder);
             StatementLog.OnModelCreating(builder);
         }

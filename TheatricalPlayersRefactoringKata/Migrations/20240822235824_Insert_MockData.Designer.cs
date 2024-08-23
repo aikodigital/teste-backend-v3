@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheatricalPlayersRefactoringKata.Data;
 
@@ -10,9 +11,11 @@ using TheatricalPlayersRefactoringKata.Data;
 namespace TheatricalPlayersRefactoringKata.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class DbConnModelSnapshot : ModelSnapshot
+    [Migration("20240822235824_Insert_MockData")]
+    partial class Insert_MockData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.20");
@@ -93,18 +96,18 @@ namespace TheatricalPlayersRefactoringKata.Migrations
                         new
                         {
                             Name = "tragedy",
-                            DtInclusao = DateTime.Now
+                            DtInclusao = new DateTime(2024, 8, 22, 20, 58, 24, 570, DateTimeKind.Local).AddTicks(3682)
                         },
                         new
                         {
                             Name = "comedy",
-                            DtInclusao = DateTime.Now.AddMinutes(1)
+                            DtInclusao = new DateTime(2024, 8, 22, 20, 58, 24, 570, DateTimeKind.Local).AddTicks(3692)
                         },
                         new
                         {
                             Name = "history",
                             Description = "new genre",
-                            DtInclusao = DateTime.Now.AddMinutes(2)
+                            DtInclusao = new DateTime(2024, 8, 22, 20, 58, 24, 570, DateTimeKind.Local).AddTicks(3693)
                         });
                 });
 

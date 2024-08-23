@@ -2,5 +2,5 @@
 [Oo]bj/
 
 *.received.txt
-/app.db
+
 /.vs/*

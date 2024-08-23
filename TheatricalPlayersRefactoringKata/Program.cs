@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Data.Common;
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Data;
 using TheatricalPlayersRefactoringKata.Repository;
@@ -32,9 +32,13 @@ builder.Services.AddScoped<HistoryCalculator>();
 
 builder.Services.AddScoped<IPlayTypeRepository, PlayTypeRepository>();
 
-
-
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {
