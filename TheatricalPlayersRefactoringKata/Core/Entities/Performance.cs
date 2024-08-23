@@ -9,7 +9,7 @@ namespace TheatricalPlayersRefactoringKata.Core.Entities;
 
 public class Performance
 {
-    public Performance(Play? play, int audience, List<Invoice> invoices , Guid id)
+    public Performance(Play? play, int audience, List<Invoice> invoices, Guid id)
     {
         Play = play;
         PlayId = play!.Id;
@@ -18,9 +18,20 @@ public class Performance
         Id = id;
         Amount = CalculateAmount(play);
     }
-    
-    public Performance(){}
-    
+
+    public Performance()
+    {
+    }
+
+    public Guid Id { get; }
+    public Guid PlayId { get; }
+    public Play? Play { get; set; }
+
+    public int Audience { get; }
+
+    public int Amount { get; set; }
+    public List<Invoice>? Invoices { get; init; }
+
     private int CalculateAmount(Play? play)
     {
         return play!.Type switch
@@ -31,15 +42,6 @@ public class Performance
             _ => throw new Exception("unknown genre")
         };
     }
-    
-    public Guid Id { get; }
-    public Guid PlayId { get; }
-    public Play? Play { get; set; }
-
-    public int Audience { get; }
-
-    public int Amount { get; set; }
-    public List<Invoice>? Invoices { get; init; }
 
     public int CalculateCredits()
     {
