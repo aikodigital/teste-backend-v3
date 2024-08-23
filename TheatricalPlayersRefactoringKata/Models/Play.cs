@@ -11,8 +11,8 @@ public class Play
     public string Type { get => _type; set => _type = value; }
 
     public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+        Name = name;
+        Lines = lines;
+        Type = type;
     }
 }

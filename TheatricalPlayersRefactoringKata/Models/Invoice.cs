@@ -12,8 +12,8 @@ public class Invoice
 
     public Invoice(string customer, List<Performance> performance)
     {
-        this._customer = customer;
-        this._performances = performance;
+        Customer = customer;
+        Performances = performance;
     }
 
 }
