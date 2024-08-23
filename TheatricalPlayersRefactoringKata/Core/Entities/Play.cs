@@ -17,7 +17,7 @@ public class Play : IPlay
         Lines = lines;
         Type = type;
     }
-    
+
     public Play(Guid id, string name, int lines, Genre type)
     {
         if (lines < 0) throw new Exception("lines cannot be negative");
@@ -26,11 +26,10 @@ public class Play : IPlay
         Lines = lines;
         Type = type;
     }
-    
-    public Guid Id { get; }
-    public int Lines { get; }
 
-    public string Name { get; }
-    public Genre Type { get; }
-    
+    public Guid Id { get; }
+    public int Lines { get; set; }
+
+    public string Name { get; set; }
+    public Genre Type { get; set; }
 }
