@@ -53,9 +53,9 @@ public class StatementPrinterTests {
         Dictionary<string, Play> plays = InitializePlays();
         Invoice invoice = CreateInvoice();
 
-        StatementPrinterRepositoryImpl repository = new(genres);
+        StatementPrinterRepositoryImpl repository = new();
         StatementPrinterService statementPrinter = new(repository);
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.PrintText(invoice, plays, genres);
 
 
         Approvals.Verify(result.Value);

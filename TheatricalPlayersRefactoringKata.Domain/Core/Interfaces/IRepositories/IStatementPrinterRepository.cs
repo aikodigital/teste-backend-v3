@@ -8,7 +8,8 @@ using TheatricalPlayersRefactoringKata.Domain.Common.Result;
 namespace TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IRepositories {
     public interface IStatementPrinterRepository {
 
-        Result<string> Print(Invoice invoice, Dictionary<string, Play> plays);
+        Result<string> PrintText(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres);
+        Result<string> PrintXml(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres);
 
     }
 }

@@ -3,20 +3,23 @@
   "WorkspaceRootPath": "C:\\Projects\\.NET\\teste-backend-v3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.testxmlstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.testxmlstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.infrastructure\\repositories\\statementprinterrepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{228A26F5-B9F7-420E-BBD9-6FE100C0356A}|TheatricalPlayersRefactoringKata.Infrastructure\\TheatricalPlayersRefactoringKata.Infrastructure.csproj|solutionrelative:theatricalplayersrefactoringkata.infrastructure\\repositories\\statementprinterrepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.testtextstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.testtextstatementexample.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.teststatementexamplelegacy.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.teststatementexamplelegacy.approved.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\regexxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\regexxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\playcalculationutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\playcalculationutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\utf8stringwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\utf8stringwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +29,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestStatementExampleLegacy.approved.txt",
+              "DocumentIndex": 3,
+              "Title": "PlayCalculationUtils.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-08-22T03:51:46.424Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T03:06:07.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegexXml.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T02:55:49.003Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "StatementPrinterTests.TestTextStatementExample.approved.txt",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestTextStatementExample.approved.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-08-22T03:51:45.016Z",
+              "Title": "FileApprover.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
+              "ToolTip": "C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
+              "RelativeToolTip": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAuwDAAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T02:53:36.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Utf8StringWriter.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T02:51:17.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StatementPrinterTests.TestXmlStatementExample.approved.txt",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-08-22T03:51:43.942Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StatementPrinterTests.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwCsAAAAwAAAAAAAAAA==",
+              "Title": "StatementPrinterRepositoryImpl.cs",
+              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
+              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAiwH4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-22T03:49:27.636Z",
+              "WhenOpened": "2024-08-23T02:48:14.483Z",
               "EditorCaption": ""
             }
           ]
