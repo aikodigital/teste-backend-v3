@@ -19,8 +19,4 @@ public class StatementPrinterService : IStatementPrinterService {
         return _repository.PrintText(invoice, plays, genres);
     }
 
-    public Result<string> PrintXml(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres) {
-        return _repository.PrintXml(invoice, plays, genres);
-    }
-
 }

@@ -9,7 +9,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Core.Interfaces.IRepositories 
     public interface IStatementPrinterRepository {
 
         Result<string> PrintText(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres);
-        Result<string> PrintXml(Invoice invoice, Dictionary<string, Play> plays, Dictionary<Enum, IGenreStrategy> genres);
 
     }
 }

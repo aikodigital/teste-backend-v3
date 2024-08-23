@@ -69,11 +69,10 @@ public class StatementPrinterTests {
         Invoice invoice = CreateInvoice();
 
         StatementPrinterRepositoryImpl repository = new();
-        StatementPrinterService statementPrinter = new(repository);
-        var result = statementPrinter.PrintXml(invoice, plays, genres);
+        var result = repository.PrintXml(invoice, plays, genres);
 
 
-        Approvals.Verify(result.Value);
+        Approvals.Verify(result);
     }
 
     private Dictionary<Enum, IGenreStrategy> InitializeGenres() {
