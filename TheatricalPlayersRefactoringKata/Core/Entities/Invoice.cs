@@ -6,8 +6,8 @@ public class Invoice(List<Performance> performance, string customer, Guid id = n
     {
     }
 
-    public Guid Id { get; } = id;
-    public string Customer { get; } = customer;
+    public Guid Id { get; init; } = id;
+    public string Customer { get; init; } = customer;
 
-    public List<Performance> Performances { get; } = performance;
+    public List<Performance> Performances { get; set; } = performance;
 }
