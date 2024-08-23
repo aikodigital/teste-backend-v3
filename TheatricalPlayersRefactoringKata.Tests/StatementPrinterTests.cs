@@ -61,6 +61,21 @@ public class StatementPrinterTests {
         Approvals.Verify(result.Value);
     }
 
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample() {
+        Dictionary<Enum, IGenreStrategy> genres = InitializeGenres();
+        Dictionary<string, Play> plays = InitializePlays();
+        Invoice invoice = CreateInvoice();
+
+        StatementPrinterRepositoryImpl repository = new();
+        StatementPrinterService statementPrinter = new(repository);
+        var result = statementPrinter.PrintXml(invoice, plays, genres);
+
+
+        Approvals.Verify(result.Value);
+    }
+
     private Dictionary<Enum, IGenreStrategy> InitializeGenres() {
         return new Dictionary<Enum, IGenreStrategy> {
         { PlayGenre.Comedy, new ComedyGenreStrategy() },

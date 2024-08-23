@@ -8,18 +8,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\regexxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\regexxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\playcalculationutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\playcalculationutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|c:\\projects\\.net\\teste-backend-v3\\theatricalplayersrefactoringkata.domain\\utils\\utf8stringwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata.Domain\\TheatricalPlayersRefactoringKata.Domain.csproj|solutionrelative:theatricalplayersrefactoringkata.domain\\utils\\utf8stringwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,34 +17,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayCalculationUtils.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\PlayCalculationUtils.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T03:06:07.257Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RegexXml.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\RegexXml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T02:55:49.003Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -65,22 +27,9 @@
               "RelativeDocumentMoniker": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
               "ToolTip": "C:\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
               "RelativeToolTip": "..\\..\\..\\Users\\pedro\\AppData\\Local\\SourceServer\\b086f86a21216a77619a59fd83c3751c65872453ae91d985d66aed715e551344\\src\\ApprovalTests\\Approvers\\FileApprover.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAuwDAAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAuwDsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T02:53:36.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Utf8StringWriter.cs",
-              "DocumentMoniker": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
-              "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Domain\\Utils\\Utf8StringWriter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T02:51:17.765Z",
+              "WhenOpened": "2024-08-23T03:21:14.771Z",
               "EditorCaption": ""
             },
             {
@@ -91,9 +40,9 @@
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
               "ToolTip": "C:\\Projects\\.NET\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata.Infrastructure\\Repositories\\StatementPrinterRepositoryImpl.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAiwH4AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAwHYAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T02:48:14.483Z",
+              "WhenOpened": "2024-08-23T03:14:34.028Z",
               "EditorCaption": ""
             }
           ]
