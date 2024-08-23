@@ -28,7 +28,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 { 3, new Play("Othello", "tragedy") },
                 { 4, new Play("Henry V", "history") },
                 { 5, new Play("King John", "history") },
-                { 6, new Play("Richard III", "history") }
+                { 6, new Play("Henry V", "history") }
             };
 
             var invoice = new Invoice(

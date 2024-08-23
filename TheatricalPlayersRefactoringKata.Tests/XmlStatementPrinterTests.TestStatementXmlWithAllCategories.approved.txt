@@ -3,36 +3,36 @@
   <Customer>BigCo</Customer>
   <Items>
     <Item>
-      <AmountOwed>220.0</AmountOwed>
-      <EarnedCredits>13</EarnedCredits>
+      <AmountOwed>350.00</AmountOwed>
+      <EarnedCredits>25</EarnedCredits>
       <Seats>55</Seats>
     </Item>
     <Item>
-      <AmountOwed>87.5</AmountOwed>
-      <EarnedCredits>18</EarnedCredits>
+      <AmountOwed>380.00</AmountOwed>
+      <EarnedCredits>25</EarnedCredits>
       <Seats>35</Seats>
     </Item>
     <Item>
-      <AmountOwed>160.0</AmountOwed>
+      <AmountOwed>200.00</AmountOwed>
       <EarnedCredits>10</EarnedCredits>
       <Seats>40</Seats>
     </Item>
     <Item>
-      <AmountOwed>60.0</AmountOwed>
-      <EarnedCredits>4</EarnedCredits>
+      <AmountOwed>260.00</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
       <Seats>20</Seats>
     </Item>
     <Item>
-      <AmountOwed>117.0</AmountOwed>
-      <EarnedCredits>7</EarnedCredits>
+      <AmountOwed>602.00</AmountOwed>
+      <EarnedCredits>9</EarnedCredits>
       <Seats>39</Seats>
     </Item>
     <Item>
-      <AmountOwed>60.0</AmountOwed>
-      <EarnedCredits>4</EarnedCredits>
+      <AmountOwed>260.00</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
       <Seats>20</Seats>
     </Item>
   </Items>
-  <AmountOwed>704.5</AmountOwed>
-  <EarnedCredits>56</EarnedCredits>
+  <AmountOwed>2052.00</AmountOwed>
+  <EarnedCredits>69</EarnedCredits>
 </Statement>

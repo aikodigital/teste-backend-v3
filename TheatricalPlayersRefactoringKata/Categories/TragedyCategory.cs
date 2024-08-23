@@ -6,15 +6,21 @@ namespace TheatricalPlayersRefactoringKata.Categories
     {
         public decimal CalculateAmount(int seats, int performanceId)
         {
-            // Implementação específica para TragedyCategory
-            // Exemplo: retorno fictício, substitua pela lógica real
-            return seats * 4.0m;
+            // Valor base para tragédia
+            decimal baseAmount = Math.Max(1000, Math.Min(4000, seats)) / 10m;
+            if (seats <= 30)
+            {
+                return baseAmount;
+            }
+            else
+            {
+                return baseAmount + (seats - 30) * 10.00m;
+            }
         }
 
         public int CalculatePoints(int seats)
         {
-            // Implementação específica para TragedyCategory
-            return (int)Math.Floor((decimal)seats / 4);
+            return (seats > 30) ? (seats - 30) : 0;
         }
     }
 }

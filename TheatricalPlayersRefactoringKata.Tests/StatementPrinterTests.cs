@@ -39,7 +39,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
 
             var statementCalculator = new StatementCalculator(playCategories, plays);
             var statementPrinter = new StatementPrinter(statementCalculator);
-            var result = statementPrinter.Print(invoice, plays); // Passando plays como Dictionary<int, Play>
+            var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }
@@ -80,7 +80,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
 
             var statementCalculator = new StatementCalculator(playCategories, plays);
             var statementPrinter = new StatementPrinter(statementCalculator);
-            var result = statementPrinter.Print(invoice, plays); // Passando plays como Dictionary<int, Play>
+            var result = statementPrinter.Print(invoice, plays);
 
             Approvals.Verify(result);
         }

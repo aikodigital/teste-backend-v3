@@ -21,7 +21,7 @@ namespace TheatricalPlayersRefactoringKata.Data
                 .WithMany()
                 .HasForeignKey(p => p.PlayId);
 
-            // Se você tiver mais configurações para a entidade Invoice, adicione aqui
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TheatricalPlayersRefactoringKata.Data
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory()) // Isso deve funcionar se o arquivo appsettings.json estiver na raiz do projeto
+            .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
 

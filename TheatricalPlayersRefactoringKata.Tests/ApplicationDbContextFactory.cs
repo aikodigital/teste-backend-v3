@@ -11,7 +11,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\TheatricalPlayersRefactoringKata"))) // Caminho para o diretório do projeto principal
                 .AddJsonFile("appsettings.json")
                 .Build();
 

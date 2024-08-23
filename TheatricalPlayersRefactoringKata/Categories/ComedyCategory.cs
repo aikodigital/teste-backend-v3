@@ -6,15 +6,24 @@ namespace TheatricalPlayersRefactoringKata.Categories
     {
         public decimal CalculateAmount(int seats, int performanceId)
         {
-            // Implementação específica para ComedyCategory
-            // Exemplo: retorno fictício, substitua pela lógica real
-            return seats * 2.5m;
+            decimal baseAmount = Math.Max(1000, Math.Min(4000, seats)) / 10m;
+            decimal amount = baseAmount + (seats * 3.00m);
+
+            if (seats > 20)
+            {
+                amount += 100.00m + (seats - 20) * 5.00m;
+            }
+
+            return amount;
         }
 
         public int CalculatePoints(int seats)
         {
-            // Implementação específica para ComedyCategory
-            return (int)Math.Floor((decimal)seats / 3) + (int)Math.Floor((decimal)seats / 5);
+            int basePoints = (int)Math.Floor((decimal)seats / 3) + (int)Math.Floor((decimal)seats / 5);
+
+            int bonusPoints = (int)Math.Floor((decimal)seats / 5);
+
+            return basePoints + bonusPoints;
         }
     }
 }
