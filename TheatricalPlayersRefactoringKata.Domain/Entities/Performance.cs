@@ -1,6 +1,8 @@
+using TheatricalPlayersRefactoringKata.Domain.Entities;
+
 namespace TheatricalPlayersRefactoringKata;
 
-public class Performance
+public class Performance : Entity
 {
     private string _playId;
     private int _audience;

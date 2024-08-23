@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata;
 
-public class Invoice
+public class Invoice : Entity
 {
     private string _customer;
     private List<Performance> _performances;
