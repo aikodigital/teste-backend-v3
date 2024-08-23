@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Data;
 using TheatricalPlayersRefactoringKata.Repository;
+using TheatricalPlayersRefactoringKata.Repository.Plays;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddScoped<ComedyCalculator>();
 builder.Services.AddScoped<HistoryCalculator>();
 
 builder.Services.AddScoped<IPlayTypeRepository, PlayTypeRepository>();
+builder.Services.AddScoped<IPlayRepository, PlayRepository>();
 
 var app = builder.Build();
 
