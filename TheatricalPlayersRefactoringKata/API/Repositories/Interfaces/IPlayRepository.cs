@@ -13,6 +13,5 @@ public interface IPlayRepository
     Task<IActionResult> CreatePlay(PlayRequest play);
     Task<IEnumerable<PlayResponse>> GetPlays();
     Task<IActionResult> GetPlayById(Guid playId);
-    Task<IActionResult> UpdatePlay(Guid playId, Play play);
     Task<IActionResult> DeletePlay(Guid playId);
 }

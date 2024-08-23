@@ -40,29 +40,6 @@ public class PlayRepository(ApiDbContext context) : IPlayRepository
         return new OkObjectResult(new PlayResponse(play.Id, play.Name, play.Type, play.Lines));
     }
 
-    public async Task<IActionResult> UpdatePlay(Guid playId, Play play)
-    {
-        if(playId != play.Id)
-        {
-            return new BadRequestResult();
-        }
-        
-        var existingPlay = await context.Plays.FindAsync(playId);
-        
-        if (existingPlay == null)
-        {
-            return new NotFoundResult();
-        }
-
-        existingPlay.Name = play.Name;
-        existingPlay.Type = play.Type;
-        existingPlay.Lines = play.Lines;
-
-        await context.SaveChangesAsync();
-
-        return new OkObjectResult(new PlayResponse(existingPlay.Id, existingPlay.Name, existingPlay.Type, existingPlay.Lines));
-    }
-
     public async Task<IActionResult> DeletePlay(Guid playId)
     {
         var play = await context.Plays.FindAsync(playId);

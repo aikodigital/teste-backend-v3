@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.API.Data;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
 using TheatricalPlayersRefactoringKata.API.Repositories.Interfaces;
@@ -54,34 +53,6 @@ public class PerfRepository(ApiDbContext context): IPerformanceRepository
         return new OkObjectResult(response);
     }
     
-    public async Task<IActionResult> UpdatePerformance(Guid performanceId, Performance perf)
-    {
-        if (performanceId != perf.Id)
-        {
-            return new BadRequestResult();
-        }
-
-        context.Entry(perf).State = EntityState.Modified;
-
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (! await PerformanceExists(performanceId))
-            {
-                return new NotFoundResult();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return new NoContentResult();
-    }
-    
     public async Task<IActionResult> DeletePerformance(Guid performanceId)
     {
         var performance = await context.Performances.FindAsync(performanceId);
@@ -94,10 +65,5 @@ public class PerfRepository(ApiDbContext context): IPerformanceRepository
         await context.SaveChangesAsync();
 
         return new NoContentResult();
-    }
-    
-    private async Task<bool> PerformanceExists(Guid id)
-    {
-        return await context.Performances.AnyAsync(e => e.Id == id);
     }
 }

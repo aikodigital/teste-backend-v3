@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.API.Repositories;
 using TheatricalPlayersRefactoringKata.API.Repositories.DTOs;
 using TheatricalPlayersRefactoringKata.API.Repositories.Validators;
+using TheatricalPlayersRefactoringKata.Core.Entities;
 
 #endregion
 
@@ -37,17 +38,7 @@ public class PlayController(PlayRepository repo) : ControllerBase
             new BadRequestObjectResult("Invalid play request") : 
             await repo.CreatePlay(play).ConfigureAwait(false);
     }
-
-    // PUT api/<PlayController>/5
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Put(Guid id, [FromBody] PlayRequest play)
-    {
-        return PlayValidator.IsValid(play) && id == Guid.Empty ? 
-            new BadRequestObjectResult("Invalid play request or id") : 
-            await repo.UpdatePlay(id, play).ConfigureAwait(false);
-    }
     
-
     // DELETE api/<PlayController>/5
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id)
