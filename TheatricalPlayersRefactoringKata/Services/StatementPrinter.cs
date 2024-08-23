@@ -9,6 +9,8 @@ using System.Linq;
 using System.Xml.Linq;
 using System.IO;
 using System.Numerics;
+using TheatricalPlayersRefactoringKata.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
@@ -16,10 +18,18 @@ public class StatementPrinter
 {
     private readonly PlayType[] PlayTypes;
     private readonly Dictionary<string, Play> Plays;
-    public StatementPrinter(Dictionary<string, Play> plays, PlayType[] playTypes) 
+    private readonly AppDbContext db = null;
+    public StatementPrinter(Dictionary<string, Play> plays, PlayType[] playTypes)
     {
         Plays = plays;
         PlayTypes = playTypes;
+    }
+
+    public StatementPrinter(AppDbContext db)
+    {
+        this.db = db;
+        Plays = db.Plays.ToDictionary(play => play.Name);
+        PlayTypes = db.PlayTypes.ToArray();
     }
 
     private IPlayCalculator GetCalculatorByType(string playType)
@@ -42,12 +52,13 @@ public class StatementPrinter
         try
         {
             decimal totalAmount = 0m;
-            decimal volumeCredits = 0;
+            int volumeCredits = 0;
             CultureInfo cultureInfo = new CultureInfo("en-US");
+            DateTime dt = DateTime.Now;
 
             foreach (Performance perf in invoice.Performances)
             {
-                var play = Plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId).Value;
+                var play = Plays.FirstOrDefault(p => p.Key.ToLower() == perf.PlayId.ToLower()).Value;
 
                 if (play is null) throw new ArgumentOutOfRangeException($"{perf.PlayId} is not a valid Play.");
 
@@ -56,6 +67,20 @@ public class StatementPrinter
                 volumeCredits += playTypeCalculator.CalculateCredits(play, perf.Audience);
 
                 billingStatement.AppendLine(cultureInfo, $"  {play.Name}: {thisAmount:C} ({perf.Audience} seats)");
+                if (db != null)
+                {
+                    db.StatementLogs.Add(new StatementLog
+                    {
+                        DtInclusao = dt,
+                        PlayId = perf.PlayId,
+                        Costumer = invoice.Customer,
+                        Audience = perf.Audience,
+                        Amount = thisAmount,
+                        Credits = volumeCredits
+                    });
+                    db.SaveChanges();
+                }
+
                 totalAmount += thisAmount;
             }
             billingStatement.AppendLine(cultureInfo, $"Amount owed is {totalAmount:C}");
@@ -70,7 +95,8 @@ public class StatementPrinter
         try
         {
             decimal totalAmount = 0m;
-            decimal volumeCredits = 0;
+            int volumeCredits = 0;
+            DateTime dt = DateTime.Now;
 
             XElement[] items = invoice.Performances.Select(perf =>
             {
@@ -80,15 +106,30 @@ public class StatementPrinter
 
                 var playTypeCalculator = GetCalculatorByType(play.Type);
                 decimal thisAmount = playTypeCalculator.CalculateAmount(play, perf.Audience);
-                decimal thisCredits = playTypeCalculator.CalculateCredits(play, perf.Audience);
+                int thisCredits = playTypeCalculator.CalculateCredits(play, perf.Audience);
 
                 totalAmount += thisAmount;
                 volumeCredits += thisCredits;
+
+                if (db != null)
+                {
+                    db.StatementLogs.Add(new StatementLog
+                    {
+                        DtInclusao = dt,
+                        PlayId = perf.PlayId,
+                        Costumer = invoice.Customer,
+                        Audience = perf.Audience,
+                        Amount = thisAmount,
+                        Credits = volumeCredits
+                    });
+                    db.SaveChanges();
+                }
 
                 return new XElement("Item",
                            new XElement("AmountOwed", thisAmount),
                            new XElement("EarnedCredits", thisCredits),
                            new XElement("Seats", perf.Audience));
+
             }).ToArray();
 
             var xmlDoc = new XDocument(
