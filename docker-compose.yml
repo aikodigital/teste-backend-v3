@@ -1,0 +1,36 @@
+﻿services:
+  theatricalplayersrefactoringkata:
+    image: ${DOCKER_REGISTRY-}theatricalplayersrefactoringkata
+    build:
+      context: .
+      dockerfile: TheatricalPlayersRefactoringKata/Dockerfile
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    environment:
+      - ENVIRONMENT=Dev
+    depends_on:
+      - theatricalplayersrefactoringkata.db
+  
+  theatricalplayersrefactoringkata.db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_HOST=ep-restless-shadow-a5t5e30y.us-east-2.aws.neon.tech
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=THEATRICAL
+    ports:
+      - "5432:5432"
+    networks:
+      - dev
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+
+volumes:
+  db-data:
+
+
+networks:
+  dev:
+    driver: bridge
