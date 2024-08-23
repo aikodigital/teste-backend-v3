@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Application", "TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{8B5785FC-742B-404B-BEBD-9233A6CA7843}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Application", "TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{8B5785FC-742B-404B-BEBD-9233A6CA7843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infrastructure", "TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{228A26F5-B9F7-420E-BBD9-6FE100C0356A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Infrastructure", "TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{228A26F5-B9F7-420E-BBD9-6FE100C0356A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{8BE0F47A-F886-4A20-8814-66329366935D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{228A26F5-B9F7-420E-BBD9-6FE100C0356A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{228A26F5-B9F7-420E-BBD9-6FE100C0356A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{228A26F5-B9F7-420E-BBD9-6FE100C0356A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE0F47A-F886-4A20-8814-66329366935D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE0F47A-F886-4A20-8814-66329366935D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE0F47A-F886-4A20-8814-66329366935D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE0F47A-F886-4A20-8814-66329366935D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17102DFA-F477-4D4B-BEFB-9A1A93755F89}
 	EndGlobalSection
 EndGlobal

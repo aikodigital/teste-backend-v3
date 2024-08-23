@@ -8,9 +8,9 @@ using TheatricalPlayersRefactoringKata.Application.DTO;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Data
 {
-    public class PrinterContext : DbContext {
+    public class TheaterContext : DbContext {
 
-        public PrinterContext(DbContextOptions<PrinterContext> options) : base(options) { }
+        public TheaterContext(DbContextOptions<TheaterContext> options) : base(options) { }
 
         public DbSet<StatementDTO> Statement { get; set; }
 
