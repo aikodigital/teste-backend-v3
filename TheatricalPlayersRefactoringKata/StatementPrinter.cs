@@ -4,6 +4,10 @@ using System.Globalization;
 
 namespace TheatricalPlayersRefactoringKata;
 
+public interface IPerformanceCalculator
+{
+    int CalculateAmount(Performance performance);
+}
 public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
