@@ -6,7 +6,29 @@ namespace TheatricalPlayersRefactoringKata;
 
 public interface IPerformanceCalculator
 {
-    int CalculateAmount(Performance performance);
+    double CalculateAmount(Performance performance);
+}
+public class TragedyCalculator : IPerformanceCalculator
+{
+    private readonly Dictionary<string, Play> _plays;
+
+    public TragedyCalculator(Dictionary<string, Play> plays)
+    {
+        _plays = plays;
+    }
+    public double CalculateAmount(Performance performance)
+    {
+        var play = _plays[performance.PlayId];
+        // Calcular o valor base com base no número de linhas da peça
+        int baseValue = Math.Min(Math.Max(play.Lines / 10, 1000), 4000);
+
+        // Calcular o valor adicional por espectador acima de 30
+        int audience = performance.Audience;
+        int extraAudience = Math.Max(audience - 30, 0);
+
+        // Calcular o valor total
+        return baseValue + (extraAudience * 10.0);
+    }
 }
 public class StatementPrinter
 {
