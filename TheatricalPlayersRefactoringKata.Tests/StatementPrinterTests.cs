@@ -181,5 +181,28 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTragedyAmountBoundaryValues()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "hamlet", new Play("Hamlet", 999, "tragedy") },
+        { "othello", new Play("Othello", 4001, "tragedy") }
+    };
 
+        var invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+            new Performance("hamlet", 55),
+            new Performance("othello", 40)
+            }
+        );
+
+        var statementPrinter = new StatementPrinter();
+        var result = statementPrinter.Print(invoice, plays);
+
+        Approvals.Verify(result);
+    }
 }
