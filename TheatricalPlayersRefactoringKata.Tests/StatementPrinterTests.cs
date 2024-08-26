@@ -63,4 +63,26 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestComedyStatement()
+    {
+        var plays = new Dictionary<string, Play>
+            {
+                { "as-like", new Play("As You Like It", 2670, "comedy") }
+            };
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                    new Performance("as-like", 35)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.Print(invoice, plays);
+
+        Approvals.Verify(result);
+    }
 }
