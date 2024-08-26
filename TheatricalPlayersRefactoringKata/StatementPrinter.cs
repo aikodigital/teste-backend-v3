@@ -23,15 +23,13 @@ public class StatementPrinter
             switch (play.Type) 
             {
                 case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
+                    thisAmount = CalculateTragedyAmount(lines, perf.Audience);
                     break;
                 case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
+                    thisAmount = CalculateComedyAmount(lines, perf.Audience);
+                    break;
+                case "history":
+                    thisAmount = CalculateHistoryAmount(lines, perf.Audience);
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
@@ -48,5 +46,22 @@ public class StatementPrinter
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
+    }
+    private int CalculateTragedyAmount(int lines, int audience)
+    {
+        var baseAmount = lines * 10;
+        var extraAmount = audience > 30 ? 1000 * (audience - 30) : 0;
+        return baseAmount + extraAmount;
+    }
+
+    private int CalculateComedyAmount(int lines, int audience)
+    {
+        var baseAmount = lines * 10;
+        var extraAmount = audience > 20 ? 10000 + 500 * (audience - 20) : 0;
+        return baseAmount + extraAmount + 300 * audience;
+    }
+    private int CalculateHistoryAmount(int lines, int audience)
+    {
+        return CalculateTragedyAmount(lines, audience) + CalculateComedyAmount(lines, audience);
     }
 }
