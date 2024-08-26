@@ -109,4 +109,27 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestHistoryStatement()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "henry-v", new Play("Henry V", 3227, "history") }
+    };
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+            new Performance("henry-v", 39)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.Print(invoice, plays);
+
+        Approvals.Verify(result);
+    }
 }
