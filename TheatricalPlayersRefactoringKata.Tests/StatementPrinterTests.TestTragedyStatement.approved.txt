@@ -1,0 +1,4 @@
+﻿Statement for BigCo
+  Hamlet: $650.00 (55 seats)
+Amount owed is $650.00
+You earned 25 credits

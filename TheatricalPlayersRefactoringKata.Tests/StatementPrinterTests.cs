@@ -63,6 +63,30 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTragedyStatement()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "hamlet", new Play("Hamlet", 4024, "tragedy") }
+    };
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+            new Performance("hamlet", 55)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.Print(invoice, plays);
+
+        Approvals.Verify(result);
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestComedyStatement()
