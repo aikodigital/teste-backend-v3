@@ -205,4 +205,29 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+    
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestPrintXml()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+        { "as-like", new Play("As You Like It", 2670, "comedy") }
+    };
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+            new Performance("hamlet", 55),
+            new Performance("as-like", 35)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.PrintXml(invoice, plays);
+
+        Approvals.Verify(result);
+    }
 }

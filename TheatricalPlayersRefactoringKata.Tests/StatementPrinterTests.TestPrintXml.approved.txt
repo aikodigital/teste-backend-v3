@@ -1,0 +1,17 @@
+﻿<Statement>
+  <Customer>BigCo</Customer>
+  <TotalAmount>$1,197.00</TotalAmount>
+  <VolumeCredits>37</VolumeCredits>
+  <Performances>
+    <Performance>
+      <Name>Hamlet</Name>
+      <Amount>$650.00</Amount>
+      <Seats>55</Seats>
+    </Performance>
+    <Performance>
+      <Name>As You Like It</Name>
+      <Amount>$547.00</Amount>
+      <Seats>35</Seats>
+    </Performance>
+  </Performances>
+</Statement>
