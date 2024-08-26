@@ -137,7 +137,6 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestCurrencyFormatting()
     {
-        // Arrange
         var plays = new Dictionary<string, Play>
     {
         { "hamlet", new Play("Hamlet", 4024, "tragedy") },
@@ -156,7 +155,31 @@ public class StatementPrinterTests
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.Print(invoice, plays);
 
-        // Act & Assert
         Approvals.Verify(result);
     }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestMinMaxAudience()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "hamlet", new Play("Hamlet", 4024, "tragedy") }
+    };
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+            new Performance("hamlet", 0),
+            new Performance("hamlet", 1000)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.Print(invoice, plays);
+
+        Approvals.Verify(result);
+    }
+
 }
