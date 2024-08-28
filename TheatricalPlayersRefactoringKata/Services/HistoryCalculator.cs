@@ -20,8 +20,7 @@ namespace TheatricalPlayersRefactoringKata.Services
 
         public int CalculateVolumeCredits(Performance performance, Play play)
         {
-            return _tragedyCalculator.CalculateVolumeCredits(performance, play) +
-                   _comedyCalculator.CalculateVolumeCredits(performance, play);
+            return Math.Max(performance.Audience - 30, 0);
         }
     }
 }

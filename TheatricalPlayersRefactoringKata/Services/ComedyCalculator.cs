@@ -24,7 +24,8 @@ namespace TheatricalPlayersRefactoringKata.Services
         public int CalculateVolumeCredits(Performance performance, Play play)
         {
             int credits = Math.Max(performance.Audience - 30, 0);
-            credits += (int)Math.Floor((decimal)performance.Audience / 5);
+            if (credits > 0)
+                credits += (int)Math.Floor((decimal)performance.Audience / 5);
             return credits;
         }
     }

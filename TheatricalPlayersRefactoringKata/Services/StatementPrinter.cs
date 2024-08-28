@@ -24,7 +24,6 @@ public class StatementPrinter
         var totalAmount = 0;
         var volumeCredits = 0;
         var result = $"Statement for {invoice.Customer}\n";
-
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
         foreach (var perf in invoice.Performances)
@@ -35,11 +34,11 @@ public class StatementPrinter
             var thisAmount = calculator.CalculateAmount(perf, play);
             volumeCredits += calculator.CalculateVolumeCredits(perf, play);
 
-            result += $"{play.Name}: {Convert.ToDecimal(thisAmount / 100):C} ({perf.Audience} seats)\n";
+            result += $"  {play.Name}: {thisAmount / 100m:C} ({perf.Audience} seats)\n";
             totalAmount += thisAmount;
         }
 
-        result += $"Amount owed is {Convert.ToDecimal(totalAmount / 100):C}\n";
+        result += $"Amount owed is {totalAmount / 100m:C}\n";
         result += $"You earned {volumeCredits} credits\n";
 
         return result;
