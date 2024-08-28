@@ -129,7 +129,7 @@
   <data name="SUBTRACT_CREDIT_ERROR" xml:space="preserve">
     <value>You can't subtract more credits than you have available</value>
   </data>
-  <data name="UKNOW_ERROR" xml:space="preserve">
+  <data name="UKNNOWN_ERROR" xml:space="preserve">
     <value>Error unknown</value>
   </data>
 </root>

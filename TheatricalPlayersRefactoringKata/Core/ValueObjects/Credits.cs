@@ -1,16 +1,18 @@
 ﻿using System;
+using TheatricalPlayersRefactoringKata.Exception;
 
 namespace TheatricalPlayersRefactoringKata.Core.ValueObjects;
 
 public class Credits
 {
-    public int Value { get; private set; }
+    public int Value { get; }
 
     public Credits(int value)
     {
         if (value < 0)
-            throw new ArgumentException("Credits cannot be negative.");
-
+        {
+            throw new ArgumentException(ResourceMessagesException.CREDIT_NEGATIVE_ERROR);
+        }
         Value = value;
     }
 
@@ -21,15 +23,11 @@ public class Credits
 
     public Credits Subtract(Credits other)
     {
-        if (other.Value > Value)
-            throw new InvalidOperationException("Cannot subtract more credits than available.");
-
+        if (Value < other.Value)
+        {
+            throw new InvalidOperationException(ResourceMessagesException.SUBTRACT_CREDIT_ERROR);
+        }
         return new Credits(Value - other.Value);
-    }
-
-    public override string ToString()
-    {
-        return $"{Value} credits";
     }
 }
 

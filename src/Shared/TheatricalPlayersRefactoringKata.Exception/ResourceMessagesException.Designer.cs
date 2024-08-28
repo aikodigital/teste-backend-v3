@@ -99,9 +99,9 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Error desconhecido.
         /// </summary>
-        public static string UKNOW_ERROR {
+        public static string UKNNOWN_ERROR {
             get {
-                return ResourceManager.GetString("UKNOW_ERROR", resourceCulture);
+                return ResourceManager.GetString("UKNNOWN_ERROR", resourceCulture);
             }
         }
     }
