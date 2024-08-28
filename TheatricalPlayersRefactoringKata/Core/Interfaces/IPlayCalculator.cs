@@ -6,6 +6,6 @@ namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 public interface IPlayCalculator
 {
-     Task <Money> CalculateCost(Performance performance);
-     Task <Credits> CalculateCredits(Performance performance);
+     Task <Money> CalculateCostAsync(Performance performance);
+     Task <Credits> CalculateCreditsAsync(Performance performance);
 }

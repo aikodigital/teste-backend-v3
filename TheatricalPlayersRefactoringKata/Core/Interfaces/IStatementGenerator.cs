@@ -5,6 +5,6 @@ namespace TheatricalPlayersRefactoringKata.Core.Interfaces;
 
 public interface IStatementGenerator
 {
-    Task <string> GenerateTextStatement(Invoice invoice);
-    Task <string> GenerateXmlStatement(Invoice invoice);
+    Task <string> GenerateTextStatementAsync(Invoice invoice);
+    Task <string> GenerateXmlStatementAsync(Invoice invoice);
 }
