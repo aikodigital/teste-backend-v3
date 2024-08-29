@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TheatricalPlayersRefactoringKata.Core.Entities;
 
@@ -12,4 +13,5 @@ public class Invoice
         Customer = customer;
         Performances = performances;
     }
+
 }

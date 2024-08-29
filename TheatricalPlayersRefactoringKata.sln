@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9ED007
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Exception", "src\Shared\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj", "{DCA989A9-837E-405C-AFFC-535533287B3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Communication", "src\Shared\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{FACDC226-1E65-456D-AB81-82C79CF7F480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DCA989A9-837E-405C-AFFC-535533287B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCA989A9-837E-405C-AFFC-535533287B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCA989A9-837E-405C-AFFC-535533287B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACDC226-1E65-456D-AB81-82C79CF7F480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACDC226-1E65-456D-AB81-82C79CF7F480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACDC226-1E65-456D-AB81-82C79CF7F480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACDC226-1E65-456D-AB81-82C79CF7F480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 		{8E345168-72B7-4413-A0B3-29B9980E8378} = {41D8234F-8868-4188-8B4A-0C13287F20BC}
 		{9ED007AC-8365-4F50-94D3-38C6D341BA87} = {41D8234F-8868-4188-8B4A-0C13287F20BC}
 		{DCA989A9-837E-405C-AFFC-535533287B3C} = {9ED007AC-8365-4F50-94D3-38C6D341BA87}
+		{FACDC226-1E65-456D-AB81-82C79CF7F480} = {9ED007AC-8365-4F50-94D3-38C6D341BA87}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4FCB2CD-C6F0-4E1E-85A5-0A29BBFC819F}
