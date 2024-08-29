@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Infrastructure.Helpers;
 using TheatricalPlayersRefactoringKata.Services;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
@@ -37,6 +42,67 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
             result.AppendFormat("You earned {0} credits\n", volumeCredits);
 
             return result.ToString();
+        }
+
+        public string PrintXML(Invoice invoice, Dictionary<string, Play> plays)
+        {
+            var items = invoice.Performances.Select(performance =>
+            {
+                var play = plays[performance.PlayId];
+                var calculator = _calculatorFactory.GetCalculator(play.Type);
+                var amount = calculator.CalculateAmount(play, performance);
+                var credits = calculator.CalculateCredits(performance);
+
+                return new XElement("Item",
+                    new XElement("AmountOwed", FormatNumber(amount)),
+                    new XElement("EarnedCredits", credits),
+                    new XElement("Seats", performance.Audience)
+                );
+            });
+
+            var XMLdocument = new XDocument(
+                    new XDeclaration("1.0", "utf-8", null),
+                    new XElement("Statement",
+                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                    new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
+                    new XElement("Customer", invoice.Customer),
+                    new XElement("Items", items),
+                    new XElement("AmountOwed", FormatNumber(items.Sum(i => decimal.Parse(i.Element("AmountOwed").Value, _cultureInfo)))),
+                    new XElement("EarnedCredits", items.Sum(i => int.Parse(i.Element("EarnedCredits").Value)))
+                )
+            );
+
+            using (var memoryStream = new MemoryStream())
+            {
+                XMLdocument.Save( memoryStream );
+                string utf8String = Encoding.UTF8.GetString(memoryStream.ToArray() );
+                return utf8String;
+            }
+
+            //var sb = new StringBuilder();
+            //using (var writer = new StringWriter(sb))
+            //{
+            //    XMLdocument.Save(writer);
+            //    return sb.ToString();
+
+            //    //XMLdocument.Save(writer);
+            //    //return sb.ToString();
+            //}
+
+            //byte[] utf8Bytes = Encoding.UTF8.GetBytes(XMLdocument.ToString());
+            //string utf8String = Encoding.UTF8.GetString(utf8Bytes);
+
+            //return utf8String;
+
+            //var wr = new StringWriter();
+            //XMLdocument.Save(wr);
+            //return wr.ToString();
+        }
+
+        private string FormatNumber(decimal number)
+        {
+            string format = (number % 1 == 0) ? "F0" : "F1";
+            return number.ToString(format, _cultureInfo);
         }
     }
 }
