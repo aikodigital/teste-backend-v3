@@ -1,6 +1,10 @@
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Application.Services;
+using TheatricalPlayersRefactoringKata.Application.Services.Gender;
+using TheatricalPlayersRefactoringKata.Application.Services.Statment;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using Xunit;
 
@@ -10,7 +14,7 @@ public class StatementPrinterTests
 {
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
+    public async Task TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -21,21 +25,29 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance("hamlet", 55, plays["hamlet"]),
+                new Performance("as-like", 35, plays["as-like"]),
+                new Performance("othello", 40, plays["othello"]),
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        // Adicionar os dicionários de calculadoras
+        var calculators = new Dictionary<string, IPerformanceCalculator>
+        {
+            { "tragedy", new TragedyCalculator() },
+            { "comedy", new ComedyCalculator() },
+            { "history", new HistoryCalculator() }
+        };
+
+        StatementPrinter statementPrinter = new StatementPrinter(new InvoiceCalculationService(calculators), calculators);
+        var result = await statementPrinter.PrintAsync(invoice);
 
         Approvals.Verify(result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public async Task TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -49,17 +61,25 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new Performance("hamlet", 55, plays["hamlet"]),
+                new Performance("as-like", 35, plays["as-like"]),
+                new Performance("othello", 40, plays["othello"]),
+                new Performance("henry-v", 20, plays["henry-v"]),
+                new Performance("john", 39, plays["john"]),
+                new Performance("richard-iii", 20, plays["richard-iii"])
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        // Adicionar os dicionários de calculadoras
+        var calculators = new Dictionary<string, IPerformanceCalculator>
+        {
+            { "tragedy", new TragedyCalculator() },
+            { "comedy", new ComedyCalculator() },
+            { "history", new HistoryCalculator() }
+        };
+
+        StatementPrinter statementPrinter = new StatementPrinter(new InvoiceCalculationService(calculators), calculators);
+        var result = await statementPrinter.PrintAsync(invoice);
 
         Approvals.Verify(result);
     }
