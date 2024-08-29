@@ -7,13 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{A1AE5DAB-2459-44D4-A785-B038BD976235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.API", "TheatricalPlayersRefactoringKata.API\TheatricalPlayersRefactoringKata.API.csproj", "{A1AE5DAB-2459-44D4-A785-B038BD976235}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{676446A2-9D05-497B-A6DC-6CF9F7D675AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{8FB45B5B-103B-4185-8837-5B33247F5B7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4ABA5F1F-9DC2-4A53-B0EA-556C60B07EB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infrastructure", "TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A1AE5DAB-2459-44D4-A785-B038BD976235}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1AE5DAB-2459-44D4-A785-B038BD976235}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1AE5DAB-2459-44D4-A785-B038BD976235}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B} = {8FB45B5B-103B-4185-8837-5B33247F5B7C}
 		{A1AE5DAB-2459-44D4-A785-B038BD976235} = {676446A2-9D05-497B-A6DC-6CF9F7D675AB}
+		{662C27A3-3BDA-4BE5-ACDC-59A25A8E3E90} = {4ABA5F1F-9DC2-4A53-B0EA-556C60B07EB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EF43917-191E-4446-AC7D-A3D58CF94468}
