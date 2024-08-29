@@ -17,9 +17,6 @@ public class AutoMapping : Profile
     {
         // Mapping from Request to Domain
         CreateMap<InvoiceRequest, Invoice>();
-
-        // Mapping for Extracts
-        CreateMap<ExtractRequest, ExtractResponse>();
     }
     private void DomainToResponse()
     {

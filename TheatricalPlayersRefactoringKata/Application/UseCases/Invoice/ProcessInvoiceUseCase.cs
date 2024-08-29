@@ -15,7 +15,6 @@ public class ProcessInvoiceUseCase : IProcessInvoiceUseCase
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-
     public ProcessInvoiceUseCase(IInvoiceWriteOnlyRepository writeOnlyRepository, IInvoiceReadOnlyRepository readOnlyRepository, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _writeOnlyRepository = writeOnlyRepository;
@@ -32,6 +31,7 @@ public class ProcessInvoiceUseCase : IProcessInvoiceUseCase
         await _writeOnlyRepository.AddAsync(invoice);
         return _mapper.Map<InvoiceResponse>(invoice);
     }
+
     private async Task Validate(InvoiceRequest request)
     {
         var existingInvoice = await _readOnlyRepository.GetByDateRangeAsync(request.DateProcessing, request.DateProcessing, null);
