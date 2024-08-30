@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj" />
+    <ProjectReference Include="..\JogadoresTeatrais.Utility\JogadoresTeatrais.Utility.csproj" />
   </ItemGroup>
 
 </Project>

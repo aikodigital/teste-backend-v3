@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogadoresTeatrais.Utility.Methods
+namespace JogadoresTeatrais.Utility.Utility
 {
-    public class CalculoFatura
+    public enum FormatoArquivo
     {
-        
+        Txt,
+        Xml, 
+        Json,
+        Csv
     }
 }

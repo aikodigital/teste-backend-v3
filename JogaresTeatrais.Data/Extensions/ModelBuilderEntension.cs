@@ -31,8 +31,13 @@ namespace JogaresTeatrais.Data.Extensions
                  new Desempenho { Id = 004, JogarId = 003, Audiencia = 40 }
 
                 );
+            builder.Entity<Fatura>()
+                .HasData(
+                new Fatura { Id = 001, Cliente = "Big Co"}
+                     
+                );
 
-           
+
 
             return builder;
         }

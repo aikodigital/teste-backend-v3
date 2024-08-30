@@ -10,4 +10,8 @@
     <ProjectReference Include="..\JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Methods\" />
+  </ItemGroup>
+
 </Project>

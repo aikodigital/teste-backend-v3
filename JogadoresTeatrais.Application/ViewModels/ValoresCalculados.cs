@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogadoresTeatrais.Utility.Utility
+namespace JogadoresTeatrais.Application.ViewModels
 {
-    public class FaturaTxt
+    public class ValoresCalculados
     {
-        
+
     }
 }

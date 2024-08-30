@@ -1,6 +1,7 @@
 ﻿using JogadoresTeatrais.IoC;
 using JogaresTeatrais.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace JogadoresTeatrais
 {
@@ -31,6 +32,11 @@ namespace JogadoresTeatrais
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            var defaultCulture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = defaultCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = defaultCulture;
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
