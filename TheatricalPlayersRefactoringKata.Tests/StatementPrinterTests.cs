@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using AutoMapper;
 using TheatricalPlayersRefactoringKata.Application.Adapters;
+using TheatricalPlayersRefactoringKata.Application.Mappings;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Strategies;
 using TheatricalPlayersRefactoringKata.Models;
@@ -12,6 +14,16 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private readonly IMapper _mapper;
+
+    public StatementPrinterTests() 
+    {
+        var config = new MapperConfiguration(cfg => {
+            cfg.AddProfile<MappingProfile>();
+        });
+
+        _mapper = config.CreateMapper();
+    }
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -99,7 +111,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new XmlFormatterAdapter());
+        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new XmlFormatterAdapter(_mapper));
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -132,7 +144,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new JsonFormatterAdapter());
+        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new JsonFormatterAdapter(_mapper));
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);

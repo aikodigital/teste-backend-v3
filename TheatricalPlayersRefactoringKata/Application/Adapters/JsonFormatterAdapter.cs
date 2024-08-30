@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Linq;
+﻿using AutoMapper;
+using Newtonsoft.Json;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Models.Dtos;
@@ -9,21 +9,15 @@ namespace TheatricalPlayersRefactoringKata.Application.Adapters;
 
 public class JsonFormatterAdapter : IFormatterAdapter
 {
+    private readonly IMapper _mapper;
+
+    public JsonFormatterAdapter(IMapper mapper) 
+    {
+        _mapper = mapper;
+    }
     public string Format(Statement statement)
     {
-        // TODO: AJUSTAR CRIAÇÃO DO DTO
-        var statementDto = new StatementDto
-        {
-            Customer = statement.Customer,
-            TotalAmountOwed = statement.TotalAmountOwed,
-            TotalEarnedCredits = statement.TotalEarnedCredits,
-            Items = statement.Items.Select(item => new StatementItemDto
-            {
-                AmountOwed = item.AmountOwed,
-                EarnedCredits = item.EarnedCredits,
-                Seats = item.Seats
-            }).ToList()
-        };
+        var statementDto = _mapper.Map<StatementDto>(statement);
 
         return JsonConvert.SerializeObject(statementDto, new JsonSerializerSettings
         {

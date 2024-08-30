@@ -1,34 +1,31 @@
 ﻿using TheatricalPlayersRefactoringKata.Models.Dtos;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Entities;
-using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
 using System.Text;
 using System.Xml;
+using AutoMapper;
 
 namespace TheatricalPlayersRefactoringKata.Application.Adapters;
+
 public class Utf8StringWriter : StringWriter
 {
     public override Encoding Encoding => new UTF8Encoding(true);
 }
+
 public class XmlFormatterAdapter : IFormatterAdapter
 {
+    private readonly IMapper _mapper;
+
+    public XmlFormatterAdapter(IMapper mapper) 
+    {
+        _mapper = mapper;
+    }
+
     public string Format(Statement statement)
     {
-        // TODO: AJUSTAR CRIAÇÃO DO DTO
-        var statementDto = new StatementDto
-        {
-            Customer = statement.Customer,
-            TotalAmountOwed = statement.TotalAmountOwed,
-            TotalEarnedCredits = statement.TotalEarnedCredits,
-            Items = statement.Items.Select(item => new StatementItemDto
-            {
-                AmountOwed = item.AmountOwed,
-                EarnedCredits = item.EarnedCredits,
-                Seats = item.Seats
-            }).ToList()
-        };
+        var statementDto = _mapper.Map<StatementDto>(statement);
 
         var xmlSerializer = new XmlSerializer(typeof(StatementDto));
         var settings = new XmlWriterSettings

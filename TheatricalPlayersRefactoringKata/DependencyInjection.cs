@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;
 using TheatricalPlayersRefactoringKata;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,8 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSqlite<ApplicationDbContext>("Data Source=./TheatricalPlayersRefactoringKata.db");
+
+        services.AddAutoMapper(typeof(Program));
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(o => o.InferSecuritySchemes());
