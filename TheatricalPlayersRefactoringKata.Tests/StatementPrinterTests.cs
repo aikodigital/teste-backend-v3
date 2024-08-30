@@ -1,5 +1,6 @@
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using System;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
@@ -36,7 +37,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public void Should_Return_Text_Statement()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -67,7 +68,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestXmlStatementExample()
+    public void Should_Return_XML_Statement()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -94,5 +95,31 @@ public class StatementPrinterTests
         var result = statementPrinter.Print(invoice, plays, "xml");
 
         Approvals.Verify(result);
+    }
+
+    [Fact]
+    public void Should_ThrowException_For_Unsupported_Type()
+    {
+        var plays = new Dictionary<string, Play>();
+        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
+        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
+
+        Invoice invoice = new Invoice(
+            "BigCo",
+            new List<Performance>
+            {
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("othello", 40),
+                new Performance("henry-v", 20),
+                new Performance("john", 39),
+                new Performance("henry-v", 20)
+            }
+        );
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var exception = Assert.Throws<ArgumentException>(() => statementPrinter.Print(invoice, plays, "md"));
+
+        Assert.Equal("Not supported type: md", exception.Message);
     }
 }

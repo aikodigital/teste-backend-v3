@@ -15,7 +15,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
 
         public string Print(Invoice invoice, Dictionary<string, Play> plays, string format)
         {
-            return _generators[format].GenerateStatement(invoice, plays);
+            try
+            {
+                return _generators[format].GenerateStatement(invoice, plays);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException($"Not supported type: {format}");
+            }
         }
     }
 }
