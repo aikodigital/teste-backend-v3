@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Web", "1-Web", "{AC9EF517-9E24-4735-88D6-65AA462D156C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogadoresTeatrais", "JogadoresTeatrais\JogadoresTeatrais.csproj", "{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais", "JogadoresTeatrais\JogadoresTeatrais.csproj", "{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{D42304E7-44B4-43A1-B0D4-A880AD565658}"
 EndProject
@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{51
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Data", "4-Data", "{258F7FE3-5E5B-498B-B449-0251224E3620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogaresTeatrais.Data", "JogaresTeatrais.Data\JogaresTeatrais.Data.csproj", "{277C55C3-58E8-4A74-92B0-7121EC4182C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogaresTeatrais.Data", "JogaresTeatrais.Data\JogaresTeatrais.Data.csproj", "{277C55C3-58E8-4A74-92B0-7121EC4182C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogadoresTeatrais.Domain", "JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj", "{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Domain", "JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj", "{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
