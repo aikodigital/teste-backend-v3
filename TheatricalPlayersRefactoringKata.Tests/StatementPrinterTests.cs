@@ -37,7 +37,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void Should_Return_Text_Statement()
+    public void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -68,7 +68,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void Should_Return_XML_Statement()
+    public void TestXmlStatementExample()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
