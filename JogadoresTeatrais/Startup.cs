@@ -1,4 +1,5 @@
-﻿using JogaresTeatrais.Data.Context;
+﻿using JogadoresTeatrais.IoC;
+using JogaresTeatrais.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace JogadoresTeatrais
@@ -18,10 +19,12 @@ namespace JogadoresTeatrais
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            //services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("JogadoresTeatrais")).EnableSensitiveDataLogging());
+
             var connectionString = Configuration.GetConnectionString("JogadoresTeatrais");
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlite(connectionString));
+            services.AddDbContext<DataContext>(options => options.UseSqlite(connectionString));
+
+            NativeInjector.RegisterServices(services);
+
 
 
         }
@@ -53,7 +56,7 @@ namespace JogadoresTeatrais
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

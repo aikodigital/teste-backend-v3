@@ -17,13 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogaresTeatrais.Data", "Jog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Domain", "JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj", "{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogadoresTeatrais.Application", "JogadoresTeatrais.Application\JogadoresTeatrais.Application.csproj", "{07C02030-0108-434C-BD26-65E09F28CB1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Application", "JogadoresTeatrais.Application\JogadoresTeatrais.Application.csproj", "{07C02030-0108-434C-BD26-65E09F28CB1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2-CrossCutting", "4.2-CrossCutting", "{F410EE65-DA78-4013-A342-36DA3B08F124}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1-Data", "4.1-Data", "{7E497D38-57A8-490C-ADED-98AAE90B4FA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogadoresTeatrais.IoC", "JogadoresTeatrais.IoC\JogadoresTeatrais.IoC.csproj", "{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.IoC", "JogadoresTeatrais.IoC\JogadoresTeatrais.IoC.csproj", "{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Utility", "5-Utility", "{9C79437B-CAAB-45D2-AF60-D32EFCA2E05B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogadoresTeatrais.Utility", "JogadoresTeatrais.Utility\JogadoresTeatrais.Utility.csproj", "{8C44A164-14BD-417F-8202-32D60199FA9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,7 @@ Global
 		{F410EE65-DA78-4013-A342-36DA3B08F124} = {258F7FE3-5E5B-498B-B449-0251224E3620}
 		{7E497D38-57A8-490C-ADED-98AAE90B4FA1} = {258F7FE3-5E5B-498B-B449-0251224E3620}
 		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF} = {F410EE65-DA78-4013-A342-36DA3B08F124}
+		{8C44A164-14BD-417F-8202-32D60199FA9A} = {9C79437B-CAAB-45D2-AF60-D32EFCA2E05B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BFE8D3CD-AEE2-416C-9602-81B6EC6EBE66}

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogadoresTeatrais.Application.Interfaces
+namespace JogadoresTeatrais.Utility.Methods
 {
-    public interface IDeclaracaoTxtService
+    public class CalculoFatura
     {
+        
     }
 }

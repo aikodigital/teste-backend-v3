@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JogadoresTeatrais.Application\JogadoresTeatrais.Application.csproj" />
+    <ProjectReference Include="..\JogadoresTeatrais.IoC\JogadoresTeatrais.IoC.csproj" />
     <ProjectReference Include="..\JogaresTeatrais.Data\JogaresTeatrais.Data.csproj" />
   </ItemGroup>
 
