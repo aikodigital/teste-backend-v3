@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Models;
 using Microsoft.Extensions.Configuration;
+using TheatricalPlayersRefactoringKata.Application.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services;
 

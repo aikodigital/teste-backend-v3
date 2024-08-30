@@ -2,12 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;
-using TheatricalPlayersRefactoringKata;
 using TheatricalPlayersRefactoringKata.Application.Adapters;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Strategies;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
+using TheatricalPlayersRefactoringKata.Infrastructure;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

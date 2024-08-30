@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Models;
 using TheatricalPlayersRefactoringKata.Application.Strategies;
 using TheatricalPlayersRefactoringKata.Entities;
-using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services;
 

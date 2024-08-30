@@ -1,11 +1,11 @@
-﻿using TheatricalPlayersRefactoringKata.Models.Dtos;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Entities;
 using System.Xml.Serialization;
 using System.IO;
 using System.Text;
 using System.Xml;
 using AutoMapper;
+using TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 
 namespace TheatricalPlayersRefactoringKata.Application.Adapters;
 

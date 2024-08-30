@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Application.Models;
 using TheatricalPlayersRefactoringKata.Entities;
-using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Interfaces;
 

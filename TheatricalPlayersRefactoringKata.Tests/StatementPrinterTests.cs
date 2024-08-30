@@ -5,9 +5,9 @@ using ApprovalTests.Reporters;
 using AutoMapper;
 using TheatricalPlayersRefactoringKata.Application.Adapters;
 using TheatricalPlayersRefactoringKata.Application.Mappings;
+using TheatricalPlayersRefactoringKata.Application.Models;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Strategies;
-using TheatricalPlayersRefactoringKata.Models;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;

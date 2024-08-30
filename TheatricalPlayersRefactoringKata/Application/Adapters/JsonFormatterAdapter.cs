@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 using TheatricalPlayersRefactoringKata.Entities;
-using TheatricalPlayersRefactoringKata.Models.Dtos;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace TheatricalPlayersRefactoringKata.Application.Adapters;

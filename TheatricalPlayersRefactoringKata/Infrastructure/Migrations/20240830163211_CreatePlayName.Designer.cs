@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheatricalPlayersRefactoringKata;
+using TheatricalPlayersRefactoringKata.Infrastructure;
 
 #nullable disable
 
 namespace TheatricalPlayersRefactoringKata.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240829224115_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240830163211_CreatePlayName")]
+    partial class CreatePlayName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace TheatricalPlayersRefactoringKata.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Identity.Statement", b =>
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Entities.Statement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,15 +31,15 @@ namespace TheatricalPlayersRefactoringKata.Migrations
                     b.Property<decimal>("TotalAmountOwed")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TotalEarnedCredits")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("TotalEarnedCredits")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Statements");
                 });
 
-            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Identity.StatementItem", b =>
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Entities.StatementItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,8 +48,11 @@ namespace TheatricalPlayersRefactoringKata.Migrations
                     b.Property<decimal>("AmountOwed")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("EarnedCredits")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("EarnedCredits")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Seats")
                         .HasColumnType("INTEGER");
@@ -64,9 +67,9 @@ namespace TheatricalPlayersRefactoringKata.Migrations
                     b.ToTable("StatementItems");
                 });
 
-            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Identity.StatementItem", b =>
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Entities.StatementItem", b =>
                 {
-                    b.HasOne("TheatricalPlayersRefactoringKata.Identity.Statement", "Statement")
+                    b.HasOne("TheatricalPlayersRefactoringKata.Entities.Statement", "Statement")
                         .WithMany("Items")
                         .HasForeignKey("StatementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -75,7 +78,7 @@ namespace TheatricalPlayersRefactoringKata.Migrations
                     b.Navigation("Statement");
                 });
 
-            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Identity.Statement", b =>
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Entities.Statement", b =>
                 {
                     b.Navigation("Items");
                 });

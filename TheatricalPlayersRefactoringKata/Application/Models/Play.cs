@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata.Models;
+namespace TheatricalPlayersRefactoringKata.Application.Models;
 
 public class Play
 {

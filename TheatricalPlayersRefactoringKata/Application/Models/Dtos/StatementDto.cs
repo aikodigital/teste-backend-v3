@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata.Models.Dtos;
+namespace TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 
 [XmlRoot("Statement")]
 public class StatementDto

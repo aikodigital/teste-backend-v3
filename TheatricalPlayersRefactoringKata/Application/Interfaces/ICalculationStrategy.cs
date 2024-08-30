@@ -1,4 +1,4 @@
-﻿using TheatricalPlayersRefactoringKata.Models;
+﻿using TheatricalPlayersRefactoringKata.Application.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Interfaces;
 

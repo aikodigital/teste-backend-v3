@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Application.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Interfaces;
 

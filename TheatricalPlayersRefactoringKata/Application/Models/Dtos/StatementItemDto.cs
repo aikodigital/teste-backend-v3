@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata.Models.Dtos;
+namespace TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 
 public class StatementItemDto
 {

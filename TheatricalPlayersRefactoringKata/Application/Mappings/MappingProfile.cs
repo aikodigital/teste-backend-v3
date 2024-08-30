@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 using TheatricalPlayersRefactoringKata.Entities;
-using TheatricalPlayersRefactoringKata.Models.Dtos;
 
 namespace TheatricalPlayersRefactoringKata.Application.Mappings;
 

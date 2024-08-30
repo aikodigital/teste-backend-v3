@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Models.Dtos;
+using TheatricalPlayersRefactoringKata.Application.Models.Dtos;
 
 namespace TheatricalPlayersRefactoringKata.Endpoints;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Application.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Strategies;
 
