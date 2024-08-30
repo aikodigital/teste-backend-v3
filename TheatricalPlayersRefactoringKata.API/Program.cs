@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 
 namespace TheatricalPlayersRefactoringKata.API
 {
@@ -13,6 +14,7 @@ namespace TheatricalPlayersRefactoringKata.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<DbContext>();
 
             var app = builder.Build();
 
