@@ -13,12 +13,17 @@ namespace TheatricalPlayersRefactoringKata.Application.Services;
 public class StatementProcessingService : BackgroundService, IStatementProcessingService
 {
     private readonly ConcurrentQueue<Invoice> _invoiceQueue = new ConcurrentQueue<Invoice>();
-    private readonly IStatementPrinterService _statementPrinter;
+    private readonly IStatementPrinterService _statementPrinterService;
+    private readonly IServiceProvider _serviceProvider;
     private readonly string _outputDirectory;
 
-    public StatementProcessingService(IStatementPrinterService statementPrinter, IConfiguration outputDirectory)
+    public StatementProcessingService(
+        IStatementPrinterService statementPrinterService,
+        IConfiguration outputDirectory,
+        IServiceProvider serviceProvider)
     {
-        _statementPrinter = statementPrinter;
+        _statementPrinterService = statementPrinterService;
+        _serviceProvider = serviceProvider;
         _outputDirectory = outputDirectory["BackgroundWorker:XmlDirectory"];
     }
 
@@ -43,7 +48,18 @@ public class StatementProcessingService : BackgroundService, IStatementProcessin
     public async Task ProcessInvoiceAsync(Invoice invoice, CancellationToken cancellationToken)
     {
         var plays = await GetPlaysAsync();
-        var xmlContent = await Task.Run(() => _statementPrinter.Print(invoice, plays));
+
+        var statement = await Task.Run(() => _statementPrinterService.BuildStatement(invoice, plays));
+
+        var xmlContent = await Task.Run(() => _statementPrinterService.Print(statement));
+
+        await Task.Run(() => {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var statementService = scope.ServiceProvider.GetRequiredService<IStatementService>();
+                statementService.AddStatementAsync(statement);
+            }
+        });
 
         var fileName = $"{invoice.Customer}_{DateTime.Now:yyyyMMddHHmmss}.xml";
 

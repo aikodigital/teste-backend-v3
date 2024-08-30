@@ -3,11 +3,11 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;
 using TheatricalPlayersRefactoringKata;
-using Microsoft.AspNetCore.Hosting;
 using TheatricalPlayersRefactoringKata.Application.Adapters;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Strategies;
+using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +22,8 @@ public static class DependencyInjection
         services.AddAutoMapper(typeof(Program));
 
         // DI
+        services.AddScoped<IStatementRepository, StatementRepository>();
+        services.AddScoped<IStatementService, StatementService>();
         services.AddSingleton<IFormatterAdapter, XmlFormatterAdapter>();
         services.AddSingleton<CalculationStrategyFactory>();
         services.AddSingleton<IStatementPrinterService, StatementPrinterService>();

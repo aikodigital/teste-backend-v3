@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Routing;
-using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Entities;
+using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Models.Dtos;
 
 namespace TheatricalPlayersRefactoringKata.Endpoints;
 
@@ -13,13 +14,11 @@ internal static class StatementEndpoint
 
         group.WithTags("Statement");
 
-        group.MapGet("/{id}", async Task<Results<Ok<Statement>, NotFound>> (ApplicationDbContext db, int id) =>
+        group.MapGet("/", async (IStatementService service, IMapper mapper) =>
         {
-            return await db.Statements.FindAsync(id) switch
-            {
-                Statement stmt => TypedResults.Ok(stmt),
-                null => TypedResults.NotFound(),
-            };
+            var result = await service.GetAllStatementsAsync();
+
+            return TypedResults.Ok(mapper.Map<List<StatementDto>>(result));
         });
 
         return group;

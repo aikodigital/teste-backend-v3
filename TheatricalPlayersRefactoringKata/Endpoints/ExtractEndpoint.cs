@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Models;
 
@@ -19,7 +15,7 @@ internal static class ExtractEndpoint
 
         group.MapPost("/", (StatementProcessingService service) =>
         {
-            //var service = serviceProvider.GetRequiredService<StatementProcessingService>();
+            // TODO: PODERIA VIR POR PARAMETRO
             Invoice invoice = new Invoice(
                 "BigCo",
                 new List<Performance>

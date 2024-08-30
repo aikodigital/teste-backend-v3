@@ -56,4 +56,9 @@ public class StatementPrinterService: IStatementPrinterService
         var statement = BuildStatement(invoice, plays);
         return _formatterAdapter.Format(statement);
     }
+
+    public string Print(Statement statement)
+    {
+        return _formatterAdapter.Format(statement);
+    }
 }
