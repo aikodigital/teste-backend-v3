@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Models;
+﻿using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Interfaces;
 
 public interface IFormatterAdapter
 {
-    string Format(Invoice invoice, Dictionary<string, Play> plays, decimal totalAmount, decimal volumeCredits);
+    string Format(Statement statement);
 }

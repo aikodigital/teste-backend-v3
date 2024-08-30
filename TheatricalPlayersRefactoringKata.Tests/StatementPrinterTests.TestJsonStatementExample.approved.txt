@@ -1,0 +1,37 @@
+﻿{
+  "Customer": "BigCo",
+  "Items": [
+    {
+      "AmountOwed": 650.0,
+      "EarnedCredits": 25.0,
+      "Seats": 55
+    },
+    {
+      "AmountOwed": 547.0,
+      "EarnedCredits": 12.0,
+      "Seats": 35
+    },
+    {
+      "AmountOwed": 456.0,
+      "EarnedCredits": 10.0,
+      "Seats": 40
+    },
+    {
+      "AmountOwed": 705.4,
+      "EarnedCredits": 0.0,
+      "Seats": 20
+    },
+    {
+      "AmountOwed": 931.6,
+      "EarnedCredits": 9.0,
+      "Seats": 39
+    },
+    {
+      "AmountOwed": 705.4,
+      "EarnedCredits": 0.0,
+      "Seats": 20
+    }
+  ],
+  "TotalAmountOwed": 3995.4,
+  "TotalEarnedCredits": 56.0
+}

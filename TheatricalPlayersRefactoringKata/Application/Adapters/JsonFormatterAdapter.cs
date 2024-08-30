@@ -1,22 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Linq;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Application.Strategies;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Models.Dtos;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace TheatricalPlayersRefactoringKata.Application.Adapters;
 
 public class JsonFormatterAdapter : IFormatterAdapter
 {
-    private readonly CalculationStrategyFactory _strategyFactory;
-
-    public JsonFormatterAdapter(CalculationStrategyFactory strategyFactory)
+    public string Format(Statement statement)
     {
-        _strategyFactory = strategyFactory;
-    }
+        // TODO: AJUSTAR CRIAÇÃO DO DTO
+        var statementDto = new StatementDto
+        {
+            Customer = statement.Customer,
+            TotalAmountOwed = statement.TotalAmountOwed,
+            TotalEarnedCredits = statement.TotalEarnedCredits,
+            Items = statement.Items.Select(item => new StatementItemDto
+            {
+                AmountOwed = item.AmountOwed,
+                EarnedCredits = item.EarnedCredits,
+                Seats = item.Seats
+            }).ToList()
+        };
 
-    public string Format(Invoice invoice, Dictionary<string, Play> plays, decimal totalAmount, decimal volumeCredits)
-    {
-        // TODO: Trabalhar na logica JSON
-        return string.Empty;
+        return JsonConvert.SerializeObject(statementDto, new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+        });
     }
 }
