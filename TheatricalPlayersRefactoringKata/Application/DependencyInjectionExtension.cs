@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application.Services.AutoMapper;
+using TheatricalPlayersRefactoringKata.Application.UseCases.Extract;
+using TheatricalPlayersRefactoringKata.Application.UseCases.Invoice;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
@@ -21,8 +23,8 @@ public static class DependencyInjectionExtension
     }
     private static void AddUserCase(IServiceCollection services)
     {
-        //services.AddScoped<IProcessInvoiceUseCase, ProcessInvoiceUseCase>();
-        //services.AddScoped<IExtractInvoiceUseCase, ExtractInvoiceUseCase>();
+        services.AddScoped<IProcessInvoiceUseCase, ProcessInvoiceUseCase>();
+        services.AddScoped<IExtractInvoiceUseCase, ExtractInvoiceUseCase>();
     }
 
 

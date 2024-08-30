@@ -25,17 +25,17 @@ public class TextStatementFormatter : IStatementFormatter
             var play = performance.Play;
             var calculator = _calculators[play.Type];
 
-            int amount = await calculator.CalculateAmount(performance, play);
+            decimal amount = await calculator.CalculateAmount(performance, play);
             int volumeCredits = await calculator.CalculateVolumeCredits(performance, play);
 
-            result.AppendLine($"{play.Name}: {amount:C} ({performance.Audience} seats)");
+            result.AppendLine($"{play.Name}: {amount:C2} ({performance.Audience} seats)");
 
             invoice.TotalVolumeCredits += volumeCredits;
         }
 
         decimal totalAmount = await _invoiceCalculationService.CalculateTotalValue(invoice);
 
-        result.AppendLine($"Amount owed is {totalAmount:C}");
+        result.AppendLine($"Amount owed is {totalAmount:C2}");
         result.AppendLine($"You earned {invoice.TotalVolumeCredits} credits");
 
         return result.ToString();

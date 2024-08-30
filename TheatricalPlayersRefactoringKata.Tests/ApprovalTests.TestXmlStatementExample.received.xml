@@ -1,0 +1,25 @@
+﻿<invoice>
+  <customer>BigCo</customer>
+  <performances>
+    <performance>
+      <playName>Hamlet</playName>
+      <audience>55</audience>
+      <amount>$450.00</amount>
+      <volumeCredits>25</volumeCredits>
+    </performance>
+    <performance>
+      <playName>As You Like It</playName>
+      <audience>35</audience>
+      <amount>$480.00</amount>
+      <volumeCredits>12</volumeCredits>
+    </performance>
+    <performance>
+      <playName>Othello</playName>
+      <audience>40</audience>
+      <amount>$1,020.00</amount>
+      <volumeCredits>28</volumeCredits>
+    </performance>
+  </performances>
+  <totalAmount>$1,950.00</totalAmount>
+  <totalVolumeCredits>65</totalVolumeCredits>
+</invoice>

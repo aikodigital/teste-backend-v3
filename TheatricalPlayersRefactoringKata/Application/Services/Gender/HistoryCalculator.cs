@@ -1,24 +1,26 @@
 ﻿using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Application.Services;
+using TheatricalPlayersRefactoringKata.Application.Services.Gender;
 using TheatricalPlayersRefactoringKata.Core.Entities;
-
-namespace TheatricalPlayersRefactoringKata.Application.Services.Gender;
 
 public class HistoryCalculator : IPerformanceCalculator
 {
-    private readonly TragedyCalculator _tragedyCalculator = new();
-    private readonly ComedyCalculator _comedyCalculator = new();
+    private readonly TragedyCalculator _tragedyCalculator = new TragedyCalculator();
+    private readonly ComedyCalculator _comedyCalculator = new ComedyCalculator();
 
-    public async Task<int> CalculateAmount(Performance performance, Play play)
+    public async Task<decimal> CalculateAmount(Performance performance, Play play)
     {
-        var tragedyAmount = await _tragedyCalculator.CalculateAmount(performance, play);
-        var comedyAmount = await _comedyCalculator.CalculateAmount(performance, play);
+        decimal tragedyAmount = await _tragedyCalculator.CalculateAmount(performance, play);
+        decimal comedyAmount = await _comedyCalculator.CalculateAmount(performance, play);
         return tragedyAmount + comedyAmount;
     }
 
+
     public async Task<int> CalculateVolumeCredits(Performance performance, Play play)
     {
-        var tragedyCredit = await _tragedyCalculator.CalculateVolumeCredits(performance, play);
-        var comedyCredit = await _comedyCalculator.CalculateVolumeCredits(performance, play);
-        return tragedyCredit + comedyCredit;
+        int tragedyCredits = await _tragedyCalculator.CalculateVolumeCredits(performance, play);
+        int comedyCredits = await _comedyCalculator.CalculateVolumeCredits(performance, play);
+        return tragedyCredits + comedyCredits;
     }
+
 }

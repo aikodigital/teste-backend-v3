@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Services.Gender;
-using TheatricalPlayersRefactoringKata.Application.Services.Statment;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 using Xunit;
 
@@ -66,7 +65,7 @@ public class StatementPrinterTests
                 new Performance("othello", 40, plays["othello"]),
                 new Performance("henry-v", 20, plays["henry-v"]),
                 new Performance("john", 39, plays["john"]),
-                new Performance("richard-iii", 20, plays["richard-iii"])
+                new Performance("henry-v", 20, plays["henry-v"]),
             }
         );
 
@@ -83,4 +82,6 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+
+
 }
