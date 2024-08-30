@@ -78,25 +78,6 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Services
                 string utf8String = Encoding.UTF8.GetString(memoryStream.ToArray() );
                 return utf8String;
             }
-
-            //var sb = new StringBuilder();
-            //using (var writer = new StringWriter(sb))
-            //{
-            //    XMLdocument.Save(writer);
-            //    return sb.ToString();
-
-            //    //XMLdocument.Save(writer);
-            //    //return sb.ToString();
-            //}
-
-            //byte[] utf8Bytes = Encoding.UTF8.GetBytes(XMLdocument.ToString());
-            //string utf8String = Encoding.UTF8.GetString(utf8Bytes);
-
-            //return utf8String;
-
-            //var wr = new StringWriter();
-            //XMLdocument.Save(wr);
-            //return wr.ToString();
         }
 
         private string FormatNumber(decimal number)
