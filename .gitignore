@@ -4,4 +4,4 @@
 *.received.txt
 
 .vs/*
-*.db
+*.db*

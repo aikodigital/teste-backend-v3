@@ -45,7 +45,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new TextFormatterAdapter());
+        StatementPrinterService statementPrinter = new StatementPrinterService(strategyFactory, new TextFormatterAdapter());
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -78,7 +78,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new TextFormatterAdapter());
+        StatementPrinterService statementPrinter = new StatementPrinterService(strategyFactory, new TextFormatterAdapter());
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -111,7 +111,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new XmlFormatterAdapter(_mapper));
+        StatementPrinterService statementPrinter = new StatementPrinterService(strategyFactory, new XmlFormatterAdapter(_mapper));
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -144,7 +144,7 @@ public class StatementPrinterTests
 
         var strategyFactory = new CalculationStrategyFactory();
 
-        StatementPrinter statementPrinter = new StatementPrinter(strategyFactory, new JsonFormatterAdapter(_mapper));
+        StatementPrinterService statementPrinter = new StatementPrinterService(strategyFactory, new JsonFormatterAdapter(_mapper));
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);

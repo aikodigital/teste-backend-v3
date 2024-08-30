@@ -6,12 +6,12 @@ using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services;
 
-public class StatementPrinter
+public class StatementPrinterService: IStatementPrinterService
 {
     private readonly IFormatterAdapter _formatterAdapter;
     private readonly CalculationStrategyFactory _strategyFactory;
 
-    public StatementPrinter(CalculationStrategyFactory strategyFactory, IFormatterAdapter formatterAdapter)
+    public StatementPrinterService(CalculationStrategyFactory strategyFactory, IFormatterAdapter formatterAdapter)
     {
         _formatterAdapter = formatterAdapter;
         _strategyFactory = strategyFactory;
