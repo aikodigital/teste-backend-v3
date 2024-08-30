@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
 using Xunit;
@@ -30,7 +29,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "text");
 
         Approvals.Verify(result);
     }
@@ -61,7 +60,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "text");
 
         Approvals.Verify(result);
     }
@@ -70,7 +69,7 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
-        var plays = new Dictionary<string,  Play>();
+        var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
         plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
         plays.Add("othello", new Play("Othello", 3560, "tragedy"));
@@ -92,7 +91,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXML(invoice, plays);
+        var result = statementPrinter.Print(invoice, plays, "xml");
 
         Approvals.Verify(result);
     }
