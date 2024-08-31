@@ -1,0 +1,22 @@
+﻿{
+  "Customer": "John Doe",
+  "Items": [
+    {
+      "AmountOwed": 400.00,
+      "EarnedCredits": 0.0,
+      "Seats": 55
+    },
+    {
+      "AmountOwed": 300.00,
+      "EarnedCredits": 0.0,
+      "Seats": 35
+    },
+    {
+      "AmountOwed": 500.00,
+      "EarnedCredits": 0.0,
+      "Seats": 40
+    }
+  ],
+  "TotalAmountOwed": 1200.00,
+  "TotalEarnedCredits": 30.0
+}

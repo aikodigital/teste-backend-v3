@@ -1,0 +1,6 @@
+﻿Statement for John Doe
+  Hamlet: $400.00 (55 seats)
+  As You Like It: $300.00 (35 seats)
+  Othello: $500.00 (40 seats)
+Amount owed is $1,200.00
+You earned 30 credits
