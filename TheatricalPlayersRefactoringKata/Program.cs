@@ -17,7 +17,6 @@ if (app.Environment.IsDevelopment())
 app.Map("/", () => Results.Redirect("/swagger"));
 
 // Configure the APIs
-app.MapExtract();
 app.MapStatement();
 
 app.Run();
