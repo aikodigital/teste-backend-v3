@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj" />
   </ItemGroup>
 

@@ -1,19 +1,34 @@
 ﻿using JogadoresTeatrais.Application.Interfaces;
+using JogadoresTeatrais.Application.ViewModels;
 using JogadoresTeatrais.Domain.Entities;
+using JogadoresTeatrais.Domain.Interfaces;
 using JogadoresTeatrais.Utility.Utility;
 using JogaresTeatrais.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.Json;
 
 namespace JogadoresTeatrais.Application.Service
 {
     public class FaturaService : IFaturaService
     {
-        public void Teste()
+       
+        public string Get()
         {
-            // Implementar API das faturas
+            
+            Fatura fatura = new Fatura();
+
+            
+            Dictionary<int, Jogar> jogarDictionary = new Dictionary<int, Jogar>();
+
+            var result = FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json);
+
+            return result;
+
+
+
         }
 
         private string FormatarFatura(Fatura fatura, Dictionary<int, Jogar> jogar, FormatoArquivo formatoArquivo)
@@ -22,7 +37,7 @@ namespace JogadoresTeatrais.Application.Service
             {
                 FormatoArquivo.Txt => FormatarTexto(fatura, jogar),
                 FormatoArquivo.Xml => GerarXml(fatura, jogar),
-                FormatoArquivo.Json => throw new NotImplementedException("Formato JSON ainda não implementado!"),
+                FormatoArquivo.Json => GerarJson(fatura, jogar),
                 FormatoArquivo.Csv => throw new NotImplementedException("Formato CSV ainda não implementado!"),
                 _ => throw new ArgumentException("Formato de arquivo desconhecido.", nameof(formatoArquivo)),
             };
@@ -72,6 +87,34 @@ namespace JogadoresTeatrais.Application.Service
             sb.AppendLine("</Extrato>");
 
             return sb.ToString();
+        }
+
+        private string GerarJson(Fatura fatura, Dictionary<int, Jogar> jogar)
+        {
+            
+            var extrato = new
+            {
+                Cliente = fatura.Cliente,
+                Itens = new List<object>(),
+                ValorDevido = CalcularMontanteTotal(fatura, jogar, out int volumeCreditos) / 100m,
+                CreditosGanhos = volumeCreditos
+            };
+
+            foreach (var desempenho in fatura.Desempenhos)
+            {
+                var jogarItem = jogar[desempenho.JogarId];
+                var valorDesempenho = CalcularValorDesempenho(desempenho, jogarItem);
+
+                extrato.Itens.Add(new
+                {
+                    Jogar = jogarItem.Nome,
+                    ValorDevido = valorDesempenho / 100m,
+                    CreditosGanhos = Math.Max(desempenho.Audiencia - 30, 0),
+                    Assentos = desempenho.Audiencia
+                });
+            }
+
+            return JsonSerializer.Serialize(extrato, new JsonSerializerOptions { WriteIndented = true });
         }
 
         private int CalcularMontanteTotal(Fatura fatura, Dictionary<int, Jogar> jogar, out int creditos)

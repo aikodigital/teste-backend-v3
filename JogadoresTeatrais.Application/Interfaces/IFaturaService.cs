@@ -8,6 +8,6 @@ namespace JogadoresTeatrais.Application.Interfaces
 {
     public interface IFaturaService
     {
-        void Teste();
+        string Get();
     }
 }

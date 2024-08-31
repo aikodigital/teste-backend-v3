@@ -18,8 +18,8 @@ namespace JogadoresTeatrais.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            this.faturaService.Teste();
-            return Ok("Ok");
+            var resultado = this.faturaService.Get();
+            return Ok(resultado);
         }
 
     }
