@@ -1,4 +1,4 @@
-﻿namespace TheatricalPlayersRefactoringKata.Exception.BaseException;
+﻿namespace TheatricalPlayersRefactoringKata.Exceptions.BaseException;
 
 public class ErrorOnValidationException : CustomizedException
 {

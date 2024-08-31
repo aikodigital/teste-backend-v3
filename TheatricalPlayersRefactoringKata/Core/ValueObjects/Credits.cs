@@ -1,5 +1,5 @@
 ﻿using System;
-using TheatricalPlayersRefactoringKata.Exception;
+using TheatricalPlayersRefactoringKata.Exceptions;
 
 namespace TheatricalPlayersRefactoringKata.Core.ValueObjects;
 

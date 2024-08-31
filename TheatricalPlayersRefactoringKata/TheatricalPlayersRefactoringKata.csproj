@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\Shared\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj" />
-    <ProjectReference Include="..\src\Shared\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj" />
+    <ProjectReference Include="..\src\Shared\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exceptions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

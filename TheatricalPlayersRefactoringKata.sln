@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{8E34
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9ED007AC-8365-4F50-94D3-38C6D341BA87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Exception", "src\Shared\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj", "{DCA989A9-837E-405C-AFFC-535533287B3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Exceptions", "src\Shared\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exceptions.csproj", "{DCA989A9-837E-405C-AFFC-535533287B3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Communication", "src\Shared\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{FACDC226-1E65-456D-AB81-82C79CF7F480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Communication", "src\Shared\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{FACDC226-1E65-456D-AB81-82C79CF7F480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

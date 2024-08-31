@@ -120,8 +120,14 @@
   <data name="AMOUNTS_DIFFEREN_ERROR" xml:space="preserve">
     <value>Não é possível adicionar valores com moedas diferentes.</value>
   </data>
+  <data name="AUDIENCE_CANNOT_ZERO" xml:space="preserve">
+    <value>O público-alvo deve ser maior que zero</value>
+  </data>
   <data name="CREDIT_NEGATIVE_ERROR" xml:space="preserve">
     <value>Créditos não podem estar negativos</value>
+  </data>
+  <data name="PLAYID_CANOT_EMPTY" xml:space="preserve">
+    <value>PlayId não pode estar vazio</value>
   </data>
   <data name="SUBTRACT_AMOUNTS_DIFFERENTE_ERROR" xml:space="preserve">
     <value>Não é possível subtrair valores com moedas diferentes</value>

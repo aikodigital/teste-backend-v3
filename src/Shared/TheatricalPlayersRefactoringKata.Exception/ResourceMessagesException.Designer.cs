@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TheatricalPlayersRefactoringKata.Exception {
+namespace TheatricalPlayersRefactoringKata.Exceptions {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TheatricalPlayersRefactoringKata.Exception.ResourceMessagesException", typeof(ResourceMessagesException).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TheatricalPlayersRefactoringKata.Exceptions.ResourceMessagesException", typeof(ResourceMessagesException).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,11 +70,29 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O público-alvo deve ser maior que zero.
+        /// </summary>
+        public static string AUDIENCE_CANNOT_ZERO {
+            get {
+                return ResourceManager.GetString("AUDIENCE_CANNOT_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Créditos não podem estar negativos.
         /// </summary>
         public static string CREDIT_NEGATIVE_ERROR {
             get {
                 return ResourceManager.GetString("CREDIT_NEGATIVE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a PlayId não pode estar vazio.
+        /// </summary>
+        public static string PLAYID_CANOT_EMPTY {
+            get {
+                return ResourceManager.GetString("PLAYID_CANOT_EMPTY", resourceCulture);
             }
         }
         

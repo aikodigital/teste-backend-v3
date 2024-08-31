@@ -2,13 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Core.Entities;
+using TheatricalPlayersRefactoringKata.Core.Enuns;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services;
 
 public class InvoiceCalculationService : IInvoiceCalculationService
 {
-    private readonly Dictionary<string, IPerformanceCalculator> _calculators;
-    public InvoiceCalculationService(Dictionary<string, IPerformanceCalculator> calculators)
+    private readonly Dictionary<Genre, IPerformanceCalculator> _calculators;
+
+    public InvoiceCalculationService(Dictionary<Genre, IPerformanceCalculator> calculators)
     {
         _calculators = calculators;
     }
@@ -37,11 +39,11 @@ public class InvoiceCalculationService : IInvoiceCalculationService
 
         switch (play.Type)
         {
-            case "tragedy":
+            case Genre.Tragedy:
                 baseAmount += (audience > 30) ? 10 * (audience - 30) : 0;
                 break;
 
-            case "comedy":
+            case Genre.Comedy:
                 baseAmount += 3 * audience;
                 if (audience > 20)
                 {

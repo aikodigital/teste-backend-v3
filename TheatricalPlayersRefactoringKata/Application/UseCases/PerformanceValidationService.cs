@@ -3,7 +3,7 @@ using System;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Core.Entities;
 
-namespace TheatricalPlayersRefactoringKata.Application.Validators;
+namespace TheatricalPlayersRefactoringKata.Application.UseCases;
 
 public class PerformanceValidationService : IPerformanceValidationService
 {

@@ -1,6 +1,6 @@
-﻿namespace TheatricalPlayersRefactoringKata.Exception.BaseException;
+﻿namespace TheatricalPlayersRefactoringKata.Exceptions.BaseException;
 
-public class CustomizedException : System.Exception
+public class CustomizedException : Exception
 {
     public CustomizedException(string message) : base(message) { }
 
