@@ -24,9 +24,9 @@ namespace JogadoresTeatrais.Application.Service
             this.faturaRepository = faturaRepository;
             this.jogarRepository = jogarRepository;
         }
-            
-       
-        public string GetAll()
+
+
+        public string GetAll(string formato = "Json")
         {
 
             var faturas = faturaRepository.GetAll();
@@ -42,8 +42,23 @@ namespace JogadoresTeatrais.Application.Service
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (var fatura in faturas)
-            { 
-                stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json));  
+            {
+                //stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json));
+
+                switch (formato.ToLower())
+                {
+                    case "json":
+                        stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json));
+                        break;
+                    case "txt":
+                        stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Txt));
+                        break;
+                    case "xml":
+                        stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Xml));
+                        break;
+                    default:
+                        throw new ArgumentException("Formato não suportado");
+                }
             }
             return stringBuilder.ToString();
 

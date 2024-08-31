@@ -13,7 +13,7 @@ namespace JogadoresTeatrais.Controllers
         public FaturaController (IFaturaService faturaService)
             {
             this.faturaService = faturaService;
-            }
+        }
 
         [HttpGet]
         public IActionResult GetAll()
@@ -21,6 +21,7 @@ namespace JogadoresTeatrais.Controllers
             var resultado = this.faturaService.GetAll();
             return Ok(resultado);
         }
+        
 
     }
 }
