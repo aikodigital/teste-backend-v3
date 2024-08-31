@@ -14,5 +14,9 @@ namespace JogadoresTeatrais.Domain.Entities
         public int JogarId { get; set; }
 
         public int Audiencia { get; set; }
+
+        public int FaturaId { get; set; }
+        
+        public Fatura Fatura { get; set; }
     }
 }

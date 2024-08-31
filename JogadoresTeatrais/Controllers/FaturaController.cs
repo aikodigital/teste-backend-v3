@@ -16,9 +16,9 @@ namespace JogadoresTeatrais.Controllers
             }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            var resultado = this.faturaService.Get();
+            var resultado = this.faturaService.GetAll();
             return Ok(resultado);
         }
 

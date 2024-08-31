@@ -14,20 +14,38 @@ namespace JogadoresTeatrais.Application.Service
 {
     public class FaturaService : IFaturaService
     {
-       
-        public string Get()
-        {
-            
-            Fatura fatura = new Fatura();
 
+        private readonly IFaturaRepository faturaRepository;
+
+        private readonly IJogarRepository jogarRepository;
+
+        public FaturaService(IFaturaRepository faturaRepository, IJogarRepository jogarRepository)
+        {
+            this.faturaRepository = faturaRepository;
+            this.jogarRepository = jogarRepository;
+        }
             
+       
+        public string GetAll()
+        {
+
+            var faturas = faturaRepository.GetAll();
+            var jogar = jogarRepository.GetAll();
+
             Dictionary<int, Jogar> jogarDictionary = new Dictionary<int, Jogar>();
 
-            var result = FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json);
+            foreach (var _jogar in jogar)
+            {
+                jogarDictionary[_jogar.Id] = _jogar;
+            }
 
-            return result;
+            StringBuilder stringBuilder = new StringBuilder();
 
-
+            foreach (var fatura in faturas)
+            { 
+                stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json));  
+            }
+            return stringBuilder.ToString();
 
         }
 
