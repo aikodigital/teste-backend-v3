@@ -1,0 +1,36 @@
+{
+  "invoice": {
+    "customer": "John Doe",
+    "performances": [
+      {
+        "playId": "hamlet",
+        "audience": 55
+      },
+      {
+        "playId": "as-like",
+        "audience": 35
+      },
+      {
+        "playId": "othello",
+        "audience": 40
+      }
+    ]
+  },
+  "plays": {
+    "hamlet": {
+      "name": "Hamlet",
+      "lines": 4024,
+      "type": "tragedy"
+    },
+    "as-like": {
+      "name": "As You Like It",
+      "lines": 2670,
+      "type": "comedy"
+    },
+    "othello": {
+      "name": "Othello",
+      "lines": 3560,
+      "type": "tragedy"
+    }
+  }
+}
