@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
@@ -39,7 +38,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public void TestXmlStatementExample()
     {
         var plays = new Dictionary<string, IPlay>
             {
@@ -65,9 +64,9 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.PrintAsXml(invoice, plays);
 
         Approvals.Verify(result);
     }
 }
-}
+

@@ -15,12 +15,12 @@ namespace TheatricalPlayersRefactoringKata.Models
 
         public decimal CalculateAmount(int audience)
         {
-            decimal amount = 40000; // Base amount
+            var baseAmount = Math.Max(Lines / 10, 100);
             if (audience > 30)
             {
-                amount += 1000 * (audience - 30);
+                return baseAmount + 10 * (audience - 30);
             }
-            return amount;
+            return baseAmount;
         }
 
         public int CalculateVolumeCredits(int audience)

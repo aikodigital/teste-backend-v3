@@ -13,12 +13,16 @@
 
         public decimal CalculateAmount(int audience)
         {
-            return 30000;
+            var tragedy = new Tragedy(Name, Lines);
+            var comedy = new Comedy(Name, Lines);
+            return tragedy.CalculateAmount(audience) + comedy.CalculateAmount(audience);
         }
 
         public int CalculateVolumeCredits(int audience)
         {
-            return 0; 
+            var tragedy = new Tragedy(Name, Lines);
+            var comedy = new Comedy(Name, Lines);
+            return tragedy.CalculateVolumeCredits(audience) + comedy.CalculateVolumeCredits(audience);
         }
     }
 }
