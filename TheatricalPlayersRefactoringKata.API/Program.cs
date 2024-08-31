@@ -1,5 +1,7 @@
 using Microsoft.OpenApi.Models;
 using TheatricalPlayersRefactoringKata.Infrastructure.Persistence;
+using TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositories;
+using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.API
 {
@@ -9,9 +11,21 @@ namespace TheatricalPlayersRefactoringKata.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
 
+            // Add services to the container.
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -22,7 +36,12 @@ namespace TheatricalPlayersRefactoringKata.API
                     Description = "API for Plays, Performances and Invoices",
                 })
             );
+
+            //Repository services.
             builder.Services.AddDbContext<DBContext>();
+            builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            builder.Services.AddScoped<IPlayRepository, PlayRepository>();
+
 
             var app = builder.Build();
 
@@ -36,12 +55,9 @@ namespace TheatricalPlayersRefactoringKata.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowAllOrigins");
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
