@@ -1,4 +1,5 @@
-using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using TheatricalPlayersRefactoringKata.Infrastructure.Persistence;
 
 namespace TheatricalPlayersRefactoringKata.API
 {
@@ -13,8 +14,15 @@ namespace TheatricalPlayersRefactoringKata.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<DbContext>();
+            builder.Services.AddSwaggerGen(c =>
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Theatrical Plays API",
+                    Version = "v1",
+                    Description = "API for Plays, Performances and Invoices",
+                })
+            );
+            builder.Services.AddDbContext<DBContext>();
 
             var app = builder.Build();
 
@@ -22,7 +30,9 @@ namespace TheatricalPlayersRefactoringKata.API
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Theatrical API v1")
+                );
             }
 
             app.UseHttpsRedirection();
