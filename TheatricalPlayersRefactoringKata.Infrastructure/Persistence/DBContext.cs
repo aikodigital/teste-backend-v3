@@ -1,25 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence
 {
     public class DBContext : DbContext
     {
         private IConfiguration _config;
+        public DbSet<Play> Plays { get; set; }
 
-        public DBContext(IConfiguration config, DbContextOptions options) : base(options)
+        public DBContext(IConfiguration config, DbContextOptions<DBContext> options) : base(options)
         {
             _config = config;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = _config.GetConnectionString("npgServer"); 
+            var connectionString = _config.GetConnectionString("Postgresql");
             optionsBuilder.UseNpgsql(connectionString);
         }
 

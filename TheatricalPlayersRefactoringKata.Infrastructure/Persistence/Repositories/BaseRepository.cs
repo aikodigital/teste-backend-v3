@@ -5,13 +5,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly DBContext _context;
+        protected readonly DBContext Context;
         private readonly DbSet<T> _dbSet;
 
         public BaseRepository(DBContext context)
         {
-            _context = context;
-            _dbSet = _context.Set<T>();
+            Context = context;
+            _dbSet = Context.Set<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -27,13 +27,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -42,7 +42,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
             if (entity != null)
             {
                 _dbSet.Remove(entity);
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
         }
     }

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.Entities;
-using TheatricalPlayersRefactoringKata.Infrastructure.Persistence;
+using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -11,26 +9,25 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     public class PlayController : Controller
     {
         private static List<Play> plays = new List<Play>();
-        private readonly DBContext _dbContext;
+        private readonly IBaseRepository<Play> _playRepository;
 
-        public PlayController(DBContext context)
+        public PlayController(IBaseRepository<Play> context)
         {
-            _dbContext = context;
+            _playRepository = context;
         }
 
         [HttpPost]
         public async Task<ActionResult<List<Play>>> Post([FromBody] Play play)
         {
-            //_dbContext.Plays.Add(play);
-            //await _dbContext.SaveChangesAsync();
-            //return CreatedAtAction(nameof(Get), new { play }, play);
-            
-            plays.Add(play);
-            return plays;
+            await _playRepository.AddAsync(play);
+            return CreatedAtAction(nameof(Get), new { play }, play);
         }
 
         [HttpGet]
-        public ActionResult<List<Play>> Get() => 
-            plays;
+        public async Task<ActionResult<List<Play>>> Get()
+        {
+            var plays = await _playRepository.GetAllAsync();
+            return Ok(plays);
+        }
     }
 }
