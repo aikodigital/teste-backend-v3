@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Statement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>John Doe</Customer>
+  <Items>
+    <Item>
+      <AmountOwed>400.00</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
+      <Seats>55</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>300.00</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
+      <Seats>35</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>500.00</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
+      <Seats>40</Seats>
+    </Item>
+  </Items>
+  <AmountOwed>1200.00</AmountOwed>
+  <EarnedCredits>30</EarnedCredits>
+</Statement>

@@ -8,4 +8,5 @@ public interface IStatementProcessingService
 {
     void EnqueueInvoice(Invoice invoice);
     Task ProcessInvoiceAsync(Invoice invoice, CancellationToken cancellationToken);
+    Task ProcessPendingInvoicesAsync(CancellationToken stoppingToken);
 }

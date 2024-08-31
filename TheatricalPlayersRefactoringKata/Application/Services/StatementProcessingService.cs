@@ -36,12 +36,16 @@ public class StatementProcessingService : BackgroundService, IStatementProcessin
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            while (_invoiceQueue.TryDequeue(out var invoice))
-            {
-                await ProcessInvoiceAsync(invoice, stoppingToken);
-            }
-
+            await ProcessPendingInvoicesAsync(stoppingToken);
             await Task.Delay(100, stoppingToken);
+        }
+    }
+
+    public async Task ProcessPendingInvoicesAsync(CancellationToken stoppingToken)
+    {
+        while (_invoiceQueue.TryDequeue(out var invoice))
+        {
+            await ProcessInvoiceAsync(invoice, stoppingToken);
         }
     }
 
@@ -61,6 +65,8 @@ public class StatementProcessingService : BackgroundService, IStatementProcessin
             }
         });
 
+        // TODO: Refatore isso para um método separado
+
         var fileName = $"{invoice.Customer}_{DateTime.Now:yyyyMMddHHmmss}.xml";
 
         var filePath = Path.Combine(_outputDirectory, fileName);
@@ -72,6 +78,7 @@ public class StatementProcessingService : BackgroundService, IStatementProcessin
 
     private Task<Dictionary<string, Play>> GetPlaysAsync()
     {
+        // TODO: Refatore isso para um método separado
         var plays = new Dictionary<string, Play>
         {
             { "hamlet", new Play("Hamlet", 4024, "tragedy") },
