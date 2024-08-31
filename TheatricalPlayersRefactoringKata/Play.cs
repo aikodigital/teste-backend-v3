@@ -19,6 +19,10 @@ public class Play
         this._strategy = strategy;
     }
 
+    public Play()
+    {
+    }
+
     public double CalculateAmount(Performance performance, double amount, int lines)
     {
         return _strategy.CalculateAmount(performance, amount, lines);

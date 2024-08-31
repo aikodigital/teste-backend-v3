@@ -1,6 +1,6 @@
 public enum OutputType
 {
-    XML,
     JSON,
+    XML,
     TXT
 }
