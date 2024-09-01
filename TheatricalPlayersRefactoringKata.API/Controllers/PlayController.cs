@@ -8,7 +8,6 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     [Route("api/[controller]")]
     public class PlayController : Controller
     {
-        private static List<Play> plays = new List<Play>();
         private readonly IBaseRepository<Play> _playRepository;
 
         public PlayController(IBaseRepository<Play> context)
