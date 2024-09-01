@@ -46,6 +46,5 @@ O projeto segue uma abordagem de DDD, sendo dividido nos seguintes diretórios p
     Relatórios: Imprima ou visualize os extratos das faturas.
 
   ## Contato
-    Contato
-  Guilherme Nonato Novais
-  Email: nonatovga10gmail.com
+     Guilherme Nonato Novais
+     Email: nonatovga10gmail.com
