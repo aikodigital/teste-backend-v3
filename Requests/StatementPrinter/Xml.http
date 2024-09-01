@@ -1,0 +1,30 @@
+POST {{baseUrl}}/statementPrinter/print
+Content-Type: application/xml
+
+{
+  "invoice": {
+    "customer": "John Doe",
+    "performances": [
+      {
+        "playId": "hamlet",
+        "audience": 55
+      },
+      {
+        "playId": "as-like",
+        "audience": 35
+      }
+    ]
+  },
+  "plays": {
+    "hamlet": {
+      "name": "Hamlet",
+      "lines": 40,
+      "type": "tragedy"
+    },
+    "as-like": {
+      "name": "As You Like It",
+      "lines": 20,
+      "type": "comedy"
+    }
+  }
+}

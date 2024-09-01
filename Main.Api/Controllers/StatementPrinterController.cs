@@ -8,17 +8,27 @@ namespace Main.Api.Controllers
     [Route("statementPrinter")]
     public class StatementPrinterController : ControllerBase
     {
-        private readonly IStatementPrinterService _statementPrinterService;
+        private readonly Func<string, IStatementPrinterService> _statementPrinterServiceFactory;
 
-        public StatementPrinterController(IStatementPrinterService statementPrinterService)
+        public StatementPrinterController(Func<string, IStatementPrinterService> statementPrinterServiceFactory)
         {
-            _statementPrinterService = statementPrinterService;
+            _statementPrinterServiceFactory = statementPrinterServiceFactory;
         }
 
         [HttpPost("print")]
-        public IActionResult Register(StatementPrinterRequest request)
+        public IActionResult Print(StatementPrinterRequest request)
         {
-            var result = _statementPrinterService.Print(request.invoice,request.plays);
+            var statementPrinterService = _statementPrinterServiceFactory("default");
+            var result = statementPrinterService.Print(request.invoice,request.plays);
+            var response = new StatementPrinterResponse(result.Result);
+            return Ok(response);
+        }
+
+        [HttpPost("xml")]
+        public IActionResult Xml(StatementPrinterRequest request)
+        {
+            var statementPrinterService = _statementPrinterServiceFactory("xml");
+            var result = statementPrinterService.Print(request.invoice, request.plays);
             var response = new StatementPrinterResponse(result.Result);
             return Ok(response);
         }

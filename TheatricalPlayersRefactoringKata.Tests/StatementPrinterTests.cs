@@ -4,16 +4,17 @@ using ApprovalTests.Reporters;
 using Xunit;
 using Main.Application.Services.StatementPrinter;
 using Main.Contracts.StatementPrinter;
+using System;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
-    private readonly IStatementPrinterService _statementPrinterService;
+    private readonly Func<string, IStatementPrinterService> _statementPrinterServiceFactory;
 
-    public StatementPrinterTests(IStatementPrinterService statementPrinterService)
+    public StatementPrinterTests(Func<string, IStatementPrinterService> statementPrinterServiceFactory)
     {
-        _statementPrinterService = statementPrinterService;
+        _statementPrinterServiceFactory = statementPrinterServiceFactory;
     }
 
     [Fact]
@@ -36,8 +37,8 @@ public class StatementPrinterTests
             }
         };
 
-        var result = _statementPrinterService.Print(invoice, plays);
-
+        var statementPrinterService = _statementPrinterServiceFactory("default");
+        var result = statementPrinterService.Print(invoice, plays);
         Approvals.Verify(result.Result);
     }
 
@@ -67,8 +68,42 @@ public class StatementPrinterTests
             }
         };
 
-        var result = _statementPrinterService.Print(invoice, plays);
+       
+        var statementPrinterService = _statementPrinterServiceFactory("default");
+        var result = statementPrinterService.Print(invoice, plays);
+        Approvals.Verify(result.Result);
+    }
 
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
+            { "as-like", new Play { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
+            { "othello", new Play { Name = "Othello", Lines = 3560, Type = "tragedy" } },
+            { "henry-v", new Play { Name = "Henry V", Lines = 3227, Type = "history" } },
+            { "john", new Play { Name = "King John", Lines = 2648, Type = "history" } },
+            { "richard-iii", new Play { Name = "Richard III", Lines = 3718, Type = "history" } }
+        };
+
+        var invoice = new Invoice
+        {
+            Customer = "BigCo",
+            Performances = new List<Performance>
+            {
+                new Performance { PlayId = "hamlet", Audience = 55 },
+                new Performance { PlayId = "as-like", Audience = 35 },
+                new Performance { PlayId = "othello", Audience = 40 },
+                new Performance { PlayId = "henry-v", Audience = 20 },
+                new Performance { PlayId = "john", Audience = 39 },
+                new Performance { PlayId = "henry-v", Audience = 20 }
+            }
+        };
+
+        var statementPrinterService = _statementPrinterServiceFactory("xml");
+        var result = statementPrinterService.Print(invoice, plays);
         Approvals.Verify(result.Result);
     }
 }

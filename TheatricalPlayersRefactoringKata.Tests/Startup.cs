@@ -1,6 +1,7 @@
 ﻿using Main.Application.Services.StatementPrinter;
 using Microsoft.Extensions.DependencyInjection;
 using Main.Domain.Services;
+using System;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
@@ -8,9 +9,18 @@ namespace TheatricalPlayersRefactoringKata.Tests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IStatementPrinterService, StatementPrinterService>();
             services.AddTransient<StatementFormatter>();
             services.AddTransient<StatementCalculator>();
+            services.AddScoped<StatementPrinterService>();
+            services.AddScoped<XmlStatementPrinterService>();
+            services.AddScoped<Func<string, IStatementPrinterService>>(provider => key =>
+            {
+                return key switch
+                {
+                    "xml" => provider.GetRequiredService<XmlStatementPrinterService>(),
+                    _ => provider.GetRequiredService<StatementPrinterService>(),
+                };
+            });
         }
     }
 }
