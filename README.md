@@ -32,11 +32,11 @@ O projeto segue uma abordagem de DDD, sendo dividido nos seguintes diretórios p
 
     No terminal, na pasta do projeto, execute os seguintes comando para criar o banco dados e aplicar as migrações:
     
-     "dotnet ef database update --project JogaresTeatrais.Data -c DataContext --startup-project JogadoresTeatrais"
+        "dotnet ef database update --project JogaresTeatrais.Data -c DataContext --startup-project JogadoresTeatrais"
 
  3. **Inicie o servidor:**  
 
-     dotnet run --project JogadoresTeatrais.Web
+        dotnet run --project JogadoresTeatrais.Web
 
 
   ## Uso
