@@ -1,17 +1,32 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Performance
 {
-    private string _playId;
-    private int _audience;
+    [Key]
+    public int Id { get; set; }
 
-    public string PlayId { get => _playId; set => _playId = value; }
-    public int Audience { get => _audience; set => _audience = value; }
+    [Required, ForeignKey(nameof(PlayId))]
+    public string PlayId;
+    public Play Play { get; set; }    
+
+    public int Audience;
+
+    [Required, ForeignKey(nameof(InvoiceId))]
+    public int InvoiceId { get; set; }
+    public Invoice Invoice { get; set; }
+
+    public Performance()
+    {
+        
+    }
 
     public Performance(string playID, int audience)
     {
-        _playId = playID;
-        _audience = audience;
+        PlayId = playID;
+        Audience = audience;
     }
 
 }

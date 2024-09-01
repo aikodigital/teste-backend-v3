@@ -8,6 +8,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence
     {
         private IConfiguration _config;
         public DbSet<Play> Plays { get; set; }
+        public DbSet<Performance> Performances { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         public DBContext(IConfiguration config, DbContextOptions<DBContext> options) : base(options)
         {
@@ -20,5 +22,35 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence
             optionsBuilder.UseNpgsql(connectionString);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Play>()
+                .HasKey(p => p.Name);
+
+            modelBuilder.Entity<Play>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<Performance>()
+                .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Performance>()
+                .HasOne(p => p.Play)
+                .WithMany()
+                .HasForeignKey(p => p.PlayId) 
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasPrincipalKey(p => p.Name)
+                .HasConstraintName("FK_Performance_PlayId");
+
+            modelBuilder.Entity<Invoice>()
+                .HasKey(i => i.Id);
+
+            modelBuilder.Entity<Invoice>()
+                .HasMany(i => i.Performances)
+                .WithOne(p => p.Invoice)
+                .HasForeignKey(p => p.InvoiceId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
