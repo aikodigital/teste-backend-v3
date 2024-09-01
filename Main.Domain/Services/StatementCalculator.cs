@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Main.Domain.Services
+﻿namespace Main.Domain.Services
 {
     public class StatementCalculator
     {
