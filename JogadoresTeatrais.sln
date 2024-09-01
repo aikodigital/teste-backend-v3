@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Web", "1-Web", "{AC9EF517-9E24-4735-88D6-65AA462D156C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais", "JogadoresTeatrais\JogadoresTeatrais.csproj", "{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{D42304E7-44B4-43A1-B0D4-A880AD565658}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{51667865-27BE-4311-AF4D-7B51B38D539A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Data", "4-Data", "{258F7FE3-5E5B-498B-B449-0251224E3620}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogaresTeatrais.Data", "JogaresTeatrais.Data\JogaresTeatrais.Data.csproj", "{277C55C3-58E8-4A74-92B0-7121EC4182C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Domain", "JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj", "{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Application", "JogadoresTeatrais.Application\JogadoresTeatrais.Application.csproj", "{07C02030-0108-434C-BD26-65E09F28CB1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2-CrossCutting", "4.2-CrossCutting", "{F410EE65-DA78-4013-A342-36DA3B08F124}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1-Data", "4.1-Data", "{7E497D38-57A8-490C-ADED-98AAE90B4FA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.IoC", "JogadoresTeatrais.IoC\JogadoresTeatrais.IoC.csproj", "{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Utility", "5-Utility", "{9C79437B-CAAB-45D2-AF60-D32EFCA2E05B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Utility", "JogadoresTeatrais.Utility\JogadoresTeatrais.Utility.csproj", "{8C44A164-14BD-417F-8202-32D60199FA9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Tests", "0-Tests", "{3B02757E-2837-429A-85BA-BCB6DC79545A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JogadoresTeatrais.Tests", "JogadoresTeatrais.Tests\JogadoresTeatrais.Tests.csproj", "{DDA036DD-D7A8-485F-A6B7-298FB0E77C92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{277C55C3-58E8-4A74-92B0-7121EC4182C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277C55C3-58E8-4A74-92B0-7121EC4182C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277C55C3-58E8-4A74-92B0-7121EC4182C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277C55C3-58E8-4A74-92B0-7121EC4182C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C02030-0108-434C-BD26-65E09F28CB1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C02030-0108-434C-BD26-65E09F28CB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C02030-0108-434C-BD26-65E09F28CB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C02030-0108-434C-BD26-65E09F28CB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C44A164-14BD-417F-8202-32D60199FA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA036DD-D7A8-485F-A6B7-298FB0E77C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA036DD-D7A8-485F-A6B7-298FB0E77C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA036DD-D7A8-485F-A6B7-298FB0E77C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA036DD-D7A8-485F-A6B7-298FB0E77C92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F08D5B1-74C0-4D3B-A823-C86AA4C8139A} = {AC9EF517-9E24-4735-88D6-65AA462D156C}
+		{277C55C3-58E8-4A74-92B0-7121EC4182C7} = {7E497D38-57A8-490C-ADED-98AAE90B4FA1}
+		{84C61766-99BA-4BB5-B0CB-9F8F6FDF1BC1} = {51667865-27BE-4311-AF4D-7B51B38D539A}
+		{07C02030-0108-434C-BD26-65E09F28CB1C} = {D42304E7-44B4-43A1-B0D4-A880AD565658}
+		{F410EE65-DA78-4013-A342-36DA3B08F124} = {258F7FE3-5E5B-498B-B449-0251224E3620}
+		{7E497D38-57A8-490C-ADED-98AAE90B4FA1} = {258F7FE3-5E5B-498B-B449-0251224E3620}
+		{57CD21DF-02B1-4E0D-BBE0-C1514F769FEF} = {F410EE65-DA78-4013-A342-36DA3B08F124}
+		{8C44A164-14BD-417F-8202-32D60199FA9A} = {9C79437B-CAAB-45D2-AF60-D32EFCA2E05B}
+		{DDA036DD-D7A8-485F-A6B7-298FB0E77C92} = {3B02757E-2837-429A-85BA-BCB6DC79545A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFE8D3CD-AEE2-416C-9602-81B6EC6EBE66}
+	EndGlobalSection
+EndGlobal
