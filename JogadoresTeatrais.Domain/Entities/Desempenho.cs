@@ -1,10 +1,4 @@
-﻿using JogaresTeatrais.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace JogadoresTeatrais.Domain.Entities
 {
     public class Desempenho
@@ -17,6 +11,6 @@ namespace JogadoresTeatrais.Domain.Entities
 
         public int FaturaId { get; set; }
         
-        public Fatura Fatura { get; set; }
+        public Fatura? Fatura { get; set; }
     }
 }

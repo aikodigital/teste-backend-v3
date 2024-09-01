@@ -2,11 +2,6 @@
 using JogaresTeatrais.Data.Extensions;
 using JogaresTeatrais.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JogaresTeatrais.Data.Context
 {
@@ -19,11 +14,11 @@ namespace JogaresTeatrais.Data.Context
         }
 
         #region
-        public DbSet<Jogar> Jogar { get; set; }
+        public DbSet<Jogar>? Jogar { get; set; }
 
-        public DbSet<Fatura> Fatura { get; set; }
+        public DbSet<Fatura>? Fatura { get; set; }
 
-        public DbSet<Desempenho> Desempenho { get; set; }
+        public DbSet<Desempenho>? Desempenho { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

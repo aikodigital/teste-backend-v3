@@ -1,12 +1,6 @@
 ﻿using JogadoresTeatrais.Domain.Entities;
 using JogadoresTeatrais.Domain.Interfaces;
 using JogaresTeatrais.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace JogaresTeatrais.Data.Repositories
 {

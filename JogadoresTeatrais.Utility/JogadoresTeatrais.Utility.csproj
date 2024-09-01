@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj" />
+    <Compile Remove="Methods\**" />
+    <EmbeddedResource Remove="Methods\**" />
+    <None Remove="Methods\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Methods\" />
+    <ProjectReference Include="..\JogadoresTeatrais.Domain\JogadoresTeatrais.Domain.csproj" />
   </ItemGroup>
 
 </Project>

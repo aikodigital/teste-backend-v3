@@ -1,12 +1,8 @@
 ﻿using JogadoresTeatrais.Application.Interfaces;
-using JogadoresTeatrais.Application.ViewModels;
 using JogadoresTeatrais.Domain.Entities;
 using JogadoresTeatrais.Domain.Interfaces;
 using JogadoresTeatrais.Utility.Utility;
 using JogaresTeatrais.Data;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 using System.Text.Json;
 
@@ -43,7 +39,6 @@ namespace JogadoresTeatrais.Application.Service
 
             foreach (var fatura in faturas)
             {
-                //stringBuilder.AppendLine(FormatarFatura(fatura, jogarDictionary, FormatoArquivo.Json));
 
                 switch (formato.ToLower())
                 {
@@ -64,7 +59,7 @@ namespace JogadoresTeatrais.Application.Service
 
         }
 
-        private string FormatarFatura(Fatura fatura, Dictionary<int, Jogar> jogar, FormatoArquivo formatoArquivo)
+        private static string FormatarFatura(Fatura fatura, Dictionary<int, Jogar> jogar, FormatoArquivo formatoArquivo)
         {
             return formatoArquivo switch
             {
@@ -76,7 +71,7 @@ namespace JogadoresTeatrais.Application.Service
             };
         }
 
-        private string FormatarTexto(Fatura fatura, Dictionary<int, Jogar> jogar)
+        private static string FormatarTexto(Fatura fatura, Dictionary<int, Jogar> jogar)
         {
             var resultado = $"Extrato para {fatura.Cliente}\n";
             var valorTotal = CalcularMontanteTotal(fatura, jogar, out int volumeCreditos);
@@ -95,7 +90,7 @@ namespace JogadoresTeatrais.Application.Service
             return resultado;
         }
 
-        private string GerarXml(Fatura fatura, Dictionary<int, Jogar> jogar)
+        private static string GerarXml(Fatura fatura, Dictionary<int, Jogar> jogar)
         {
             var sb = new StringBuilder();
             sb.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
@@ -122,7 +117,7 @@ namespace JogadoresTeatrais.Application.Service
             return sb.ToString();
         }
 
-        private string GerarJson(Fatura fatura, Dictionary<int, Jogar> jogar)
+        private static string GerarJson(Fatura fatura, Dictionary<int, Jogar> jogar)
         {
             
             var extrato = new
@@ -150,7 +145,7 @@ namespace JogadoresTeatrais.Application.Service
             return JsonSerializer.Serialize(extrato, new JsonSerializerOptions { WriteIndented = true });
         }
 
-        private int CalcularMontanteTotal(Fatura fatura, Dictionary<int, Jogar> jogar, out int creditos)
+        private static int CalcularMontanteTotal(Fatura fatura, Dictionary<int, Jogar> jogar, out int creditos)
         {
             var valorTotal = 0;
             creditos = 0;
@@ -172,7 +167,7 @@ namespace JogadoresTeatrais.Application.Service
             return valorTotal;
         }
 
-        private int CalcularValorDesempenho(Desempenho desempenho, Jogar jogar)
+        private static int CalcularValorDesempenho(Desempenho desempenho, Jogar jogar)
         {
             int valor;
             var linhas = Math.Clamp(jogar.Linhas, 1000, 4000);
@@ -188,7 +183,7 @@ namespace JogadoresTeatrais.Application.Service
             return valor;
         }
 
-        private int CalcularValorTragedia(int audiencia, int linhas)
+        private static int CalcularValorTragedia(int audiencia, int linhas)
         {
             var valor = linhas * 10;
             if (audiencia > 30)
@@ -198,7 +193,7 @@ namespace JogadoresTeatrais.Application.Service
             return valor;
         }
 
-        private int CalcularValorComedia(int audiencia, int linhas)
+        private static int CalcularValorComedia(int audiencia, int linhas)
         {
             var valor = linhas * 10;
             if (audiencia > 20)
