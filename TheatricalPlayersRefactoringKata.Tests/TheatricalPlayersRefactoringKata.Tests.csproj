@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -9,7 +9,8 @@
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.7.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="Xunit.DependencyInjection" Version="9.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -17,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
+    <ProjectReference Include="..\Main.Application\Main.Application.csproj" />
+    <ProjectReference Include="..\Main.Contracts\Main.Contracts.csproj" />
+    <ProjectReference Include="..\Main.Domain\Main.Domain.csproj" />
   </ItemGroup>
 
 </Project>
