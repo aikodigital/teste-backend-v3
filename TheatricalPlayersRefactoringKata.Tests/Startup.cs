@@ -1,10 +1,5 @@
 ﻿using Main.Application.Services.StatementPrinter;
 using Microsoft.Extensions.DependencyInjection;
-using TheatricalPlayersRefactoringKata.Tests;
-using Xunit;
-using Xunit.DependencyInjection;
-using Xunit;
-using Xunit.DependencyInjection;
 using Main.Domain.Services;
 
 namespace TheatricalPlayersRefactoringKata.Tests

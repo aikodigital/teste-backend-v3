@@ -28,6 +28,10 @@ namespace Main.Domain.Services
             }
             return amount;
         }
+        public int CalculateHistoryAmount(int amount,int audience)
+        {
+            return CalculateComedyAmount(amount, audience) + CalculateTragedyAmount(amount,audience);
+        }
 
         public int CalculateVolumeCredits(int volumeCredits,string type,int audience)
         {

@@ -37,6 +37,9 @@ namespace Main.Application.Services.StatementPrinter
                     case "comedy":
                         thisAmount = _calculator.CalculateComedyAmount(thisAmount, audience);
                         break;
+                    case "history":
+                        thisAmount = _calculator.CalculateHistoryAmount(thisAmount, audience);
+                        break;
                     default:
                         throw new Exception("unknown type: " + play.Type);
 
