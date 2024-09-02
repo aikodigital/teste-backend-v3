@@ -1,4 +1,6 @@
-﻿using TheatricalPlayersRefactoringKata.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
+using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositories
@@ -10,6 +12,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
         public InvoiceRepository(DBContext context) : base(context)
         {
             _dbContext = context;
+        }
+
+        public async Task<Invoice> GetByCustomerNameAsync(string costumer)
+        {
+            return await _dbSet
+                .Include(i => i.Performances)
+                .ThenInclude(p => p.Play)
+                .FirstOrDefaultAsync(i => i.Customer == costumer);
         }
     }
 }

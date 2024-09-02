@@ -1,4 +1,5 @@
-﻿using TheatricalPlayersRefactoringKata.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositories
@@ -11,5 +12,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
         {
             _dbContext = context;
         }
+
+        public async Task<Play> GetByNameAsync(string name) => await _dbSet.FirstOrDefaultAsync(p => p.Name == name);
     }
 }

@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositori
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly DBContext Context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         public BaseRepository(DBContext context)
         {
