@@ -1,0 +1,17 @@
+﻿<Statement>
+  <Customer>John Doe</Customer>
+  <Items>
+    <Item>
+      <AmountOwed>300.0</AmountOwed>
+      <EarnedCredits>30</EarnedCredits>
+      <Seats>25</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>400.0</AmountOwed>
+      <EarnedCredits>40</EarnedCredits>
+      <Seats>35</Seats>
+    </Item>
+  </Items>
+  <AmountOwed>700.0</AmountOwed>
+  <EarnedCredits>70</EarnedCredits>
+</Statement>
