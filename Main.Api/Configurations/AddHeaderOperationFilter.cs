@@ -16,7 +16,7 @@ namespace Main.Api.Configurations
                 Name = "X-ResponseFormat",
                 In = ParameterLocation.Header,
                 Required = false,
-                Description = "Define o tipo de saída do método.",
+                Description = "Sets the response format from the method",
                 Schema = new OpenApiSchema
                 {
                     Type = "string"
