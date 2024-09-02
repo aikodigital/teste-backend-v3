@@ -33,6 +33,9 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             {
                 var play = _context.Plays.FirstOrDefault(p => p.Name == performance.PlayId);
 
+                if (play == null)                
+                    return BadRequest($"Play ID [{performance.PlayId}] not found.");
+
                 var _performance = new Performance
                 {
                     PlayId = play.Name,
