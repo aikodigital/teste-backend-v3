@@ -46,7 +46,9 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
                 invoice.Performances.Add(_performance);
             }
 
-            await _invoiceRepository.AddAsync(invoice);
+            _context.Invoices.Add(invoice);
+            _context.SaveChanges();
+            //await _invoiceRepository.AddAsync(invoice);
             return CreatedAtAction(nameof(Get), new { id = invoice.Id }, invoice);
         }
 
