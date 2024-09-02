@@ -1,0 +1,5 @@
+﻿Statement for John Doe
+ Comedy Play: $300.00 (25 seats)
+ Tragedy Play: $400.00 (35 seats)
+Amount owed is $700.00
+You earned 70 credits
