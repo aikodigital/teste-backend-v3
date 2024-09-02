@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Domain.Entities;
+using Domain.Enums;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -13,9 +15,9 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        plays.Add("hamlet", new Play("Hamlet", 4024, Types.Tragedy));
+        plays.Add("as-like", new Play("As You Like It", 2670, Types.Comedy));
+        plays.Add("othello", new Play("Othello", 3560, Types.Tragedy));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -38,12 +40,12 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        plays.Add("hamlet", new Play("Hamlet", 4024, Types.Tragedy));
+        plays.Add("as-like", new Play("As You Like It", 2670, Types.Comedy));
+        plays.Add("othello", new Play("Othello", 3560, Types.Tragedy));
+        plays.Add("henry-v", new Play("Henry V", 3227, Types.History));
+        plays.Add("john", new Play("King John", 2648, Types.History));
+        plays.Add("richard-iii", new Play("Richard III", 3718, Types.History));
 
         Invoice invoice = new Invoice(
             "BigCo",

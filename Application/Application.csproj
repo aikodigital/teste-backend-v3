@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="MediatR" Version="12.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Invoices\Commands\UpdateInvoice\" />
+    <Folder Include="Performances\Commands\DeletePerformance\" />
+    <Folder Include="Performances\Commands\UpdatePerformance\" />
+    <Folder Include="Performances\EventHandlers\" />
+    <Folder Include="Performances\Queries\" />
+    <Folder Include="Invoices\Queries\" />
+    <Folder Include="Plays\EventHandlers\" />
+    <Folder Include="Plays\Queries\" />
+  </ItemGroup>
+
+</Project>
