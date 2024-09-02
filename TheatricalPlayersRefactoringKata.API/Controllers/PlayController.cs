@@ -16,14 +16,14 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Play>>> Post([FromBody] Play play)
+        public async Task<ActionResult> Post([FromBody] Play play)
         {
             await _playRepository.AddAsync(play);
             return CreatedAtAction(nameof(Get), new { id = play.Name }, play);
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Play>>> Get()
+        public async Task<ActionResult> Get()
         {
             var plays = await _playRepository.GetAllAsync();
             return Ok(plays);
