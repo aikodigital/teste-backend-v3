@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 using TheatricalPlayersRefactoringKata.Infrastructure.Persistence;
 using TheatricalPlayersRefactoringKata.Infrastructure.Persistence.Repositories;
 using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
@@ -36,6 +37,11 @@ namespace TheatricalPlayersRefactoringKata.API
                     Description = "API for Plays, Performances and Invoices",
                 })
             );
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
 
             //Repository services.
             builder.Services.AddDbContext<DBContext>();
