@@ -1,4 +1,5 @@
 ﻿using Main.Application.Services.StatementPrinter;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Main.Application
@@ -9,9 +10,13 @@ namespace Main.Application
         {
             services.AddScoped<StatementPrinterService>();
             services.AddScoped<XmlStatementPrinterService>();
-            services.AddScoped<Func<string, IStatementPrinterService>>(provider => key =>
+            services.AddScoped<IStatementPrinterService>(provider =>
             {
-                return key switch
+                var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
+
+                string? header = httpContextAccessor?.HttpContext?.Request?.Headers?["X-ResponseFormat"];
+
+                return header switch
                 {
                     "xml" => provider.GetRequiredService<XmlStatementPrinterService>(),
                     _ => provider.GetRequiredService<StatementPrinterService>(),

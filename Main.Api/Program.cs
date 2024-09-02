@@ -2,6 +2,7 @@ using Main.Application;
 using Main.Infrastructure;
 using Main.Domain;
 using Microsoft.OpenApi.Models;
+using Main.Api.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -10,11 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
         .AddInfrastructure()
         .AddDomain();
     builder.Services.AddControllers();
-
+    builder.Services.AddHttpContextAccessor();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "TheatricalPlayersRefactoringKata", Version = "v1" });
+        c.OperationFilter<AddHeaderOperationFilter>();
     });
 }
 
@@ -29,7 +31,3 @@ var app = builder.Build();
     app.MapControllers();
     app.Run();
 }
-
-
-
-
