@@ -11,8 +11,8 @@ using TheatricalPlayersRefactoringKata.Infrastructure.Persistence;
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240901145558_v2")]
-    partial class v2
+    [Migration("20240901183706_v3")]
+    partial class v3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,11 +45,13 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Audience")
+                        .HasColumnType("integer");
+
                     b.Property<int>("InvoiceId")
                         .HasColumnType("integer");
 
                     b.Property<string>("PlayId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -93,7 +95,6 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("PlayId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("FK_Performance_PlayId");
 
                     b.Navigation("Invoice");

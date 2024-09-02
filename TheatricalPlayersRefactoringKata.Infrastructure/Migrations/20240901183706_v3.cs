@@ -6,44 +6,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class v2 : Migration
+    public partial class v3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Plays",
-                table: "Plays");
-
-            migrationBuilder.DropColumn(
-                name: "Id",
-                table: "Plays");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Type",
-                table: "Plays",
-                type: "text",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Plays",
-                type: "text",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Plays",
-                table: "Plays",
-                column: "Name");
-
             migrationBuilder.CreateTable(
                 name: "Invoices",
                 columns: table => new
@@ -57,12 +24,26 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Plays",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Lines = table.Column<int>(type: "integer", nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Plays", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Performances",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PlayId = table.Column<string>(type: "text", nullable: false),
+                    PlayId = table.Column<string>(type: "text", nullable: true),
+                    Audience = table.Column<int>(type: "integer", nullable: false),
                     InvoiceId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -83,12 +64,6 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plays_Name",
-                table: "Plays",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Performances_InvoiceId",
                 table: "Performances",
                 column: "InvoiceId");
@@ -97,6 +72,12 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
                 name: "IX_Performances_PlayId",
                 table: "Performances",
                 column: "PlayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Plays_Name",
+                table: "Plays",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -106,43 +87,10 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Migrations
                 name: "Performances");
 
             migrationBuilder.DropTable(
+                name: "Plays");
+
+            migrationBuilder.DropTable(
                 name: "Invoices");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Plays",
-                table: "Plays");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Plays_Name",
-                table: "Plays");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Type",
-                table: "Plays",
-                type: "text",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Plays",
-                type: "text",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Id",
-                table: "Plays",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Plays",
-                table: "Plays",
-                column: "Id");
         }
     }
 }

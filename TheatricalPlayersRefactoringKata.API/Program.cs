@@ -41,6 +41,7 @@ namespace TheatricalPlayersRefactoringKata.API
             builder.Services.AddDbContext<DBContext>();
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddScoped<IPlayRepository, PlayRepository>();
+            builder.Services.AddScoped<IPerformanceRepository, PerformanceRepository>();
 
 
             var app = builder.Build();

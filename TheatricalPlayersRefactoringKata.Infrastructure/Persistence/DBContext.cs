@@ -38,8 +38,8 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Persistence
                 .HasOne(p => p.Play)
                 .WithMany()
                 .HasForeignKey(p => p.PlayId) 
-                .OnDelete(DeleteBehavior.Restrict)
                 .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Performance_PlayId");
 
             modelBuilder.Entity<Invoice>()

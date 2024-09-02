@@ -9,14 +9,14 @@ public class Performance
     public int Id { get; set; }
 
     [Required, ForeignKey(nameof(PlayId))]
-    public string PlayId;
-    public Play Play { get; set; }    
+    public string PlayId { get; set; }
+    public virtual Play Play { get; set; }    
 
-    public int Audience;
+    public int Audience { get; set; }
 
     [Required, ForeignKey(nameof(InvoiceId))]
     public int InvoiceId { get; set; }
-    public Invoice Invoice { get; set; }
+    public virtual Invoice Invoice { get; set; }
 
     public Performance()
     {
