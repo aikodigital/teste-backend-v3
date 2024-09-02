@@ -1,4 +1,8 @@
 [Bb]in/
 [Oo]bj/
 
+# Files
 *.received.txt
+
+# Folders
+.vs
