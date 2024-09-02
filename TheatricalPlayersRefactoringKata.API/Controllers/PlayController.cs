@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheatricalPlayersRefactoringKata.API.DTO;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Interfaces.Repositories;
 
@@ -16,10 +17,17 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Play play)
+        public async Task<ActionResult> Post([FromBody] PlayDTO play)
         {
-            await _playRepository.AddAsync(play);
-            return CreatedAtAction(nameof(Get), new { id = play.Name }, play);
+            var _play = new Play
+            {
+                Name = play.Name,
+                Lines = play.Lines,
+                Type = play.Type
+            };
+
+            await _playRepository.AddAsync(_play);
+            return CreatedAtAction(nameof(Get), new { id = _play.Name }, _play);
         }
 
         [HttpGet]

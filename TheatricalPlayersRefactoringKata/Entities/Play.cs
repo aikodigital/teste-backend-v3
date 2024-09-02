@@ -14,6 +14,7 @@ public class Play
     [Required]
     public string Type { get; set; }
 
+    public Play() { }
     public Play(string name, int lines, string type)
     {
         Name = name;
