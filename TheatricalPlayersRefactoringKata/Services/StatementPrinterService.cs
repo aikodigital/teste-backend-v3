@@ -3,10 +3,11 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Services.Interface;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
-public class StatementPrinterService
+public class StatementPrinterService : IStatementPrinterService
 {
     public async Task<string> Print(Invoice invoice, Dictionary<string, Play> plays)
     {
