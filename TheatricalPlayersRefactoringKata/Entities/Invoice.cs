@@ -4,6 +4,7 @@ namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Invoice
 {
+    public int Id { get; set; }
     private string _customer;
     private List<Performance> _performances;
 
