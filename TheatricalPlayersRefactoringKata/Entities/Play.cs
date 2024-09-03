@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Play
 {
@@ -10,9 +10,10 @@ public class Play
     public int Lines { get => _lines; set => _lines = value; }
     public string Type { get => _type; set => _type = value; }
 
-    public Play(string name, int lines, string type) {
-        this._name = name;
-        this._lines = lines;
-        this._type = type;
+    public Play(string name, int lines, string type)
+    {
+        _name = name;
+        _lines = lines;
+        _type = type;
     }
 }
