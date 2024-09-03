@@ -1,66 +1,113 @@
-using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
+using Main.Application.Services.StatementPrinter;
+using Main.Contracts.StatementPrinter;
+using System;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private readonly Func<string, IStatementPrinterService> _statementPrinterServiceFactory;
+
+    public StatementPrinterTests(Func<string, IStatementPrinterService> statementPrinterServiceFactory)
+    {
+        _statementPrinterServiceFactory = statementPrinterServiceFactory;
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
+            { "as-like", new Play { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
+            { "othello", new Play { Name = "Othello", Lines = 3560, Type = "tragedy" } }
+        };
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
+        Invoice invoice = new Invoice
+        {
+            Customer = "BigCo",
+            Performances = new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new() {PlayId="hamlet", Audience=55 },
+                new() {PlayId="as-like", Audience=35 },
+                new() { PlayId = "othello", Audience = 40 },
             }
-        );
+        };
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
-
-        Approvals.Verify(result);
+        var statementPrinterService = _statementPrinterServiceFactory("default");
+        var result = statementPrinterService.Print(invoice, plays);
+        Approvals.Verify(result.Result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
+            { "as-like", new Play { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
+            { "othello", new Play { Name = "Othello", Lines = 3560, Type = "tragedy" } },
+            { "henry-v", new Play { Name = "Henry V", Lines = 3227, Type = "history" } },
+            { "john", new Play { Name = "King John", Lines = 2648, Type = "history" } },
+            { "richard-iii", new Play { Name = "Richard III", Lines = 3718, Type = "history" } }
+        };
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
+        Invoice invoice = new Invoice
+        {
+            Customer = "BigCo",
+            Performances = new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new() { PlayId = "hamlet", Audience = 55 },
+                new() { PlayId = "as-like", Audience = 35 },
+                new() { PlayId = "othello", Audience = 40 },
+                new() { PlayId = "henry-v", Audience = 20 },
+                new() { PlayId = "john", Audience = 39 },
+                new() { PlayId = "henry-v", Audience = 20 }
             }
-        );
+        };
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+       
+        var statementPrinterService = _statementPrinterServiceFactory("default");
+        var result = statementPrinterService.Print(invoice, plays);
+        Approvals.Verify(result.Result);
+    }
 
-        Approvals.Verify(result);
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
+            { "as-like", new Play { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
+            { "othello", new Play { Name = "Othello", Lines = 3560, Type = "tragedy" } },
+            { "henry-v", new Play { Name = "Henry V", Lines = 3227, Type = "history" } },
+            { "john", new Play { Name = "King John", Lines = 2648, Type = "history" } },
+            { "richard-iii", new Play { Name = "Richard III", Lines = 3718, Type = "history" } }
+        };
+
+        var invoice = new Invoice
+        {
+            Customer = "BigCo",
+            Performances = new List<Performance>
+            {
+                new() { PlayId = "hamlet", Audience = 55 },
+                new() { PlayId = "as-like", Audience = 35 },
+                new() { PlayId = "othello", Audience = 40 },
+                new() { PlayId = "henry-v", Audience = 20 },
+                new() { PlayId = "john", Audience = 39 },
+                new() { PlayId = "henry-v", Audience = 20 }
+            }
+        };
+
+        var statementPrinterService = _statementPrinterServiceFactory("xml");
+        var result = statementPrinterService.Print(invoice, plays);
+        Approvals.Verify(result.Result);
     }
 }
