@@ -1,0 +1,43 @@
+﻿<Statement>
+  <Customer>BigCo</Customer>
+  <Items>
+    <Item>
+      <Play>Hamlet</Play>
+      <AmountOwed>650</AmountOwed>
+      <Seats>55</Seats>
+      <EarnedCredits>25</EarnedCredits>
+    </Item>
+    <Item>
+      <Play>As You Like It</Play>
+      <AmountOwed>547</AmountOwed>
+      <Seats>35</Seats>
+      <EarnedCredits>37</EarnedCredits>
+    </Item>
+    <Item>
+      <Play>Othello</Play>
+      <AmountOwed>456</AmountOwed>
+      <Seats>40</Seats>
+      <EarnedCredits>47</EarnedCredits>
+    </Item>
+    <Item>
+      <Play>Henry V</Play>
+      <AmountOwed>322</AmountOwed>
+      <Seats>20</Seats>
+      <EarnedCredits>47</EarnedCredits>
+    </Item>
+    <Item>
+      <Play>King John</Play>
+      <AmountOwed>264</AmountOwed>
+      <Seats>39</Seats>
+      <EarnedCredits>56</EarnedCredits>
+    </Item>
+    <Item>
+      <Play>Henry V</Play>
+      <AmountOwed>322</AmountOwed>
+      <Seats>20</Seats>
+      <EarnedCredits>56</EarnedCredits>
+    </Item>
+  </Items>
+  <TotalAmount>2563</TotalAmount>
+  <TotalCredits>56</TotalCredits>
+</Statement>
