@@ -2,6 +2,7 @@ namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Play
 {
+    public int Id { get; set; }
     private string _name;
     private int _lines;
     private string _type;

@@ -11,6 +11,10 @@ public class Invoice
     public string Customer { get => _customer; set => _customer = value; }
     public List<Performance> Performances { get => _performances; set => _performances = value; }
 
+    public Invoice()
+    {
+    }
+
     public Invoice(string customer, List<Performance> performance)
     {
         _customer = customer;

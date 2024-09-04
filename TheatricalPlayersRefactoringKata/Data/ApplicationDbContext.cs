@@ -14,6 +14,12 @@ namespace TheatricalPlayersRefactoringKata.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Performance>()
+                        .HasOne(x => x.Invoice)
+                        .WithMany(x => x.Performances)
+                        .HasForeignKey(x => x.InvoiceId)
+                        .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

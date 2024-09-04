@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TheatricalPlayersRefactoringKata.Data;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Repositories.Interface;
+using System.Linq;
 
 namespace TheatricalPlayersRefactoringKata.Repositories
 {
@@ -34,7 +35,16 @@ namespace TheatricalPlayersRefactoringKata.Repositories
 
         public async Task UpdateInvoiceAsync(Invoice invoice)
         {
-            _dbContext.Invoices.Update(invoice);
+            var local = _dbContext.Set<Invoice>()
+                          .Local
+                          .FirstOrDefault(entry => entry.Id.Equals(invoice.Id));
+
+            if (local != null)
+                _dbContext.Entry(local).State = EntityState.Detached;
+
+            _dbContext.Invoices.Attach(invoice);
+            _dbContext.Entry(invoice).State = EntityState.Modified;
+
             await _dbContext.SaveChangesAsync();
         }
 
@@ -43,6 +53,9 @@ namespace TheatricalPlayersRefactoringKata.Repositories
             var invoice = await GetInvoiceByIdAsync(id);
             if (invoice != null)
             {
+                if (invoice.Performances != null && invoice.Performances.Count != 0)
+                    _dbContext.Performances.RemoveRange(invoice.Performances);
+
                 _dbContext.Invoices.Remove(invoice);
                 await _dbContext.SaveChangesAsync();
             }
