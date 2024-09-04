@@ -64,8 +64,8 @@ namespace TheatricalPlayersRefactoringKata
                     Description = "API for managing theatrical invoices and performances",
                     Contact = new OpenApiContact
                     {
-                        Name = "Developer Name",
-                        Email = "developer@example.com",
+                        Name = "Guilherme Mathias de Almeida",
+                        Email = "guimathiasgui@gmail.com",
                     }
                 });
 
