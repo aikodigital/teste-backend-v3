@@ -1,0 +1,47 @@
+name: CI/CD for C# .NET 8.0 with Docker
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        dotnet-quality: 'ga'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build the project
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal
+
+    # - name: Publish the project
+    #   run: dotnet publish -c Release -o out --no-restore
+
+    # - name: Build Docker image
+    #   run: docker build -t managerapi:latest .
+
+    # - name: Push Docker image to DockerHub
+    #   env:
+    #     DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+    #     DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+    #   run: |
+    #     echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+    #     docker tag managerapi:latest yourdockerhubuser/managerapi:latest
+    #     docker push yourdockerhubuser/managerapi:latest

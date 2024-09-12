@@ -1,0 +1,6 @@
+@TP.Apresentation.WebAPI_HostAddress = http://localhost:5089
+
+GET {{TP.Apresentation.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
