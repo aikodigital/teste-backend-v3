@@ -1,4 +1,6 @@
-﻿namespace TheatricalPlayersRefactoringKata
+﻿using System;
+
+namespace TheatricalPlayersRefactoringKata
 {
     public class ComedyAmountCalculator : IPlayAmountCalculator
     {
@@ -11,6 +13,14 @@
             baseAmount += 300 * perf.Audience;
 
             return baseAmount;
+        }
+
+        public int CalculateEarnedCredits(int audience)
+        {
+            int volumeCredits = Math.Max(audience - 30, 0);
+            volumeCredits += (int)Math.Floor((decimal)audience / 5);
+
+            return volumeCredits;
         }
     }
 }

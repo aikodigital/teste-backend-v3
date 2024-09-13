@@ -25,11 +25,4 @@ public class Play
         if (lines > 4000) lines = 4000;
         return lines * 10;
     }
-
-    public int CalculateVolumeCredits(int audience)
-    {
-        int volumeCredits = Math.Max(audience - 30, 0);
-        if ("comedy" == Type) volumeCredits += (int)Math.Floor((decimal)audience / 5);
-        return volumeCredits;
-    }
 }

@@ -24,7 +24,7 @@ public class StatementPrinter
             IPlayAmountCalculator calculator = PlayAmountCalculatorFactory.GetCalculator(play.Type);
             thisAmount = calculator.CalculateAmount(perf, thisAmount);
 
-            volumeCredits += play.CalculateVolumeCredits(perf.Audience);
+            volumeCredits += calculator.CalculateEarnedCredits(perf.Audience);
 
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100m), perf.Audience);
             totalAmount += thisAmount;
@@ -63,7 +63,7 @@ public class StatementPrinter
                 IPlayAmountCalculator calculator = PlayAmountCalculatorFactory.GetCalculator(play.Type);
                 thisAmount = calculator.CalculateAmount(perf, thisAmount);
 
-                var earnedCredits = play.CalculateVolumeCredits(perf.Audience);
+                var earnedCredits = calculator.CalculateEarnedCredits(perf.Audience);
                 volumeCredits += earnedCredits;
 
                 totalAmount += thisAmount;

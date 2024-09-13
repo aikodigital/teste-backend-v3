@@ -1,4 +1,6 @@
-﻿namespace TheatricalPlayersRefactoringKata
+﻿using System;
+
+namespace TheatricalPlayersRefactoringKata
 {
     public class TragedyAmountCalculator : IPlayAmountCalculator
     {
@@ -10,6 +12,11 @@
             }
 
             return baseAmount;
+        }
+
+        public int CalculateEarnedCredits(int audience)
+        {
+            return Math.Max(audience - 30, 0);
         }
     }
 }
