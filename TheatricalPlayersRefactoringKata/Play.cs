@@ -1,3 +1,5 @@
+using System;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Play
@@ -22,5 +24,12 @@ public class Play
         if (lines < 1000) lines = 1000;
         if (lines > 4000) lines = 4000;
         return lines * 10;
+    }
+
+    public int CalculateVolumeCredits(int audience)
+    {
+        int volumeCredits = Math.Max(audience - 30, 0);
+        if ("comedy" == Type) volumeCredits += (int)Math.Floor((decimal)audience / 5);
+        return volumeCredits;
     }
 }

@@ -21,12 +21,8 @@ public class StatementPrinter
             IPlayAmountCalculator calculator = PlayAmountCalculatorFactory.GetCalculator(play.Type);
             thisAmount = calculator.CalculateAmount(perf, thisAmount);
 
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            volumeCredits += play.CalculateVolumeCredits(perf.Audience);
 
-            // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             totalAmount += thisAmount;
         }
