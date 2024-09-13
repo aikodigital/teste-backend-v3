@@ -15,4 +15,12 @@ public class Play
         this._lines = lines;
         this._type = type;
     }
+
+    public int CalculateBaseAmount()
+    {
+        var lines = _lines;
+        if (lines < 1000) lines = 1000;
+        if (lines > 4000) lines = 4000;
+        return lines * 10;
+    }
 }

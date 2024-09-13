@@ -16,10 +16,7 @@ public class StatementPrinter
         foreach(var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
-            var lines = play.Lines;
-            if (lines < 1000) lines = 1000;
-            if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            var thisAmount = play.CalculateBaseAmount();
             switch (play.Type) 
             {
                 case "tragedy":
