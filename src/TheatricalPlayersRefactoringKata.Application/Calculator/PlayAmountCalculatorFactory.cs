@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TheatricalPlayersRefactoringKata
+﻿namespace TheatricalPlayersRefactoringKata.Application.Calculator
 {
     public class PlayAmountCalculatorFactory
     {

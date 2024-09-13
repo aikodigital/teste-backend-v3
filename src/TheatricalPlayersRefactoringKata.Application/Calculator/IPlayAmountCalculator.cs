@@ -1,4 +1,6 @@
-﻿namespace TheatricalPlayersRefactoringKata
+﻿using TheatricalPlayersRefactoringKata.Entities;
+
+namespace TheatricalPlayersRefactoringKata.Application.Calculator
 {
     public interface IPlayAmountCalculator
     {

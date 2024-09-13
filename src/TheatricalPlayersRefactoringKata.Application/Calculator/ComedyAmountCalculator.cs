@@ -1,6 +1,6 @@
-﻿using System;
+﻿using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Application.Calculator
 {
     public class ComedyAmountCalculator : IPlayAmountCalculator
     {

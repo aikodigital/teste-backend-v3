@@ -1,18 +1,19 @@
-﻿using System;
+﻿using TheatricalPlayersRefactoringKata.Application.Calculator;
+using TheatricalPlayersRefactoringKata.Entities;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
-    public class TragedyAmountCalculatorTests
+    public class ComedyAmountCalculatorTests
     {
-        private TragedyAmountCalculator _calculator;
-        public TragedyAmountCalculatorTests()
+        private ComedyAmountCalculator _calculator;
+        public ComedyAmountCalculatorTests()
         {
-            _calculator = new TragedyAmountCalculator();
+            _calculator = new ComedyAmountCalculator();
         }
 
         [Fact]
-        public void CalculateAmountShoulEqualTo2000()
+        public void CalculateAmountShoulEqualTo5000()
         {
             // Arrange
             var performance = new Performance("1", 10);
@@ -22,21 +23,21 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(2000);
+            amount.Equals(5000);
         }
 
         [Fact]
-        public void CalculateAmountShoulEqualTo12000()
+        public void CalculateAmountShoulEqualTo26000()
         {
             // Arrange
-            var performance = new Performance("1", 40);
+            var performance = new Performance("1", 30);
             var baseAmount = 2000;
 
             // Act
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(12000);
+            amount.Equals(26000);
         }
 
         [Fact]
@@ -49,7 +50,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var earnedCredits = _calculator.CalculateEarnedCredits(audience);
 
             // Assert
-            earnedCredits.Equals(0);
+            earnedCredits.Equals(2);
         }
 
         [Fact]
@@ -62,7 +63,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var earnedCredits = _calculator.CalculateEarnedCredits(audience);
 
             // Assert
-            earnedCredits.Equals(30);
+            earnedCredits.Equals(42);
         }
     }
 }

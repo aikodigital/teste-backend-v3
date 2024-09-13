@@ -1,17 +1,20 @@
-﻿using Xunit;
+﻿using System;
+using TheatricalPlayersRefactoringKata.Application.Calculator;
+using TheatricalPlayersRefactoringKata.Entities;
+using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
-    public class HistoryAmountCalculatorTests
+    public class TragedyAmountCalculatorTests
     {
-        private HistoryAmountCalculator _calculator;
-        public HistoryAmountCalculatorTests()
+        private TragedyAmountCalculator _calculator;
+        public TragedyAmountCalculatorTests()
         {
-            _calculator = new HistoryAmountCalculator();
+            _calculator = new TragedyAmountCalculator();
         }
 
         [Fact]
-        public void CalculateAmountShoulEqualTo5000()
+        public void CalculateAmountShoulEqualTo2000()
         {
             // Arrange
             var performance = new Performance("1", 10);
@@ -21,24 +24,24 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(7000);
+            amount.Equals(2000);
         }
 
         [Fact]
-        public void CalculateAmountShoulEqualTo26000()
+        public void CalculateAmountShoulEqualTo12000()
         {
             // Arrange
-            var performance = new Performance("1", 50);
-            var baseAmount = 1000;
+            var performance = new Performance("1", 40);
+            var baseAmount = 2000;
 
             // Act
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(62000);
+            amount.Equals(12000);
         }
 
-        [Fact] 
+        [Fact]
         public void CalculateEarnedCreditsShouldBe0()
         {
             // Arrange

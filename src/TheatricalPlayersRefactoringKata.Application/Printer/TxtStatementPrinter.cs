@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System;
+﻿using System.Globalization;
+using TheatricalPlayersRefactoringKata.Application.Calculator;
+using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Application.Printer
 {
     public class TxtStatementPrinter : IStatementPrinter
     {

@@ -1,13 +1,15 @@
-﻿using Xunit;
+﻿using TheatricalPlayersRefactoringKata.Application.Calculator;
+using TheatricalPlayersRefactoringKata.Entities;
+using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests
 {
-    public class ComedyAmountCalculatorTests
+    public class HistoryAmountCalculatorTests
     {
-        private ComedyAmountCalculator _calculator;
-        public ComedyAmountCalculatorTests()
+        private HistoryAmountCalculator _calculator;
+        public HistoryAmountCalculatorTests()
         {
-            _calculator = new ComedyAmountCalculator();
+            _calculator = new HistoryAmountCalculator();
         }
 
         [Fact]
@@ -21,24 +23,24 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(5000);
+            amount.Equals(7000);
         }
 
         [Fact]
         public void CalculateAmountShoulEqualTo26000()
         {
             // Arrange
-            var performance = new Performance("1", 30);
-            var baseAmount = 2000;
+            var performance = new Performance("1", 50);
+            var baseAmount = 1000;
 
             // Act
             var amount = _calculator.CalculateAmount(performance, baseAmount);
 
             // Assert
-            amount.Equals(26000);
+            amount.Equals(62000);
         }
 
-        [Fact]
+        [Fact] 
         public void CalculateEarnedCreditsShouldBe0()
         {
             // Arrange
@@ -48,7 +50,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var earnedCredits = _calculator.CalculateEarnedCredits(audience);
 
             // Assert
-            earnedCredits.Equals(2);
+            earnedCredits.Equals(0);
         }
 
         [Fact]
@@ -61,7 +63,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
             var earnedCredits = _calculator.CalculateEarnedCredits(audience);
 
             // Assert
-            earnedCredits.Equals(42);
+            earnedCredits.Equals(30);
         }
     }
 }

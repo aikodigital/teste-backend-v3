@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Application.Printer
 {
     public interface IStatementPrinter
     {
