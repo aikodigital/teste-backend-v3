@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Model;
 
 namespace TheatricalPlayersRefactoringKata.Services;
@@ -38,7 +41,12 @@ public class StatementPrinter
         return calculoDaPeca;
     }
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public class Utf8StringWriter : StringWriter
+    {
+        public override Encoding Encoding => Encoding.UTF8;
+    }
+
+    public string PrintTXT(Invoice invoice, Dictionary<string, Play> plays)
     {
         decimal somaTotal = 0;
         var creditos = 0;
@@ -52,18 +60,73 @@ public class StatementPrinter
             decimal valorBase = lines * 10;
             decimal calculoDaPeca = CalculaValorDaPeca(play.Type, perf.Audience, valorBase);
 
-            // add volume credits
+            // Adiciona créditos de audiência > 30
             creditos += Math.Max(perf.Audience - 30, 0);
-
-            // add extra credit for every ten comedy attendees
+            // Adiciona crédito extra para cada dez pessoas em comédias
             if (play.Type == Genero.Comedy) creditos += (int)Math.Floor((decimal)perf.Audience / 5);
 
-            // print line for this order
+            // Print
             result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(calculoDaPeca / 100), perf.Audience);
             somaTotal += calculoDaPeca;
         }
         result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(somaTotal / 100));
         result += string.Format("You earned {0} credits\n", creditos);
         return result;
+    }
+
+    public XDocument PrintXML(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        decimal somaTotal = 0;
+        var creditos = 0;
+        var creditosTotais = 0;
+        var cultureInfo = new CultureInfo("en-US");
+
+        // Criando a estrutura do XML        
+        var statement = new XElement("Statement",
+            new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+            new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
+            new XElement("Customer", invoice.Customer),
+            new XElement("Items")
+        );
+
+        foreach (var perf in invoice.Performances)
+        {
+            var play = plays[perf.PlayId];
+            var lines = AjustarLinhas(play.Lines);
+            decimal valorBase = lines * 10;
+            decimal calculoDaPeca = CalculaValorDaPeca(play.Type, perf.Audience, valorBase);
+
+            // Adiciona créditos de audiência > 30
+            creditos = Math.Max(perf.Audience - 30, 0);
+            // Adiciona crédito extra para cada dez pessoas em comédias
+            if (play.Type == Genero.Comedy) creditos += (int)Math.Floor((decimal)perf.Audience / 5);
+            creditosTotais += creditos;
+
+            // Aciona itensquer
+            statement.Element("Items").Add(
+                new XElement("Item",
+                    // Demonstra casa decimais apenas se houver e com apenas um dígito
+                    new XElement("AmountOwed", (calculoDaPeca / 100) % 1 == 0 ? Math.Floor(calculoDaPeca / 100).ToString(cultureInfo) : (calculoDaPeca / 100).ToString("F1", cultureInfo)),
+                    new XElement("EarnedCredits", creditos),
+                    new XElement("Seats", perf.Audience)
+                )
+            );
+            somaTotal += calculoDaPeca;
+        }
+
+        // Soma total
+        statement.Add(
+            new XElement("AmountOwed", (somaTotal / 100).ToString("F1", cultureInfo)),
+            new XElement("EarnedCredits", creditosTotais)
+        );
+
+        var document = new XDocument(new XDeclaration("1.0", "utf-8", null), statement);
+
+        //using (var stringWriter = new Utf8StringWriter())
+        //{
+        //    document.Save(stringWriter, SaveOptions.None);
+        //    return stringWriter.ToString();
+        //}
+        return document;
     }
 }
