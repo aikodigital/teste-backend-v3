@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Domain", "src\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "tests\TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.UI.WebAPI", "src\TheatricalPlayersRefactoringKata.UI.WebAPI\TheatricalPlayersRefactoringKata.UI.WebAPI.csproj", "{FE07CBC3-19DA-444C-A4C9-9868F735CBBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Application", "src\TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{AAF94542-14C0-4E6F-A574-4DACB2145169}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infrastructure", "src\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{05325D18-CAC5-4B40-B76B-CF9652ED6CC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{071D7325-B7B8-497E-95A7-68600464482C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D786A4B2-488D-4954-BDE5-D9B8721BB283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +34,24 @@ Global
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE07CBC3-19DA-444C-A4C9-9868F735CBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE07CBC3-19DA-444C-A4C9-9868F735CBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE07CBC3-19DA-444C-A4C9-9868F735CBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE07CBC3-19DA-444C-A4C9-9868F735CBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF94542-14C0-4E6F-A574-4DACB2145169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF94542-14C0-4E6F-A574-4DACB2145169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF94542-14C0-4E6F-A574-4DACB2145169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF94542-14C0-4E6F-A574-4DACB2145169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05325D18-CAC5-4B40-B76B-CF9652ED6CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05325D18-CAC5-4B40-B76B-CF9652ED6CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05325D18-CAC5-4B40-B76B-CF9652ED6CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05325D18-CAC5-4B40-B76B-CF9652ED6CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B} = {071D7325-B7B8-497E-95A7-68600464482C}
+		{05325D18-CAC5-4B40-B76B-CF9652ED6CC7} = {071D7325-B7B8-497E-95A7-68600464482C}
+		{FE07CBC3-19DA-444C-A4C9-9868F735CBBE} = {071D7325-B7B8-497E-95A7-68600464482C}
+		{AAF94542-14C0-4E6F-A574-4DACB2145169} = {071D7325-B7B8-497E-95A7-68600464482C}
+		{2AFBF20D-3D97-46EC-B506-8B7C82598951} = {D786A4B2-488D-4954-BDE5-D9B8721BB283}
 	EndGlobalSection
 EndGlobal
