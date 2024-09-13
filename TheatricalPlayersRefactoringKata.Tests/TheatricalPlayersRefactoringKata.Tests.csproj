@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TP.Domain.csproj" />
+    <ProjectReference Include="..\TP.ApplicationServices\TP.ApplicationServices.csproj" />
   </ItemGroup>
 
 </Project>
