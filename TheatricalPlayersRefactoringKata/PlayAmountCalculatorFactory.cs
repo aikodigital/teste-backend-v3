@@ -10,6 +10,7 @@ namespace TheatricalPlayersRefactoringKata
             {
                 "tragedy" => new TragedyAmountCalculator(),
                 "comedy" => new ComedyAmountCalculator(),
+                "history" => new HistoryAmountCalculator(),
                 _ => throw new Exception("unknown type: " + playType)
             };
         }
