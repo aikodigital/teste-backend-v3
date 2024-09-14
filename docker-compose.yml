@@ -14,6 +14,15 @@ services:
       - postgres_data_theatrical:/var/lib/postgresql/data
     ports:
       - "9001:5432"
+      
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-server
+    hostname: rabbitserver
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: unless-stopped
 
 volumes:
   postgres_data_theatrical:
