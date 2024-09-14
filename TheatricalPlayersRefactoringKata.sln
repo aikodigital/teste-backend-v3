@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "tests\TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Application", "src\TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{B3D74374-23D0-4AE2-BD21-3113D0B03E4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Application", "src\TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj", "{B3D74374-23D0-4AE2-BD21-3113D0B03E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infrastructure", "src\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{F99B7992-1ECE-409E-954F-B5D4151CEE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Infrastructure", "src\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj", "{F99B7992-1ECE-409E-954F-B5D4151CEE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Api", "src\TheatricalPlayersRefactoringKata.Api\TheatricalPlayersRefactoringKata.Api.csproj", "{80D1ED2C-AEDC-4040-8B2A-41CF75C12F54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F99B7992-1ECE-409E-954F-B5D4151CEE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F99B7992-1ECE-409E-954F-B5D4151CEE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F99B7992-1ECE-409E-954F-B5D4151CEE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D1ED2C-AEDC-4040-8B2A-41CF75C12F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D1ED2C-AEDC-4040-8B2A-41CF75C12F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D1ED2C-AEDC-4040-8B2A-41CF75C12F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D1ED2C-AEDC-4040-8B2A-41CF75C12F54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

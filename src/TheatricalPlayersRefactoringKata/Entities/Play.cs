@@ -1,13 +1,13 @@
-using System;
-
 namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Play
 {
+    private int _id;
     private string _name;
     private int _lines;
     private string _type;
 
+    public int Id { get => _id; }
     public string Name { get => _name; set => _name = value; }
     public int Lines { get => _lines; set => _lines = value; }
     public string Type { get => _type; set => _type = value; }
