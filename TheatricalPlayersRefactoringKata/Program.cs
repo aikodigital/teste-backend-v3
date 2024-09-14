@@ -1,6 +1,4 @@
-﻿using TheatricalPlayers.Application.Services.Statements;
-
-namespace TheatricalPlayersRefactoringKata;
+﻿namespace TheatricalPlayersRefactoringKata;
 
 public class Program
 {

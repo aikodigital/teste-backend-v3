@@ -2,7 +2,7 @@
 
 namespace TheatricalPlayers.Core.Interfaces.Statements;
 
-public interface IStatementPrinter
+public interface IStatementPrinterHandler
 {
     public string Print(Invoice invoice, List<Play> plays);
 }
