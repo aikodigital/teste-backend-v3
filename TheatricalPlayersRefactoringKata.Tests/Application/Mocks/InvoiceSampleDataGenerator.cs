@@ -1,63 +1,55 @@
-﻿using ApprovalTests;
-using ApprovalTests.Reporters;
-using TheatricalPlayers.Application.Handlers;
-using TheatricalPlayers.Core.Entities;
+﻿using TheatricalPlayers.Core.Entities;
 using TheatricalPlayers.Core.Enums;
-using TheatricalPlayers.Core.Interfaces.Statements;
-using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests.Application.Handlers.StatementTests;
+namespace TheatricalPlayersRefactoringKata.Tests.Application.Mocks;
 
-public class Print
+public static class InvoiceSampleDataGenerator
 {
-    private readonly IStatementPrinterHandler _statementPrinterHandler;
-    public Print()
-    {
-        _statementPrinterHandler = new StatementPrinterHandler();
-    }
+     public static (List<Play>, Invoice) CreateSampleData()
+     {
+         return (CreatePlays(), CreateInvoice());
+     }
 
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    private static List<Play> CreatePlays()
     {
-        var plays = new List<Play>
+        return new List<Play>
         {
-            new()
+            new Play
             {
                 Id = 1,
                 Name = "Hamlet",
                 Lines = 4024,
                 Type = PlayTypeEnum.Tragedy
             },
-            new()
+            new Play
             {
                 Id = 2,
                 Name = "As You Like It",
                 Lines = 2670,
                 Type = PlayTypeEnum.Comedy
             },
-            new()
+            new Play
             {
                 Id = 3,
                 Name = "Othello",
                 Lines = 3560,
                 Type = PlayTypeEnum.Tragedy
             },
-            new()
+            new Play
             {
                 Id = 4,
                 Name = "Henry V",
                 Lines = 3227,
                 Type = PlayTypeEnum.Historical
             },
-            new()
+            new Play
             {
                 Id = 5,
                 Name = "john",
                 Lines = 2648,
                 Type = PlayTypeEnum.Historical
             },
-            new()
+            new Play
             {
                 Id = 6,
                 Name = "Richard III",
@@ -65,47 +57,46 @@ public class Print
                 Type = PlayTypeEnum.Historical
             }
         };
+    }
 
-        var invoice = new Invoice
+    private static Invoice CreateInvoice()
+    {
+        return new Invoice
         {
             Customer = "BigCo",
             Performances = new List<Performance>
             {
-                new()
+                new Performance
                 {
                     PlayId = 1,
                     Audience = 55
                 },
-                new()
+                new Performance
                 {
                     PlayId = 2,
                     Audience = 35
                 },
-                new()
+                new Performance
                 {
                     PlayId = 3,
                     Audience = 40
                 },
-                new()
+                new Performance
                 {
                     PlayId = 4,
                     Audience = 20
                 },
-                new()
+                new Performance
                 {
                     PlayId = 5,
                     Audience = 39
                 },
-                new()
+                new Performance
                 {
                     PlayId = 6,
                     Audience = 20
                 }
             }
         };
-        
-        var result = _statementPrinterHandler.Print(invoice, plays);
-
-        Approvals.Verify(result);
     }
 }
