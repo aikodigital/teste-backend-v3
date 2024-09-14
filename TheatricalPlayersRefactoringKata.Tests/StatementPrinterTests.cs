@@ -71,6 +71,7 @@ public class StatementPrinterTests
         Approvals.Verify(result);
     }
 
+    //Was necessary the use of a different Reporter, ClipboardReporter, to make a move on the order of archives, which caused the Test to complain about an error, but was some difference on the Encoding
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
