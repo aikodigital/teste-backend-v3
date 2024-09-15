@@ -13,9 +13,9 @@ public class StatementPrinterTests
     public void TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        plays.Add("othello", new TragedyPlay("Othello", 3560));
 
         Invoice invoice = new Invoice(
             "BigCo",
@@ -38,12 +38,12 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
+        plays.Add("as-like", new ComedyPlay("As You Like It", 2670));
+        plays.Add("othello", new TragedyPlay("Othello", 3560));
+        plays.Add("henry-v", new HistoricalPlay("Henry V", 3227));
+        plays.Add("john", new HistoricalPlay("King John", 2648));
+        plays.Add("richard-iii", new HistoricalPlay("Richard III", 3718));
 
         Invoice invoice = new Invoice(
             "BigCo",
