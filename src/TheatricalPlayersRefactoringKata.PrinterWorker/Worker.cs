@@ -18,21 +18,18 @@ namespace TheatricalPlayersRefactoringKata.PrinterWorker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory();
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: "printerQueue",
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
+
+            channel.QueueDeclare("printerQueue", exclusive: false);
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += (model, eventArgs) =>
             {
                 try
                 {
-                    var body = ea.Body.ToArray(); ;
+                    var body = eventArgs.Body.ToArray(); ;
                     var message = Encoding.UTF8.GetString(body);
                     var objeto = System.Text.Json.JsonSerializer.Deserialize<PrinterWorkerRequest>(message);
 
@@ -45,18 +42,21 @@ namespace TheatricalPlayersRefactoringKata.PrinterWorker
                             { "othello", new Play("Othello", 3560, "tragedy") }
                         };
 
-                    var teste = new StatementPrinter().Print(new Invoice(objeto.Invoice.Customer, performances), plays, objeto.Type);
-                    File.WriteAllText($"E:\\Dev\\Aiko\\teste-backend-v3\\invoices\\{objeto.Invoice.Customer}-{DateTime.Now:yyyyMMdd_HHmmss}.{objeto.Type}", teste);
-                    channel.BasicAck(ea.DeliveryTag, false);
+                    var printerInvoice = new StatementPrinter().Print(new Invoice(objeto.Invoice.Customer, performances), plays, objeto.Type);
+
+                    File.WriteAllText($"E:\\Dev\\Aiko\\teste-backend-v3\\invoices\\{objeto.Invoice.Customer}-{DateTime.Now:yyyyMMdd_HHmmss}.{objeto.Type}", printerInvoice);
+
+                    channel.BasicAck(eventArgs.DeliveryTag, false);
                 }
                 catch (Exception)
                 {
-                    channel.BasicNack(ea.DeliveryTag, false, true);
+                    channel.BasicNack(eventArgs.DeliveryTag, false, true);
                 }
             };
+
             channel.BasicConsume(queue: "printerQueue",
-                                 autoAck: false,
-                                 consumer: consumer);
+                 autoAck: false,
+                 consumer: consumer);
 
             while (!stoppingToken.IsCancellationRequested)
             {

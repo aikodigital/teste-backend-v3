@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System.Net.Mime;
-using System.Text;
-using System.Text.Json;
 using TheatricalPlayersRefactoringKata.Application.Request;
 using TheatricalPlayersRefactoringKata.Application.Response;
 using TheatricalPlayersRefactoringKata.Entities;
@@ -19,11 +15,13 @@ namespace TheatricalPlayersRefactoringKata.Api.Controllers
     {
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMessageProducer _messageProducer;
 
-        public InvoiceController(IInvoiceRepository invoiceRepository, IUnitOfWork unitOfWork)
+        public InvoiceController(IInvoiceRepository invoiceRepository, IUnitOfWork unitOfWork, IMessageProducer messageProducer)
         {
             _invoiceRepository = invoiceRepository;
             _unitOfWork = unitOfWork;
+            _messageProducer = messageProducer;
         }
 
         /// <summary>
@@ -204,33 +202,11 @@ namespace TheatricalPlayersRefactoringKata.Api.Controllers
             if (invoice == null)
                 return NotFound(new RespostaPadrao(false, $"Invoice id {id} não cadastrado."));
 
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(queue: "printerQueue",
-                     durable: false,
-                     exclusive: false,
-                     autoDelete: false,
-                     arguments: null);
+            var performancesWorkerRequest = invoice.Performances.Select(p => new PerformanceWorkerRequest { Id = p.Id, PlayId = p.PlayId, Audience = p.Audience }).ToList();
 
-                var performancesWorkerRequest = invoice.Performances.Select(p => new PerformanceWorkerRequest
-                {
-                    Id = p.Id,
-                    PlayId = p.PlayId,
-                    Audience = p.Audience
-                }).ToList();
+            var request = new PrinterWorkerRequest { Invoice = new InvoiceWorkerRequest { Customer = invoice.Customer, Performances = performancesWorkerRequest }, Type = type };
 
-                var request = new PrinterWorkerRequest { Invoice = new InvoiceWorkerRequest { Customer = invoice.Customer, Performances = performancesWorkerRequest }, Type = type };
-
-                string message = JsonSerializer.Serialize(request);
-                var body = Encoding.UTF8.GetBytes(message);
-
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "printerQueue",
-                                     basicProperties: null,
-                                     body: body);
-            }
+            _messageProducer.SendMessage(request);
 
             return Accepted(new RespostaPadrao(true, "O seu pedido de impressão foi recebido e será processado"));
         }

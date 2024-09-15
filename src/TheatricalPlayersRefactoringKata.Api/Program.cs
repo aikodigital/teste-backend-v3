@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using TheatricalPlayersRefactoringKata.Api.Middleware;
 using TheatricalPlayersRefactoringKata.Infrastructure.Context;
+using TheatricalPlayersRefactoringKata.Infrastructure.RabbitMQ;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repository;
 using TheatricalPlayersRefactoringKata.Interface;
 
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<TheatricalContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IMessageProducer, RabbitMQProducer>();
 
 var app = builder.Build();
 
