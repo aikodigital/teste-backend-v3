@@ -21,14 +21,14 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new Performance(plays["hamlet"], 55),
+                new Performance(plays["as-like"], 35),
+                new Performance(plays["othello"], 40),
             }
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }
@@ -49,17 +49,17 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new Performance(plays["hamlet"], 55),
+                new Performance(plays["as-like"], 35),
+                new Performance(plays["othello"], 40),
+                new Performance(plays["henry-v"], 20),
+                new Performance(plays["john"], 39),
+                new Performance(plays["henry-v"], 20)
             }
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var result = statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
     }

@@ -6,7 +6,7 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public string Print(Invoice invoice)
     {
         decimal totalAmount = 0;
         var volumeCredits = 0;
@@ -16,7 +16,7 @@ public class StatementPrinter
         foreach(var perf in invoice.Performances) 
         {
 
-            var play = plays[perf.PlayId];
+            var play = perf.play;
             var thisAmount = play.CalculateValue(perf.Audience);
 
             // add volume credits
