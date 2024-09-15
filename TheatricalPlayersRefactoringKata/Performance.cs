@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Performance
@@ -13,5 +15,12 @@ public class Performance
         this._play = play;
         this._audience = audience;
     }
-
+    public decimal CalculateValue()
+    {
+        return _play.CalculateValue(_audience);
+    }
+    public int CalculateCredits()
+    {
+        return _play.CalculateCredits(_audience);
+    }
 }

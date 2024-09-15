@@ -16,14 +16,13 @@ public class StatementPrinter
         foreach(var perf in invoice.Performances) 
         {
 
-            var play = perf.play;
-            var thisAmount = play.CalculateValue(perf.Audience);
+            var thisAmount = perf.CalculateValue();
 
             // add volume credits
-            volumeCredits += play.CalculateCredits(perf.Audience);
+            volumeCredits += perf.CalculateCredits();
 
             // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", perf.play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             totalAmount += thisAmount;
         }
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
