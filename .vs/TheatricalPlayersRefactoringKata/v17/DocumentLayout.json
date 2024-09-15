@@ -1,0 +1,241 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\historycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\historycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\models\\performance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\models\\performance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\models\\play.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\models\\play.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\tragedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\tragedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\comedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\comedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\playcalculatorfactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\playcalculatorfactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\playcalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\playcalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\calculators\\iplaycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\iplaycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\services\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\services\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\fernando galo\\onedrive\\\u00E1rea de trabalho\\para subir\\teste-backend-v3-main\\theatricalplayersrefactoringkata.tests\\theatricalplayersrefactoringkata.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\theatricalplayersrefactoringkata.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "StatementPrinter.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Services\\StatementPrinter.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Services\\StatementPrinter.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Services\\StatementPrinter.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Services\\StatementPrinter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:15:46.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ComedyCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:57:28.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HistoryCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:58:51.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IPlayCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\IPlayCalculator.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\IPlayCalculator.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\IPlayCalculator.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\IPlayCalculator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:54:15.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculator.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculator.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculator.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculator.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAUwBgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T21:58:49.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayCalculatorFactor.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculatorFactor.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculatorFactor.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculatorFactor.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\PlayCalculatorFactor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T22:06:51.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TragedyCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAIwA8AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T16:01:13.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Models\\Invoice.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Invoice.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Models\\Invoice.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:28:09.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Performance.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Performance.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Models\\Performance.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Performance.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Models\\Performance.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:29:35.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Play.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Play.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Models\\Play.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Models\\Play.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Models\\Play.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:30:13.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "InvoiceService.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Services\\InvoiceService.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Services\\InvoiceService.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata\\Services\\InvoiceService.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Services\\InvoiceService.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAA9wBEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T16:14:31.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StatementPrinterTests.cs",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAIBJwGgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T15:16:08.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TheatricalPlayersRefactoringKata.Tests.csproj",
+              "DocumentMoniker": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj",
+              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj",
+              "ToolTip": "C:\\Users\\Fernando Galo\\OneDrive\\\u00C1rea de Trabalho\\para subir\\teste-backend-v3-main\\TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj",
+              "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-13T16:12:07.886Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
