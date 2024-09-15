@@ -4,6 +4,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application;
+using TheatricalPlayersRefactoringKata.Application.Constants;
 using TheatricalPlayersRefactoringKata.Application.Extensions;
 using TheatricalPlayersRefactoringKata.Application.Factory;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
@@ -63,7 +64,9 @@ public class StatementPrinterTests
             }
         );
 
-        var result = _StatementPrinter.Print(invoice, plays, PrintType.Text);
+        var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
+
+        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.Text, invoiceCalculeteSettings);
 
         Approvals.Verify(result);
     }
@@ -72,35 +75,43 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        var plays = GeneratePlay();
+        var invoice = GenerateInvoice();
+        var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
+        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.Text, invoiceCalculeteSettings);
 
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
+        Approvals.Verify(result);
+    }
+        
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        var plays = GeneratePlay();
+        var invoice = GenerateInvoice();
+        var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
+        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.XML, invoiceCalculeteSettings);
+        Approvals.Verify(result);
+    }
+
+    #region Generate
+    private static Invoice GenerateInvoice()
+    {
+        return new Invoice(
+                    "BigCo",
+                    new List<Performance>
+                    {
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
                 new Performance("othello", 40),
                 new Performance("henry-v", 20),
                 new Performance("john", 39),
                 new Performance("henry-v", 20)
-            }
-        );
-
-        var result = _StatementPrinter.Print(invoice, plays, PrintType.Text);
-
-        Approvals.Verify(result);
+                    }
+                );
     }
 
-    [Fact]
-    [UseReporter(typeof(DiffReporter))]
-    public void TestXmlStatementExample()
+    private static Dictionary<string, Play> GeneratePlay()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
@@ -109,21 +120,45 @@ public class StatementPrinterTests
         plays.Add("henry-v", new Play("Henry V", 3227, "history"));
         plays.Add("john", new Play("King John", 2648, "history"));
         plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
-            }
-        );
-
-        var result = _StatementPrinter.Print(invoice, plays, PrintType.XML);
-        Approvals.Verify(result);
+        return plays;
     }
+
+    private static List<InvoiceCalculeteSettings> GenerateInvoiceCalculeteSettings()
+    {
+        var invoiceCalculeteSettings = new List<InvoiceCalculeteSettings>();
+        invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
+                    new Guid(),
+                    GenderType.tragedy,
+                    StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
+                    StatementPrinterConstants.TRAGEDY_BONUS,
+                    StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
+                    StatementPrinterConstants.TRAGEDY_PER_AUDIENCE
+        ));
+        invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
+                    new Guid(),
+                    GenderType.comedy,
+                    StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
+                    StatementPrinterConstants.COMEDY_BONUS,
+                    StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
+                    StatementPrinterConstants.COMEDY_PER_AUDIENCE
+        ));
+        invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
+                    new Guid(),
+                    GenderType.history,
+                    StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
+                    StatementPrinterConstants.TRAGEDY_BONUS,
+                    StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
+                    StatementPrinterConstants.TRAGEDY_PER_AUDIENCE
+        ));
+        invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
+                    new Guid(),
+                    GenderType.history,
+                    StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
+                    StatementPrinterConstants.COMEDY_BONUS,
+                    StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
+                    StatementPrinterConstants.COMEDY_PER_AUDIENCE
+        ));
+        return invoiceCalculeteSettings;
+    }
+    #endregion
 }

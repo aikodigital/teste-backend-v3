@@ -30,7 +30,7 @@ public class StatementPrinter
         _invoicePrintFactory = invoicePrintFactory;
     }
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType printType)
+    public string PrintInvoice(Invoice invoice, Dictionary<string, Play> plays, PrintType printType, List<InvoiceCalculeteSettings> invoiceCalculeteSettings)
     {
         var totalAmount = 0m;
         var volumeCredits = 0m;
@@ -41,42 +41,17 @@ public class StatementPrinter
         foreach (var performance in invoice.Performances)
         {
             var play = plays[performance.PlayId];
-            var thisAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
+            var thisAmount = 0m;
+            var invoiceCalculeteGender = invoiceCalculeteSettings.Where(x => x.Gender.ToString().Equals(play.Gender.ToString())).ToList();
 
-            switch (play.Gender)
+            foreach(var invoiceCalculete in invoiceCalculeteGender)
             {
-                case "tragedy":
-                    thisAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
-                                                                                              StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
-                                                                                              StatementPrinterConstants.TRAGEDY_BONUS,
-                                                                                              StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
-                                                                                              StatementPrinterConstants.TRAGEDY_PER_AUDIENCE);
-                    break;
-                case "comedy":
-                    thisAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
-                                                                                              StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
-                                                                                              StatementPrinterConstants.COMEDY_BONUS,
-                                                                                              StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
-                                                                                              StatementPrinterConstants.COMEDY_PER_AUDIENCE);
-                    break;
-                case "history":
-                    var tragedyAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
-                    tragedyAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
-                                                                                                 StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
-                                                                                                 StatementPrinterConstants.TRAGEDY_BONUS,
-                                                                                                 StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
-                                                                                                 StatementPrinterConstants.TRAGEDY_PER_AUDIENCE);
-
-                    var comedyAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
-                    comedyAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
-                                                                                                StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
-                                                                                                StatementPrinterConstants.COMEDY_BONUS,
-                                                                                                StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
-                                                                                                StatementPrinterConstants.COMEDY_PER_AUDIENCE);
-                    thisAmount = tragedyAmount + comedyAmount;
-                    break;
-                default:
-                    throw new Exception("unknown type: " + play.Gender);
+                thisAmount += _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
+                thisAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
+                                                                                          invoiceCalculete.MinimumAudience,
+                                                                                          invoiceCalculete.Bonus,
+                                                                                          invoiceCalculete.PerAudienceAdditional,
+                                                                                          invoiceCalculete.PerAudience);
             }
 
             var volumeCreditPerformance = _calculateCreditAudience.CalculateCredit(performance.Audience, play.Gender);
