@@ -8,9 +8,11 @@ namespace TS.Domain.Entities
         [Key]
         public long Id { get; set; }
         [Required]
-        [ForeignKey(nameof(Play))]
         public long PlayId { get; set; }
         [Required]
         public int Audience { get; set; }
+
+        [ForeignKey(nameof(PlayId))]
+        public virtual Play Play { get; set; } = new();
     }
 }

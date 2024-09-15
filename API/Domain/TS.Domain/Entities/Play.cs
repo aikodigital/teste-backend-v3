@@ -1,9 +1,17 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TS.Domain.Entities
 {
     public class Play
     {
+        public Play()
+        {
+            Invoices = [];
+            Performances = [];
+        }
+
         [Key]
         public long Id { get; set; }
         [Required]
@@ -13,5 +21,12 @@ namespace TS.Domain.Entities
         public int Type { get; set; }
         [Required]
         public int Lines { get; set; }
+
+        [InverseProperty("Play")]
+        [JsonIgnore]
+        public virtual ICollection<Invoice> Invoices { get; set; } = [];
+        [InverseProperty("Play")]
+        [JsonIgnore]
+        public virtual ICollection<Performance> Performances { get; set; } = [];
     }
 }

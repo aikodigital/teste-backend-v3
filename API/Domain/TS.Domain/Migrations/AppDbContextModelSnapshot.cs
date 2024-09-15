@@ -68,6 +68,10 @@ namespace TS.Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("PlayId");
+
                     b.ToTable("Invoices");
                 });
 
@@ -86,6 +90,8 @@ namespace TS.Domain.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PlayId");
 
                     b.ToTable("Performances");
                 });
@@ -112,6 +118,48 @@ namespace TS.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Plays");
+                });
+
+            modelBuilder.Entity("TS.Domain.Entities.Invoice", b =>
+                {
+                    b.HasOne("TS.Domain.Entities.Customer", "Customer")
+                        .WithMany("Invoices")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TS.Domain.Entities.Play", "Play")
+                        .WithMany("Invoices")
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Play");
+                });
+
+            modelBuilder.Entity("TS.Domain.Entities.Performance", b =>
+                {
+                    b.HasOne("TS.Domain.Entities.Play", "Play")
+                        .WithMany("Performances")
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Play");
+                });
+
+            modelBuilder.Entity("TS.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("Invoices");
+                });
+
+            modelBuilder.Entity("TS.Domain.Entities.Play", b =>
+                {
+                    b.Navigation("Invoices");
+
+                    b.Navigation("Performances");
                 });
 #pragma warning restore 612, 618
         }

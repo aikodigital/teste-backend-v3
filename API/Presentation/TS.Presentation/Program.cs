@@ -3,6 +3,12 @@ using System.Text.Json.Serialization;
 using TS.Domain.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TS.Domain.Repositories.Invoices;
+using TS.Domain.Repositories.Customers;
+using TS.Domain.Repositories.Performances;
+using TS.Domain.Repositories.Plays;
+using Hangfire;
+using TS.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,9 +35,30 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TS"));
 });
 
+builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
+builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
+builder.Services.AddScoped<IPerformancesRepository, PerformancesRepository>();
+builder.Services.AddScoped<IPlaysRepository, PlaysRepository>();
+builder.Services.AddScoped<IRabbitMQServices, RabbitMQServices>();
 
 builder.Services.AddMvc()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+GlobalConfiguration.Configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(builder.Configuration.GetConnectionString("TS"));
+
+builder.Services.AddHangfire(Configuration => Configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(builder.Configuration.GetConnectionString("TS")));
+
+builder.Services.AddHangfireServer();
+//RecurringJob.AddOrUpdate<IRabbitMQServices>("Faturas", services => services.Consumer(), "*/1 * * * * *"); //Expressão CROM para executar a cada segundo
+RecurringJob.AddOrUpdate<IRabbitMQServices>("Faturas", services => services.Consumer(), "*/2 * * * *"); //Expressão CROM para executar a cada 2 minutos
 
 var app = builder.Build();
 
@@ -44,10 +71,16 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
         options.RoutePrefix = string.Empty;
     });
+    app.UseHangfireDashboard();
 }
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+     {
+         _ = endpoints.MapControllers();
+         _ = endpoints.MapHangfireDashboard();
+     });
 
 app.Run();
