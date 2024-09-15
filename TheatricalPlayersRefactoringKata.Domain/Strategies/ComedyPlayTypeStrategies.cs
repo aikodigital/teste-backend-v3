@@ -20,9 +20,9 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
             return amount;
         }
 
-        public int CalculateCreditsByAudience(int audience)
+        public int CalculateCreditsByAudience(int valueBase, int audience)
         {
-            int credits = Math.Max(audience - 30, 0);
+            int credits = valueBase;
             credits += (int)Math.Floor((decimal)audience / 5);
             return credits;
         }

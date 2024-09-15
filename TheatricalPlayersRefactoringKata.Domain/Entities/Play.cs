@@ -41,8 +41,9 @@ public class Play : Entity
         return decimal.Round(totalAmount / 100, 2);
     }
 
-    public int CalculateCredits(int audience)
+    public int CalculateCreditsByAudience(int audience)
     {
-        return _playTypeStrategy.CalculateCreditsByAudience(audience);
+        int valueBase = Math.Max(audience - 30, 0);
+        return _playTypeStrategy.CalculateCreditsByAudience(valueBase, audience);
     }
 }
