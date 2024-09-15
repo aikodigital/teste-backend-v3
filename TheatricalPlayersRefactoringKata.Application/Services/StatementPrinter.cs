@@ -3,11 +3,27 @@ using System.Collections.Generic;
 using System.Globalization;
 using TheatricalPlayersRefactoringKata.Domain;
 using TheatricalPlayersRefactoringKata.Application.Constants;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Services;
+using System.Reflection;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
 public class StatementPrinter
 {
+    private readonly ICalculateBaseAmountPerLine _calculateBaseAmountPerLine;
+    private readonly ICalculateCreditAudience _calculateCreditAudience;
+    private readonly ICalculateAdditionalValuePerGender _calculateAdditionalValuePerGender;
+
+    public StatementPrinter(ICalculateBaseAmountPerLine calculateBaseAmountPerLine,
+                            ICalculateCreditAudience calculateCreditAudience,
+                            ICalculateAdditionalValuePerGender calculateAdditionalValuePerGender)
+    {
+        _calculateBaseAmountPerLine = calculateBaseAmountPerLine;
+        _calculateCreditAudience = calculateCreditAudience;
+        _calculateAdditionalValuePerGender = calculateAdditionalValuePerGender;
+    }
+
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
         var totalAmount = 0m;
@@ -18,54 +34,45 @@ public class StatementPrinter
         foreach (var performance in invoice.Performances)
         {
             var play = plays[performance.PlayId];
-            var lines = play.Lines;
-            if (lines < StatementPrinterConstants.MINIMUM_LINES) lines = StatementPrinterConstants.MINIMUM_LINES;
-            if (lines > StatementPrinterConstants.MAXIMUM_LINES) lines = StatementPrinterConstants.MAXIMUM_LINES;
-            var thisAmount = lines / StatementPrinterConstants.DIVIDER_PER_LINE;
+            var thisAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
 
-            switch (play.Type)
+            switch (play.Gender)
             {
                 case "tragedy":
-                    if (performance.Audience > StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE)
-                    {
-                        thisAmount += StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL 
-                                      * (performance.Audience - StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE);
-                    }
+                    thisAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
+                                                                                              StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
+                                                                                              StatementPrinterConstants.TRAGEDY_BONUS,
+                                                                                              StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
+                                                                                              StatementPrinterConstants.TRAGEDY_PER_AUDIENCE);
                     break;
                 case "comedy":
-                    if (performance.Audience > StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE)
-                    {
-                        thisAmount += StatementPrinterConstants.COMEDY_BONUS 
-                                      + StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL
-                                      * (performance.Audience - StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE);
-                    }
-                    thisAmount += StatementPrinterConstants.COMEDY_PER_AUDIENCE * performance.Audience;
+                    thisAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
+                                                                                              StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
+                                                                                              StatementPrinterConstants.COMEDY_BONUS,
+                                                                                              StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
+                                                                                              StatementPrinterConstants.COMEDY_PER_AUDIENCE);
                     break;
                 case "history":
-                    var tragedyAmount = (lines / StatementPrinterConstants.DIVIDER_PER_LINE);
-                    if (performance.Audience > StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE)
-                    {
-                        tragedyAmount += StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL
-                                      * (performance.Audience - StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE);
-                    }
+                    var tragedyAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
+                    tragedyAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
+                                                                                                 StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
+                                                                                                 StatementPrinterConstants.TRAGEDY_BONUS,
+                                                                                                 StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
+                                                                                                 StatementPrinterConstants.TRAGEDY_PER_AUDIENCE);
 
-                    var comedyAmount = (lines / StatementPrinterConstants.DIVIDER_PER_LINE);
-                    if (performance.Audience > StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE)
-                    {
-                        comedyAmount += StatementPrinterConstants.COMEDY_BONUS
-                                      + StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL
-                                      * (performance.Audience - StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE);
-                    }
-                    comedyAmount += StatementPrinterConstants.COMEDY_PER_AUDIENCE * performance.Audience;
+                    var comedyAmount = _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
+                    comedyAmount += _calculateAdditionalValuePerGender.CalculateAdditionalValue(performance.Audience,
+                                                                                                StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
+                                                                                                StatementPrinterConstants.COMEDY_BONUS,
+                                                                                                StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
+                                                                                                StatementPrinterConstants.COMEDY_PER_AUDIENCE);
                     thisAmount = tragedyAmount + comedyAmount;
                     break;
                 default:
-                    throw new Exception("unknown type: " + play.Type);
+                    throw new Exception("unknown type: " + play.Gender);
             }
-            // add volume credits
-            volumeCredits += Math.Max(performance.Audience - StatementPrinterConstants.CREDIT_MINIMUM_AUDIENCE, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == play.Type) volumeCredits += (int)Math.Floor(performance.Audience / StatementPrinterConstants.COMEDY_BONUS_CREDIT_PER_ATTENDEES);
+
+            volumeCredits += _calculateCreditAudience.CalculateCredit(performance.Audience, play.Gender);
 
             // print line for this order
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount, performance.Audience);

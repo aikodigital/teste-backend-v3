@@ -10,7 +10,9 @@
         #endregion
         #region Tragedy
         public const int TRAGEDY_MINIMUM_AUDIENCE = 30;
+        public const decimal TRAGEDY_BONUS = 0m;
         public const decimal TRAGEDY_PER_AUDIENCE_ADDITIONAL = 10.00m;
+        public const decimal TRAGEDY_PER_AUDIENCE = 0m;
         #endregion
         #region Comedy
         public const int COMEDY_MINIMUM_AUDIENCE = 20;

@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application;
+using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Domain;
 using Xunit;
 
@@ -10,6 +13,29 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private readonly StatementPrinter _StatementPrinter;
+
+    public StatementPrinterTests()
+    {
+        // Configurar o container de serviços
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddTransient<ICalculateBaseAmountPerLine,
+                                       CalculateBaseAmountPerLine>();
+
+        serviceCollection.AddTransient<ICalculateCreditAudience,
+                                       CalculateCreditAudience>();
+
+        serviceCollection.AddTransient<ICalculateAdditionalValuePerGender,
+                                       CalculateAdditionalValuePerGender>();
+        
+        serviceCollection.AddTransient<StatementPrinter>();
+
+        var serviceProvider = serviceCollection.BuildServiceProvider();
+
+        _StatementPrinter = serviceProvider.GetService<StatementPrinter>()
+                                 ?? throw new InvalidOperationException("A instância de CalculateBaseAmountPerLine não pôde ser criada.");
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -29,8 +55,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        //StatementPrinter statementPrinter = new StatementPrinter(_calculateBaseAmountPerLine);
+        var result = _StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
     }
@@ -60,8 +86,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        //StatementPrinter statementPrinter = new StatementPrinter(_calculateBaseAmountPerLine);
+        var result = _StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
     }
