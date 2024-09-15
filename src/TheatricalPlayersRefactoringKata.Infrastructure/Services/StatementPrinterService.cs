@@ -50,6 +50,20 @@ public class StatementPrinterService : IStatementPrinterService
                     break;
 
                 case PlayTypeEnum.History:
+                    var tragedyAmount = performanceAmount;
+                    if (performance.Audience > 30)
+                    {
+                        tragedyAmount += 1000 * (performance.Audience - 30);
+                    }
+
+                    var comedyAmount = performanceAmount + 300 * performance.Audience;
+                    if (performance.Audience > 20)
+                    {
+                        comedyAmount += 10000 + 500 * (performance.Audience - 20);
+                    }
+
+                    performanceAmount = tragedyAmount + comedyAmount;
+                    
                     break;
 
                 default:
