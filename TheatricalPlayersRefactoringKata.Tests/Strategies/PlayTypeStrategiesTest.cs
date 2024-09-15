@@ -2,7 +2,7 @@
 using TheatricalPlayersRefactoringKata.Domain.Enums;
 using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests
+namespace TheatricalPlayersRefactoringKata.Tests.Strategies
 {
     public class PlayTypeStrategiesTest
     {

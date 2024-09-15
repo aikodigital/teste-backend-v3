@@ -16,6 +16,7 @@ public class Play : Entity
     public string Name { get => _name; set => _name = value; }
     public int Lines { get => _lines; set => _lines = value; }
     public string TypeName { get => _playType.Name; }
+    public PlayType PlayType { get => _playType; set => _playType = value; }
 
     public Play(string name, int lines, PlayTypeEnum playType)
     {

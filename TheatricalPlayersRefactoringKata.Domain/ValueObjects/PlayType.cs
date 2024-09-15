@@ -8,8 +8,8 @@ namespace TheatricalPlayersRefactoringKata.Domain.ValueObjects
 {
     public class PlayType : ValueObject<PlayType>
     {
-        public string Name { get => _typeEnum.GetPlayTypeName(); }
-        private PlayTypeEnum _typeEnum { get; set; }
+        public string Name { get => TypeEnum.GetPlayTypeName(); }
+        public PlayTypeEnum TypeEnum { get; private set; }
 
         public PlayType(PlayTypeEnum typeEnum)
         {
@@ -19,7 +19,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.ValueObjects
         private void ValidateDomain(PlayTypeEnum typeEnum)
         {
             DomainExceptionValidation.When(!Enum.IsDefined(typeEnum), "Invalid play type. Play type must be mapped in the application.");
-            _typeEnum = typeEnum;
+            TypeEnum = typeEnum;
         }
 
         protected override decimal GetHashCodeCore()
@@ -35,7 +35,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.ValueObjects
 
         public IPlayTypeStrategy GetStrategies()
         {
-            return _typeEnum switch
+            return TypeEnum switch
             {
                 PlayTypeEnum.Comedy => new ComedyPlayTypeStrategies(),
                 PlayTypeEnum.Tragedy => new TragedyPlayTypeStrategies(),

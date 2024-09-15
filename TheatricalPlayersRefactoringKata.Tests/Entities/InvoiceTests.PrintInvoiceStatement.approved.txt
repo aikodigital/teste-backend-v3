@@ -1,0 +1,6 @@
+﻿Statement for BigCo
+  Hamlet: $650.00 (55 seats)
+  As You Like It: $547.00 (35 seats)
+  Henry V: $705.40 (20 seats)
+Amount owed is $1,902.40
+You earned 37 credits
