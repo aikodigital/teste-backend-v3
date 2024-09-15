@@ -3,6 +3,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Enum;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
 using Xunit;
 
@@ -19,9 +20,9 @@ public class StatementPrinterServiceTests
         // Arrange
         var plays = new Dictionary<string, PlayEntity>
         {
-            { "hamlet", new PlayEntity("Hamlet", 4024, "tragedy") },
-            { "as-like", new PlayEntity("As You Like It", 2670, "comedy") },
-            { "othello", new PlayEntity("Othello", 3560, "tragedy") }
+            { "hamlet", new PlayEntity("Hamlet", 4024, PlayTypeEnum.Tragedy) },
+            { "as-like", new PlayEntity("As You Like It", 2670, PlayTypeEnum.Comedy) },
+            { "othello", new PlayEntity("Othello", 3560, PlayTypeEnum.Tragedy) }
         };
 
         var invoice = new InvoiceEntity(
@@ -48,12 +49,12 @@ public class StatementPrinterServiceTests
         // Arrange
         var plays = new Dictionary<string, PlayEntity>
         {
-            { "hamlet", new PlayEntity("Hamlet", 4024, "tragedy") },
-            { "as-like", new PlayEntity("As You Like It", 2670, "comedy") },
-            { "othello", new PlayEntity("Othello", 3560, "tragedy") },
-            { "henry-v", new PlayEntity("Henry V", 3227, "history") },
-            { "john", new PlayEntity("King John", 2648, "history") },
-            { "richard-iii", new PlayEntity("Richard III", 3718, "history") }
+            { "hamlet", new PlayEntity("Hamlet", 4024, PlayTypeEnum.Tragedy) },
+            { "as-like", new PlayEntity("As You Like It", 2670, PlayTypeEnum.Comedy) },
+            { "othello", new PlayEntity("Othello", 3560, PlayTypeEnum.Tragedy) },
+            { "henry-v", new PlayEntity("Henry V", 3227, PlayTypeEnum.History) },
+            { "john", new PlayEntity("King John", 2648, PlayTypeEnum.History) },
+            { "richard-iii", new PlayEntity("Richard III", 3718, PlayTypeEnum.History) }
         };
 
         var invoice = new InvoiceEntity(

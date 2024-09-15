@@ -1,3 +1,5 @@
+using TheatricalPlayersRefactoringKata.Enum;
+
 namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class PlayEntity
@@ -6,9 +8,9 @@ public class PlayEntity
 
     public int Lines { get; private set; }
 
-    public string Type { get; private set; }
+    public PlayTypeEnum Type { get; private set; }
 
-    public PlayEntity(string name, int lines, string type)
+    public PlayEntity(string name, int lines, PlayTypeEnum type)
     {
         Name = name;
         Lines = lines;

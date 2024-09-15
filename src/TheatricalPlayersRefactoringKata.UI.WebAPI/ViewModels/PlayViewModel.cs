@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Enum;
 
 namespace TheatricalPlayersRefactoringKata.UI.WebAPI.ViewModels;
 
@@ -12,7 +13,7 @@ public class PlayViewModel
     public int Lines { get; set; }
 
     [Required(ErrorMessage = "A propriedade 'Type' é obrigatória.")]
-    public string Type { get; set; } = null!;
+    public PlayTypeEnum Type { get; set; }
 
     public PlayEntity ToEntity()
     {
