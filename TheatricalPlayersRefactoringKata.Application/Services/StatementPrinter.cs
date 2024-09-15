@@ -6,6 +6,9 @@ using TheatricalPlayersRefactoringKata.Application.Constants;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using System.Reflection;
+using TheatricalPlayersRefactoringKata.Domain.Enum;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
+using System.Xml.Linq;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
@@ -14,22 +17,26 @@ public class StatementPrinter
     private readonly ICalculateBaseAmountPerLine _calculateBaseAmountPerLine;
     private readonly ICalculateCreditAudience _calculateCreditAudience;
     private readonly ICalculateAdditionalValuePerGender _calculateAdditionalValuePerGender;
+    private readonly IInvoicePrintFactory _invoicePrintFactory;
 
     public StatementPrinter(ICalculateBaseAmountPerLine calculateBaseAmountPerLine,
                             ICalculateCreditAudience calculateCreditAudience,
-                            ICalculateAdditionalValuePerGender calculateAdditionalValuePerGender)
+                            ICalculateAdditionalValuePerGender calculateAdditionalValuePerGender,
+                            IInvoicePrintFactory invoicePrintFactory)
     {
         _calculateBaseAmountPerLine = calculateBaseAmountPerLine;
         _calculateCreditAudience = calculateCreditAudience;
         _calculateAdditionalValuePerGender = calculateAdditionalValuePerGender;
+        _invoicePrintFactory = invoicePrintFactory;
     }
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public string Print(Invoice invoice, Dictionary<string, Play> plays, PrintType printType)
     {
         var totalAmount = 0m;
         var volumeCredits = 0m;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+
+        var invoicePrint = new InvoicePrint.Statement();
+        invoicePrint.Customer = invoice.Customer;
 
         foreach (var performance in invoice.Performances)
         {
@@ -72,14 +79,25 @@ public class StatementPrinter
                     throw new Exception("unknown type: " + play.Gender);
             }
 
-            volumeCredits += _calculateCreditAudience.CalculateCredit(performance.Audience, play.Gender);
+            var volumeCreditPerformance = _calculateCreditAudience.CalculateCredit(performance.Audience, play.Gender);
+            volumeCredits += volumeCreditPerformance;
 
             // print line for this order
-            result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount, performance.Audience);
+            invoicePrint.Items.Item.Add(new InvoicePrint.Item()
+            {
+                Name = play.Name,
+                AmountOwed = thisAmount,
+                EarnedCredits = volumeCreditPerformance,
+                Seats = performance.Audience
+            });
+
             totalAmount += thisAmount;
         }
-        result += String.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount);
-        result += String.Format("You earned {0} credits\n", volumeCredits);
-        return result;
+        invoicePrint.AmountOwed = totalAmount;
+        invoicePrint.EarnedCredits = volumeCredits;
+
+
+        var _invoicePrint = _invoicePrintFactory.GetPrintType(printType);
+        return _invoicePrint.Print(invoicePrint);
     }
 }
