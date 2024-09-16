@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Calculators

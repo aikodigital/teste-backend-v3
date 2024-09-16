@@ -1,4 +1,5 @@
-﻿using System;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Calculators
 {

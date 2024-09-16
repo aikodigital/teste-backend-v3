@@ -2,6 +2,7 @@
 using System.Globalization;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services.Factories;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
 {

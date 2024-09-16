@@ -1,5 +1,4 @@
-﻿using System;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
+﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services.Printers;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Factories
