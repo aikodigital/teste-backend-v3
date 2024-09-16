@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Services;
 
 public class XmlStatementFormatter : IStatementFormatter
 {

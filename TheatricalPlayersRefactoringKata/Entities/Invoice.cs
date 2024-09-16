@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Invoice
 {
@@ -15,14 +15,14 @@ public class Invoice
         set
         {
             _performances = value;
-         
+
         }
     }
 
 
     public decimal CalculateTotals()
     {
-        return _performances  != null ? _performances.Sum(perf => perf.CalculateValue()) : 0;
+        return _performances != null ? _performances.Sum(perf => perf.CalculateValue()) : 0;
     }
     public int CalculateCredits()
     {
@@ -31,8 +31,8 @@ public class Invoice
 
     public Invoice(string customer, List<Performance> performance)
     {
-        this._customer = customer;
-        this._performances = performance;
+        _customer = customer;
+        _performances = performance;
     }
 
 }

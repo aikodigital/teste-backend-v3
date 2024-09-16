@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class Performance
 {
@@ -12,8 +12,8 @@ public class Performance
 
     public Performance(Play play, int audience)
     {
-        this._play = play;
-        this._audience = audience;
+        _play = play;
+        _audience = audience;
     }
     public decimal CalculateValue()
     {

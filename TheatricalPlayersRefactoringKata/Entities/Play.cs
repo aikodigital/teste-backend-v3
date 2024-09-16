@@ -1,6 +1,6 @@
 using System;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Entities;
 
 public abstract class Play
 {
@@ -20,8 +20,8 @@ public abstract class Play
 
     public Play(string name, int lines)
     {
-        this._name = name;
-        this._lines = lines;
+        _name = name;
+        _lines = lines;
     }
 
 

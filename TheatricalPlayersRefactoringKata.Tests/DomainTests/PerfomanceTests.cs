@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
+using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.DomainTests;
 
 public class PerfomanceTests
 {
@@ -28,7 +29,7 @@ public class PerfomanceTests
     {
 
         var performance = new Performance(new TragedyPlay("The Night Death", 3200), 25); //Valor Esperado : 0
-        
+
 
         var result = performance.CalculateCredits();
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class ComedyPlay : Play
 {
@@ -10,7 +10,7 @@ public class ComedyPlay : Play
     {
 
         var amount = 0;
-        var playLines = this.Lines;
+        var playLines = Lines;
 
         if (playLines < 1000) playLines = 1000;
         if (playLines > 4000) playLines = 4000;

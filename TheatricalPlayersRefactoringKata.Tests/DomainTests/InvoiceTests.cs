@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Entities;
 using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.DomainTests;
 
 public class InvoiceTests
 {
@@ -12,7 +13,7 @@ public class InvoiceTests
     [UseReporter(typeof(DiffReporter))]
     public void CalculateTotals_ShouldReturnCorrectAmount()
     {
-     
+
         var performances = new List<Performance>
         {
             new Performance(new TragedyPlay("The Night Death", 3200), 25), //Valor Esperado : 32000
@@ -21,18 +22,18 @@ public class InvoiceTests
         };
         var invoice = new Invoice("UnitTest1", performances);
 
-   
+
         var result = invoice.CalculateTotals();
 
-       
-        Assert.Equal(215000, result); 
+
+        Assert.Equal(215000, result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void CalculateCredits_ShouldReturnCorrectAmount()
     {
-     
+
         var performances = new List<Performance>
         {
             new Performance(new TragedyPlay("The Night Death", 3200), 25), //Valor Esperado : 0
@@ -41,10 +42,10 @@ public class InvoiceTests
         };
         var invoice = new Invoice("UnitTest2", performances);
 
-     
+
         var result = invoice.CalculateCredits();
 
         Assert.Equal(39, result);
     }
-  
+
 }

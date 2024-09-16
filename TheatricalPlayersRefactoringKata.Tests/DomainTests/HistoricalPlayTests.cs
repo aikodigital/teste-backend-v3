@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
-
-namespace TheatricalPlayersRefactoringKata.Tests;
+using TheatricalPlayersRefactoringKata.Entities;
+namespace TheatricalPlayersRefactoringKata.Tests.DomainTests;
 
 public class HistoricalPlayTests
 {

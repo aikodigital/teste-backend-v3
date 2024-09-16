@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
+using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.DomainTests;
 
 public class TragedyPlayTests
 {

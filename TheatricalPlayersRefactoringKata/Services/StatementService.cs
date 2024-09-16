@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Services;
 
 public class StatementService
 {
