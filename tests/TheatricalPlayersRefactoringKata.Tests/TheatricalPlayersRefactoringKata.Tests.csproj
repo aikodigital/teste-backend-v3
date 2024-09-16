@@ -22,4 +22,13 @@
     <ProjectReference Include="..\..\src\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Services\StatementPrinterServiceTests.TestTextStatementExample.approved.txt">
+      <DependentUpon>StatementPrinterServiceTests.cs</DependentUpon>
+    </None>
+    <None Update="Services\StatementPrinterServiceTests.TestXmlStatementExample.approved.txt">
+      <DependentUpon>StatementPrinterServiceTests.cs</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>

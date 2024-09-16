@@ -1,15 +1,20 @@
-﻿using System.Xml.Serialization;
-
-namespace TheatricalPlayersRefactoringKata.Entities;
+﻿namespace TheatricalPlayersRefactoringKata.Entities;
 
 public class StatementItemEntity
 {
-    [XmlIgnore]
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; }
     
-    public decimal AmountOwed { get; set; }
+    public decimal AmountOwed { get; private set; }
 
-    public int EarnedCredits { get; set; }
+    public int EarnedCredits { get; private set; }
 
-    public int Seats { get; set; }
+    public int Seats { get; private set; }
+
+    public StatementItemEntity(string name, decimal amountOwed, int earnedCredits, int seats)
+    {
+        Name = name;
+        AmountOwed = amountOwed;
+        EarnedCredits = earnedCredits;
+        Seats = seats;
+    }
 }

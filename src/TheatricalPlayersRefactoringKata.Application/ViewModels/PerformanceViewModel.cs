@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TheatricalPlayersRefactoringKata.Entities;
 
-namespace TheatricalPlayersRefactoringKata.UI.WebAPI.ViewModels;
+namespace TheatricalPlayersRefactoringKata.Application.ViewModels;
 
 public class PerformanceViewModel
 {

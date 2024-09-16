@@ -8,6 +8,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDomainServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddUseCases();
 
 var app = builder.Build();
 

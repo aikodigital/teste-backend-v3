@@ -2,7 +2,7 @@
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Enum;
 
-namespace TheatricalPlayersRefactoringKata.UI.WebAPI.ViewModels;
+namespace TheatricalPlayersRefactoringKata.Application.ViewModels;
 
 public class PlayViewModel
 {
