@@ -1,16 +1,13 @@
-namespace Domain.Entities;
-
-public class Invoice : BaseEntity
+namespace Domain.Entities
 {
-    private string _customer;
-    private List<Performance> _performances;
-
-    public string Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
-
-    public Invoice(string customer, List<Performance> performance)
+    public class Invoice : BaseEntity
     {
-        _customer = customer;
-        _performances = performance;
+        public Invoice(string customer, List<Performance> performances)
+        {
+            Customer = customer;
+            Performances = performances ?? new List<Performance>();
+        }
+        public string Customer { get; set; }
+        public List<Performance> Performances { get; set; } = new List<Performance>();
     }
 }

@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Play : BaseEntity
+public class Play
 {
     private string _name;
     private int _lines;
