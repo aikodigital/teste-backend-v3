@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16.4
+    container_name: theatrical-postgre-db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: theatrical
+      POSTGRES_PASSWORD: theatrical.123
+      POSTGRES_DB: theatricaldb
+    volumes:
+      - postgres_data_theatrical:/var/lib/postgresql/data
+    ports:
+      - "9001:5432"
+      
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-server
+    hostname: rabbitserver
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: unless-stopped
+
+volumes:
+  postgres_data_theatrical:
