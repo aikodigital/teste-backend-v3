@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Linq;
+using System.Text;
 
 namespace TheatricalPlayersRefactoringKata
 {
@@ -19,28 +20,27 @@ namespace TheatricalPlayersRefactoringKata
                 Customer = statement.Customer,
                 Items = statement.Items.Select(item => new Item
                 {
-                    AmountOwed = item.AmountOwed,
+                    AmountOwed = decimal.Parse(FormatAmount(item.AmountOwed)),
                     EarnedCredits = item.EarnedCredits,
                     Seats = item.Seats
 
                 }).ToList(),
-                AmountOwed = statement.AmountOwed,
+                AmountOwed = decimal.Parse(FormatAmount(statement.AmountOwed)),
                 EarnedCredits = statement.EarnedCredits,
             };
 
             var xmlSettings = new XmlWriterSettings
             {
-                Indent = true,
-                Encoding = System.Text.Encoding.UTF7
+                Encoding = Encoding.UTF8,
+                Indent = true
             };
 
             var xmlSerializer = new XmlSerializer(typeof(Statement));
-            using (var stringWriter = new StringWriter())
-            using (var xmlWriter = XmlWriter.Create(stringWriter, xmlSettings))
-            {
-                xmlSerializer.Serialize(xmlWriter, xmlStatement);
-                return stringWriter.ToString();
-            }
+            using var stringWriter = new StringWriter();
+            using var xmlWriter = XmlWriter.Create(stringWriter, xmlSettings);
+            xmlSerializer.Serialize(xmlWriter, xmlStatement);
+
+            return stringWriter.ToString();
         }
 
         public string ConvertJsonToTxt(string json)
@@ -64,6 +64,10 @@ namespace TheatricalPlayersRefactoringKata
             result += String.Format("You earned {0} credits\n", statement.EarnedCredits);
 
             return result;
+        }
+        private string FormatAmount(decimal amount)
+        {
+            return amount % 1 == 0 ? amount.ToString("F0") : amount.ToString("F1");
         }
     }
 }

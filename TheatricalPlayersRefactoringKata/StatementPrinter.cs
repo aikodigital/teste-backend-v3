@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Xml;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace TheatricalPlayersRefactoringKata
@@ -64,6 +61,7 @@ namespace TheatricalPlayersRefactoringKata
                     default:
                         throw new Exception("unknown type: " + play.Type);
                 }
+
                 // Add volume credits
                 volumeCredits += Math.Max(perf.Audience - 30, 0);
 
@@ -71,7 +69,8 @@ namespace TheatricalPlayersRefactoringKata
                 if ("comedy" == play.Type)
                 {
                     volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-                    earnedCredits = (int)Math.Floor((decimal)perf.Audience / 5);
+                    earnedCredits = Math.Max(perf.Audience - 30, 0);
+                    earnedCredits += (int)Math.Floor((decimal)perf.Audience / 5);
                 }
                 else
                     earnedCredits = Math.Max(perf.Audience - 30, 0);
