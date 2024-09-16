@@ -36,11 +36,12 @@ namespace TheatricalPlayersRefactoringKata
             };
 
             var xmlSerializer = new XmlSerializer(typeof(Statement));
-            using var stringWriter = new StringWriter();
-            using var xmlWriter = XmlWriter.Create(stringWriter, xmlSettings);
+            using var memoryStream = new MemoryStream();
+            using var xmlWriter = XmlWriter.Create(memoryStream, xmlSettings);
             xmlSerializer.Serialize(xmlWriter, xmlStatement);
+            string xmlOutput = Encoding.UTF8.GetString(memoryStream.ToArray());
 
-            return stringWriter.ToString();
+            return xmlOutput.ToString();
         }
 
         public string ConvertJsonToTxt(string json)

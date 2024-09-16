@@ -31,9 +31,9 @@ public class StatementPrinterTests
 
         StatementPrinter statementPrinter = new StatementPrinter();
         Converter converterJsonToTxt = new Converter();
-        var resultPrint = statementPrinter.Print(invoice, plays);
+        var printResult = statementPrinter.Print(invoice, plays);
 
-        var result = converterJsonToTxt.ConvertJsonToTxt(resultPrint);
+        var result = converterJsonToTxt.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -67,9 +67,9 @@ public class StatementPrinterTests
 
         StatementPrinter statementPrinter = new StatementPrinter();
         Converter converterJsonToTxt = new Converter();
-        var resultPrint = statementPrinter.Print(invoice, plays);
+        var printResult = statementPrinter.Print(invoice, plays);
 
-        var result = converterJsonToTxt.ConvertJsonToTxt(resultPrint);
+        var result = converterJsonToTxt.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -105,8 +105,8 @@ public class StatementPrinterTests
         Converter jsonToXmlConverter = new Converter();
 
         var jsonResult = statementPrinter.Print(invoice, plays);
-        string xmlOutput = jsonToXmlConverter.ConvertJsonToXml(jsonResult);
+        string result = jsonToXmlConverter.ConvertJsonToXml(jsonResult);
 
-        Approvals.Verify(xmlOutput);
+        Approvals.Verify(result);
     }
 }
