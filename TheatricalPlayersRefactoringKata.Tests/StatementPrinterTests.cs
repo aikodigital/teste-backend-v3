@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
+using System.IO;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Model;
+using ApprovalTests.Xml;
+using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
@@ -31,7 +31,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintTXT(invoice, plays);
+        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);
 
         Approvals.Verify(result);
     }
@@ -62,12 +62,11 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintTXT(invoice, plays);
+        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);
 
         Approvals.Verify(result);
     }
-
-    // TO-DO - Implementar teste XML
+    
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
@@ -94,8 +93,9 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintXML(invoice, plays);
+        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.XML);
 
-        Approvals.Verify(result);
+        // Formato de saida alterado para XML para possibilitar validação correta de cabeçalhos pertinentes
+        Approvals.VerifyXml(result);
     }
 }

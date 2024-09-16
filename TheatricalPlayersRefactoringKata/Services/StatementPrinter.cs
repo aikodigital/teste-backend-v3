@@ -4,22 +4,24 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
-using TheatricalPlayersRefactoringKata.Model;
+
+using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.ViewModels;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
 public class StatementPrinter
 {
-    // Intervalo obrigatório
+    // Intervalo de linhas obrigatório
     private const int minimoDeLinhas = 1000;
     private const int maximoDeLinhas = 4000;
 
-    private int AjustarLinhas(int linhas)
+    private int AjustarQuantidadeDeLinhas(int linhas)
     {
         return Math.Clamp(linhas, minimoDeLinhas, maximoDeLinhas);
     }
 
-    // Cálculo do valor da peça teatral, para cadastro de novos genêros basta alterar o Enum.Genero e acrescentar aqui a nova regra de negócio
+    // Cálculo do valor da peça teatral, para cadastro de novos genêros basta alterar o Enum.Genero e acrescentar aqui a nova regra de cálculo
     private decimal CalculaValorDaPeca(Genero genero, int audiencia, decimal valorBase = 0)
     {
         decimal calculoDaPeca = 0;
@@ -46,87 +48,115 @@ public class StatementPrinter
         public override Encoding Encoding => Encoding.UTF8;
     }
 
-    public string PrintTXT(Invoice invoice, Dictionary<string, Play> plays)
+    // Controle dos formatos de saída
+    public string PrintExtrato(Invoice invoice, Dictionary<string, Play> plays, FormatoDoExtrato formatoDoEstrato)
+    {
+        var (somaTotal, creditosTotais, detalhesDaApresentacao) = GerarDetalhesDePerformance(invoice, plays);
+
+        switch (formatoDoEstrato)
+        {
+            case FormatoDoExtrato.TXT:
+                return FormatarSaidaTXT(invoice.Customer, detalhesDaApresentacao, somaTotal, creditosTotais);
+
+            case FormatoDoExtrato.XML:
+                return FormatarSaidaXML(invoice.Customer, detalhesDaApresentacao, somaTotal, creditosTotais);
+
+            default:
+                throw new ArgumentException("Formato do extrato não suportado.", nameof(formatoDoEstrato));
+        }
+    }
+
+    // Cáculo dos dados comuns a todos tipos de saída - Via Tupla
+    private (decimal somaTotal, int creditosTotais, List<DetalhesDaApresentacaoViewModel> detalhesDaApresentacao) GerarDetalhesDePerformance(Invoice invoice, Dictionary<string, Play> plays)
     {
         decimal somaTotal = 0;
-        var creditos = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
+        int creditosTotais = 0;
+        var detalhesDaApresentacao = new List<DetalhesDaApresentacaoViewModel>();
 
         foreach (var perf in invoice.Performances)
         {
             var play = plays[perf.PlayId];
-            var lines = AjustarLinhas(play.Lines);
+            var lines = AjustarQuantidadeDeLinhas(play.Lines);
             decimal valorBase = lines * 10;
             decimal calculoDaPeca = CalculaValorDaPeca(play.Type, perf.Audience, valorBase);
 
             // Adiciona créditos de audiência > 30
-            creditos += Math.Max(perf.Audience - 30, 0);
+            int creditos = Math.Max(perf.Audience - 30, 0);
             // Adiciona crédito extra para cada dez pessoas em comédias
             if (play.Type == Genero.Comedy) creditos += (int)Math.Floor((decimal)perf.Audience / 5);
 
-            // Print
-            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(calculoDaPeca / 100), perf.Audience);
-            somaTotal += calculoDaPeca;
+            creditosTotais += creditos;
+
+            detalhesDaApresentacao.Add(new DetalhesDaApresentacaoViewModel
+            {
+                PlayName = play.Name,
+                AmountOwed = calculoDaPeca / 100,
+                EarnedCredits = creditos,
+                Seats = perf.Audience
+            });
+
+            somaTotal += calculoDaPeca / 100;
         }
-        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(somaTotal / 100));
-        result += string.Format("You earned {0} credits\n", creditos);
+
+        return (somaTotal, creditosTotais, detalhesDaApresentacao);
+    }
+
+    // Formata saída em TXT conforme estrutura necessária
+    private string FormatarSaidaTXT(string customer, List<DetalhesDaApresentacaoViewModel> detalhesDaApresentacao, decimal somaTotal, int creditosTotais)
+    {
+        var result = string.Format("Statement for {0}\n", customer);
+        CultureInfo cultureInfo = new CultureInfo("en-US");
+
+        foreach (var detail in detalhesDaApresentacao)
+        {
+            // Adiciona itens TXT
+            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", detail.PlayName, detail.AmountOwed, detail.Seats);
+        }
+
+        // Adiciona totalizadores ao final do arquivo TXT
+        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", somaTotal);
+        result += string.Format("You earned {0} credits\n", creditosTotais);
+
         return result;
     }
 
-    public XDocument PrintXML(Invoice invoice, Dictionary<string, Play> plays)
+    // Formata saída em XML conforme estrutura necessária
+    private string FormatarSaidaXML(string customer, List<DetalhesDaApresentacaoViewModel> detalhesDaApresentacao, decimal somaTotal, int creditosTotais)
     {
-        decimal somaTotal = 0;
-        var creditos = 0;
-        var creditosTotais = 0;
-        var cultureInfo = new CultureInfo("en-US");
+        CultureInfo cultureInfo = new CultureInfo("en-US");
 
-        // Criando a estrutura do XML        
+        // Criando a estrutura do XML 
         var statement = new XElement("Statement",
             new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
             new XAttribute(XNamespace.Xmlns + "xsd", "http://www.w3.org/2001/XMLSchema"),
-            new XElement("Customer", invoice.Customer),
+            new XElement("Customer", customer),
             new XElement("Items")
         );
 
-        foreach (var perf in invoice.Performances)
+        // Adiciona itens XML
+        foreach (var detalhe in detalhesDaApresentacao)
         {
-            var play = plays[perf.PlayId];
-            var lines = AjustarLinhas(play.Lines);
-            decimal valorBase = lines * 10;
-            decimal calculoDaPeca = CalculaValorDaPeca(play.Type, perf.Audience, valorBase);
-
-            // Adiciona créditos de audiência > 30
-            creditos = Math.Max(perf.Audience - 30, 0);
-            // Adiciona crédito extra para cada dez pessoas em comédias
-            if (play.Type == Genero.Comedy) creditos += (int)Math.Floor((decimal)perf.Audience / 5);
-            creditosTotais += creditos;
-
-            // Aciona itensquer
             statement.Element("Items").Add(
                 new XElement("Item",
-                    // Demonstra casa decimais apenas se houver e com apenas um dígito
-                    new XElement("AmountOwed", (calculoDaPeca / 100) % 1 == 0 ? Math.Floor(calculoDaPeca / 100).ToString(cultureInfo) : (calculoDaPeca / 100).ToString("F1", cultureInfo)),
-                    new XElement("EarnedCredits", creditos),
-                    new XElement("Seats", perf.Audience)
+                    new XElement("AmountOwed", (detalhe.AmountOwed) % 1 == 0 ? Math.Floor(detalhe.AmountOwed).ToString(cultureInfo) : (detalhe.AmountOwed).ToString("F1", cultureInfo)),
+                    new XElement("EarnedCredits", detalhe.EarnedCredits),
+                    new XElement("Seats", detalhe.Seats)
                 )
             );
-            somaTotal += calculoDaPeca;
         }
 
-        // Soma total
+        // Adiciona totalizadores ao final do arquivo XML
         statement.Add(
-            new XElement("AmountOwed", (somaTotal / 100).ToString("F1", cultureInfo)),
+            new XElement("AmountOwed", somaTotal.ToString("F1", cultureInfo)),
             new XElement("EarnedCredits", creditosTotais)
         );
 
         var document = new XDocument(new XDeclaration("1.0", "utf-8", null), statement);
 
-        //using (var stringWriter = new Utf8StringWriter())
-        //{
-        //    document.Save(stringWriter, SaveOptions.None);
-        //    return stringWriter.ToString();
-        //}
-        return document;
+        using (var stringWriter = new Utf8StringWriter())
+        {
+            document.Save(stringWriter, SaveOptions.None);
+            return stringWriter.ToString();
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata.Model;
+namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Performance
 {
