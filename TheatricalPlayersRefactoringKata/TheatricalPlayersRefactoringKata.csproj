@@ -4,4 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Extratos\**" />
+    <EmbeddedResource Remove="Extratos\**" />
+    <None Remove="Extratos\**" />
+  </ItemGroup>
+
 </Project>

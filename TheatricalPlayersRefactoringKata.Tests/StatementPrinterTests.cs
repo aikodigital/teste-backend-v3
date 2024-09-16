@@ -5,14 +5,15 @@ using ApprovalTests.Xml;
 using TheatricalPlayersRefactoringKata.Models;
 using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
-public class StatementPrinterTests
+public class StatementPrinterTests   
 {
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
+    public async Task TestStatementExampleLegacy()    
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, Genero.Tragedy));
@@ -30,14 +31,14 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);
+        var result = await statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);        
 
         Approvals.Verify(result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public async Task TestTextStatementExample()    
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, Genero.Tragedy));
@@ -61,14 +62,14 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);
+        var result = await statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.TXT);        
 
         Approvals.Verify(result);
     }
     
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestXmlStatementExample()
+    public async Task TestXmlStatementExample()    
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new Play("Hamlet", 4024, Genero.Tragedy));
@@ -92,9 +93,9 @@ public class StatementPrinterTests
         );
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.XML);
+        var result = await statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.XML);        
 
         // Formato de saida alterado para XML para possibilitar validação correta de cabeçalhos pertinentes
-        Approvals.VerifyXml(result);        
+        Approvals.VerifyXml(result.ToString());        
     }
 }
