@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheatricalPlayersTest", "Th
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{522C4D01-53B7-4714-9B7A-65412216065C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{739DEE9D-D9FC-46FD-8ABB-9CE1972840F4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{739DEE9D-D9FC-46FD-8ABB-9CE1972840F4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - ApplicationServices", "3 - ApplicationServices", "{FABC76EF-2B3F-4D39-BC7B-519E3EE41460}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - ApplicationServices", "2 - ApplicationServices", "{FABC76EF-2B3F-4D39-BC7B-519E3EE41460}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - Infrastructure", "{170387D8-DF5E-4EDA-BA86-73B9A5BF7A33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP.ApplicationServices", "TP.ApplicationServices\TP.ApplicationServices.csproj", "{CAB05D3C-F38C-4920-9F7C-3D1637E04DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.ApplicationServices", "TP.ApplicationServices\TP.ApplicationServices.csproj", "{CAB05D3C-F38C-4920-9F7C-3D1637E04DBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP.Apresentation.WebAPI", "TP.Apresentation.WebAPI\TP.Apresentation.WebAPI.csproj", "{E45E1627-B82B-4FB3-8655-3F1F51533471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Apresentation.WebAPI", "TP.Apresentation.WebAPI\TP.Apresentation.WebAPI.csproj", "{E45E1627-B82B-4FB3-8655-3F1F51533471}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP.Infrastructure", "TP.Infrastructure\TP.Infrastructure.csproj", "{AB6C6DE5-D28B-471F-85FA-830487D02F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Infrastructure", "TP.Infrastructure\TP.Infrastructure.csproj", "{AB6C6DE5-D28B-471F-85FA-830487D02F77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

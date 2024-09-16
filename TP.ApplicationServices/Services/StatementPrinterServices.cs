@@ -7,7 +7,7 @@ public class StatementPrinterServices : IStatementPrinterServices
     private readonly CultureInfo _usCulture = new CultureInfo("en-US");
     private readonly StatementCalculator _calculator = new StatementCalculator();
 
-    public string Print(Invoice invoice, Dictionary<string, Play> plays, string format = "text")
+    public string Print(Invoice invoice, Dictionary<string, Play> plays, string format)
     {
         IStatementFormatter formatter = format switch
         {

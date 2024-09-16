@@ -1,8 +1,10 @@
-﻿using TP.Domain.Entities;
+﻿using System.Globalization;
+using TP.Domain.Entities;
 
 public class TextStatementFormatter : IStatementFormatter
 {
     private readonly StatementCalculator _calculator = new StatementCalculator();
+    private readonly CultureInfo _usCulture = new CultureInfo("en-US");
 
     public string FormatStatement(Invoice invoice, Dictionary<string, Play> plays, decimal totalAmount, int volumeCredits)
     {
@@ -19,11 +21,11 @@ public class TextStatementFormatter : IStatementFormatter
 
     public string FormatPerformance(Play play, Performance perf, decimal amount)
     {
-        return $"  {play.Name}: {amount:F2} ({perf.Audience} seats)\n";
+        return $"  {play.Name}: {amount.ToString("C2", _usCulture)} ({perf.Audience} seats)\n";
     }
 
     public string FormatTotals(decimal totalAmount, int volumeCredits)
     {
-        return $"Amount owed is {totalAmount:F2}\nYou earned {volumeCredits} credits\n";
+        return $"Amount owed is {totalAmount.ToString("C2", _usCulture)}\nYou earned {volumeCredits} credits\n";
     }
 }

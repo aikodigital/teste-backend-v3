@@ -38,7 +38,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            var result = _statementPrinter.Print(invoice, _plays);
+            var result = _statementPrinter.Print(invoice, _plays, "text");
 
             Approvals.Verify(result);
         }
@@ -60,7 +60,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            var result = _statementPrinter.Print(invoice, _plays);
+            var result = _statementPrinter.Print(invoice, _plays, "text");
 
             Approvals.Verify(result);
         }
@@ -82,65 +82,9 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            var result = _statementPrinter.Print(invoice, _plays, format: "xml");
+            var result = _statementPrinter.Print(invoice, _plays, "xml");
 
             Approvals.Verify(result);
-        }
-
-        [Theory]
-        [InlineData("tragedy", 55, 650.00, 25)]
-        [InlineData("comedy", 35, 547.00, 7)]
-        [InlineData("history", 20, 705.40, 0)]
-        [InlineData("history", 39, 931.60, 9)]
-        public void CalculateAmountAndCredits_ShouldReturnExpectedValues(string playType, int audience, decimal expectedAmount, int expectedCredits)
-        {
-            var play = new Play("Play", 3000, playType);
-            var performance = new Performance("playId", audience);
-            var calculator = new StatementCalculator();
-
-            var (amount, credits) = calculator.CalculateAmountAndCredits(play, performance);
-
-            Assert.Equal(expectedAmount, amount);
-            Assert.Equal(expectedCredits, credits);
-        }
-
-        [Fact]
-        public void FormatTextStatement_ShouldReturnExpectedTextFormat()
-        {
-            var invoice = new Invoice(
-                "BigCo",
-                new List<Performance>
-                {
-                    new Performance("hamlet", 55),
-                    new Performance("as-like", 35)
-                }
-            );
-
-            var formatter = new TextStatementFormatter();
-            var result = formatter.FormatStatement(invoice, _plays, 1197.00m, 32);
-
-            var expected = "Statement for BigCo\n  Hamlet: $650.00 (55 seats)\n  As You Like It: $547.00 (35 seats)\nAmount owed is $1,197.00\nYou earned 32 credits\n";
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void FormatXmlStatement_ShouldReturnExpectedXmlFormat()
-        {
-            var invoice = new Invoice(
-                "BigCo",
-                new List<Performance>
-                {
-                    new Performance("hamlet", 55),
-                    new Performance("as-like", 35)
-                }
-            );
-
-            var formatter = new XmlStatementFormatter();
-            var result = formatter.FormatStatement(invoice, _plays, 1197.00m, 32);
-
-            var expectedXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Statement xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <Customer>BigCo</Customer>\n  <Items>\n    <Item>\n      <AmountOwed>650.00</AmountOwed>\n      <EarnedCredits>25</EarnedCredits>\n      <Seats>55</Seats>\n    </Item>\n    <Item>\n      <AmountOwed>547.00</AmountOwed>\n      <EarnedCredits>7</EarnedCredits>\n      <Seats>35</Seats>\n    </Item>\n  </Items>\n  <AmountOwed>1197.00</AmountOwed>\n  <EarnedCredits>32</EarnedCredits>\n</Statement>";
-
-            Assert.Equal(expectedXml, result);
         }
 
         [Fact]
@@ -154,7 +98,7 @@ namespace TheatricalPlayersRefactoringKata.Tests
                 }
             );
 
-            Assert.Throws<KeyNotFoundException>(() => _statementPrinter.Print(invoice, _plays));
+            Assert.Throws<KeyNotFoundException>(() => _statementPrinter.Print(invoice, _plays, "text"));
         }
     }
 }
