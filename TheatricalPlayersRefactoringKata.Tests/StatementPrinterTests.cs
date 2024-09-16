@@ -1,7 +1,7 @@
-using Application.UseCases.StatementUseCase;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Domain.Contracts.UseCases.StatementUseCase;
+using Domain.Entities;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Tests.Fixture;
 using Xunit;
@@ -11,10 +11,12 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
 {
     private readonly IStatementPrinterUseCase _statementPrinterUseCase;
+    private readonly IConvertUseCase _convertUseCase;
 
     public StatementPrinterTests(StatementPrinterFixture fixture)
     {
         _statementPrinterUseCase = fixture.StatementPrinterUseCase;
+        _convertUseCase = fixture.ConvertUseCase;
     }
 
     [Fact]
@@ -39,7 +41,7 @@ public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
         );
 
         var printResult = _statementPrinterUseCase.Print(invoice, plays);
-        var result = _statementPrinterUseCase.ConvertJsonToTxt(printResult);
+        var result = _convertUseCase.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -72,7 +74,7 @@ public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
         );
 
         var printResult = _statementPrinterUseCase.Print(invoice, plays);
-        var result = _statementPrinterUseCase.ConvertJsonToTxt(printResult);
+        var result = _convertUseCase.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -105,7 +107,7 @@ public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
         );
 
         var printResult = _statementPrinterUseCase.Print(invoice, plays);
-        string result = _statementPrinterUseCase.ConvertJsonToXml(printResult);
+        string result = _convertUseCase.ConvertJsonToXml(printResult);
 
         Approvals.Verify(result);
     }

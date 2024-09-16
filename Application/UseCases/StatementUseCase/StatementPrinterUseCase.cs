@@ -1,10 +1,6 @@
 ﻿using Domain.Contracts.UseCases.StatementUseCase;
+using Domain.Entities;
 using Newtonsoft.Json;
-using System.Globalization;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using TheatricalPlayersRefactoringKata;
 
 namespace Application.UseCases.StatementUseCase
 {
@@ -25,58 +21,26 @@ namespace Application.UseCases.StatementUseCase
             {
                 var play = plays[perf.PlayId];
 
-                decimal lines = play.Lines;
-                lines = Math.Max(1000, Math.Min(lines, 4000));
-
-                decimal thisAmount = lines * 10;
+                decimal thisAmount = 0;
                 int earnedCredits = 0;
 
                 switch (play.Type)
                 {
                     case "tragedy":
-                        if (perf.Audience > 30)
-                        {
-                            thisAmount += 1000 * (perf.Audience - 30);
-                        }
+                        thisAmount += CalculateTragedyAmount(perf, play);
                         break;
                     case "comedy":
-                        if (perf.Audience > 20)
-                        {
-                            thisAmount += 10000 + 500 * (perf.Audience - 20);
-                        }
-                        thisAmount += 300 * perf.Audience;
+                        thisAmount += CalculateComedyAmount(perf, play);
                         break;
                     case "history":
-                        decimal tragedyAmount = thisAmount;
-                        decimal comedyAmount = thisAmount + 300 * perf.Audience;
-
-                        if (perf.Audience > 30)
-                        {
-                            tragedyAmount += 1000 * (perf.Audience - 30);
-                        }
-                        if (perf.Audience > 20)
-                        {
-                            comedyAmount += 10000 + 500 * (perf.Audience - 20);
-                        }
-
-                        thisAmount = tragedyAmount + comedyAmount;
+                        thisAmount += CalculateHistoryAmount(perf, play);
                         break;
                     default:
                         throw new Exception("unknown type: " + play.Type);
                 }
 
                 // Add volume credits
-                volumeCredits += Math.Max(perf.Audience - 30, 0);
-
-                // Add extra credit for every ten comedy attendees
-                if ("comedy" == play.Type)
-                {
-                    volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-                    earnedCredits = Math.Max(perf.Audience - 30, 0);
-                    earnedCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-                }
-                else
-                    earnedCredits = Math.Max(perf.Audience - 30, 0);
+                volumeCredits = CalculateVolumeCredits(perf, play, volumeCredits);
 
                 // Add item to the statement
                 statement.Items.Add(new Item
@@ -84,7 +48,7 @@ namespace Application.UseCases.StatementUseCase
                     PlayName = play.Name,
                     AmountOwed = Convert.ToDecimal(thisAmount / 100),
                     Seats = perf.Audience,
-                    EarnedCredits = earnedCredits
+                    EarnedCredits = (int)CalculateEarnedCredits(perf, play, earnedCredits)
                 });
 
                 totalAmount += thisAmount;
@@ -96,64 +60,70 @@ namespace Application.UseCases.StatementUseCase
             return JsonConvert.SerializeObject(statement, Newtonsoft.Json.Formatting.Indented);
         }
 
-        public string ConvertJsonToXml(string json)
+        private decimal CalculateBaseAmount(Play play)
         {
-            Statement statement = JsonConvert.DeserializeObject<Statement>(json);
-
-            var xmlStatement = new Statement
-            {
-                Customer = statement.Customer,
-                Items = statement.Items.Select(item => new Item
-                {
-                    AmountOwed = decimal.Parse(FormatAmount(item.AmountOwed)),
-                    EarnedCredits = item.EarnedCredits,
-                    Seats = item.Seats
-
-                }).ToList(),
-                AmountOwed = decimal.Parse(FormatAmount(statement.AmountOwed)),
-                EarnedCredits = statement.EarnedCredits,
-            };
-
-            var xmlSettings = new XmlWriterSettings
-            {
-                Encoding = Encoding.UTF8,
-                Indent = true
-            };
-
-            var xmlSerializer = new XmlSerializer(typeof(Statement));
-            using var memoryStream = new MemoryStream();
-            using var xmlWriter = XmlWriter.Create(memoryStream, xmlSettings);
-            xmlSerializer.Serialize(xmlWriter, xmlStatement);
-            string xmlOutput = Encoding.UTF8.GetString(memoryStream.ToArray());
-
-            return xmlOutput.ToString();
+            decimal lines = Math.Max(1000, Math.Min(play.Lines, 4000));
+            return lines * 10;
         }
 
-        public string ConvertJsonToTxt(string json)
+        private decimal CalculateVolumeCredits(Performance perf, Play play, decimal volumeCredits)
         {
-            Statement statement = JsonConvert.DeserializeObject<Statement>(json);
+            volumeCredits += Math.Max(perf.Audience - 30, 0);
 
-            var result = $"Statement for {statement.Customer}\n";
-            CultureInfo cultureInfo = new("en-US");
+            if ("comedy" == play.Type)
+                volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
 
-            foreach (var item in statement.Items)
+            return volumeCredits;
+        }
+
+        private decimal CalculateEarnedCredits(Performance perf, Play play, decimal earnedCredits)
+        {
+            if ("comedy" == play.Type)
             {
-                result += string.Format(cultureInfo, "  {0}: {1} ({2} seats)\n",
-                    item.PlayName,
-                    item.AmountOwed.ToString("C", cultureInfo),
-                    item.Seats);
+                earnedCredits = Math.Max(perf.Audience - 30, 0);
+                earnedCredits += (int)Math.Floor((decimal)perf.Audience / 5);
             }
+            else
+                earnedCredits = Math.Max(perf.Audience - 30, 0);
 
-            result += string.Format(cultureInfo, "Amount owed is {0}\n",
-                statement.AmountOwed.ToString("C", cultureInfo));
-
-            result += string.Format("You earned {0} credits\n", statement.EarnedCredits);
-
-            return result;
+            return earnedCredits;
         }
-        private string FormatAmount(decimal amount)
+
+        private decimal CalculateTragedyAmount(Performance perf, Play play)
         {
-            return amount % 1 == 0 ? amount.ToString("F0") : amount.ToString("F1");
+            decimal thisAmount = CalculateBaseAmount(play);
+
+            if (perf.Audience > 30)
+                thisAmount += 1000 * (perf.Audience - 30);
+
+            return thisAmount;
+        }
+
+        private decimal CalculateComedyAmount(Performance perf, Play play)
+        {
+            decimal thisAmount = CalculateBaseAmount(play);
+
+            if (perf.Audience > 20)
+                thisAmount += 10000 + 500 * (perf.Audience - 20);
+
+            thisAmount += 300 * perf.Audience;
+            return thisAmount;
+        }
+        private decimal CalculateHistoryAmount(Performance perf, Play play)
+        {
+            decimal thisAmount = CalculateBaseAmount(play);
+
+            decimal tragedyAmount = thisAmount;
+            decimal comedyAmount = thisAmount + 300 * perf.Audience;
+
+            if (perf.Audience > 30)
+                tragedyAmount += 1000 * (perf.Audience - 30);
+
+            if (perf.Audience > 20)
+                comedyAmount += 10000 + 500 * (perf.Audience - 20);
+
+            thisAmount = tragedyAmount + comedyAmount;
+            return thisAmount;
         }
     }
 }

@@ -5,13 +5,13 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.WebApi", "TheatricalPlayers.WebApi\TheatricalPlayers.WebApi.csproj", "{750AA4FA-AACC-42CB-A0C4-C39E2142BFB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayers.WebApi", "TheatricalPlayers.WebApi\TheatricalPlayers.WebApi.csproj", "{750AA4FA-AACC-42CB-A0C4-C39E2142BFB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{64B3F6AC-9E6F-4A33-8FE9-693A50698A58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{64B3F6AC-9E6F-4A33-8FE9-693A50698A58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{40B7B858-9B06-4150-9695-008A73E253A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{40B7B858-9B06-4150-9695-008A73E253A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Repository", "Infra.Repository\Infra.Repository.csproj", "{03B877BF-C4E8-476A-B46B-EC4693E17409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra.Repository\Infra.csproj", "{03B877BF-C4E8-476A-B46B-EC4693E17409}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
