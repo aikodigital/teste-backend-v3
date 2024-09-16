@@ -3,9 +3,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using TheatricalPlayers.Application.Factories;
-using TheatricalPlayers.Application.Models;
-using TheatricalPlayers.Core.Entities;
+using TheatricalPlayers.Core.DataTransferObjects.StatementDTOs;
 using TheatricalPlayers.Core.Interfaces.Statements;
+using TheatricalPlayers.Core.Models;
 
 namespace TheatricalPlayers.Application.Handlers
 {
@@ -66,7 +66,7 @@ namespace TheatricalPlayers.Application.Handlers
             }
         }
 
-        private static Statement GetStatement(Invoice invoice, List<Play> plays)
+        public Statement GetStatement(Invoice invoice, List<Play> plays)
         {
             var totalPriceCents = 0;
             var totalCredits = 0;

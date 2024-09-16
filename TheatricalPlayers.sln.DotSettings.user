@@ -3,6 +3,9 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AMethodBaseInvoker_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F24372012c6c94138bf3f496e104366ffc8f918_003Fad_003Fa6cef6f7_003FMethodBaseInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AXmlTextReaderImpl_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fd9b46e80b21e123191133bcd5d614341b78f87a1aee46b9c1441bd0363c1633_003FXmlTextReaderImpl_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bedfe84c_002D98df_002D4f8b_002Da364_002D2d9ad0c0bd70/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestStatementExampleLegacy" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\gabri\Desktop\Gabriel\teste-backend-v3\TheatricalPlayersRefactoringKata.Tests" Presentation="&amp;lt;TheatricalPlayersRefactoringKata.Tests&amp;gt;" /&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;Project Location="C:\Users\gabri\Desktop\Gabriel\teste-backend-v3\TheatricalPlayersRefactoringKata.Tests" Presentation="&amp;lt;TheatricalPlayersRefactoringKata.Tests&amp;gt;" /&gt;&#xD;
+    &lt;Project Location="C:\Users\gabri\Desktop\Gabriel\teste-backend-v3\TheatricalPlayers.Tests" Presentation="&amp;lt;TheatricalPlayers.Tests&amp;gt;" /&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=devenv_002Eexe/@EntryIndexedValue">KillOrphaned</s:String></wpf:ResourceDictionary>
