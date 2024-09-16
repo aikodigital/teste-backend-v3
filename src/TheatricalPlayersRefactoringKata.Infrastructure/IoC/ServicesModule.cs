@@ -8,6 +8,6 @@ public static class ServicesModule
 {
     public static void AddServices(this IServiceCollection services)
     {
-        services.AddSingleton<IStatementPrinterService, StatementPrinterService>();
+        services.AddSingleton<IStatementService, StatementService>();
     }
 }

@@ -4,35 +4,59 @@ using TheatricalPlayersRefactoringKata.Application.Services;
 namespace TheatricalPlayersRefactoringKata.UI.WebAPI.Controllers.StatementPrinter;
 
 [ApiController]
-[Route("statement-printer")]
+[Route("statement-printer/print")]
 public class StatementPrinterController : ControllerBase
 {
     private readonly ILogger<StatementPrinterController> _logger;
-    private readonly IStatementPrinterService _statementPrinterService;
+    private readonly IStatementService _statementService;
 
     public StatementPrinterController(
         ILogger<StatementPrinterController> logger,
-        IStatementPrinterService statementPrinterService
+        IStatementService statementService
     )
     {
-        _statementPrinterService = statementPrinterService;
+        _statementService = statementService;
         _logger = logger;
     }
 
-    [HttpPost("print")]
-    public IActionResult Print([FromBody] StatementPrinterPrintInput input)
+    [HttpPost("text")]
+    public IActionResult PrintText([FromBody] StatementPrinterPrintInput input)
     {
         try
         {
             var invoice = input.Invoice.ToEntity();
             var plays = input.Plays.ToDictionary(pair => pair.Key, pair => pair.Value.ToEntity());
-            
-            var result = _statementPrinterService.Print(
-                invoice: invoice, 
+
+            var statement = _statementService.Generate(
+                invoice: invoice,
                 plays: plays
             );
-            
-            return Ok(result);
+
+            var output = _statementService.PrintText(statement);
+            return Ok(output);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation("Something went wrong. Error message: {Message}", ex.Message);
+            return UnprocessableEntity();
+        }
+    }
+
+    [HttpPost("xml")]
+    public IActionResult PrintXml([FromBody] StatementPrinterPrintInput input)
+    {
+        try
+        {
+            var invoice = input.Invoice.ToEntity();
+            var plays = input.Plays.ToDictionary(pair => pair.Key, pair => pair.Value.ToEntity());
+
+            var statement = _statementService.Generate(
+                invoice: invoice,
+                plays: plays
+            );
+
+            var output = _statementService.PrintXml(statement);
+            return Ok(output);
         }
         catch (Exception ex)
         {
