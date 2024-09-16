@@ -15,5 +15,4 @@ public class Invoice
         _customer = customer;
         _performances = performance;
     }
-
 }

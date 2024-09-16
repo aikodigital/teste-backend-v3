@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using ApprovalTests.Xml;
@@ -96,6 +95,6 @@ public class StatementPrinterTests
         var result = statementPrinter.PrintExtrato(invoice, plays, FormatoDoExtrato.XML);
 
         // Formato de saida alterado para XML para possibilitar validação correta de cabeçalhos pertinentes
-        Approvals.VerifyXml(result);
+        Approvals.VerifyXml(result);        
     }
 }
