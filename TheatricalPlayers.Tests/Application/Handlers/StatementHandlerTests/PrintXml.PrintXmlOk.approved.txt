@@ -1,38 +1,44 @@
-﻿﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Statement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>BigCo</Customer>
   <Items>
     <Item>
+      <Play>Hamlet</Play>
       <AmountOwed>650</AmountOwed>
       <EarnedCredits>25</EarnedCredits>
       <Seats>55</Seats>
     </Item>
     <Item>
+      <Play>As You Like It</Play>
       <AmountOwed>547</AmountOwed>
       <EarnedCredits>12</EarnedCredits>
       <Seats>35</Seats>
     </Item>
     <Item>
+      <Play>Othello</Play>
       <AmountOwed>456</AmountOwed>
       <EarnedCredits>10</EarnedCredits>
       <Seats>40</Seats>
     </Item>
     <Item>
+      <Play>Henry V</Play>
       <AmountOwed>705.4</AmountOwed>
       <EarnedCredits>0</EarnedCredits>
       <Seats>20</Seats>
     </Item>
     <Item>
+      <Play>john</Play>
       <AmountOwed>931.6</AmountOwed>
       <EarnedCredits>9</EarnedCredits>
       <Seats>39</Seats>
     </Item>
     <Item>
-      <AmountOwed>705.4</AmountOwed>
+      <Play>Richard III</Play>
+      <AmountOwed>803.6</AmountOwed>
       <EarnedCredits>0</EarnedCredits>
       <Seats>20</Seats>
     </Item>
   </Items>
-  <AmountOwed>3995.4</AmountOwed>
+  <AmountOwed>4093.6</AmountOwed>
   <EarnedCredits>56</EarnedCredits>
 </Statement>

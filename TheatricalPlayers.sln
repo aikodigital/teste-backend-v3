@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.Core", "TheatricalPlayers.Core\TheatricalPlayers.Core.csproj", "{7278C122-B517-4D45-B8FA-624B332A2C1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.Application", "TheatricalPlayers.Application\TheatricalPlayers.Application.csproj", "{F5A92F56-7F40-4E63-97B8-DB0201F020EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.Infrastructure", "TheatricalPlayers.Infrastructure\TheatricalPlayers.Infrastructure.csproj", "{B547235F-C489-4C8B-B211-CCD9843FADB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.API", "TheatricalPlayers.API\TheatricalPlayers.API.csproj", "{7461DE09-D402-4546-A6DD-7911AF1C645F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayers.Tests", "TheatricalPlayers.Tests\TheatricalPlayers.Tests.csproj", "{B132645C-9CFE-4372-90E2-724394977EA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7278C122-B517-4D45-B8FA-624B332A2C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7278C122-B517-4D45-B8FA-624B332A2C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7278C122-B517-4D45-B8FA-624B332A2C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7278C122-B517-4D45-B8FA-624B332A2C1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5A92F56-7F40-4E63-97B8-DB0201F020EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5A92F56-7F40-4E63-97B8-DB0201F020EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5A92F56-7F40-4E63-97B8-DB0201F020EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5A92F56-7F40-4E63-97B8-DB0201F020EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B547235F-C489-4C8B-B211-CCD9843FADB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B547235F-C489-4C8B-B211-CCD9843FADB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B547235F-C489-4C8B-B211-CCD9843FADB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B547235F-C489-4C8B-B211-CCD9843FADB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7461DE09-D402-4546-A6DD-7911AF1C645F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7461DE09-D402-4546-A6DD-7911AF1C645F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7461DE09-D402-4546-A6DD-7911AF1C645F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7461DE09-D402-4546-A6DD-7911AF1C645F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B132645C-9CFE-4372-90E2-724394977EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B132645C-9CFE-4372-90E2-724394977EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B132645C-9CFE-4372-90E2-724394977EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B132645C-9CFE-4372-90E2-724394977EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
