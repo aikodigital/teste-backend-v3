@@ -4,9 +4,9 @@ using TheatricalPlayersRefactoringKata.Infrastructure.Services;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.IoC;
 
-public static class ServicesModule
+public static class ApplicationServicesModule
 {
-    public static void AddServices(this IServiceCollection services)
+    public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddSingleton<IStatementService, StatementService>();
     }

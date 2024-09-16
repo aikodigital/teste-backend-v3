@@ -2,43 +2,60 @@
 using System.Xml.Serialization;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Services.PlayAmount;
+using TheatricalPlayersRefactoringKata.Services.PlayVolumeCredits;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure.Services;
 
 public class StatementService : IStatementService
 {
-    public StatementEntity Generate(InvoiceEntity invoice, Dictionary<string, PlayEntity> plays)
+    private readonly IPlayAmountService _playAmountService;
+    private readonly IPlayVolumeCreditsService _playVolumeCreditsService;
+
+    public StatementService(IPlayAmountService playAmountService, IPlayVolumeCreditsService playVolumeCreditsService)
+    {
+        _playAmountService = playAmountService;
+        _playVolumeCreditsService = playVolumeCreditsService;
+    }
+
+    public StatementEntity Create(InvoiceEntity invoice, Dictionary<string, PlayEntity> plays)
     {
         var statement = new StatementEntity
         {
-            Customer = invoice.Customer
+            Customer = invoice.Customer,
         };
 
         var totalAmount = 0m;
-        var volumeCredits = 0;
+        var totalVolumeCredits = 0;
 
         foreach (var performance in invoice.Performances)
         {
             var play = plays[performance.PlayId];
-            var performanceAmount = performance.GetAmount(play);
-            var performanceVolumeCredits = performance.GetVolumeCredits(play);
+            var playAmount = _playAmountService.GetAmount(
+                play: play,
+                audience: performance.Audience
+            );
+            var playVolumeCredits = _playVolumeCreditsService.GetVolumeCredits(
+                play: play,
+                audience: performance.Audience
+            );
 
             var statementItem = new StatementItemEntity
             {
                 Name = play.Name,
-                AmountOwed = performanceAmount / 100,
-                EarnedCredits = performanceVolumeCredits,
+                AmountOwed = playAmount / 100,
+                EarnedCredits = playVolumeCredits,
                 Seats = performance.Audience
             };
 
-            totalAmount += performanceAmount;
-            volumeCredits += performanceVolumeCredits;
+            totalAmount += playAmount;
+            totalVolumeCredits += playVolumeCredits;
 
             statement.Items.Add(statementItem);
         }
 
         statement.AmountOwed = totalAmount / 100;
-        statement.EarnedCredits = volumeCredits;
+        statement.EarnedCredits = totalVolumeCredits;
 
         return statement;
     }
@@ -68,7 +85,7 @@ public class StatementService : IStatementService
         var xmlSerializer = new XmlSerializer(statement.GetType());
         using var textWriter = new StringWriter();
         xmlSerializer.Serialize(textWriter, statement);
-        
+
         return textWriter.ToString();
     }
 }

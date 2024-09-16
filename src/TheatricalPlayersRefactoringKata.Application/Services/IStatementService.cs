@@ -4,7 +4,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services;
 
 public interface IStatementService
 {
-    StatementEntity Generate(InvoiceEntity invoice, Dictionary<string, PlayEntity> plays);
+    StatementEntity Create(InvoiceEntity invoice, Dictionary<string, PlayEntity> plays);
     
     string PrintText(StatementEntity statement);
     

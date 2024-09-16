@@ -27,7 +27,7 @@ public class StatementPrinterController : ControllerBase
             var invoice = input.Invoice.ToEntity();
             var plays = input.Plays.ToDictionary(pair => pair.Key, pair => pair.Value.ToEntity());
 
-            var statement = _statementService.Generate(
+            var statement = _statementService.Create(
                 invoice: invoice,
                 plays: plays
             );
@@ -50,7 +50,7 @@ public class StatementPrinterController : ControllerBase
             var invoice = input.Invoice.ToEntity();
             var plays = input.Plays.ToDictionary(pair => pair.Key, pair => pair.Value.ToEntity());
 
-            var statement = _statementService.Generate(
+            var statement = _statementService.Create(
                 invoice: invoice,
                 plays: plays
             );
