@@ -27,7 +27,7 @@ namespace TS.Domain.Repositories.Invoices
 
         public async Task<Invoice?> GetAsync(long id)
         {
-            var invoices = await _context.Invoices.FirstOrDefaultAsync(x => x.Id == id);
+            var invoices = await _context.Invoices.Include(i => i.InvoicesItems).FirstOrDefaultAsync(x => x.Id == id);
             return invoices;
         }
 
