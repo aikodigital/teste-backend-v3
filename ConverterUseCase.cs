@@ -7,9 +7,9 @@ using System.Xml;
 using System.Linq;
 using System.Text;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Application.UseCases
 {
-    public class Converter
+    public class ConverterUseCase
     {
         public string ConvertJsonToXml(string json)
         {

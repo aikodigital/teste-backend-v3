@@ -1,13 +1,22 @@
-using System;
-using System.Collections.Generic;
+using Application.UseCases.StatementUseCase;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Domain.Contracts.UseCases.StatementUseCase;
+using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Tests.Fixture;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
-public class StatementPrinterTests
+public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
 {
+    private readonly IStatementPrinterUseCase _statementPrinterUseCase;
+
+    public StatementPrinterTests(StatementPrinterFixture fixture)
+    {
+        _statementPrinterUseCase = fixture.StatementPrinterUseCase;
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -19,7 +28,7 @@ public class StatementPrinterTests
             { "othello", new("Othello", 3560, "tragedy") }
         };
 
-        Invoice invoice = new Invoice(
+        Invoice invoice = new(
             "BigCo",
             new List<Performance>
             {
@@ -29,11 +38,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        Converter converterJsonToTxt = new Converter();
-        var printResult = statementPrinter.Print(invoice, plays);
-
-        var result = converterJsonToTxt.ConvertJsonToTxt(printResult);
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        var result = _statementPrinterUseCase.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -52,7 +58,7 @@ public class StatementPrinterTests
             { "richard-iii", new Play("Richard III", 3718, "history") }
         };
 
-        Invoice invoice = new Invoice(
+        Invoice invoice = new(
             "BigCo",
             new List<Performance>
             {
@@ -65,15 +71,12 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        Converter converterJsonToTxt = new Converter();
-        var printResult = statementPrinter.Print(invoice, plays);
-
-        var result = converterJsonToTxt.ConvertJsonToTxt(printResult);
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        var result = _statementPrinterUseCase.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
-    
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
@@ -88,7 +91,7 @@ public class StatementPrinterTests
             { "richard-iii", new Play("Richard III", 3718, "history") }
         };
 
-        Invoice invoice = new Invoice(
+        Invoice invoice = new(
             "BigCo",
             new List<Performance>
             {
@@ -101,11 +104,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        Converter jsonToXmlConverter = new Converter();
-
-        var jsonResult = statementPrinter.Print(invoice, plays);
-        string result = jsonToXmlConverter.ConvertJsonToXml(jsonResult);
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        string result = _statementPrinterUseCase.ConvertJsonToXml(printResult);
 
         Approvals.Verify(result);
     }

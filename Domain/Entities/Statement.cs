@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-
-namespace TheatricalPlayersRefactoringKata
+﻿namespace TheatricalPlayersRefactoringKata
 {
     public class Statement
     {
