@@ -20,4 +20,27 @@
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CalculadoraTests.TestStatementExampleLegacy.approved.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
+      <DependentUpon>CalculadoraTests.cs</DependentUpon>
+    </None>
+    <None Update="CalculadoraTests.TestTextStatementExample.approved.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
+      <DependentUpon>CalculadoraTests.cs</DependentUpon>
+    </None>
+    <None Update="CalculadoraTests.TestXmlStatementExample.approved.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
+      <DependentUpon>CalculadoraTests.cs</DependentUpon>
+    </None>
+    <None Update="CalculadoraTests.TestXmlStatementExample.approved.xml">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
+      <DependentUpon>CalculadoraTests.cs</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>
