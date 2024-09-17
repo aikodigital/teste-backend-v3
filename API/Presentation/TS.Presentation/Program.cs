@@ -57,7 +57,6 @@ builder.Services.AddHangfire(Configuration => Configuration
     .UseSqlServerStorage(builder.Configuration.GetConnectionString("TS")));
 
 builder.Services.AddHangfireServer();
-//RecurringJob.AddOrUpdate<IRabbitMQServices>("Faturas", services => services.Consumer(), "*/1 * * * * *"); //Expressão CROM para executar a cada segundo
 RecurringJob.AddOrUpdate<IRabbitMQServices>("Faturas", services => services.Consumer(), "*/2 * * * *"); //Expressão CROM para executar a cada 2 minutos
 
 var app = builder.Build();

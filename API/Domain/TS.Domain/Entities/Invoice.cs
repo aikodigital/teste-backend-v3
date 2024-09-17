@@ -18,14 +18,10 @@ namespace TS.Domain.Entities
         [Required]
         public long CustomerId { get; set; }
         [Required]
-        public long PlayId { get; set; }
-        [Required]
-        public decimal LoyaltyCredit { get; set; }
+        public decimal Seats { get; set; }
 
         [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; } = new();
-        [ForeignKey(nameof(PlayId))]
-        public virtual Play Play { get; set; } = new();
 
         [InverseProperty("Invoice")]
         [JsonIgnore]

@@ -17,9 +17,7 @@ namespace TS.Application.Invoices.Queries.GetAllInvoices
                                           {
                                               Id = res.Id,
                                               CreationAt = res.CreationAt,
-                                              CustomerId = res.CustomerId,
-                                              PlayId = res.PlayId,
-                                              LoyaltyCredit = res.LoyaltyCredit
+                                              CustomerId = res.CustomerId
                                           }).ToList();
             return responses;
         }

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TS.Application.Invoices.Commands.AddInvoices.Request;
 using TS.Application.Invoices.Commands.DeleteInvoices.Request;
-using TS.Application.Invoices.Commands.UpdateInvoices.Request;
 using TS.Application.Invoices.Queries.GetAllInvoices.Request;
 using TS.Application.Invoices.Queries.GetAllInvoices.Response;
 using TS.Application.Invoices.Queries.GetInvoices.Request;
@@ -71,43 +70,17 @@ namespace TS.Presentation.Controllers
                 var request = new AddInvoicesRequest
                 {
                     CustomerId = viewModel.CustomerId,
-                    PlayId = viewModel.PlayId,
-                    LoyaltyCredit = viewModel.LoyaltyCredit
+                    Seats = viewModel.Seats,
+                    Performances = viewModel.Performances.Select(res => new AddInvoicePerformances
+                    {
+                        PlayId = res.PlayId,
+                        Audience = res.Audience
+                    })
                 };
 
                 await Mediator!.Send(request);
 
                 return Ok("Fatura criada com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Registration update
-        /// </summary>
-        /// <param name="viewModel">Object representing an Invoice</param>
-        /// <returns></returns>
-        [HttpPut("Update")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(object))]
-        public async Task<ActionResult> Update([FromForm] UpdateInvoicesViewModel viewModel)
-        {
-            try
-            {
-                var request = new UpdateInvoicesRequest
-                {
-                    Id = viewModel.Id,
-                    CreationAt = viewModel.CreationAt,
-                    CustomerId = viewModel.CustomerId,
-                    PlayId = viewModel.PlayId,
-                    LoyaltyCredit = viewModel.LoyaltyCredit
-                };
-
-                await Mediator!.Send(request);
-
-                return Ok("Fatura atualizada com sucesso!");
             }
             catch (Exception ex)
             {

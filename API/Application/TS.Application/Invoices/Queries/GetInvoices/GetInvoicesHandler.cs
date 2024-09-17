@@ -17,8 +17,6 @@ namespace TS.Application.Invoices.Queries.GetInvoices
                 Id = invoices!.Id,
                 CreationAt = invoices.CreationAt,
                 CustomerId = invoices.CustomerId,
-                PlayId = invoices.PlayId,
-                LoyaltyCredit = invoices.LoyaltyCredit
             };
 
             return responses;

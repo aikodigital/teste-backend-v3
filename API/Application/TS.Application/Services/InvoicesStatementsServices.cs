@@ -1,3 +1,5 @@
+using System.Xml;
+using System.Xml.Linq;
 using TS.Domain.Enums;
 using TS.Domain.Repositories.Customers;
 using TS.Domain.Repositories.Invoices;
@@ -106,6 +108,9 @@ namespace TS.Application.Services
                 });
             }
 
+            response.TotalAmoutOwed = response.Items.Sum(x => x.AmountOwed);
+            response.TotalEarnedCredits = response.Items.Sum(x => x.EarnedCredits);
+
             return response;
         }
 
@@ -117,6 +122,39 @@ namespace TS.Application.Services
         public async Task XML(long invoiceId)
         {
             var invoice = await Invoices(invoiceId);
+
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
+
+            var xml = new XDocument(new XElement("Statement",
+                                    new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                                    new XAttribute(XNamespace.Xmlns + "xsd", xsd),
+                                    new XElement("Items"),
+                                        invoice!.Items.Select(p => new XElement("Item",
+                                                                  new XElement("AmountOwed", p.AmountOwed),
+                                                                  new XElement("EarnedCredits", p.EarnedCredits),
+                                                                  new XElement("Seats", p.Seats))),
+                                    new XElement("AmountOwed", invoice.TotalAmoutOwed),
+                                    new XElement("EarnedCredits", invoice.TotalEarnedCredits)));
+
+            var rootPath = FindFirstRootDirectory();
+
+            if (rootPath != null)
+            {
+                var fileName = Path.Combine(rootPath, $"{DateTime.Now:dd_MM_yyyy_HH_mm_ss}_invoice.xnl");
+                xml.Save(fileName);
+            }
+        }
+
+        private static string? FindFirstRootDirectory()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo drive in drives)
+                if (drive.IsReady)
+                    return drive.RootDirectory.FullName;
+
+            return null;
         }
     }
 
@@ -124,6 +162,8 @@ namespace TS.Application.Services
     {
         public string Customers { get; set; } = string.Empty;
         public List<DatasItemsResponse> Items { get; set; } = [];
+        public decimal TotalAmoutOwed { get; set; } = 0;
+        public decimal TotalEarnedCredits { get; set; } = 0;
     }
 
     public class DatasItemsResponse

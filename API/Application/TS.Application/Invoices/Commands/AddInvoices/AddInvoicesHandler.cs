@@ -18,18 +18,25 @@ namespace TS.Application.Invoices.Commands.AddInvoices
         public async Task Handle(AddInvoicesRequest request, CancellationToken cancellationToken)
         {
             var customer = await _customersRepository.GetAsync(request.CustomerId);
-            var play = await _playsRepository.GetAsync(request.PlayId);
+            var plays = await _playsRepository.GetAllAsync();
 
-            if (customer != null && play != null)
+            if (customer != null)
             {
                 var addTo = new Invoice
                 {
                     CreationAt = DateTime.Now,
                     CustomerId = request.CustomerId,
-                    PlayId = request.PlayId,
-                    LoyaltyCredit = request.LoyaltyCredit,
                     Customer = customer,
-                    Play = play
+                    Seats = request.Seats,
+                    InvoicesItems = request.Performances.Select(res => new InvoicesItems
+                    {
+                        Performance = new Performance
+                        {
+                            PlayId = res.PlayId,
+                            Play = plays.FirstOrDefault(x => x.Id == res.PlayId)!,
+                            Audience = res.Audience
+                        }
+                    }).ToList()
                 };
 
                 await _invoicesRepository.CreateAsync(addTo);

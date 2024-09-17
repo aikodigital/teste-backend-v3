@@ -8,7 +8,6 @@ namespace TS.Domain.Entities
     {
         public Play()
         {
-            Invoices = [];
             Performances = [];
         }
 
@@ -22,9 +21,6 @@ namespace TS.Domain.Entities
         [Required]
         public int Lines { get; set; }
 
-        [InverseProperty("Play")]
-        [JsonIgnore]
-        public virtual ICollection<Invoice> Invoices { get; set; } = [];
         [InverseProperty("Play")]
         [JsonIgnore]
         public virtual ICollection<Performance> Performances { get; set; } = [];
