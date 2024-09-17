@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Statement>
+  <Customer>BigCo</Customer>
+  <Performances>
+    <Performance>
+      <Play>Hamlet</Play>
+      <Audience>55</Audience>
+      <Amount>650</Amount>
+    </Performance>
+    <Performance>
+      <Play>As You Like It</Play>
+      <Audience>35</Audience>
+      <Amount>547</Amount>
+    </Performance>
+    <Performance>
+      <Play>Othello</Play>
+      <Audience>40</Audience>
+      <Amount>456</Amount>
+    </Performance>
+  </Performances>
+  <TotalAmount>1653</TotalAmount>
+  <Credits>47</Credits>
+</Statement>

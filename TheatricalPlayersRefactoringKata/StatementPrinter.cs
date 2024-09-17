@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Model;
 
 namespace TheatricalPlayersRefactoringKata;
 

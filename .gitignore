@@ -2,3 +2,6 @@
 [Oo]bj/
 
 *.received.txt
+/.vs/Aiko/v17
+/.vs/TheatricalPlayersRefactoringKata
+/.vs/VSWorkspaceState.json
