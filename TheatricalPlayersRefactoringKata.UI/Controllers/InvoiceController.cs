@@ -44,11 +44,18 @@ namespace TheatricalPlayersRefactoringKata.UI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public string Index(string invoiceId, string printTypeRequest)
         {
-            StatementPrinter _StatementPrinter = new StatementPrinter(_calculateBaseAmountPerLine,
+            try
+            {
+                StatementPrinter _StatementPrinter = new StatementPrinter(_calculateBaseAmountPerLine,
                                                                       _calculateCreditAudience,
                                                                       _calculateAdditionalValuePerPlayType,
                                                                       _invoicePrintFactory);
-            return _StatementPrinter.PrintInvoice(invoiceId, printTypeRequest);
+                return _StatementPrinter.PrintInvoice(invoiceId, printTypeRequest);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }            
         }
     }
 }
