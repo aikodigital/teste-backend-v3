@@ -49,6 +49,28 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
+
+    int CalcTragedyValue(Performance perf)
+    {
+        int value = 0; 
+        if (perf.Audience > 30)
+        {
+            value += 1000 * (perf.Audience - 30);
+        }
+        return value;
+    }
+
+    int CalcComedyValue(Performance perf)
+    {
+        int value = 0; 
+        if (perf.Audience > 20)
+        {
+            value += 10000 + 500 * (perf.Audience - 20);
+        }
+        value += 300 * perf.Audience;
+        return value;
+    }
+
     decimal CalcHistoryValue(Performance perf, decimal performanceAmount)
     {
         decimal historyAmount = CalcTragedyValue(perf) + CalcComedyValue(perf) + performanceAmount;
