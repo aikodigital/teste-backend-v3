@@ -7,11 +7,6 @@ Sign in
 Sign up
 Instantly share code, notes, and snippets.
 .vs/
-Application/
-Domain/
-Infra.Data/
-Infra.IOC/
-Shared/
 TheatricalPlayersRefactoringKata.Tests/StatementPrinterTests.TestXmlStatementExample.received.txt
 Thetrical.Api/
 @takekazuomi
