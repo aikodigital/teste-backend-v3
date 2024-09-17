@@ -12,7 +12,7 @@ public class StatementPrinterTests
 {
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
+    public async void TestStatementExampleLegacy()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
@@ -31,14 +31,14 @@ public class StatementPrinterTests
 
         var textPrinter = new TextStatementFormatter();
         StatementPrinter statementPrinter = new StatementPrinter(textPrinter);
-        var result = statementPrinter.Print(invoice);
+        var result = await statementPrinter.PrintAsync(invoice);
 
         Approvals.Verify(result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public async void TestTextStatementExample()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
@@ -63,13 +63,13 @@ public class StatementPrinterTests
 
         var textPrinter = new TextStatementFormatter();
         StatementPrinter statementPrinter = new StatementPrinter(textPrinter);
-        var result = statementPrinter.Print(invoice);
+        var result = await statementPrinter.PrintAsync(invoice);
 
         Approvals.Verify(result);
     }
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestXmlStatementExample()
+    public async void TestXmlStatementExample()
     {
         var plays = new Dictionary<string, Play>();
         plays.Add("hamlet", new TragedyPlay("Hamlet", 4024));
@@ -94,7 +94,7 @@ public class StatementPrinterTests
 
         var xmlPrinter = new XmlStatementFormatter();
         StatementPrinter statementPrinter = new StatementPrinter(xmlPrinter);
-        var result = statementPrinter.Print(invoice);
+        var result = await statementPrinter.PrintAsync(invoice);
 
         Approvals.Verify(result);
     }

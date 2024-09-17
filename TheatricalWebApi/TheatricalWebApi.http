@@ -1,0 +1,6 @@
+@TheatricalWebApi_HostAddress = http://localhost:5057
+
+GET {{TheatricalWebApi_HostAddress}}/TheatricalWebApi/
+Accept: application/json
+
+###
