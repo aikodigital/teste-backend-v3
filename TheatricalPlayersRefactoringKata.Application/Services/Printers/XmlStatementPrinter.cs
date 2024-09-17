@@ -14,7 +14,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
             var totalVolumeCredits = 0;
             var xml = new StringBuilder();
 
-            xml.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            xml.AppendLine("﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             xml.AppendLine("<Statement xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
             xml.AppendLine($"  <Customer>{invoice.Customer}</Customer>");
             xml.AppendLine("  <Items>");
