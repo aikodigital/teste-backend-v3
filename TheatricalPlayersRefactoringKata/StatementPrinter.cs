@@ -23,15 +23,10 @@ public class StatementPrinter
             switch (play.Type) 
             {
                 case "tragedy":
-                    if (perf.Audience > 30) {
-                        thisAmount += 1000 * (perf.Audience - 30);
-                    }
+                    thisAmount += CalcTragedyValue(perf);
                     break;
                 case "comedy":
-                    if (perf.Audience > 20) {
-                        thisAmount += 10000 + 500 * (perf.Audience - 20);
-                    }
-                    thisAmount += 300 * perf.Audience;
+                    thisAmount += CalcComedyValue(perf);
                     break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
