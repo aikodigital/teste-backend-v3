@@ -12,38 +12,17 @@ builder.Services.AddSwaggerGen();
 
 // Configurando o canal e serviços necessários
 builder.Services.AddSingleton<IStatementFormatter, XmlStatementFormatter>();
-//builder.Services.AddSingleton<Channel<Invoice>>(Channel.CreateUnbounded<Invoice>());
 builder.Services.AddSingleton<StatementProcessingService>();
 builder.Services.AddDbContext<TheaterDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("TheatricalPlayersRefactoringKata.API")));
 WebApplication app = builder.Build();
-
+DatabaseManagementService.MigrationInitialisation(app);
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Minimal API: Rota para processar fatura
-app.MapPost("/api/invoice/process", async (Invoice invoice, TheaterDbContext dbContext, StatementProcessingService processingService) =>
-{
-    dbContext.Invoices.Add(invoice);
-    await dbContext.SaveChangesAsync();
-
-    string statement = await processingService.ProcessInvoiceAsync(invoice);
-
-    return Results.Ok(statement);
-});
-
-// Minimal API: Rota para verificar o status de processamento
-app.MapGet("/api/invoice/status/{customer}", (string customer) =>
-{
-    string filePath = Path.Combine("Output", $"{customer}_statement.xml");
-    return File.Exists(filePath)
-        ? Results.Ok(new { Status = "Completed", FilePath = filePath })
-        : Results.NotFound("Statement not found or still processing.");
-});
 app.MapPost("/api/invoice", async (InvoiceDto invoiceDto, TheaterDbContext context) =>
 {
     var invoice = new Invoice
@@ -75,4 +54,54 @@ app.MapPost("/api/invoice", async (InvoiceDto invoiceDto, TheaterDbContext conte
 
     return Results.Ok("Invoice saved successfully!");
 });
+
+#region Plays Endpoint
+app.MapGet("/api/plays", async (TheaterDbContext dbContext) =>
+{
+    List<Play> plays = await dbContext.Plays.ToListAsync();
+    return Results.Ok(plays);
+});
+
+app.MapGet("/api/plays/{id}", async (string id, TheaterDbContext dbContext) =>
+{
+    Play? play = await dbContext.Plays.FindAsync(id);
+    if (play == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(play);
+});
+
+app.MapPost("/api/plays", async (Play play, TheaterDbContext dbContext) =>
+{
+    dbContext.Plays.Add(play);
+    await dbContext.SaveChangesAsync();
+    return Results.Created($"/api/plays/{play.PlayId}", play);
+});
+#endregion Plays Endpoint
+
+#region Performance Endpoint
+app.MapGet("/api/performances", async (TheaterDbContext dbContext) =>
+{
+    List<Performance> performances = await dbContext.Performances.ToListAsync();
+    return Results.Ok(performances);
+});
+
+app.MapGet("/api/performances/{playId}", async (string playId, TheaterDbContext dbContext) =>
+{
+    Performance? performance = await dbContext.Performances.FindAsync(playId);
+    if (performance == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(performance);
+});
+
+app.MapPost("/api/performances", async (Performance performance, TheaterDbContext dbContext) =>
+{
+    dbContext.Performances.Add(performance);
+    await dbContext.SaveChangesAsync();
+    return Results.Created($"/api/performances/{performance.PlayId}", performance);
+});
+#endregion Performance Endpoint
 await app.RunAsync();

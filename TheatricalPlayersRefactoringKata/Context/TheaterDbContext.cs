@@ -9,16 +9,18 @@ public class TheaterDbContext : DbContext
     public DbSet<Performance> Performances { get; set; }
 
     public TheaterDbContext(DbContextOptions<TheaterDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) {}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Invoice>().HasNoKey();
-        modelBuilder.Entity<Play>().HasNoKey();
-        modelBuilder.Entity<Performance>().HasNoKey();
+        modelBuilder.Entity<Play>()
+            .HasKey(p => p.PlayId);
 
+        modelBuilder.Entity<Performance>()
+            .HasKey(p => new { p.PerformanceId });
+
+        modelBuilder.Entity<Invoice>()
+            .HasKey(p => new { p.InvoiceId });
     }
 }

@@ -1,34 +1,24 @@
-﻿networks:
-  my-network:
-
-services:
+﻿services:
   theatricalplayersrefactoringkata.api:
     image: ${DOCKER_REGISTRY-}theatricalplayersrefactoringkataapi
     build:
       context: .
       dockerfile: TheatricalPlayersRefactoringKata.API/Dockerfile
-    depends_on:
-      - sqlserver
     ports:
-      - "8080:80"
-    volumes:
-      - ./app:/app
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=TheaterDB;User Id=sa;Password=@x?E3g5~£2MK;
-    networks:
-      - my-network
+      - "5000:80"
+    depends_on: 
+      - sqlserver
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver-container
+    container_name: sqlserver
     environment:
-      - SA_PASSWORD=@x?E3g5~£2MK
+      - SA_PASSWORD=Password123
       - ACCEPT_EULA=Y
     ports:
-      - "1433:1433"
+      - "1433:1433" 
     volumes:
-      - sqlvolume:/var/opt/mssql
-    networks:
-      - my-network
+      - sqlvolume:/var/opt/mssql/data
 
 volumes:
   sqlvolume:
