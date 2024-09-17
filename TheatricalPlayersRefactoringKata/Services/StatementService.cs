@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Entities;
 using TheatricalPlayersRefactoringKata.Interfaces;
@@ -17,8 +18,8 @@ public class StatementService
         _printer = printer;
     }
 
-    public string GenerateStatement(Invoice invoice)
+    public async Task<string> GenerateStatementAsync(Invoice invoice)
     {
-        return _printer.Print(invoice);
+        return await _printer.PrintAsync(invoice);
     }
 }

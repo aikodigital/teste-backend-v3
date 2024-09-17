@@ -1,9 +1,8 @@
-using System;
+using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Interfaces;
-
 public interface IStatementFormatter
 {
-    string Print(Invoice invoice);
+    Task<string> PrintAsync(Invoice invoice);
 }
