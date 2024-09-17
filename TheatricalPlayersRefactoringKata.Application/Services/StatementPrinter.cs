@@ -13,6 +13,7 @@ using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using TheatricalPlayersRefactoringKata.Application.Strategy;
 using TheatricalPlayersRefactoringKata.Domain.Exceptions;
 using static TheatricalPlayersRefactoringKata.Domain.Entities.InvoicePrint;
+using System.IO;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
@@ -23,6 +24,8 @@ public class StatementPrinter
     private readonly ICalculateAdditionalValuePerPlayType _calculateAdditionalValuePerPlayType;
     private readonly IInvoicePrintFactory _invoicePrintFactory;
     private readonly IInvoiceRepository _invoiceRepository;
+    private readonly Queue<Invoice> _invoiceQueue;
+    private readonly object _queueLock = new object();
 
     public StatementPrinter(ICalculateBaseAmountPerLine calculateBaseAmountPerLine,
                             ICalculateCreditAudience calculateCreditAudience,
@@ -35,6 +38,7 @@ public class StatementPrinter
         _calculateAdditionalValuePerPlayType = calculateAdditionalValuePerPlayType;
         _invoicePrintFactory = invoicePrintFactory;
         _invoiceRepository = invoiceRepository;
+        _invoiceQueue = new Queue<Invoice>();
     }
 
     public string PrintInvoice(string invoiceId, string printTypeRequest)
@@ -177,5 +181,49 @@ public class StatementPrinter
         return play;
     }
 
+    public void EnqueueInvoiceForProcessing(Invoice invoice)
+    {
+        lock (_queueLock)
+        {
+            _invoiceQueue.Enqueue(invoice);
+        }
+    }
 
+    public async Task ProcessInvoicesAsync(string path)
+    {
+        while (true)
+        {
+            Invoice invoice = null;
+            lock (_queueLock)
+            {
+                if (_invoiceQueue.Count > 0)
+                {
+                    invoice = _invoiceQueue.Dequeue();
+                }
+            }
+
+            if (invoice != null)
+            {
+                await ProcessInvoiceAsync(invoice, path);
+            }
+            else
+            {
+                await Task.Delay(1000);
+            }
+        }
+    }
+
+    private async Task ProcessInvoiceAsync(Invoice invoice, string path)
+    {
+        var performances = await _invoiceRepository.GetPerformancesByInvoiceIdAsync(invoice.InvoiceId.ToString());
+        var plays = await _invoiceRepository.GetAllPlaysAsync();
+        var calcSettings = await _invoiceRepository.GetInvoiceCalculeteSettingsAsync();
+        var invoiceCreditSettings = await _invoiceRepository.GetInvoiceCreditSettingsAsync();
+
+        var result = PrintInvoice(invoice, performances, plays, PrintType.XML, calcSettings, invoiceCreditSettings);
+
+        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+        var xmlPath = $@"{path}\{invoice.InvoiceId}.xml";
+        await File.WriteAllTextAsync(xmlPath, result);
+    }
 }

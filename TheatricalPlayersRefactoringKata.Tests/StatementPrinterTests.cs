@@ -48,7 +48,7 @@ public class StatementPrinterTests
                                  ?? throw new InvalidOperationException("A instância de CalculateBaseAmountPerLine não pôde ser criada.");
     }
 
-    //[Fact]
+    [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
