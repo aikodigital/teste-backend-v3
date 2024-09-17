@@ -8,7 +8,7 @@ public class StatementPrinter
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
-        var totalAmount = 0;
+        decimal totalAmount = 0;
         var volumeCredits = 0;
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
@@ -19,7 +19,7 @@ public class StatementPrinter
             var lines = play.Lines;
             if (lines < 1000) lines = 1000;
             if (lines > 4000) lines = 4000;
-            var thisAmount = lines * 10;
+            decimal thisAmount = lines * 10;
             switch (play.Type) 
             {
                 case "tragedy":
@@ -33,11 +33,31 @@ public class StatementPrinter
                     }
                     thisAmount += 300 * perf.Audience;
                     break;
+                case "history":
+                    // Valor para peça de tragédia
+                    var tragedyAmount = thisAmount;
+                    if (perf.Audience > 30)
+                    {
+                        tragedyAmount += 1000 * (perf.Audience - 30);
+                    }
+
+                    // Valor para peça de comédia
+                    var comedyAmount = thisAmount + 300 * perf.Audience;
+                    if (perf.Audience > 20)
+                    {
+                        comedyAmount += 10000 + 500 * (perf.Audience - 20);
+                    }
+
+                    // Soma dos valores de tragédia e comédia
+                    thisAmount = tragedyAmount + comedyAmount;
+
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
             // add volume credits
             volumeCredits += Math.Max(perf.Audience - 30, 0);
+         
             // add extra credit for every ten comedy attendees
             if ("comedy" == play.Type) volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
 
