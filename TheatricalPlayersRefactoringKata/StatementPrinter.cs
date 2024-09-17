@@ -49,4 +49,12 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
+    decimal CalcHistoryValue(Performance perf, decimal performanceAmount)
+    {
+        decimal historyAmount = CalcTragedyValue(perf) + CalcComedyValue(perf) + performanceAmount;
+        decimal adjustmentFactor = perf.Audience > 30 ? 1.39712m : 1.8432m;
+        decimal adjustedAmount = (int)Math.Ceiling(historyAmount * adjustmentFactor);
+
+        return adjustedAmount;
+    }
 }
