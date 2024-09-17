@@ -25,7 +25,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Repository
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                return context.Invoices.Where(x => x.InvoiceId.ToString().Equals(invoiceId)).First();
+                return context.Invoices.Where(x => x.InvoiceId.ToString().Equals(invoiceId)).FirstOrDefault();
             }
         }
 

@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Exceptions
 {
     public class InvoiceNotFoundException : Exception
     {
-        public InvoiceNotFoundException(string invoiceId) : base($"Invoice not found: {invoiceId}")
+        public InvoiceNotFoundException(string invoiceId) : base($"Invoice with id {invoiceId} not found")
         {
         }
     }

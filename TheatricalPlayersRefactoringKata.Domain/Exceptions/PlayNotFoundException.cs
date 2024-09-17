@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Exceptions
 {
     public class PlayNotFoundException : Exception
     {
-        public PlayNotFoundException(string invoiceId) : base($"Play not found: {invoiceId}")
+        public PlayNotFoundException(string playId) : base($"Play with Id {playId} not found")
         {
         }
     }

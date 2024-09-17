@@ -24,7 +24,6 @@ public class StatementPrinterTests
 
     public StatementPrinterTests()
     {
-        // Configurar o container de serviços
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddTransient<ICalculateBaseAmountPerLine,
                                        CalculateBaseAmountPerLine>();

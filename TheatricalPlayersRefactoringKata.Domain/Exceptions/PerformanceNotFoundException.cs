@@ -8,7 +8,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Exceptions
 {
     public class PerformanceNotFoundException : Exception
     {
-        public PerformanceNotFoundException(string invoiceId) : base($"Performance not found to invoice: {invoiceId}")
+        public PerformanceNotFoundException(string invoiceId) : base($"Performance with invoiceId {invoiceId} not found")
         {
         }
     }

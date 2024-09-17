@@ -164,8 +164,6 @@ public class StatementPrinter
         foreach (var performance in performances)
         {
             var play = FindPlayById(performance.PlayId, plays);
-            if (play == null) throw new PlayNotFoundException(performance.PlayId.ToString());
-
             totalCredits += CalculateEarnedCredits(play, performance, creditSettings);
         }
 
@@ -174,7 +172,9 @@ public class StatementPrinter
 
     private Play FindPlayById(int playId, List<Play> plays)
     {
-        return plays.FirstOrDefault(x => x.PlayId == playId);
+        var play = plays.FirstOrDefault(x => x.PlayId == playId);
+        if (play == null) throw new PlayNotFoundException(playId.ToString());
+        return play;
     }
 
 
