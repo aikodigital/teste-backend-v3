@@ -25,14 +25,14 @@ namespace TS.Application.Services
             if (invoices == null)
                 return null;
 
-            var customers = await _customersRepository.GetAsync(invoices.CustomerId);
-            if (customers == null)
+            var customer = await _customersRepository.GetAsync(invoices.CustomerId);
+            if (customer == null)
                 return null;
 
             var performances = await _performancesRepository.GetAllAsync();
             var plays = await _playsRepository.GetAllAsync();
 
-            response.Customers = customers.Name;
+            response.Customers = customer.Name;
 
             foreach (var invoiceItem in invoices.InvoicesItems)
             {
@@ -113,6 +113,10 @@ namespace TS.Application.Services
 
             response.TotalAmoutOwed = response.Items.Sum(x => x.AmountOwed);
             response.TotalEarnedCredits = response.Items.Sum(x => x.EarnedCredits);
+
+            customer.LoyaltyCredit += response.Items.Sum(x => x.EarnedCredits);
+
+            await _customersRepository.UpdateAsync(customer);
 
             return response;
         }

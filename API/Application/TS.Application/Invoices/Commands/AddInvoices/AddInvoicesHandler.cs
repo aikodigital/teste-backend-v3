@@ -9,7 +9,10 @@ using TS.Domain.Repositories.Plays;
 
 namespace TS.Application.Invoices.Commands.AddInvoices
 {
-    public class AddInvoicesHandler(IInvoicesRepository invoicesRepository, ICustomersRepository customersRepository, IPlaysRepository playsRepository, IRabbitMQServices rabbitMQServices) : IRequestHandler<AddInvoicesRequest>
+    public class AddInvoicesHandler(IInvoicesRepository invoicesRepository,
+                                    ICustomersRepository customersRepository,
+                                    IPlaysRepository playsRepository,
+                                    IRabbitMQServices rabbitMQServices) : IRequestHandler<AddInvoicesRequest>
     {
         private readonly IInvoicesRepository _invoicesRepository = invoicesRepository;
         private readonly ICustomersRepository _customersRepository = customersRepository;
@@ -21,35 +24,35 @@ namespace TS.Application.Invoices.Commands.AddInvoices
             var customer = await _customersRepository.GetAsync(request.CustomerId);
             var plays = await _playsRepository.GetAllAsync();
 
-            if (customer != null)
+            if (customer == null || plays == null || !plays.Any())
+                throw new Exception("Cliente ou peça não encontrado.");
+
+            var addTo = new Invoice
             {
-                var addTo = new Invoice
+                CreationAt = DateTime.Now,
+                CustomerId = request.CustomerId,
+                Customer = customer,
+                Seats = request.Seats,
+                InvoicesItems = request.Performances.Select(res => new InvoicesItems
                 {
-                    CreationAt = DateTime.Now,
-                    CustomerId = request.CustomerId,
-                    Customer = customer,
-                    Seats = request.Seats,
-                    InvoicesItems = request.Performances.Select(res => new InvoicesItems
+                    Performance = new Performance
                     {
-                        Performance = new Performance
-                        {
-                            PlayId = res.PlayId,
-                            Play = plays.FirstOrDefault(x => x.Id == res.PlayId)!,
-                            Audience = res.Audience
-                        }
-                    }).ToList()
-                };
+                        PlayId = res.PlayId,
+                        Play = plays.FirstOrDefault(x => x.Id == res.PlayId)!,
+                        Audience = res.Audience
+                    }
+                }).ToList()
+            };
 
-                await _invoicesRepository.CreateAsync(addTo);
+            await _invoicesRepository.CreateAsync(addTo);
 
-                var messageQueue = new MessageQueue
-                {
-                    TypeFile = (int)request.TypeFile,
-                    InvoiceId = addTo.Id
-                };
+            var messageQueue = new MessageQueue
+            {
+                TypeFile = (int)request.TypeFile,
+                InvoiceId = addTo.Id
+            };
 
-                _rabbitMQServices.Publisher(messageQueue);
-            }
+            _rabbitMQServices.Publisher(messageQueue);
         }
     }
 }
