@@ -13,10 +13,12 @@ namespace TheatricalPlayers.WebApi.Controllers
     public class TheatricalPlayersController : ControllerBase
     {
         private readonly IStatementPrinterUseCase _statementPrinterUseCase;
+        private readonly IStatementUseCase _statementUserCase;
 
-        public TheatricalPlayersController(IStatementPrinterUseCase statementPrinterUseCase)
+        public TheatricalPlayersController(IStatementPrinterUseCase statementPrinterUseCase, IStatementUseCase statementUserCase)
         {
             _statementPrinterUseCase = statementPrinterUseCase;
+            _statementUserCase = statementUserCase;
         }
 
         [HttpPost("print")]
@@ -26,8 +28,11 @@ namespace TheatricalPlayers.WebApi.Controllers
                 return BadRequest("Invalid request");
 
             var result = _statementPrinterUseCase.Print(request.Invoice, request.Plays);
+
+            Statement statement = JsonConvert.DeserializeObject<Statement>(result);
+            _statementUserCase.CreateStatement(statement);
+
             return Content(result, "application/json");
         }
-
     }
 }

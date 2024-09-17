@@ -9,6 +9,6 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<Play> Plays { get; set; }
-    public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<Statement> Statement { get; set; }
+    public DbSet<Item> Item { get; set; }
 }

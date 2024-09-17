@@ -1,6 +1,9 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities
 {
-    public class Statement
+    [Table("Statement")]
+    public class Statement : BaseEntity
     {
         public string Customer { get; set; }
         public List<Item> Items { get; set; } = new List<Item>();
@@ -8,7 +11,8 @@
         public int EarnedCredits { get; set; }
     }
 
-    public class Item
+    [Table("Item")]
+    public class Item : BaseEntity
     {
         public string PlayName { get; set; }
         public decimal AmountOwed { get; set; }

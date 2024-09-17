@@ -6,7 +6,7 @@ namespace Application.UseCases.StatementUseCase
 {
     public class StatementPrinterUseCase : IStatementPrinterUseCase
     {
-        public string Print(Invoice invoice, Dictionary<string, Play> plays)
+        public string Print(Invoice invoice, List<Play> plays)
         {
             var statement = new Statement
             {
@@ -19,7 +19,7 @@ namespace Application.UseCases.StatementUseCase
 
             foreach (var perf in invoice.Performances)
             {
-                var play = plays[perf.PlayId];
+                var play = plays.FirstOrDefault(p => p.NameId == perf.PlayId) ?? throw new Exception("Play not found for PlayId: " + perf.PlayId);
 
                 decimal thisAmount = 0;
                 int earnedCredits = 0;
@@ -59,6 +59,7 @@ namespace Application.UseCases.StatementUseCase
 
             return JsonConvert.SerializeObject(statement, Newtonsoft.Json.Formatting.Indented);
         }
+
 
         private decimal CalculateBaseAmount(Play play)
         {
@@ -123,6 +124,7 @@ namespace Application.UseCases.StatementUseCase
                 comedyAmount += 10000 + 500 * (perf.Audience - 20);
 
             thisAmount = tragedyAmount + comedyAmount;
+
             return thisAmount;
         }
     }

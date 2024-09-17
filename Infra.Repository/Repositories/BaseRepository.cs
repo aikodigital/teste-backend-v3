@@ -17,16 +17,19 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     public void Create(T entity)
     {
         Context.Add(entity);
+        Context.SaveChanges();
     }
 
     public void Update(T entity)
     {
         Context.Update(entity);
+        Context.SaveChanges();
     }
 
     public void Delete(T entity)
     {
         Context.Remove(entity);
+        Context.SaveChanges();
     }
 
     public async Task<T> GetById(int id)
