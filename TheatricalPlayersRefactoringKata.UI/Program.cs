@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application.Factory;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Repository;
 using TheatricalPlayersRefactoringKata.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,13 +19,19 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<ICalculateBaseAmountPerLine,
-                                       CalculateBaseAmountPerLine>();
+                           CalculateBaseAmountPerLine>();
+
 builder.Services.AddScoped<ICalculateCreditAudience,
-                               CalculateCreditAudience>();
+                           CalculateCreditAudience>();
+
 builder.Services.AddScoped<ICalculateAdditionalValuePerPlayType,
-                               CalculateAdditionalValuePerPlayType>();
+                           CalculateAdditionalValuePerPlayType>();
 builder.Services.AddScoped<IInvoicePrintFactory,
-                               InvoicePrintFactory>();
+                           InvoicePrintFactory>();
+
+builder.Services.AddScoped<IInvoiceRepository,
+                           InvoiceRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

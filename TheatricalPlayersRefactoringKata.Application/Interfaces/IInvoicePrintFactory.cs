@@ -10,5 +10,6 @@ namespace TheatricalPlayersRefactoringKata.Application.Interfaces
     public interface IInvoicePrintFactory
     {
         IInvoicePrint GetPrintType(PrintType type);
+        PrintType DeterminePrintType(string printTypeRequest);
     }
 }

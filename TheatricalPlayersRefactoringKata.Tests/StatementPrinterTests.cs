@@ -8,6 +8,7 @@ using TheatricalPlayersRefactoringKata.Application.Constants;
 using TheatricalPlayersRefactoringKata.Application.Extensions;
 using TheatricalPlayersRefactoringKata.Application.Factory;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
+using TheatricalPlayersRefactoringKata.Application.Repository;
 using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.Strategy;
 using TheatricalPlayersRefactoringKata.Domain;
@@ -36,6 +37,9 @@ public class StatementPrinterTests
 
         serviceCollection.AddTransient<IInvoicePrintFactory,
                                        InvoicePrintFactory>();
+
+        serviceCollection.AddTransient<IInvoiceRepository,
+                                       InvoiceRepository>();
 
         serviceCollection.AddTransient<StatementPrinter>();
 

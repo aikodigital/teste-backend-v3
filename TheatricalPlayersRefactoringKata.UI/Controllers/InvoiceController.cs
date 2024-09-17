@@ -14,17 +14,20 @@ namespace TheatricalPlayersRefactoringKata.UI.Controllers
         private readonly ICalculateCreditAudience _calculateCreditAudience;
         private readonly ICalculateAdditionalValuePerPlayType _calculateAdditionalValuePerPlayType;
         private readonly IInvoicePrintFactory _invoicePrintFactory;
+        private readonly IInvoiceRepository _invoiceRepository;
         StatementPrinter _StatementPrinter;
 
         public InvoiceController(ICalculateBaseAmountPerLine calculateBaseAmountPerLine,
                                 ICalculateCreditAudience calculateCreditAudience,
                                 ICalculateAdditionalValuePerPlayType calculateAdditionalValuePerPlayType,
-                                IInvoicePrintFactory invoicePrintFactory)
+                                IInvoicePrintFactory invoicePrintFactory,
+                                IInvoiceRepository invoiceRepository)
         {
             _calculateBaseAmountPerLine = calculateBaseAmountPerLine;
             _calculateCreditAudience = calculateCreditAudience;
             _calculateAdditionalValuePerPlayType = calculateAdditionalValuePerPlayType;
             _invoicePrintFactory = invoicePrintFactory;
+            _invoiceRepository = invoiceRepository;
         }
 
         /// <summary>
@@ -47,9 +50,10 @@ namespace TheatricalPlayersRefactoringKata.UI.Controllers
             try
             {
                 StatementPrinter _StatementPrinter = new StatementPrinter(_calculateBaseAmountPerLine,
-                                                                      _calculateCreditAudience,
-                                                                      _calculateAdditionalValuePerPlayType,
-                                                                      _invoicePrintFactory);
+                                                                          _calculateCreditAudience,
+                                                                          _calculateAdditionalValuePerPlayType,
+                                                                          _invoicePrintFactory,
+                                                                          _invoiceRepository);
                 return _StatementPrinter.PrintInvoice(invoiceId, printTypeRequest);
             }
             catch (Exception ex)

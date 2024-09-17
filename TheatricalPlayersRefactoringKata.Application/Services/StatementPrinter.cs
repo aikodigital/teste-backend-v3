@@ -11,6 +11,8 @@ using TheatricalPlayersRefactoringKata.Domain.Entities;
 using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using TheatricalPlayersRefactoringKata.Application.Strategy;
+using TheatricalPlayersRefactoringKata.Domain.Exceptions;
+using static TheatricalPlayersRefactoringKata.Domain.Entities.InvoicePrint;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
@@ -20,96 +22,160 @@ public class StatementPrinter
     private readonly ICalculateCreditAudience _calculateCreditAudience;
     private readonly ICalculateAdditionalValuePerPlayType _calculateAdditionalValuePerPlayType;
     private readonly IInvoicePrintFactory _invoicePrintFactory;
+    private readonly IInvoiceRepository _invoiceRepository;
 
     public StatementPrinter(ICalculateBaseAmountPerLine calculateBaseAmountPerLine,
                             ICalculateCreditAudience calculateCreditAudience,
                             ICalculateAdditionalValuePerPlayType calculateAdditionalValuePerPlayType,
-                            IInvoicePrintFactory invoicePrintFactory)
+                            IInvoicePrintFactory invoicePrintFactory,
+                            IInvoiceRepository invoiceRepository)
     {
         _calculateBaseAmountPerLine = calculateBaseAmountPerLine;
         _calculateCreditAudience = calculateCreditAudience;
         _calculateAdditionalValuePerPlayType = calculateAdditionalValuePerPlayType;
         _invoicePrintFactory = invoicePrintFactory;
+        _invoiceRepository = invoiceRepository;
     }
 
     public string PrintInvoice(string invoiceId, string printTypeRequest)
     {
-        var invoice = new Invoice();
-        var performances = new List<Performance>();
-        var plays = new List<Play>();
-        PrintType printType;
-        var invoiceCalculeteSettings = new List<InvoiceCalculeteSettings>();
-        var invoiceCreditSettings = new List<InvoiceCreditSettings>();
+        var invoice = GetInvoice(invoiceId);
+        var performances = GetPerformances(invoiceId);
+        var plays = GetAllPlays();
+        var calcSettings = GetInvoiceCalculationSettings();
+        var creditSettings = GetInvoiceCreditSettings();
+        var printType = GetPrintType(printTypeRequest);
 
-        using (ApplicationDbContext context = new ApplicationDbContext())
-        {
-            invoice = context.Invoices.Where(x => x.InvoiceId.ToString().Equals(invoiceId)).FirstOrDefault();
-            if (invoice == null) throw new Exception($"invoice not found: {invoiceId}");
-            performances = context.Performances.Where(x => x.InvoiceId.ToString().Equals(invoiceId)).ToList();
-            if (invoice == null) throw new Exception($"invoice without performance: {invoiceId}");
-            plays = context.Play.ToList();
-            invoiceCalculeteSettings = context.InvoiceCalculeteSettings.ToList();
-            invoiceCreditSettings = context.InvoiceCreditSettings.ToList();
-        }
-
-        switch (printTypeRequest.ToUpper())
-        {
-            case "XML":
-                printType = PrintType.XML;
-                break;
-            case "TEXT":
-                printType = PrintType.Text;
-                break;
-            default:
-                throw new Exception($"unknown Print type: {printTypeRequest}");
-        }
-
-        return PrintInvoice(invoice, performances, plays, printType, invoiceCalculeteSettings, invoiceCreditSettings);
+        return PrintInvoice(invoice, performances, plays, printType, calcSettings, creditSettings);
     }
 
-    public string PrintInvoice(Invoice invoice, List<Performance> performances, List<Play> plays, PrintType printType, List<InvoiceCalculeteSettings> invoiceCalculeteSettings, List<InvoiceCreditSettings> invoiceCreditSettings)
+    private Invoice GetInvoice(string invoiceId)
     {
-        var totalAmount = 0m;
-        var volumeCredits = 0m;
+        var invoice = _invoiceRepository.GetInvoiceById(invoiceId);
+        if (invoice == null) throw new InvoiceNotFoundException(invoiceId);
+        return invoice;
+    }
 
-        var invoicePrint = new InvoicePrint.Statement();
-        invoicePrint.Customer = invoice.Customer;
+    private List<Performance> GetPerformances(string invoiceId)
+    {
+        var performances = _invoiceRepository.GetPerformancesByInvoiceId(invoiceId);
+        if (performances == null) throw new PerformanceNotFoundException(invoiceId);
+        return performances;
+    }
+
+    private List<Play> GetAllPlays()
+    {
+        return _invoiceRepository.GetAllPlays();
+    }
+
+    private List<InvoiceCalculeteSettings> GetInvoiceCalculationSettings()
+    {
+        return _invoiceRepository.GetInvoiceCalculeteSettings();
+    }
+
+    private List<InvoiceCreditSettings> GetInvoiceCreditSettings()
+    {
+        return _invoiceRepository.GetInvoiceCreditSettings();
+    }
+
+    private PrintType GetPrintType(string printTypeRequest)
+    {
+        return _invoicePrintFactory.DeterminePrintType(printTypeRequest);
+    }
+
+    public string PrintInvoice(Invoice invoice, List<Performance> performances, List<Play> plays, PrintType printType,
+                            List<InvoiceCalculeteSettings> invoiceCalculeteSettings, List<InvoiceCreditSettings> creditSettings)
+    {
+        var invoicePrint = new InvoicePrint.Statement
+        {
+            Customer = invoice.Customer,
+            Items = new Items()
+        };
+        invoicePrint.Items.Item = new List<InvoicePrint.Item>();
+
+        var totalAmount = CalculateTotalAmount(performances, plays, invoiceCalculeteSettings, creditSettings, invoicePrint);
+        var totalCredits = CalculateTotalCredits(performances, plays, creditSettings);
+
+        invoicePrint.AmountOwed = totalAmount;
+        invoicePrint.EarnedCredits = totalCredits;
+
+        var printer = _invoicePrintFactory.GetPrintType(printType);
+        return printer.Print(invoicePrint);
+    }
+
+    private decimal CalculateTotalAmount(List<Performance> performances, List<Play> plays,
+                                         List<InvoiceCalculeteSettings> calcSettings, List<InvoiceCreditSettings> creditSettings,
+                                         InvoicePrint.Statement invoicePrint)
+    {
+        decimal totalAmount = 0;
 
         foreach (var performance in performances)
         {
-            var play = plays.Where(x => x.PlayId.Equals(performance.PlayId)).FirstOrDefault();
-            var thisAmount = 0m;
-            var invoiceCalculetePlayType = invoiceCalculeteSettings.Where(x => x.PlayTypeId.ToString().Equals(play.PlayTypeId.ToString())).ToList();
+            var play = FindPlayById(performance.PlayId, plays);
+            if (play == null) throw new PlayNotFoundException(performance.PlayId.ToString());
 
-            foreach (var invoiceCalculete in invoiceCalculetePlayType)
-            {
-                thisAmount += _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
-                thisAmount += _calculateAdditionalValuePerPlayType.CalculateAdditionalValue(performance.Audience,
-                                                                                          invoiceCalculete.MinimumAudience,
-                                                                                          invoiceCalculete.Bonus,
-                                                                                          invoiceCalculete.PerAudienceAdditional,
-                                                                                          invoiceCalculete.PerAudience);
-            }
+            decimal playAmount = CalculatePlayAmount(play, performance, calcSettings);
+            decimal earnedCredits = CalculateEarnedCredits(play, performance, creditSettings);
 
-            var volumeCreditPerformance = _calculateCreditAudience.CalculateCredit(performance.Audience, invoiceCreditSettings.Where(x => x.PlayTypeId.Equals(play.PlayTypeId)).FirstOrDefault());
-            volumeCredits += volumeCreditPerformance;
+            totalAmount += playAmount;
 
-            // print line for this order
-            invoicePrint.Items.Item.Add(new InvoicePrint.Item()
+            invoicePrint.Items.Item.Add(new InvoicePrint.Item
             {
                 Name = play.Name,
-                AmountOwed = thisAmount,
-                EarnedCredits = volumeCreditPerformance,
-                Seats = performance.Audience
+                AmountOwed = playAmount,
+                Seats = performance.Audience,
+                EarnedCredits = earnedCredits
             });
-
-            totalAmount += thisAmount;
         }
-        invoicePrint.AmountOwed = totalAmount;
-        invoicePrint.EarnedCredits = volumeCredits;
 
-
-        var _invoicePrint = _invoicePrintFactory.GetPrintType(printType);
-        return _invoicePrint.Print(invoicePrint);
+        return totalAmount;
     }
+
+    private decimal CalculatePlayAmount(Play play, Performance performance, List<InvoiceCalculeteSettings> calcSettings)
+    {
+        var playSettings = calcSettings.Where(x => x.PlayTypeId == play.PlayTypeId).ToList();
+        decimal playAmount = 0;
+
+        foreach (var setting in playSettings)
+        {
+            playAmount += _calculateBaseAmountPerLine.CalculateBaseAmount(play.Lines);
+            playAmount += _calculateAdditionalValuePerPlayType.CalculateAdditionalValue(
+                performance.Audience,
+                setting.MinimumAudience,
+                setting.Bonus,
+                setting.PerAudienceAdditional,
+                setting.PerAudience
+            );
+        }
+
+        return playAmount;
+    }
+
+    private decimal CalculateEarnedCredits(Play play, Performance performance, List<InvoiceCreditSettings> creditSettings)
+    {
+        var creditSetting = creditSettings.FirstOrDefault(x => x.PlayTypeId == play.PlayTypeId);
+        return _calculateCreditAudience.CalculateCredit(performance.Audience, creditSetting);
+    }
+
+    private decimal CalculateTotalCredits(List<Performance> performances, List<Play> plays, List<InvoiceCreditSettings> creditSettings)
+    {
+        decimal totalCredits = 0;
+
+        foreach (var performance in performances)
+        {
+            var play = FindPlayById(performance.PlayId, plays);
+            if (play == null) throw new PlayNotFoundException(performance.PlayId.ToString());
+
+            totalCredits += CalculateEarnedCredits(play, performance, creditSettings);
+        }
+
+        return totalCredits;
+    }
+
+    private Play FindPlayById(int playId, List<Play> plays)
+    {
+        return plays.FirstOrDefault(x => x.PlayId == playId);
+    }
+
+
 }

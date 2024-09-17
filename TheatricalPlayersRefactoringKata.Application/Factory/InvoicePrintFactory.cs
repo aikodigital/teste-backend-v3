@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Application.Exceptions;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Strategy;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
@@ -12,8 +13,6 @@ namespace TheatricalPlayersRefactoringKata.Application.Factory
 {
     public class InvoicePrintFactory : IInvoicePrintFactory
     {
-
-
         public IInvoicePrint GetPrintType(PrintType type)
         {
             switch (type)
@@ -25,6 +24,16 @@ namespace TheatricalPlayersRefactoringKata.Application.Factory
                 default:
                     throw new Exception("unknown Print type: " + type.ToString());
             }
+        }
+
+        public PrintType DeterminePrintType(string printTypeRequest)
+        {
+            return printTypeRequest.ToUpper() switch
+            {
+                "XML" => PrintType.XML,
+                "TEXT" => PrintType.Text,
+                _ => throw new InvalidPrintTypeException(printTypeRequest),
+            };
         }
     }
 }
