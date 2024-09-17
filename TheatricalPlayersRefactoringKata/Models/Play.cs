@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Play
 {
@@ -10,17 +10,17 @@ public class Play
     public int Lines { get => _lines; set => _lines = value; }
     public TypePlay Type { get => _type; set => _type = value; }
 
-    public Play(string name, int lines, TypePlay type) 
+    public Play(string name, int lines, TypePlay type)
     {
         _name = name;
         _lines = lines;
         _type = type;
     }
+}
 
-    public enum TypePlay
-    {
-        Tragedy,
-        Comedy,
-        History,
-    }
+public enum TypePlay
+{
+    Tragedy,
+    Comedy,
+    History,
 }

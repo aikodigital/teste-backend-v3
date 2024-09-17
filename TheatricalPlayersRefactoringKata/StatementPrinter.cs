@@ -1,57 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata;
 
 public class StatementPrinter
 {
-    public static string Print(Invoice invoice, Dictionary<string, Play> plays)
+    public static string Print(Invoice invoice, Dictionary<string, Play> plays, ReportType reportType = ReportType.TXT)
     {
         double totalAmount = 0;
+        int totalVolumeCredits = 0;
 
-        var volumeCredits = 0;
-        var result = string.Format("Statement for {0}\n", invoice.Customer);
         var cultureInfo = new CultureInfo("en-US");
 
-        foreach(var perf in invoice.Performances)
+        var resultObject = new Statement
         {
-            var play = plays[perf.PlayId];
-            var lines = play.Lines;
+            Customer = invoice.Customer,
+            Items = new List<Item>()
+        };
 
-            if (lines < 1000)
-                lines = 1000;
+        foreach (var perf in invoice.Performances)
+        {
+            CalculateData(plays, perf, out Play play, out double thisAmount, out int thisVolumeCredits);
 
-            if (lines > 4000)
-                lines = 4000;
+            var roundThisAmount = Math.Round(thisAmount, 2);
 
-            double thisAmount = lines / 10.0;
-
-            thisAmount = play.Type switch
+            resultObject.Items.Add(new Item
             {
-                Play.TypePlay.Tragedy => AmountTragedy(perf, thisAmount),
-                Play.TypePlay.Comedy => AmountComedy(perf, thisAmount),
-                Play.TypePlay.History => AmountHistory(perf, thisAmount),
-                _ => throw new Exception("unknown type: " + play.Type),
-            };
+                PlayName = play.Name,
+                EarnedCredits = thisVolumeCredits,
+                AmountOwed = roundThisAmount,
+                Seats = perf.Audience
+            });
 
-            // add volume credits
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-
-            // add extra credit for every ten comedy attendees
-            if (play.Type == Play.TypePlay.Comedy)
-                volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
-
-            // print line for this order
-            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, thisAmount, perf.Audience);
-
-            totalAmount += thisAmount;
+            totalAmount += roundThisAmount;
+            totalVolumeCredits += thisVolumeCredits;
         }
 
-        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", totalAmount);
-        result += string.Format("You earned {0} credits\n", volumeCredits);
+        resultObject.AmountOwed = Math.Round(totalAmount, 2);
+        resultObject.EarnedCredits = totalVolumeCredits;
+
+        string result;
+
+        if (reportType == ReportType.TXT)
+            result = resultObject.ToTXT(cultureInfo);
+        else
+            result = resultObject.ToXML(cultureInfo);
 
         return result;
+    }
+
+    private static void CalculateData(Dictionary<string, Play> plays, Performance perf, out Play play, out double thisAmount, out int thisVolumeCredits)
+    {
+        play = plays[perf.PlayId];
+        var lines = play.Lines;
+
+        if (lines < 1000)
+            lines = 1000;
+
+        if (lines > 4000)
+            lines = 4000;
+
+        thisAmount = lines / 10.0;
+        thisVolumeCredits = 0;
+
+        thisAmount = play.Type switch
+        {
+            TypePlay.Tragedy => AmountTragedy(perf, thisAmount),
+            TypePlay.Comedy => AmountComedy(perf, thisAmount),
+            TypePlay.History => AmountHistory(perf, thisAmount),
+            _ => throw new Exception("unknown type: " + play.Type),
+        };
+
+        // add volume credits
+        thisVolumeCredits += Math.Max(perf.Audience - 30, 0);
+
+        // add extra credit for every ten comedy attendees
+        if (play.Type == TypePlay.Comedy)
+            thisVolumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
     }
 
     private static double AmountTragedy(Performance perf, double thisAmount)
@@ -72,7 +99,7 @@ public class StatementPrinter
         }
 
         thisAmount += 3.00 * perf.Audience;
-        
+
         return thisAmount;
     }
 
