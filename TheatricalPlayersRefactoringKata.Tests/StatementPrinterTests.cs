@@ -1,34 +1,48 @@
-using System;
-using System.Collections.Generic;
+using Application.UseCases.StatementUseCase;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Domain.Contracts.UseCases.StatementUseCase;
+using Domain.Entities;
+using System.Collections.Generic;
+using TheatricalPlayersRefactoringKata.Tests.Fixture;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
-public class StatementPrinterTests
+public class StatementPrinterTests : IClassFixture<StatementPrinterFixture>
 {
+    private readonly IStatementPrinterUseCase _statementPrinterUseCase;
+    private readonly IConvertUseCase _convertUseCase;
+
+    public StatementPrinterTests(StatementPrinterFixture fixture)
+    {
+        _statementPrinterUseCase = fixture.StatementPrinterUseCase;
+        _convertUseCase = fixture.ConvertUseCase;
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
+        var plays = new List<Play>
+        {
+            { new("Hamlet", "hamlet", 4024, "tragedy") },
+            { new("As You Like It", "as-like", 2670, "comedy") },
+            { new("Othello", "othello", 3560, "tragedy") }
+        };
 
-        Invoice invoice = new Invoice(
+        Invoice invoice = new(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
+                new("hamlet", 55),
+                new("as-like", 35),
+                new("othello", 40),
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        var result = _convertUseCase.ConvertJsonToTxt(printResult);
 
         Approvals.Verify(result);
     }
@@ -37,29 +51,64 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        var plays = new List<Play>
+        {
+            { new("Hamlet", "hamlet", 4024, "tragedy") },
+            { new("As You Like It", "as-like", 2670, "comedy") },
+            { new("Othello", "othello", 3560, "tragedy") },
+            { new("Henry V", "henry-v", 3227, "history") },
+            { new("King John", "john", 2648, "history") },
+            { new("Richard III", "henry-v",3718, "history") }
+        };
 
-        Invoice invoice = new Invoice(
+        Invoice invoice = new(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new("hamlet", 55),
+                new("as-like", 35),
+                new("othello", 40),
+                new("henry-v", 20),
+                new("john", 39),
+                new("henry-v", 20)
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.Print(invoice, plays);
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        var result = _convertUseCase.ConvertJsonToTxt(printResult);
+
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        var plays = new List<Play>
+        {
+            { new("Hamlet", "hamlet", 4024, "tragedy") },
+            { new("As You Like It", "as-like", 2670, "comedy") },
+            { new("Othello", "othello", 3560, "tragedy") },
+            { new("Henry V", "henry-v", 3227, "history") },
+            { new("King John", "john", 2648, "history") },
+            { new("Richard III", "henry-v",3718, "history") }
+        };
+
+        Invoice invoice = new(
+            "BigCo",
+            new List<Performance>
+            {
+                new("hamlet", 55),
+                new("as-like", 35),
+                new("othello", 40),
+                new("henry-v", 20),
+                new("john", 39),
+                new("henry-v", 20)
+            }
+        );
+
+        var printResult = _statementPrinterUseCase.Print(invoice, plays);
+        string result = _convertUseCase.ConvertJsonToXml(printResult);
 
         Approvals.Verify(result);
     }
