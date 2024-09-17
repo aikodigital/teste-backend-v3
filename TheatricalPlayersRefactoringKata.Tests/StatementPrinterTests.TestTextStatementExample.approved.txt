@@ -4,6 +4,6 @@
   Othello: $456.00 (40 seats)
   Henry V: $705.40 (20 seats)
   King John: $931.60 (39 seats)
-  Henry V: $705.40 (20 seats)
-Amount owed is $3,995.40
+  Richard III: $803.60 (20 seats)
+Amount owed is $4,093.60
 You earned 56 credits
