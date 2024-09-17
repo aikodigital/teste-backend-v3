@@ -1,11 +1,11 @@
-﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Application.Services.Calculators;
+﻿using TheatricalPlayersRefactoringKata.Application.UseCases.Calculators;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Application.Services.Factories
+namespace TheatricalPlayersRefactoringKata.Application.UseCases.Factories
 {
-    public class GenreCalculatorFactory
+    public class TheatricalCalculatorFactory
     {
-        public static IGenreCalculator GetCalculator(string genreType)
+        public static ITheatricalCalculator GetCalculator(string genreType)
         {
             return genreType switch
             {

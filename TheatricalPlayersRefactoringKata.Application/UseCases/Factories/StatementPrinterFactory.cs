@@ -1,7 +1,7 @@
-﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Application.Services.Printers;
+﻿using TheatricalPlayersRefactoringKata.Application.Services.Printers;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Application.Services.Factories
+namespace TheatricalPlayersRefactoringKata.Application.UseCases.Factories
 {
     public static class StatementPrinterFactory
     {

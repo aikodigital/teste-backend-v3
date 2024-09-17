@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Text;
-using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Application.Services.Factories;
+using TheatricalPlayersRefactoringKata.Application.UseCases.Factories;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
 {
@@ -22,7 +22,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
             foreach (var perf in invoice.Performances)
             {
                 var play = plays[perf.PlayId];
-                var calculator = GenreCalculatorFactory.GetCalculator(play.Type);
+                var calculator = TheatricalCalculatorFactory.GetCalculator(play.Type);
 
                 var thisAmount = calculator.CalculateAmount(perf, play);
                 var volumeCredits = calculator.CalculateVolumeCredits(perf);

@@ -1,9 +1,9 @@
-﻿using TheatricalPlayersRefactoringKata.Application.Interfaces;
-using TheatricalPlayersRefactoringKata.Domain.Entities;
+﻿using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Application.Services.Calculators
+namespace TheatricalPlayersRefactoringKata.Application.UseCases.Calculators
 {
-    public class HistoryCalculator : IGenreCalculator
+    public class HistoryCalculator : ITheatricalCalculator
     {
         private readonly TragedyCalculator _tragedyCalculator;
         private readonly ComedyCalculator _comedyCalculator;

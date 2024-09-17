@@ -9,20 +9,20 @@ public class ApiTheatrical
     /// ID chave primária (PK)
     /// </summary>
     [Required]
-    public string Id { get; set; }
+    public required string Id { get; set; }
 
     /// <summary>
     /// O nome da peça teatral.
     /// </summary>
     [Required]
     [StringLength(100)]
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
     /// <summary>
     /// Tipo de peça, pode ser Comédia, Tragédia, Histórica e etc.
     /// </summary>
     [Required]
-    public string Genre { get; set; }
+    public required string Genre { get; set; }
 
     /// <summary>
     /// Duração da peça em minutos.

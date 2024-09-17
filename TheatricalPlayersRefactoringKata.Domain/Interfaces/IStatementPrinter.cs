@@ -1,6 +1,6 @@
 ﻿using TheatricalPlayersRefactoringKata.Domain.Entities;
 
-namespace TheatricalPlayersRefactoringKata.Application.Interfaces
+namespace TheatricalPlayersRefactoringKata.Domain.Interfaces
 {
     public interface IStatementPrinter
     {
