@@ -1,4 +1,3 @@
-using Microsoft.OpenApi.Models;
 using System.Reflection;
 using TheatricalPlayersRefactoringKata.OutputStrategies;
 

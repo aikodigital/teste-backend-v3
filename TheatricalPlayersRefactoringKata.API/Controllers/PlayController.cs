@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
@@ -11,7 +10,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         private static List<Play> plays = new List<Play>();
 
         /// <summary>
-        /// Retorna todas as peças.
+        /// Recupera todas as peças.
         /// </summary>
         /// <returns>Lista de peças.</returns>
         /// <response code="200">Peças retornadas com sucesso</response>
@@ -27,7 +26,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Retorna uma peça específica com base no nome.
+        /// Recupera uma peça específica com base no nome informado.
         /// </summary>
         /// <param name="name">Nome da peça</param>
         /// <returns>Peça correspondente</returns>
@@ -45,7 +44,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Cria uma nova peça.
+        /// Cria uma nova peça com base nos parametros fornecidos.
         /// </summary>
         /// <param name="play">Objeto Play</param>
         /// <returns>Status da criação da peça</returns>
@@ -72,7 +71,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Atualiza uma peça existente.
+        /// Atualiza uma peça existente com base no nome informado.
         /// </summary>
         /// <param name="name">Nome da peça a ser atualizada</param>
         /// <param name="updatedPlay">Dados atualizados da peça</param>
@@ -103,7 +102,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Remove uma peça existente.
+        /// Remove uma peça existente com base no nome informado.
         /// </summary>
         /// <param name="name">Nome da peça a ser removida</param>
         /// <returns>Status da remoção da peça</returns>

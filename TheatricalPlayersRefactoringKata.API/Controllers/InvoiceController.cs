@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.Models;
-using System.Collections.Generic;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -11,7 +10,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         private static List<Invoice> invoices = new List<Invoice>();
 
         /// <summary>
-        /// Recupera todas as faturas
+        /// Recupera todas as faturas.
         /// </summary>
         /// <returns>Lista de faturas ou mensagem de erro</returns>
         /// <response code="200">Retorna todas as faturas</response>
@@ -27,7 +26,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Recupera uma fatura específica pelo ID do cliente
+        /// Recupera uma fatura específica com base no nome informado.
         /// </summary>
         /// <returns>Fatura correspondente ou mensagem de erro</returns>
         /// <response code="200">Retorna a fatura especificada</response>
@@ -44,7 +43,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Cria uma nova fatura
+        /// Cria uma nova fatura com base nos parametros fornecidos.
         /// </summary>
         /// <returns>Mensagem de sucesso ou erro</returns>
         /// <response code="201">Fatura criada com sucesso</response>
@@ -78,7 +77,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Atualiza uma fatura existente
+        /// Atualiza uma fatura existente com base no nome informado.
         /// </summary>
         /// <returns>Mensagem de sucesso ou erro</returns>
         /// <response code="200">Fatura atualizada com sucesso</response>
@@ -107,7 +106,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Remove uma fatura
+        /// Remove uma fatura com base no nome informado.
         /// </summary>
         /// <returns>Mensagem de sucesso ou erro</returns>
         /// <response code="200">Fatura removida com sucesso</response>

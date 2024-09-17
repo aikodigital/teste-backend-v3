@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheatricalPlayersRefactoringKata.Enums;
 using TheatricalPlayersRefactoringKata.Models;
-using TheatricalPlayersRefactoringKata.OutputStrategies;
 
 namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
@@ -13,7 +11,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         private static List<Performance> performances = new List<Performance>();
 
         /// <summary>
-        /// Recupera todas as Performances
+        /// Recupera todas as performances.
         /// </summary>
         /// <returns>Mensagem de erro ou sucesso</returns>
         /// <response code="200">Retorno de todas as performances</response>
@@ -30,7 +28,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Recupera uma Performance especifica pelo ID informado
+        /// Recupera uma performance especifica com base no ID informado.
         /// </summary>
         /// <returns>Mensagem de erro ou sucesso</returns>
         /// <response code="200">Retorno da performance especificada</response>
@@ -47,7 +45,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Cria uma Performance com base nos parametros fornecidos
+        /// Cria uma nova performance com base nos parametros fornecidos.
         /// </summary>
         /// <returns>Mensagem de erro ou sucesso</returns>
         /// <response code="201">Performance criada com sucesso!</response>
@@ -81,7 +79,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Atualiza uma Performance com base nos parametros fornecidos
+        /// Atualiza uma performance com base no ID informado.
         /// </summary>
         /// <returns>Mensagem de erro ou sucesso</returns>
         /// <response code="200">Performance atualizada com sucesso!</response>
@@ -109,7 +107,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Remove uma Performance com base nos parametros fornecidos
+        /// Remove uma performance com base no ID informado.
         /// </summary>
         /// <returns>Mensagem de erro ou sucesso</returns>
         /// <response code="200">Performance removida com sucesso!</response>
