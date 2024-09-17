@@ -1,7 +1,10 @@
+using System;
+
 namespace TP.Domain.Entities;
 
 public class Play
 {
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public int Lines { get; set; }
     public string Type { get; set; }

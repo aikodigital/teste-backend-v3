@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TP.Domain.Entities;
 
 namespace TP.ApplicationServices.Interfaces
 {
-    public class IStatementPrinterServices
+    public interface IStatementPrinterServices
     {
+        string Print(Invoice invoice, Dictionary<string, Play> plays, string format);
     }
 }

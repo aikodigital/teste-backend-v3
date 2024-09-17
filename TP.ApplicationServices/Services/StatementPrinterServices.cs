@@ -9,6 +9,11 @@ public class StatementPrinterServices : IStatementPrinterServices
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays, string format)
     {
+     /*   var invoice = _invoiceRepository.GetInvoiceById(invoiceId); // Recupera a fatura do banco de dados
+        if (invoice == null) throw new Exception("Invoice not found");
+
+        var plays = _playRepository.GetAllPlays().ToDictionary(p => p.Name, p => p); // Mapeia plays pelo ID*/
+
         IStatementFormatter formatter = format switch
         {
             "xml" => new XmlStatementFormatter(),
