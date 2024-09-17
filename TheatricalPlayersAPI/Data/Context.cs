@@ -11,5 +11,6 @@ namespace TheatricalPlayersRefactoringKata.API.Data
         }
 
         public DbSet<Extrato> Extrato { get; set; } = default!;
+        public DbSet<Play> Play { get; set; } = default!;
     }
 }

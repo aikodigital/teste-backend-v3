@@ -57,7 +57,6 @@ public class StatementPrinter : CalculadoraDePecas
         {
             throw new Exception("Erro ao salvar arquivo de extrato!");
         }
-
     }
 
     // Cálculo dos dados comuns a todos tipos de saída - Via Tupla
