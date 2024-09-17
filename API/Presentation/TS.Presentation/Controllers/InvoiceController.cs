@@ -69,6 +69,7 @@ namespace TS.Presentation.Controllers
             {
                 var request = new AddInvoicesRequest
                 {
+                    TypeFile = viewModel.TypeFile,
                     CustomerId = viewModel.CustomerId,
                     Seats = viewModel.Seats,
                     Performances = viewModel.Performances.Select(res => new AddInvoicePerformances

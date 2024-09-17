@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MediatR;
 using TS.Application.Invoices.Commands.AddInvoices.Request;
 using TS.Application.Services;
@@ -41,12 +42,13 @@ namespace TS.Application.Invoices.Commands.AddInvoices
 
                 await _invoicesRepository.CreateAsync(addTo);
 
-                var message = new
+                var messageQueue = new MessageQueue
                 {
+                    TypeFile = (int)request.TypeFile,
                     InvoiceId = addTo.Id
                 };
 
-                _rabbitMQServices.Publisher(message.ToString()!);
+                _rabbitMQServices.Publisher(messageQueue);
             }
         }
     }

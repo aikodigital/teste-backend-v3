@@ -1,8 +1,10 @@
+using TS.Domain.Enums;
+
 namespace TS.Application.Services
 {
     public interface IInvoicesStatementsServices
     {
-        Task XML(long invoiceId);
-        Task TXT(long invoiceId);
+        Task GenerateFile(ETypeFile typeFile,
+                          long invoiceId);
     }
 }

@@ -9,6 +9,7 @@ using TS.Domain.Repositories.Performances;
 using TS.Domain.Repositories.Plays;
 using Hangfire;
 using TS.Application.Services;
+using TS.Application.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,7 @@ builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
 builder.Services.AddScoped<IPerformancesRepository, PerformancesRepository>();
 builder.Services.AddScoped<IPlaysRepository, PlaysRepository>();
 builder.Services.AddScoped<IRabbitMQServices, RabbitMQServices>();
+builder.Services.AddScoped<IInvoicesStatementsServices, InvoicesStatementsServices>();
 
 builder.Services.AddMvc()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -57,7 +59,8 @@ builder.Services.AddHangfire(Configuration => Configuration
     .UseSqlServerStorage(builder.Configuration.GetConnectionString("TS")));
 
 builder.Services.AddHangfireServer();
-RecurringJob.AddOrUpdate<IRabbitMQServices>("Faturas", services => services.Consumer(), "*/2 * * * *"); //Expressão CROM para executar a cada 2 minutos
+
+builder.Services.AddHostedService<RabbitMQWorker>();
 
 var app = builder.Build();
 

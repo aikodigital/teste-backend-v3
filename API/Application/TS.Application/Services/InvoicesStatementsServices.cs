@@ -98,10 +98,13 @@ namespace TS.Application.Services
                         }
                         value += valueHistory;
                         break;
+                    default:
+                        break;
                 }
 
                 response.Items.Add(new DatasItemsResponse
                 {
+                    PerformanceName = play.Name.Trim(),
                     AmountOwed = value,
                     Seats = 0,
                     EarnedCredits = Convert.ToDecimal(creditCustomer)
@@ -114,14 +117,37 @@ namespace TS.Application.Services
             return response;
         }
 
-        public async Task TXT(long invoiceId)
+        private async Task TXT(long invoiceId)
         {
             var invoice = await Invoices(invoiceId);
+
+            if (invoice == null)
+                return;
+
+            var lines = new List<string>
+            {
+                $"Statement for {invoice.Customers}"
+            };
+
+            foreach (var item in invoice.Items)
+                lines.Add($" {item.PerformanceName}: ${item.AmountOwed} ({item.Seats} seats)");
+
+            lines.Add($"Amount owed is ${invoice.TotalAmoutOwed}");
+            lines.Add($"You earned {invoice.TotalEarnedCredits} credits");
+
+            var fileName = Path.Combine(GetPath(), $"{DateTime.Now:ddMMyyyyHHmmss}.received.txt");
+            using StreamWriter writer = new(fileName);
+
+            foreach (string line in lines)
+                writer.WriteLine(line);
         }
 
-        public async Task XML(long invoiceId)
+        private async Task XML(long invoiceId)
         {
             var invoice = await Invoices(invoiceId);
+
+            if (invoice == null)
+                return;
 
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
             XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
@@ -137,24 +163,36 @@ namespace TS.Application.Services
                                     new XElement("AmountOwed", invoice.TotalAmoutOwed),
                                     new XElement("EarnedCredits", invoice.TotalEarnedCredits)));
 
-            var rootPath = FindFirstRootDirectory();
 
-            if (rootPath != null)
-            {
-                var fileName = Path.Combine(rootPath, $"{DateTime.Now:dd_MM_yyyy_HH_mm_ss}_invoice.xnl");
-                xml.Save(fileName);
-            }
+
+            var fileName = Path.Combine(GetPath(), $"{DateTime.Now:ddMMyyyyHHmmss}.received.xml");
+            xml.Save(fileName);
         }
 
-        private static string? FindFirstRootDirectory()
+        private static string GetPath()
         {
-            DriveInfo[] drives = DriveInfo.GetDrives();
+            var path = Path.Combine("C:/", "Receiveds");
 
-            foreach (DriveInfo drive in drives)
-                if (drive.IsReady)
-                    return drive.RootDirectory.FullName;
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
-            return null;
+            return path;
+        }
+
+        public async Task GenerateFile(ETypeFile typeFile,
+                                       long invoiceId)
+        {
+            switch (typeFile)
+            {
+                case ETypeFile.TXT:
+                    await TXT(invoiceId);
+                    break;
+                case ETypeFile.XML:
+                    await XML(invoiceId);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -168,6 +206,7 @@ namespace TS.Application.Services
 
     public class DatasItemsResponse
     {
+        public string PerformanceName { get; set; } = string.Empty;
         public decimal AmountOwed { get; set; }
         public decimal Seats { get; set; }
         public decimal EarnedCredits { get; set; }
