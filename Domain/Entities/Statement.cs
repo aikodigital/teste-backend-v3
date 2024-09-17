@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace Domain.Entities
 {
@@ -18,7 +19,10 @@ namespace Domain.Entities
         public decimal AmountOwed { get; set; }
         public int EarnedCredits { get; set; }
         public int Seats { get; set; }
+        
+        [XmlIgnore]
         public int StatementId { get; set; }
+        [XmlIgnore]
         public Statement Statement { get; set; }
 
         
