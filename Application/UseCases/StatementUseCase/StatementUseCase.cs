@@ -27,11 +27,11 @@ namespace Application.UseCases.StatementUseCase
         }
         public Statement GetByIdStatement(int id)
         {
-            return _statementRepository.GetById(id).Result;
+            return _statementRepository.GetById(id);
         }
         public List<Statement> GetAllStatement()
         {
-            return _statementRepository.GetAll().Result;
+            return _statementRepository.GetAll();
         }
     }
 }

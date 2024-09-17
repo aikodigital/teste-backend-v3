@@ -32,13 +32,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         Context.SaveChanges();
     }
 
-    public async Task<T> GetById(int id)
+    public T GetById(int id)
     {
-        return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+        return Context.Set<T>().Where(e => e.Id == id).First();
     }
 
-    public async Task<List<T>> GetAll()
+    public List<T> GetAll()
     {
-        return await Context.Set<T>().ToListAsync();
+        return Context.Set<T>().ToList();
     }
 }

@@ -7,7 +7,7 @@ namespace Domain.Contracts.Repositories
         void Create(T entity);
         void Update(T entity);  
         void Delete(T entity);
-        Task<T> GetById(int id);
-        Task<List<T>> GetAll();
+        T GetById(int id);
+        List<T> GetAll();
     }
 }

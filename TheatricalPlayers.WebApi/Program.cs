@@ -12,11 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IStatementPrinterUseCase, StatementPrinterUseCase>();
 builder.Services.AddScoped<IStatementUseCase, StatementUseCase>();
 builder.Services.AddScoped<IStatementRepository, StatementRepository>();
+builder.Services.AddScoped<IConvertUseCase, ConvertUseCase>();
+builder.Services.AddScoped<IStatementItemUseCase, StatementItemUseCase>();
+builder.Services.AddScoped<IStatementItemRepository, StatementItemRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 
 //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
