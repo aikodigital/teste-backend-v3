@@ -1,5 +1,4 @@
 namespace TheatricalPlayersRefactoringKata.Domain.Entities;
-
 public class Invoice
 {
     private string _customer;
