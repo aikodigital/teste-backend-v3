@@ -28,6 +28,9 @@ public class StatementPrinter
                 case "comedy":
                     thisAmount += CalcComedyValue(perf);
                     break;
+                case "history":
+                    thisAmount = CalcHistoryValue(perf, thisAmount);
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
