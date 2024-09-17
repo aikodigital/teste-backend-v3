@@ -5,19 +5,22 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Calculators
 {
     public class HistoryCalculator : IGenreCalculator
     {
-        public decimal CalculateAmount(Performance perf, Play play)
+        private readonly TragedyCalculator _tragedyCalculator;
+        private readonly ComedyCalculator _comedyCalculator;
+
+        public HistoryCalculator()
         {
-            decimal thisAmount = 50000; // Base amount for history plays
-            if (perf.Audience > 25)
-            {
-                thisAmount += 1500 * (perf.Audience - 25);
-            }
-            return thisAmount;
+            _tragedyCalculator = new TragedyCalculator();
+            _comedyCalculator = new ComedyCalculator();
         }
 
+        public decimal CalculateAmount(Performance perf, Play play)
+        {
+            return _tragedyCalculator.CalculateAmount(perf, play) + _comedyCalculator.CalculateAmount(perf, play);
+        }
         public int CalculateVolumeCredits(Performance perf)
         {
-            return Math.Max(perf.Audience - 25, 0);  // Different credit rule for history
+            return Math.Max(perf.Audience - 30, 0);
         }
     }
 }

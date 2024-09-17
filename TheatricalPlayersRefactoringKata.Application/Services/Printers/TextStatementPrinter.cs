@@ -23,10 +23,8 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
                 var thisAmount = calculator.CalculateAmount(perf, play);
                 totalAmount += thisAmount;
 
-                // Add volume credits
                 volumeCredits += calculator.CalculateVolumeCredits(perf);
 
-                // Print line for this order
                 result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             }
 

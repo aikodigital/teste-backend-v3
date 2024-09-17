@@ -7,7 +7,11 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Calculators
     {
         public decimal CalculateAmount(Performance perf, Play play)
         {
-            decimal thisAmount = 30000;
+            var lines = play.Lines;
+            if (lines < 1000) lines = 1000;
+            if (lines > 4000) lines = 4000;
+            var thisAmount = lines * 10;
+
             if (perf.Audience > 20)
             {
                 thisAmount += 10000 + 500 * (perf.Audience - 20);
