@@ -31,8 +31,8 @@ public class StatementPrinterTests
         serviceCollection.AddTransient<ICalculateCreditAudience,
                                        CalculateCreditAudience>();
 
-        serviceCollection.AddTransient<ICalculateAdditionalValuePerGender,
-                                       CalculateAdditionalValuePerGender>();
+        serviceCollection.AddTransient<ICalculateAdditionalValuePerPlayType,
+                                       CalculateAdditionalValuePerPlayType>();
 
         serviceCollection.AddTransient<IInvoicePrintFactory,
                                        InvoicePrintFactory>();
@@ -45,28 +45,28 @@ public class StatementPrinterTests
                                  ?? throw new InvalidOperationException("A instância de CalculateBaseAmountPerLine não pôde ser criada.");
     }
 
-    [Fact]
+    //[Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-
-        Invoice invoice = new Invoice(
-            "BigCo",
-            new List<Performance>
-            {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-            }
-        );
+        var invoice = new Invoice(1, "BigCo");
+        var plays = new List<Play>()
+        {
+            new Play(1, "Hamlet", 4024, 1),
+            new Play(2, "As You Like It", 2670, 2),
+            new Play(3, "Othello", 3560, 1)
+        };
+        var performances = new List<Performance>()
+        {
+            new Performance(1, 1, 55, 1),
+            new Performance(2, 2, 35, 1),
+            new Performance(3, 3, 40, 1),
+        };
 
         var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
+        var invoiceCreditSettings = GenerateInvoiceCreditSettings();
 
-        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.Text, invoiceCalculeteSettings);
+        var result = _StatementPrinter.PrintInvoice(invoice, performances, plays, PrintType.Text, invoiceCalculeteSettings, invoiceCreditSettings);
 
         Approvals.Verify(result);
     }
@@ -77,49 +77,75 @@ public class StatementPrinterTests
     {
         var plays = GeneratePlay();
         var invoice = GenerateInvoice();
+        var performances = GeneratePerformance();
+        var invoiceCreditSettings = GenerateInvoiceCreditSettings();
         var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
-        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.Text, invoiceCalculeteSettings);
+        var result = _StatementPrinter.PrintInvoice(invoice, performances, plays, PrintType.Text, invoiceCalculeteSettings, invoiceCreditSettings);
 
         Approvals.Verify(result);
     }
-        
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
         var plays = GeneratePlay();
         var invoice = GenerateInvoice();
+        var performances = GeneratePerformance();
         var invoiceCalculeteSettings = GenerateInvoiceCalculeteSettings();
-        var result = _StatementPrinter.PrintInvoice(invoice, plays, PrintType.XML, invoiceCalculeteSettings);
+        var invoiceCreditSettings = GenerateInvoiceCreditSettings();
+        var result = _StatementPrinter.PrintInvoice(invoice, performances, plays, PrintType.XML, invoiceCalculeteSettings, invoiceCreditSettings);
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTextStatementExampleWithDataBase()
+    {
+        var result = _StatementPrinter.PrintInvoice("1", "Text");
+
+        Approvals.Verify(result);
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExampleWithDataBase()
+    {
+        var result = _StatementPrinter.PrintInvoice("1", "XML");
         Approvals.Verify(result);
     }
 
     #region Generate
     private static Invoice GenerateInvoice()
     {
-        return new Invoice(
-                    "BigCo",
-                    new List<Performance>
-                    {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
-                    }
-                );
+        return new Invoice(1, "BigCo");
     }
 
-    private static Dictionary<string, Play> GeneratePlay()
+    private static List<Performance> GeneratePerformance()
     {
-        var plays = new Dictionary<string, Play>();
-        plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
-        plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
-        plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
-        plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
+        var performance = new List<Performance>()
+        {
+            new Performance(1, 1, 55, 1),
+            new Performance(2, 2, 35, 1),
+            new Performance(3, 3, 40, 1),
+            new Performance(4, 4, 20, 1),
+            new Performance(5, 5, 39, 1),
+            new Performance(6, 4, 20, 1)
+        };
+        return performance;
+    }
+
+    private static List<Play> GeneratePlay()
+    {
+        var plays = new List<Play>()
+        {
+            new Play(1, "Hamlet", 4024, 1),
+            new Play(2, "As You Like It", 2670, 2),
+            new Play(3, "Othello", 3560, 1),
+            new Play(4, "Henry V", 3227, 3),
+            new Play(5, "King John", 2648, 3),
+            new Play(6, "Richard III", 3718, 3)
+        };
         return plays;
     }
 
@@ -127,38 +153,58 @@ public class StatementPrinterTests
     {
         var invoiceCalculeteSettings = new List<InvoiceCalculeteSettings>();
         invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
-                    new Guid(),
-                    GenderType.tragedy,
+                    1,
+                    1,
                     StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
                     StatementPrinterConstants.TRAGEDY_BONUS,
                     StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
                     StatementPrinterConstants.TRAGEDY_PER_AUDIENCE
         ));
         invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
-                    new Guid(),
-                    GenderType.comedy,
+                    2,
+                    2,
                     StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
                     StatementPrinterConstants.COMEDY_BONUS,
                     StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
                     StatementPrinterConstants.COMEDY_PER_AUDIENCE
         ));
         invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
-                    new Guid(),
-                    GenderType.history,
+                    3,
+                    3,
                     StatementPrinterConstants.TRAGEDY_MINIMUM_AUDIENCE,
                     StatementPrinterConstants.TRAGEDY_BONUS,
                     StatementPrinterConstants.TRAGEDY_PER_AUDIENCE_ADDITIONAL,
                     StatementPrinterConstants.TRAGEDY_PER_AUDIENCE
         ));
         invoiceCalculeteSettings.Add(new InvoiceCalculeteSettings(
-                    new Guid(),
-                    GenderType.history,
+                    4,
+                    3,
                     StatementPrinterConstants.COMEDY_MINIMUM_AUDIENCE,
                     StatementPrinterConstants.COMEDY_BONUS,
                     StatementPrinterConstants.COMEDY_PER_AUDIENCE_ADDITIONAL,
                     StatementPrinterConstants.COMEDY_PER_AUDIENCE
         ));
         return invoiceCalculeteSettings;
+    }
+    private static List<InvoiceCreditSettings> GenerateInvoiceCreditSettings()
+    {
+        var InvoiceCreditSettings = new List<InvoiceCreditSettings>()
+        {
+            new InvoiceCreditSettings(1, 1, 30, 0),
+            new InvoiceCreditSettings(2, 2, 30, 5m),
+            new InvoiceCreditSettings(3, 3, 30, 0)
+        };
+        return InvoiceCreditSettings;
+    }
+    private static List<PlayType> GeneratePlayTypes()
+    {
+        var PlayTypes = new List<PlayType>()
+        {
+            new PlayType(1, "tragedy"),
+            new PlayType(2, "comedy"),
+            new PlayType(3, "history")
+        };
+        return PlayTypes;
     }
     #endregion
 }

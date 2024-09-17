@@ -1,19 +1,23 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace TheatricalPlayersRefactoringKata.Domain;
 
 public class Invoice
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    private int _invoiceId;
     private string _customer;
-    private List<Performance> _performances;
 
-    public string Customer { get => _customer; set => _customer = value; }
-    public List<Performance> Performances { get => _performances; set => _performances = value; }
-
-    public Invoice(string customer, List<Performance> performance)
+    public Invoice() { }
+    public Invoice(int invoiceId, string customer)
     {
-        this._customer = customer;
-        this._performances = performance;
+        _invoiceId = invoiceId;
+        _customer = customer;
     }
 
+    public string Customer { get => _customer; set => _customer = value; }
+    public int InvoiceId { get => _invoiceId; set => _invoiceId = value; }  
 }

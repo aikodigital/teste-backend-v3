@@ -9,7 +9,7 @@ using TheatricalPlayersRefactoringKata.Domain;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services
 {
-    public class CalculateAdditionalValuePerGender : ICalculateAdditionalValuePerGender
+    public class CalculateAdditionalValuePerPlayType : ICalculateAdditionalValuePerPlayType
     {
         public decimal CalculateAdditionalValue(int audience, int audienceMinimum, decimal bonus, decimal per_audience_additional, decimal per_audience)
         {

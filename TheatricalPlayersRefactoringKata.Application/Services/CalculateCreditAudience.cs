@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Application.Constants;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services
 {
     public class CalculateCreditAudience : ICalculateCreditAudience
     {
-        public decimal CalculateCredit(int audience, string gender)
+        public decimal CalculateCredit(int audience, InvoiceCreditSettings invoiceCreditSettings)
         {
-            // add volume credits
-            var volumeCredits = Math.Max(audience - StatementPrinterConstants.CREDIT_MINIMUM_AUDIENCE, 0);
-            // add extra credit for every ten comedy attendees
-            if ("comedy" == gender) volumeCredits += (int)Math.Floor(audience / StatementPrinterConstants.COMEDY_BONUS_CREDIT_PER_ATTENDEES);
+            var volumeCredits = Math.Max(audience - invoiceCreditSettings.MinimumAudience, 0);
+            if (invoiceCreditSettings.BonusCreditPerAttendees > 0) volumeCredits += (int)Math.Floor(audience / invoiceCreditSettings.BonusCreditPerAttendees);
 
             return volumeCredits;
         }
