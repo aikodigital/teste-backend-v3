@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace TheatricalPlayersRefactoringKata;
 
@@ -13,14 +15,6 @@ public class StatementPrinter
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
-        Performance p = new Performance("asg", 20);
-        decimal d = 3227 / 10;
-
-        /*result += String.Format("aq {0} aq2 {1}", 
-            (new HistoricalCalculator()).calculateAmount(p, 3227 / 10),
-            (new TragedyCalculator()).calculateAmount(p, 3227/10)
-        );
-        */
         foreach (var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
@@ -28,8 +22,9 @@ public class StatementPrinter
 
             lines = Math.Max(1000,Math.Min(lines,4000)); // between 1000 and 4000 only
 
-            decimal thisAmount = lines/10;
+            decimal thisAmount = lines/10; 
 
+            // calculate amount based on play type
             var calcPlayAmount = PlayCalculatorFactory.createCalculator(play.Type); 
             thisAmount = calcPlayAmount.calculateAmount(perf, thisAmount);
 
@@ -48,4 +43,57 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
+
+    public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
+    {
+        decimal totalAmount = 0;
+        var volumeCredits = 0;
+
+        // Cria o modelo para o XML
+        Statement statement = new Statement
+        {
+            Customer = invoice.Customer,
+            Items = new List<StatementItem>()
+        };
+
+        foreach (var perf in invoice.Performances)
+        {
+            var play = plays[perf.PlayId];
+            decimal lines = play.Lines;
+            lines = Math.Max(1000, Math.Min(lines, 4000)); // Limita as linhas entre 1000 e 4000
+            decimal thisAmount = lines / 10;
+
+            var calcPlayAmount = PlayCalculatorFactory.createCalculator(play.Type);
+            thisAmount = calcPlayAmount.calculateAmount(perf, thisAmount);
+
+            // Adiciona créditos
+            volumeCredits += Math.Max(perf.Audience - 30, 0);
+            if ("comedy" == play.Type)
+            {
+                volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+            }
+
+            // Adiciona um item ao XML
+            statement.Items.Add(new StatementItem
+            {
+                AmountOwed = thisAmount,
+                EarnedCredits = Math.Max(perf.Audience - 30, 0),
+                Seats = perf.Audience
+            });
+
+            totalAmount += thisAmount;
+        }
+
+        statement.AmountOwed = totalAmount;
+        statement.EarnedCredits = volumeCredits;
+
+        // Serializa o objeto Statement em XML
+        var xmlSerializer = new XmlSerializer(typeof(Statement));
+        using (var stringWriter = new StringWriter())
+        {
+            xmlSerializer.Serialize(stringWriter, statement);
+            return stringWriter.ToString();
+        }
+    }
+    
 }

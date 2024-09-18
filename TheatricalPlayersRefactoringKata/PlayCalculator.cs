@@ -42,7 +42,7 @@ namespace TheatricalPlayersRefactoringKata
             IPlayCalculator tragedyCalc = new TragedyCalculator();
             IPlayCalculator comedyCalc = new ComedyCalculator();
 
-            return tragedyCalc.calculateAmount(perf, currentAmount) + comedyCalc.calculateAmount(perf, currentAmount) + 1;
+            return tragedyCalc.calculateAmount(perf, currentAmount) + comedyCalc.calculateAmount(perf, currentAmount);
         }
     }
 }
