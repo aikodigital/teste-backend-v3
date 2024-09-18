@@ -6,7 +6,8 @@ using TheatricalPlayersRefactoringKata.Legacy;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Entities.Gender;
 using TheatricalPlayersRefactoringKata.Application.Services.Statement;
-using TheatricalPlayersRefactoringKata.Application.UserCases.Statement;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
 
@@ -41,7 +42,7 @@ public class StatementPrinterTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public async Task TestTextStatementExample()
     {
         var plays = new Dictionary<string, Domain.Entities.Performance>
         {
@@ -58,15 +59,15 @@ public class StatementPrinterTests
             plays
         );
 
-        var statement = new GenerateStatement(new StatementText());
-        var result = statement.Execute(invoice);
+        var statement = new StatementService(new TextStatementGenerator());
+        var result = await statement.Execute(invoice);
 
         Approvals.Verify(result);
     }
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestXmlStatementExample()
+    public async Task TestXmlStatementExample()
     {
         var plays = new Dictionary<string, Domain.Entities.Performance>
         {
@@ -83,8 +84,8 @@ public class StatementPrinterTests
             plays
         );
 
-        var statement = new GenerateStatement(new StatementXml());
-        var result = statement.Execute(invoice);
+        var statement = new StatementService(new XmlStatementGenerator());
+        var result = await statement.Execute(invoice);
 
         Approvals.Verify(result);
     }

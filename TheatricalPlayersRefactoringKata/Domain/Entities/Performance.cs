@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+using TheatricalPlayersRefactoringKata.Application.Converters;
 using TheatricalPlayersRefactoringKata.Domain.Entities.Gender;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces.Strategy;
 
@@ -16,6 +18,8 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         public string Name { get; private set; } = string.Empty;
         public int Lines { get; private set; } = int.MinValue;
         public int Audience { get; private set; } = int.MinValue;
+
+        [JsonConverter(typeof(GenderConverter))]
         public IGender Gender { get; private set; }
         public int Credits => CalculateCredits();
 

@@ -1,9 +1,10 @@
-﻿using TheatricalPlayersRefactoringKata.Domain.Entities;
+﻿using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Interfaces.Strategy
 {
-    public interface IStatement
+    public interface IStatementGeneratorStrategy
     {
-        string Print(Invoice invoice);
+        Task<string> GenerateStatement(Invoice invoice);
     }
 }

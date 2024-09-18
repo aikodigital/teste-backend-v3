@@ -1,26 +1,30 @@
 ﻿using System.Text;
 using System.Linq;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces.Strategy;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Statement
 {
-    public class StatementText : IStatement
+    public class TextStatementGenerator : IStatementGeneratorStrategy
     {
-        public string Print(Invoice invoice)
+        public async Task<string> GenerateStatement(Invoice invoice)
         {
-            StringBuilder sb = new();
+            return await Task.Run(() =>
+            {
+                StringBuilder sb = new();
 
-            var customerName = invoice.Customer.Name;
-            var perfomances = invoice.Performances.Select(inv => inv.Value);
+                var customerName = invoice.Customer.Name;
+                var performances = invoice.Performances.Select(inv => inv.Value);
 
-            sb.Append(InvoiceHeaderDefault(customerName));
-            sb.Append(InvoiceBodyDefault(perfomances));
-            sb.Append(InvoiceFooterDefault(perfomances));
+                sb.Append(InvoiceHeaderDefault(customerName));
+                sb.Append(InvoiceBodyDefault(performances));
+                sb.Append(InvoiceFooterDefault(performances));
 
-            return sb.ToString();
+                return sb.ToString();
+            });
         }
 
         private static string InvoiceHeaderDefault(string customerName)
