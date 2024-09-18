@@ -1,9 +1,10 @@
 ﻿using System.Globalization;
 using TheatricalPlayersRefactoringKata.Application.DTOs;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Presentation;
 
-public class StatementPrinter
+public class TextStatementPrinter : IStatementFormatter
 {
     public string Print(StatementResult statement)
     {
