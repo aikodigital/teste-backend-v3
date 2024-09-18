@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Services;
+using TheatricalPlayersRefactoringKata.Application.Services.Report;
 using TheatricalPlayersRefactoringKata.Domain.Interface;
 using TheatricalPlayersRefactoringKata.Infra;
 using TheatricalPlayersRefactoringKata.Infra.Repositories;
@@ -16,7 +17,10 @@ public static class ServiceInjection
 
         services.AddScoped<IPlayRepository, PlayRepository>();
         services.AddScoped<IPlayService, PlayService>();
+
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IInvoiceService, InvoiceService>();
+
+        services.AddScoped<IReportService, ReportService>();
     }
 }

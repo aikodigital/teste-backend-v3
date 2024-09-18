@@ -1,8 +1,8 @@
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Application;
 using TheatricalPlayersRefactoringKata.Application.Models;
+using TheatricalPlayersRefactoringKata.Application.Services.Report;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -13,11 +13,20 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
-        var plays = new Dictionary<string, PlayModel>
+        var plays = new List<PlayModel>
         {
-            { "hamlet", new PlayModel("Hamlet", 4024, TypePlay.Tragedy) },
-            { "as-like", new PlayModel("As You Like It", 2670, TypePlay.Comedy) },
-            { "othello", new PlayModel("Othello", 3560, TypePlay.Tragedy) }
+            new("Hamlet", 4024, TypePlay.Tragedy)
+            {
+                Id = "hamlet"
+            },
+            new("As You Like It", 2670, TypePlay.Comedy)
+            {
+                Id = "as-like"
+            },
+            new ("Othello", 3560, TypePlay.Tragedy)
+            {
+                Id = "othello"
+            }
         };
 
         var invoice = new InvoiceModel("BigCo", new List<PerformanceModel>
@@ -27,7 +36,6 @@ public class StatementPrinterTests
             new ("othello", 40)
         });
 
-        var statementPrinter = new StatementPrinter();
         var result = StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -37,14 +45,32 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestTextStatementExample()
     {
-        var plays = new Dictionary<string, PlayModel>
+        var plays = new List<PlayModel>
         {
-            { "hamlet", new PlayModel("Hamlet", 4024, TypePlay.Tragedy) },
-            { "as-like", new PlayModel("As You Like It", 2670, TypePlay.Comedy) },
-            { "othello", new PlayModel("Othello", 3560, TypePlay.Tragedy) },
-            { "henry-v", new PlayModel("Henry V", 3227, TypePlay.History) },
-            { "john", new PlayModel("King John", 2648, TypePlay.History) },
-            { "richard-iii", new PlayModel("Richard III", 3718, TypePlay.History) }
+            new("Hamlet", 4024, TypePlay.Tragedy)
+            {
+                Id = "hamlet"
+            },
+            new("As You Like It", 2670, TypePlay.Comedy)
+            {
+                Id = "as-like"
+            },
+            new ("Othello", 3560, TypePlay.Tragedy)
+            {
+                Id = "othello"
+            },
+            new ("Henry V", 3227, TypePlay.History)
+            {
+                Id = "henry-v"
+            },
+            new ("King John", 2648, TypePlay.History)
+            {
+                Id = "john"
+            },
+            new ("Richard III", 3718, TypePlay.History)
+            {
+                Id = "richard-iii"
+            }
         };
 
         var invoice = new InvoiceModel("BigCo", new List<PerformanceModel>
@@ -57,7 +83,6 @@ public class StatementPrinterTests
             new ("richard-iii", 20)
         });
 
-        var statementPrinter = new StatementPrinter();
         var result = StatementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -67,14 +92,32 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
-        var plays = new Dictionary<string, PlayModel>
+        var plays = new List<PlayModel>
         {
-            { "hamlet", new PlayModel("Hamlet", 4024, TypePlay.Tragedy) },
-            { "as-like", new PlayModel("As You Like It", 2670, TypePlay.Comedy) },
-            { "othello", new PlayModel("Othello", 3560, TypePlay.Tragedy) },
-            { "henry-v", new PlayModel("Henry V", 3227, TypePlay.History) },
-            { "john", new PlayModel("King John", 2648, TypePlay.History) },
-            { "richard-iii", new PlayModel("Richard III", 3718, TypePlay.History) }
+            new("Hamlet", 4024, TypePlay.Tragedy)
+            {
+                Id = "hamlet"
+            },
+            new("As You Like It", 2670, TypePlay.Comedy)
+            {
+                Id = "as-like"
+            },
+            new ("Othello", 3560, TypePlay.Tragedy)
+            {
+                Id = "othello"
+            },
+            new ("Henry V", 3227, TypePlay.History)
+            {
+                Id = "henry-v"
+            },
+            new ("King John", 2648, TypePlay.History)
+            {
+                Id = "john"
+            },
+            new ("Richard III", 3718, TypePlay.History)
+            {
+                Id = "richard-iii"
+            }
         };
 
         var invoice = new InvoiceModel("BigCo", new List<PerformanceModel>
@@ -87,7 +130,6 @@ public class StatementPrinterTests
             new ("richard-iii", 20)
         });
 
-        var statementPrinter = new StatementPrinter();
         var result = StatementPrinter.Print(invoice, plays, ReportType.XML);
 
         Approvals.Verify(result);

@@ -36,6 +36,21 @@ namespace TheatricalPlayersRefactoringKata.Application.Models
             xmlSerializer.Serialize(stringWriter, this);
             return stringWriter.ToString();
         }
+
+        public string ToXMLFile(CultureInfo cultureInfo, string fileName)
+        {
+            var dateTime = DateTime.Now;
+
+            using var stringWriter = new Utf8StringWriter(cultureInfo);
+            var xmlSerializer = new XmlSerializer(GetType());
+            xmlSerializer.Serialize(stringWriter, this);
+
+            using var fileXml = File.CreateText($"Report/{fileName}_{dateTime:ddMMyyyy}_{dateTime:HHmmss}.xml");
+            fileXml.WriteLine(stringWriter.ToString());
+            fileXml.Close();
+
+            return stringWriter.ToString();
+        }
     }
 
     public class Item

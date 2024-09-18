@@ -3,6 +3,7 @@
     public enum ReportType
     {
         TXT,
-        XML
+        XML,
+        XMLTOFILE
     }
 }

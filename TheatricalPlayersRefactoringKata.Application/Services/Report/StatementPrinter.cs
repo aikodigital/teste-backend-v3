@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using TheatricalPlayersRefactoringKata.Application.Models;
 
-namespace TheatricalPlayersRefactoringKata.Application;
+namespace TheatricalPlayersRefactoringKata.Application.Services.Report;
 
 public class StatementPrinter
 {
-    public static string Print(InvoiceModel invoice, Dictionary<string, PlayModel> plays, ReportType reportType = ReportType.TXT)
+    public static string Print(InvoiceModel invoice, List<PlayModel> plays, ReportType reportType = ReportType.TXT)
     {
         double totalAmount = 0;
         int totalVolumeCredits = 0;
@@ -39,19 +39,28 @@ public class StatementPrinter
         resultObject.AmountOwed = Math.Round(totalAmount, 2);
         resultObject.EarnedCredits = totalVolumeCredits;
 
-        string result;
+        var result = string.Empty;
 
-        if (reportType == ReportType.TXT)
-            result = resultObject.ToTXT(cultureInfo);
-        else
-            result = resultObject.ToXML(cultureInfo);
+        switch (reportType)
+        {
+            case ReportType.TXT:
+                result = resultObject.ToTXT(cultureInfo);
+                break;
+            case ReportType.XML:
+                result = resultObject.ToXML(cultureInfo);
+                break;
+            case ReportType.XMLTOFILE:
+                result = resultObject.ToXMLFile(cultureInfo, invoice.Customer);
+                break;
+        }
 
         return result;
     }
 
-    private static void CalculateData(Dictionary<string, PlayModel> plays, PerformanceModel perf, out PlayModel play, out double thisAmount, out int thisVolumeCredits)
+    private static void CalculateData(List<PlayModel> plays, PerformanceModel perf, out PlayModel play, out double thisAmount, out int thisVolumeCredits)
     {
-        play = plays[perf.PlayId];
+        play = plays.Find(x => x.Id == perf.PlayId);
+
         var lines = play.Lines;
 
         if (lines < 1000)
