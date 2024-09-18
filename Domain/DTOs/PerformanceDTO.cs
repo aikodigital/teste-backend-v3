@@ -22,6 +22,7 @@ namespace Domain.DTOs
             {
                 Id = entity.Id,
                 PlayId = entity.PlayId,
+                Audience = entity.Audience,
                 Play = entity.Play == null ? null : new PlayDTO { Lines = entity.Play.Lines, Name = entity.Play.Name, Type = entity.Play.Type },
                 InvoiceId = entity.InvoiceId,
                 Invoice = entity.Invoice == null ? null : new InvoiceDTO { Id = entity.Invoice.Id, Customer = entity.Invoice.Customer },

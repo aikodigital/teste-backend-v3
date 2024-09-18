@@ -30,7 +30,6 @@ namespace Application.Commands.TheaterPlayCommands.CreateTheaterPlayCommands
 
             theaterPlayDTO.Play = Play == null ? null : new PlayDTO { Lines = Play.Lines , Name = Play.Name, Type = Play.Type };
             return theaterPlayDTO;
-
         }
     }
 }

@@ -14,10 +14,17 @@ namespace Application.Services
 {
     public class InvoiceService (ICommandHandler<CreateInvoiceCommand, InvoiceDTO> _CreateTheaterPlayCommandHandler) : IInvoiceService
     {
-        public InvoiceDTO Create(InvoiceModelView invoce)
+        public async Task<InvoiceDTO> Create(InvoiceModelView invoce)
         {
 
-            throw new NotImplementedException();
+            var command = new CreateInvoiceCommand
+            {
+                Customer = invoce.Customer,
+            };
+
+            command.Performances = invoce.Performances.Select(p => p.DTO()).ToList();
+            var result = await _CreateTheaterPlayCommandHandler.HandleAsync(command);
+            return result.Dto;
         }
     }
 }

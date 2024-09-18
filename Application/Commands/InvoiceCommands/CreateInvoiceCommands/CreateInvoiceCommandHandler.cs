@@ -21,23 +21,30 @@ namespace Application.Commands.InvoiceCommands.CreateInvoiceCommands
     {
         public override async Task<ICommandResult<InvoiceDTO>> HandleAsync(CreateInvoiceCommand command)
         {
-
+            var performance = new List<PerformanceEntity>();
             foreach (var item in command.Performances)
             {
                var play =  _IPlayRepository.Get(item.PlayId);
+                performance.Add(item);
 
                if(play == null)
                 {
                     throw new Exception("Play not found");
                 }
             }
+            InvoiceEntity entity = command.Dto();
+            entity.Performances = performance;
 
-           var entity = await _IInvoiceRepository.AddAsync(command.Dto()); 
+
+            entity = await _IInvoiceRepository.AddAsync(entity); 
             var theaterPlayDTOs = new List<TheaterPlayDTO>();
             foreach (var item in entity.Performances)
             {
-                var theaterPlay =  _ITheaterPlayRepository.Find(p => p.PlayId == item.PlayId);
-                theaterPlayDTOs.Add(theaterPlay.First());
+               
+                var theaterPlay = ( _ITheaterPlayRepository.Find(p => p.PlayId == item.PlayId)).First();
+                theaterPlay.Play = item.Play;
+                theaterPlay.Play.Id = item.PlayId;
+                theaterPlayDTOs.Add(theaterPlay);
             }
             StatementPrinter statementPrinter = new StatementPrinter();
             var reportList = statementPrinter.Report(entity, theaterPlayDTOs);

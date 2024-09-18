@@ -76,7 +76,19 @@ namespace Infra.Data.Repositories.Base
         }
         public async Task<int> SaveChangesAsync()
         {
-            return await _context.SaveChangesAsync();
+            try
+            {
+                 await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception( ex.Message);
+
+                
+            }
+            
         }
         public void Dispose()
         {

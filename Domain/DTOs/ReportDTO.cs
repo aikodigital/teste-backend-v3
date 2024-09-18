@@ -32,6 +32,7 @@ namespace Domain.DTOs
                 Seats = entity.Seats,
                 Amount = entity.Amount,
                 ReportCreditId = entity.ReportCreditId,
+                ReportCredit = entity.ReportCredit == null ? null : new ReportCreditDTO { Id = entity.ReportCredit.Id, AmountTotal = entity.ReportCredit.AmountTotal, Credits = entity.ReportCredit.Credits },
             };
 
             return dto;

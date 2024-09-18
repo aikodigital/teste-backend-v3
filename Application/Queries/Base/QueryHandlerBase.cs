@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Queries
+namespace Application.Queries.Base
 {
-    public  interface IQueryRequest
+    internal class QueryHandlerBase
     {
-        public void Valide();
     }
 }

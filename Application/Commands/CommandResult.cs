@@ -31,6 +31,7 @@ namespace Application.Commands
         public string Message { get; set; }
         public ICollection<Error> Errors { get; set; }
         public TDTO Dto { get; set; }
+        public IEnumerable<TDTO> Dtos { get; set; } = [];
     }
 
 }

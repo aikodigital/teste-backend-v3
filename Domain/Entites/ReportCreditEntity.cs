@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,17 @@ namespace Domain.Entites
         {
             get; set;
         }
+        public static implicit operator ReportCreditEntity(ReportCreditDTO dto)
+        {
+            var entity = new ReportCreditEntity
+            {
+                Id = dto.Id,
+                AmountTotal = dto.AmountTotal,
+                Credits = dto.Credits
+            };
+
+            return entity;
+        }
+
     }
 }

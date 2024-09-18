@@ -12,6 +12,7 @@ namespace Application.Commands.InvoiceCommands.CreateInvoiceCommands
 {
     public class CreateInvoiceCommand : Notifiable<Notification>, ICommand
     {
+        
         public string Customer { get; set; } = string.Empty;
         public List<PerformanceDTO> Performances { get; set; }
         public void Validade()
@@ -31,6 +32,7 @@ namespace Application.Commands.InvoiceCommands.CreateInvoiceCommands
             {
                 Id = p.Id,
                 Audience = p.Audience,
+                PlayId = p.PlayId,
                 Play = p.Play
             }).ToList();
 

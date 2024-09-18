@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Commands\PlayCommands\" />
     <Folder Include="Commands\PerformanceCommands\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>

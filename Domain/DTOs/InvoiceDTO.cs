@@ -25,7 +25,8 @@ namespace Domain.DTOs
             {
                 Id = p.Id,
                 Audience = p.Audience,
-                Play = p.Play == null ? null : new PlayDTO { Lines = p.Play.Lines, Name = p.Play.Name, Type = p.Play.Type } 
+                PlayId = p.PlayId,
+                Play = p.Play == null ? null : new PlayDTO { Lines = p.Play.Lines, Name = p.Play.Name, Type = p.Play.Type, Id = p.PlayId } 
             }).ToList();
 
             return Dto;

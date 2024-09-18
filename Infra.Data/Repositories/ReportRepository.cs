@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Infra.Data.Context;
 using Infra.Data.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,15 @@ namespace Infra.Data.Repositories
         public ReportRepository(Context.AppSqlLiteContext context) : base(context)
         {
         }
+        public override Task<List<ReportEntity>> GetAllLisAsync()
+        {
+            var result = DbSet
+                .Include(p => p.ReportCredit)
+                .AsNoTracking().ToListAsync();
+
+
+            return result;
+        }
+
     }
 }

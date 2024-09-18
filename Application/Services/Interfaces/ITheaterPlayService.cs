@@ -10,7 +10,7 @@ namespace Application.Services.Interfaces
 {
     public interface ITheaterPlayService
     {
-
         public Task<TheaterPlayDTO> create(TheaterPlayModelView theaterPlay);
+        public Task<IEnumerable<TheaterPlayDTO>> createInBatch(IEnumerable<TheaterPlayModelView> theaterPlay);
     }
 }

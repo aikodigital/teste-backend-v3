@@ -32,7 +32,8 @@ namespace Domain.Entites
                 Invoice = dto.Invoice == null ? null : new InvoiceEntity { Customer = dto.Invoice.Customer },
                 Seats = dto.Seats,
                 Amount = dto.Amount,
-                ReportCreditId = dto.ReportCreditId,      
+                ReportCreditId = dto.ReportCreditId,
+                ReportCredit = dto.ReportCredit == null ? null : new ReportCreditEntity { Id = dto.ReportCredit.Id, AmountTotal = dto.ReportCredit.AmountTotal, Credits = dto.ReportCredit.Credits },
             };
 
             return entity;

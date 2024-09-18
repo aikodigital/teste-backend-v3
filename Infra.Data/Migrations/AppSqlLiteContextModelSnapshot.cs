@@ -89,12 +89,7 @@ namespace Infra.Data.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ReportId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ReportId");
 
                     b.ToTable("ReportCredits");
                 });
@@ -118,14 +113,19 @@ namespace Infra.Data.Migrations
                     b.Property<int>("PlayId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Seats")
+                    b.Property<int>("ReportCreditId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Seats")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
 
                     b.HasIndex("PlayId");
+
+                    b.HasIndex("ReportCreditId");
 
                     b.ToTable("Reports");
                 });
@@ -169,17 +169,6 @@ namespace Infra.Data.Migrations
                     b.Navigation("Play");
                 });
 
-            modelBuilder.Entity("Domain.Entites.ReportCreditEntity", b =>
-                {
-                    b.HasOne("Domain.Entites.ReportEntity", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Report");
-                });
-
             modelBuilder.Entity("Domain.Entites.ReportEntity", b =>
                 {
                     b.HasOne("Domain.Entites.InvoiceEntity", "Invoice")
@@ -194,9 +183,17 @@ namespace Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entites.ReportCreditEntity", "ReportCredit")
+                        .WithMany()
+                        .HasForeignKey("ReportCreditId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Invoice");
 
                     b.Navigation("Play");
+
+                    b.Navigation("ReportCredit");
                 });
 
             modelBuilder.Entity("Domain.Entites.TheaterPlayEntity", b =>

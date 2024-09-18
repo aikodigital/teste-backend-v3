@@ -14,6 +14,7 @@ namespace Shared.Commands
         string Message { get; }
         ICollection<Error> Errors { get; }
         public TDTO Dto { get; set; }
+        public IEnumerable<TDTO> Dtos { get; set; }
 
     }
 }
