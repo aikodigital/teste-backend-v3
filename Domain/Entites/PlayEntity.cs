@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class ReportEntity
+    public class PlayEntity
     {
         public int Id { get; set; }
-        public string Statement { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public int Seats { get; set; }
-        public decimal Amount { get; set; }
-        public int Credits { get; set; }
-
+        public int Lines { get; set; }
+        public string Type { get; set; } = string.Empty;
+        public int TheaterPlayId { get; set; }
+        public TheaterPlayEntity TheaterPlay { get; set; }
     }
 }

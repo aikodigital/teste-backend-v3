@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entites
+namespace Domain.DTOs
 {
-    public class ReportEntity
+    public class ReportDTO
     {
         public int Id { get; set; }
         public string Statement { get; set; } = string.Empty;

@@ -12,10 +12,10 @@ namespace Infra.Data.Repositories.Base
 {
     public class Repository<TEntity> : IDisposable, IRepository<TEntity> where TEntity : class
     {
-        protected readonly dbContext _context;
+        protected readonly Context.AppSqlLiteContext _context;
         protected DbSet<TEntity> DbSet;
 
-        public Repository(dbContext context)
+        public Repository(Context.AppSqlLiteContext context)
         {
             _context = context;
             DbSet = context.Set<TEntity>();

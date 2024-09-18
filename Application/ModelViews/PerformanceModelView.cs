@@ -2,16 +2,13 @@ namespace TheatricalPlayersRefactoringKata;
 
 public class PerformanceModelView
 {
-    private string _playId;
-    private int _audience;
 
-    public string PlayId { get => _playId; set => _playId = value; }
-    public int Audience { get => _audience; set => _audience = value; }
+    public string PlayId { get ; set ; }
+    public int Audience { get; set; }
 
-    public PerformanceModelView(string playID, int audience)
+    public PerformanceModelView()
     {
-        this._playId = playID;
-        this._audience = audience;
+  
     }
 
 }

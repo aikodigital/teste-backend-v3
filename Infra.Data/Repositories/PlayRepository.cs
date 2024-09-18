@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Infra.Data.Repositories
 {
-    public class ReportRepository : Repository<ReportEntity>, IReportRepository
+    public class PlayRepository : Repository<PlayEntity>, IPlayRepository
     {
-        public ReportRepository(Context.AppSqlLiteContext context) : base(context)
+        public PlayRepository(AppSqlLiteContext context) : base(context)
         {
         }
     }

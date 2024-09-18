@@ -9,15 +9,15 @@ namespace Application.ModelViews
 {
     public class TheaterPlayModelView
     {
-        private string _playId { get; set; }
-        private PlayModelView _play { get; set; }
-        public string Name { get => _playId; set => _playId = value; }
-        public PlayModelView Play { get => _play; set => _play = value; }
 
-        public TheaterPlayModelView(string playId, PlayModelView play)
+        public string Name { get; set; }
+        public IList<PlayModelView> Players { get; set; }
+
+        public TheaterPlayModelView()
         {
-            this._playId = playId;
-            this._play = play;
+                
         }
+
+
     }
 }
