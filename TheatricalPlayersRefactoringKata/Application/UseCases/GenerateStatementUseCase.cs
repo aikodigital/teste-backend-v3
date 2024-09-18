@@ -63,9 +63,6 @@ public class GenerateStatementUseCase
             TotalVolumeCredits = totalVolumeCredits
         };
 
-        // Save the extract in Database
-        _extractService.AddExtract(extract);
-
         return extract;
     }
 

@@ -13,9 +13,9 @@ public class ExtractService
         _context = context;
     }
 
-    public void AddExtract(StatementResult statementResult)
+    public async Task AddExtract(StatementResult statementResult)
     {
         _context.StatementResults.Add(statementResult);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

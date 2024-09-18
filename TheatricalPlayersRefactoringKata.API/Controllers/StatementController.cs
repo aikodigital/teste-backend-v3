@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 
@@ -12,11 +13,13 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
     {
         private readonly EnqueueStatementUseCase _enqueueStatementUseCase;
         private readonly GenerateStatementUseCase _generateStatementUseCase;
+        private readonly ExtractService _extractService;
 
-        public StatementController(EnqueueStatementUseCase enqueueStatementUseCase, GenerateStatementUseCase generateStatementUseCase)
+        public StatementController(EnqueueStatementUseCase enqueueStatementUseCase, GenerateStatementUseCase generateStatementUseCase, ExtractService extractService)
         {
             _enqueueStatementUseCase = enqueueStatementUseCase;
             _generateStatementUseCase = generateStatementUseCase;
+            _extractService = extractService;
         }
 
         /// <summary>
@@ -24,9 +27,13 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         /// </summary>
         /// <param name="invoice">Extrato a ser criado.</param>
         [HttpPost("GenerateExtract")]
-        public IActionResult GenerateExtract([FromBody] Invoice invoice)
+        public async Task<IActionResult> GenerateExtract([FromBody] Invoice invoice)
         {
             var response = _generateStatementUseCase.GenerateExtractValues(invoice);
+
+            // Save the extract in SQLite DB
+            await _extractService.AddExtract(response);
+
             return Ok(response);
         }
 
@@ -38,6 +45,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         public IActionResult EnqueueInvoice([FromBody] Invoice invoice)
         {
             _enqueueStatementUseCase.Execute(invoice);
+
             return Accepted("Invoice enqueued for processing.");
         }
     }

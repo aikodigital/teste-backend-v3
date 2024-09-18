@@ -24,7 +24,6 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 public class StatementPrinterTests
 {
     private readonly ApplicationDbContext _context;
-    private ExtractService _extractService => new ExtractService(_context);
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
@@ -124,7 +123,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, _extractService);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         XmlStatementPrinter statementPrinterXml = new XmlStatementPrinter();
 
         var statementResult = generateStatementUseCase.GenerateExtractValues(invoice);
@@ -162,7 +162,8 @@ public class StatementPrinterTests
         );
 
         var playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, _extractService);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
 
         // This could come from user input or configuration
         string format = "xml"; 
@@ -212,7 +213,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, _extractService);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         var xmlFormatter = new XmlStatementPrinter();
 
         // Create the statement queue and enqueue the invoices
