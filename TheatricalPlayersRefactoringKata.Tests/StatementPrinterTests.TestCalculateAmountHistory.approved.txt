@@ -1,0 +1,1 @@
+Example 1: 14500, Example 2: 30000, Example 3: 43000

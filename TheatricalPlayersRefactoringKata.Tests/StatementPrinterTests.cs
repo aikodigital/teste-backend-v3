@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
@@ -8,6 +9,84 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateAmountTragedy()
+    {
+        Approvals.Verify(
+            String.Format(
+                "Example 1: {0}, Example 2: {1}",
+                StatementPrinter.CalculateAmount("tragedy", 5000, 25),
+                StatementPrinter.CalculateAmount("tragedy", 5000, 35)
+            )
+        );
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateAmountComedy()
+    {
+        Approvals.Verify(
+            String.Format(
+                "Example 1: {0}, Example 2: {1}",
+                StatementPrinter.CalculateAmount("comedy", 5000, 15),
+                StatementPrinter.CalculateAmount("comedy", 5000, 25)
+            )
+        );
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateAmountHistory()
+    {
+        Approvals.Verify(
+             String.Format(
+                 "Example 1: {0}, Example 2: {1}, Example 3: {2}",
+                 StatementPrinter.CalculateAmount("history", 5000, 15),
+                 StatementPrinter.CalculateAmount("history", 5000, 25),
+                 StatementPrinter.CalculateAmount("history", 5000, 35)
+             )
+         );
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateCreditsTragedy()
+    {
+        Approvals.Verify(
+            String.Format(
+                "Example 1: {0}",
+                StatementPrinter.CalculateCredits("tragedy", 5000, 25)
+            )
+        );
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateCreditsComedy()
+    {
+        Approvals.Verify(
+            String.Format(
+                "Example 1: {0}, Example 2: {1}, Example 3: {2}",
+                StatementPrinter.CalculateCredits("comedy", 5000, 15),
+                StatementPrinter.CalculateCredits("comedy", 5000, 25),
+                StatementPrinter.CalculateCredits("comedy", 5000, 35)
+            )
+        );
+    }
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestCalculateCreditsHistory()
+    {
+        Approvals.Verify(
+             String.Format(
+                 "Example 1: {0}",
+                 StatementPrinter.CalculateCredits("history", 5000, 15)
+             )
+         );
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
