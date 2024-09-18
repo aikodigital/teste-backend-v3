@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -47,7 +48,7 @@ public class StatementPrinter
     public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
     {
         decimal totalAmount = 0;
-        var volumeCredits = 0;
+        var volumeCreditsTotal = 0;
 
         // Cria o modelo para o XML
         Statement statement = new Statement
@@ -60,24 +61,27 @@ public class StatementPrinter
         {
             var play = plays[perf.PlayId];
             decimal lines = play.Lines;
-            lines = Math.Max(1000, Math.Min(lines, 4000)); // Limita as linhas entre 1000 e 4000
+
+            lines = Math.Max(1000, Math.Min(lines, 4000));
             decimal thisAmount = lines / 10;
 
             var calcPlayAmount = PlayCalculatorFactory.createCalculator(play.Type);
             thisAmount = calcPlayAmount.calculateAmount(perf, thisAmount);
 
-            // Adiciona créditos
-            volumeCredits += Math.Max(perf.Audience - 30, 0);
-            if ("comedy" == play.Type)
+            // Set Credits
+            var volumeCredits = Math.Max(perf.Audience - 30, 0);
+            if (play.Type.Equals("comedy"))
             {
                 volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
             }
 
-            // Adiciona um item ao XML
+            volumeCreditsTotal += volumeCredits;
+
+            // add to XML
             statement.Items.Add(new StatementItem
             {
                 AmountOwed = thisAmount,
-                EarnedCredits = Math.Max(perf.Audience - 30, 0),
+                EarnedCredits = volumeCredits,
                 Seats = perf.Audience
             });
 
@@ -85,7 +89,7 @@ public class StatementPrinter
         }
 
         statement.AmountOwed = totalAmount;
-        statement.EarnedCredits = volumeCredits;
+        statement.EarnedCredits = volumeCreditsTotal;
 
         // Serializa o objeto Statement em XML
         var xmlSerializer = new XmlSerializer(typeof(Statement));
@@ -95,5 +99,7 @@ public class StatementPrinter
             return stringWriter.ToString();
         }
     }
+
     
+
 }
