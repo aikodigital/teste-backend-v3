@@ -19,5 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
-
+  
 </Project>
