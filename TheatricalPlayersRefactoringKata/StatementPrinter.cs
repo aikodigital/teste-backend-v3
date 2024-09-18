@@ -93,13 +93,17 @@ public class StatementPrinter
 
         // Serializa o objeto Statement em XML
         var xmlSerializer = new XmlSerializer(typeof(Statement));
-        using (var stringWriter = new StringWriter())
+        using (var stringWriter = new Utf8StringWriter())
         {
             xmlSerializer.Serialize(stringWriter, statement);
             return stringWriter.ToString();
         }
     }
 
-    
+    private sealed class Utf8StringWriter : StringWriter
+    {
+        // write utf-8 string on XMLWriter
+        public override Encoding Encoding => Encoding.UTF8;
+    }
 
 }
