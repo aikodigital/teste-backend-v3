@@ -7,7 +7,7 @@ using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using Xunit;
 using SQLitePCL;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.IntegrationTests;
 
 public class AppDbContextTests : IDisposable
 {
@@ -16,7 +16,7 @@ public class AppDbContextTests : IDisposable
     public AppDbContextTests()
     {
         // Inicializa o SQLitePCL se necessário
-        raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+        raw.SetProvider(new SQLite3Provider_e_sqlite3());
 
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseSqlite("DataSource=:memory:")
