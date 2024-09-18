@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using TheatricalPlayersRefactoringKata.Application.DTOs;
+using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Services.PlayTypeCalculators;
@@ -9,10 +10,12 @@ namespace TheatricalPlayersRefactoringKata.Application.UseCases;
 public class GenerateStatementUseCase 
 {
     private readonly IPlayRepository _playRepository;
+    private readonly ExtractService _extractService;
 
-    public GenerateStatementUseCase(IPlayRepository playRepository)
+    public GenerateStatementUseCase(IPlayRepository playRepository, ExtractService extractService)
     {
         _playRepository = playRepository;
+        _extractService = extractService;
     }
 
     public StatementResult GenerateExtractValues(Invoice invoice)
@@ -52,13 +55,18 @@ public class GenerateStatementUseCase
             });
         }
 
-        return new StatementResult
+        var extract = new StatementResult
         {
             Customer = invoice.Customer,
             Lines = lines,
             TotalAmount = totalAmount,
             TotalVolumeCredits = totalVolumeCredits
         };
+
+        // Save the extract in Database
+        _extractService.AddExtract(extract);
+
+        return extract;
     }
 
     public decimal CalculatePerformanceAmount(Performance performance)

@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using TheatricalPlayersRefactoringKata.Infrastructure.Queues;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
 using TheatricalPlayersRefactoringKata.Presentation;
@@ -27,6 +30,7 @@ builder.Services.AddTransient<GenerateStatementUseCase>();
 builder.Services.AddTransient<EnqueueStatementUseCase>();
 
 builder.Services.AddTransient<XmlStatementPrinter>();
+builder.Services.AddScoped<ExtractService>();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -37,6 +41,9 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite("Data Source=TheatricalPlayersRefactoringKataDb.sqlite"));
 
 var app = builder.Build();
 
