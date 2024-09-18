@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 
-namespace TheatricalPlayersRefactoringKata.Extensions
+namespace TheatricalPlayersRefactoringKata.Application.Extensions
 {
     public class Utf8StringWriter : StringWriter
     {

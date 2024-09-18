@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
+using TheatricalPlayersRefactoringKata.Application.Extensions;
 
-namespace TheatricalPlayersRefactoringKata.Models
+namespace TheatricalPlayersRefactoringKata.Application.Models
 {
-    public class Statement
+    public class StatementModel
     {
         public string Customer { get; set; }
         public List<Item> Items { get; set; }
