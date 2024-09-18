@@ -20,7 +20,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
         }
 
         /// <summary>
-        /// Gera um extrato
+        /// Gera um extrato - Teste com os PlayIds: "hamlet", "as-like", "othello", "henry-v" ou "richard-iii"
         /// </summary>
         /// <param name="invoice">Extrato a ser criado.</param>
         [HttpPost("GenerateExtract")]
