@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using ApprovalTests;
-using ApprovalTests.Approvers;
 using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Application.DTOs;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Services.FormatterSelection;
+using TheatricalPlayersRefactoringKata.Infrastructure.Queues;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
+using TheatricalPlayersRefactoringKata.Infrastructure.Services;
 using TheatricalPlayersRefactoringKata.Presentation;
 using Xunit;
 
@@ -171,4 +174,62 @@ public class StatementPrinterTests
 
         Approvals.Verify(result);
     }
+
+    [Fact]
+    public async Task TestAsynchronousStatementProcessing()
+    {
+        var plays = new Dictionary<string, Play>
+        {
+            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
+            { "as-like", new Play("As You Like It", 2670, "comedy") },
+            { "othello", new Play("Othello", 3560, "tragedy") },
+        };
+
+        var invoice1 = new Invoice(
+            "TestCustomer1",
+            new List<Performance>
+            {
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("othello", 40),
+            }
+        );
+
+        var invoice2 = new Invoice(
+            "TestCustomer2",
+            new List<Performance>
+            {
+                new Performance("othello", 40),
+                new Performance("hamlet", 60)
+            }
+        );
+
+        IPlayRepository playRepository = new PlayRepository(plays);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        var xmlFormatter = new XmlStatementPrinter();
+
+        // Create the statement queue and enqueue the invoices
+        IStatementQueue statementQueue = new StatementQueue();
+        statementQueue.EnqueueStatement(invoice1);
+        statementQueue.EnqueueStatement(invoice2);
+
+        ILogger<StatementProcessingService> logger = NullLogger<StatementProcessingService>.Instance;
+
+        var statementProcessingService = new StatementProcessingService(
+            statementQueue,
+            generateStatementUseCase,
+            xmlFormatter,
+            logger
+        );
+
+        var cts = new CancellationTokenSource();
+
+        // Start the service
+        await statementProcessingService.StartAsync(cts.Token);
+
+        await Task.Delay(TimeSpan.FromSeconds(5));
+
+        // Stop the service
+        await statementProcessingService.StopAsync(cts.Token);
+    } 
 }
