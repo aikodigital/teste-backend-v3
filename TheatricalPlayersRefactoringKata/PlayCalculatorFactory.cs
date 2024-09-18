@@ -15,6 +15,7 @@ namespace TheatricalPlayersRefactoringKata
             {
                 "tragedy" => new TragedyCalculator(),
                 "comedy" => new ComedyCalculator(),
+                "history" => new HistoricalCalculator(),
                 _ => throw new Exception("unknown type: " + type)
             };
         }

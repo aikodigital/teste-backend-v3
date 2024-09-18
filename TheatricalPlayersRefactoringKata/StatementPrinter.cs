@@ -13,10 +13,18 @@ public class StatementPrinter
         var result = string.Format("Statement for {0}\n", invoice.Customer);
         CultureInfo cultureInfo = new CultureInfo("en-US");
 
-        foreach(var perf in invoice.Performances) 
+        Performance p = new Performance("asg", 20);
+        decimal d = 3227 / 10;
+
+        /*result += String.Format("aq {0} aq2 {1}", 
+            (new HistoricalCalculator()).calculateAmount(p, 3227 / 10),
+            (new TragedyCalculator()).calculateAmount(p, 3227/10)
+        );
+        */
+        foreach (var perf in invoice.Performances) 
         {
             var play = plays[perf.PlayId];
-            var lines = play.Lines;
+            decimal lines = play.Lines;
 
             lines = Math.Max(1000,Math.Min(lines,4000)); // between 1000 and 4000 only
 
@@ -25,8 +33,6 @@ public class StatementPrinter
             var calcPlayAmount = PlayCalculatorFactory.createCalculator(play.Type); 
             thisAmount = calcPlayAmount.calculateAmount(perf, thisAmount);
 
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            
             // add volume credits
             volumeCredits += Math.Max(perf.Audience - 30, 0);
             // add extra credit for every ten comedy attendees
