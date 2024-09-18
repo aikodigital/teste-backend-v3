@@ -1,19 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thetrical.Api", "Thetrical.Api\Thetrical.Api.csproj", "{ACA9B242-C51C-43BD-9FF0-8EC87FDBE841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{A04299C3-BC13-46F3-884A-141211D0A2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6C8D5BEB-ACCE-4913-9FC9-18017AC528AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.IOC", "Infra.IOC\Infra.IOC.csproj", "{9FA99ADC-C586-4EB1-B276-4A3DA91C3CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Data", "Infra.Data\Infra.Data.csproj", "{42CA75F1-3101-4938-B381-DF739F71CAAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A1DDACAE-D603-4EF6-AD8C-83E3346231D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +33,35 @@ Global
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA9B242-C51C-43BD-9FF0-8EC87FDBE841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA9B242-C51C-43BD-9FF0-8EC87FDBE841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA9B242-C51C-43BD-9FF0-8EC87FDBE841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA9B242-C51C-43BD-9FF0-8EC87FDBE841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04299C3-BC13-46F3-884A-141211D0A2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04299C3-BC13-46F3-884A-141211D0A2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04299C3-BC13-46F3-884A-141211D0A2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04299C3-BC13-46F3-884A-141211D0A2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8D5BEB-ACCE-4913-9FC9-18017AC528AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8D5BEB-ACCE-4913-9FC9-18017AC528AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8D5BEB-ACCE-4913-9FC9-18017AC528AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8D5BEB-ACCE-4913-9FC9-18017AC528AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA99ADC-C586-4EB1-B276-4A3DA91C3CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA99ADC-C586-4EB1-B276-4A3DA91C3CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA99ADC-C586-4EB1-B276-4A3DA91C3CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA99ADC-C586-4EB1-B276-4A3DA91C3CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CA75F1-3101-4938-B381-DF739F71CAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CA75F1-3101-4938-B381-DF739F71CAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CA75F1-3101-4938-B381-DF739F71CAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CA75F1-3101-4938-B381-DF739F71CAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1DDACAE-D603-4EF6-AD8C-83E3346231D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1DDACAE-D603-4EF6-AD8C-83E3346231D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1DDACAE-D603-4EF6-AD8C-83E3346231D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1DDACAE-D603-4EF6-AD8C-83E3346231D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6713CA88-B66D-44C7-8A57-7058554F00F9}
 	EndGlobalSection
 EndGlobal
