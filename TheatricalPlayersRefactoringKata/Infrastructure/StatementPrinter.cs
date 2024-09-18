@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
-using System.Text;
 using TheatricalPlayersRefactoringKata.Domain;
-using TheatricalPlayersRefactoringKata.Data;
 using TheatricalPlayersRefactoringKata.Application;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure;
@@ -14,10 +9,14 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure;
 public class StatementPrinter
 {
     private readonly StatementService _statementService;
+    private readonly IStatementFormatter _txtFormatter;
+    private readonly IStatementFormatter _xmlFormatter;
 
-    public StatementPrinter(StatementService statementService)
+    public StatementPrinter(StatementService statementService, IStatementFormatter txtFormatter, IStatementFormatter xmlFormatter)
     {
         _statementService = statementService;
+        _txtFormatter = txtFormatter;
+        _xmlFormatter = xmlFormatter;
     }
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
@@ -88,37 +87,12 @@ public class StatementPrinter
     public string PrintTxt(Invoice invoice, Dictionary<string, Play> plays)
     {
         var statementData = _statementService.GenerateStatementData(invoice, plays);
-
-        var result = string.Format("Statement for {0}\n", statementData.Customer);
-        CultureInfo cultureInfo = new CultureInfo("en-US");
-
-        foreach (var item in statementData.Items)
-        {
-            result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", item.PlayName, item.AmountOwed, item.Seats);
-        }
-
-        result += string.Format(cultureInfo, "Amount owed is {0:C}\n", statementData.TotalAmountOwed);
-        result += string.Format("You earned {0} credits\n", statementData.TotalEarnedCredits);
-        return result;
+        return _txtFormatter.Format(statementData);
     }
 
     public string PrintXml(Invoice invoice, Dictionary<string, Play> plays)
     {
         var statementData = _statementService.GenerateStatementData(invoice, plays);
-
-        var serializer = new XmlSerializer(typeof(StatementData));
-        using (var stringWriter = new StringWriter())
-        {
-            using (var writer = XmlWriter.Create(stringWriter, new XmlWriterSettings { Indent = true }))
-            {
-                writer.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
-                serializer.Serialize(writer, statementData);
-            }
-
-            // Converte a saída para UTF-8
-            string xmlUtf16 = stringWriter.ToString();
-            byte[] bytes = Encoding.UTF8.GetBytes(xmlUtf16);
-            return Encoding.UTF8.GetString(bytes);
-        }
+        return _xmlFormatter.Format(statementData);
     }
 }

@@ -30,7 +30,9 @@ public class StatementPrinterTests
         );
 
         var statementService = new StatementService();
-        var statementPrinter = new StatementPrinter(statementService);
+        var txtFormatter = new TextStatementFormatter();
+        var xmlFormatter = new XmlStatementFormatter();
+        var statementPrinter = new StatementPrinter(statementService,txtFormatter,xmlFormatter);
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -62,7 +64,9 @@ public class StatementPrinterTests
         );
 
         var statementService = new StatementService();
-        var statementPrinter = new StatementPrinter(statementService);
+        var txtFormatter = new TextStatementFormatter();
+        var xmlFormatter = new XmlStatementFormatter();
+        var statementPrinter = new StatementPrinter(statementService, txtFormatter, xmlFormatter);
         var result = statementPrinter.PrintTxt(invoice, plays);
 
         Approvals.Verify(result);
@@ -94,8 +98,10 @@ public class StatementPrinterTests
             }
         );
 
-        var statementService = new StatementService(); 
-        var statementPrinter = new StatementPrinter(statementService); 
+        var statementService = new StatementService();
+        var txtFormatter = new TextStatementFormatter();
+        var xmlFormatter = new XmlStatementFormatter();
+        var statementPrinter = new StatementPrinter(statementService, txtFormatter, xmlFormatter);
         var result = statementPrinter.PrintXml(invoice, plays);
 
         Approvals.Verify(result);
