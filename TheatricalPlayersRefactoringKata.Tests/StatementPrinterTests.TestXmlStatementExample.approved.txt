@@ -1,4 +1,4 @@
-﻿﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Statement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>BigCo</Customer>
   <Items>
@@ -28,11 +28,11 @@
       <Seats>39</Seats>
     </Item>
     <Item>
-      <AmountOwed>705.4</AmountOwed>
+      <AmountOwed>803.6</AmountOwed>
       <EarnedCredits>0</EarnedCredits>
       <Seats>20</Seats>
     </Item>
   </Items>
-  <AmountOwed>3995.4</AmountOwed>
+  <AmountOwed>4093.6</AmountOwed>
   <EarnedCredits>56</EarnedCredits>
 </Statement>
