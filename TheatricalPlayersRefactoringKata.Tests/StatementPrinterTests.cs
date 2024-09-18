@@ -14,28 +14,29 @@ public class StatementPrinterTests
 {
     private string FormatXmlFile(XmlDocument file)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        // Create an XmlWriterSettings object to set the formatting options
-        XmlWriterSettings settings = new XmlWriterSettings
+        // Had to add this step in order to insert a BOM character on the beginning of the generated XML, otherwise the test comparison will fail.
+        // Since BOM characters could possibly generate incompatibility when accessing xml files on different platforms, I decided not to add it to the file itself
+        using (MemoryStream memoryStream = new MemoryStream())
         {
-            Indent = true, // Enable indenting
-            IndentChars = "  ", // You can change the indent characters (e.g., two spaces)
-            NewLineChars = "\r\n", // New line characters (you can change this as needed)
-            NewLineHandling = NewLineHandling.Replace, // Ensure new lines are handled correctly
-            Encoding = Encoding.UTF8 // Use UTF-8 encoding
-        };
+            byte[] bom = Encoding.UTF8.GetPreamble();
+            memoryStream.Write(bom, 0, bom.Length);
 
-        // Create an XmlWriter using the StringBuilder and settings
-        using (XmlWriter writer = XmlWriter.Create(stringBuilder, settings))
-        {
-            file.WriteTo(writer);
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "  ",
+                NewLineChars = "\r\n",
+                NewLineHandling = NewLineHandling.Replace,
+                Encoding = Encoding.UTF8
+            };
+
+            using (XmlWriter writer = XmlWriter.Create(memoryStream, settings))
+            {
+                file.WriteTo(writer);
+            }
+
+            return Encoding.UTF8.GetString(memoryStream.ToArray());
         }
-
-        // Get the formatted XML as a string
-        string formattedXml = stringBuilder.ToString();
-
-        return formattedXml;
     }
 
     [Fact]
