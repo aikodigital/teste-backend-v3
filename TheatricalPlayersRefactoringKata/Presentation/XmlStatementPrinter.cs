@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using TheatricalPlayersRefactoringKata.Application.DTOs;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Helpers;
 

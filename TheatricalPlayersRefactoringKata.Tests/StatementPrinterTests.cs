@@ -7,10 +7,12 @@ using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using TheatricalPlayersRefactoringKata.Application.Services;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Services.FormatterSelection;
+using TheatricalPlayersRefactoringKata.Infrastructure.Data;
 using TheatricalPlayersRefactoringKata.Infrastructure.Queues;
 using TheatricalPlayersRefactoringKata.Infrastructure.Repositories;
 using TheatricalPlayersRefactoringKata.Infrastructure.Services;
@@ -21,6 +23,8 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private readonly ApplicationDbContext _context;
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -43,7 +47,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         TextStatementPrinter statementPrinter = new TextStatementPrinter();
 
         var statementResult = generateStatementUseCase.GenerateExtractValues(invoice);
@@ -80,7 +85,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         TextStatementPrinter statementPrinter = new TextStatementPrinter();
 
         var statementResult = generateStatementUseCase.GenerateExtractValues(invoice);
@@ -117,7 +123,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         XmlStatementPrinter statementPrinterXml = new XmlStatementPrinter();
 
         var statementResult = generateStatementUseCase.GenerateExtractValues(invoice);
@@ -155,7 +162,8 @@ public class StatementPrinterTests
         );
 
         var playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
 
         // This could come from user input or configuration
         string format = "xml"; 
@@ -205,7 +213,8 @@ public class StatementPrinterTests
         );
 
         IPlayRepository playRepository = new PlayRepository(plays);
-        var generateStatementUseCase = new GenerateStatementUseCase(playRepository);
+        ExtractService extractService = new ExtractService(_context);
+        var generateStatementUseCase = new GenerateStatementUseCase(playRepository, extractService);
         var xmlFormatter = new XmlStatementPrinter();
 
         // Create the statement queue and enqueue the invoices

@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using TheatricalPlayersRefactoringKata.Application.DTOs;
+using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Presentation;

@@ -1,4 +1,4 @@
-﻿using TheatricalPlayersRefactoringKata.Application.DTOs;
+﻿using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
