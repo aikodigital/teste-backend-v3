@@ -15,6 +15,11 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             _invoiceService = invoiceService;
         }
 
+        /// <summary>
+        /// Endpoint for creating a new Invoice.
+        /// </summary>
+        /// <param name="customer">Customer name</param>
+        /// <param name="performances">List of performances</param>
         [HttpPost("Create")]
         public Task<ActionResult> Create(string customer, List<PerformanceModel> performances)
         {
@@ -28,6 +33,10 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint to return all Invoices from a specific Customer
+        /// </summary>
+        /// <param name="customerName">Customer name</param>
         [HttpGet("GetAllByCustomer")]
         public Task<ActionResult> GetAllByCustomer(string customerName)
         {
@@ -41,6 +50,10 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint to return all Invoices from a specific Play
+        /// </summary>
+        /// <param name="playId">Play ID</param>
         [HttpGet("GetAllByPlay")]
         public Task<ActionResult> GetAllByPlay(string playId)
         {
@@ -54,6 +67,10 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint to delete a specific Invoice by Invoice Id
+        /// </summary>
+        /// <param name="id">Invoice ID</param>
         [HttpDelete("Delete")]
         public Task<ActionResult> Delete(string id)
         {

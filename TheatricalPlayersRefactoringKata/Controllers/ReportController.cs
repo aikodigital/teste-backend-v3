@@ -14,6 +14,11 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             _reportService = reportService;
         }
 
+        /// <summary>
+        /// Endpoint for generating reports from multiple Customers, 
+        /// each report will be saved in the Report folder in the root directory
+        /// </summary>
+        /// <param name="customersNames">List of Customers Names</param>
         [HttpPost("ReportByCustomer")]
         public Task<ActionResult> ReportByCustomer(List<string> customersNames)
         {
