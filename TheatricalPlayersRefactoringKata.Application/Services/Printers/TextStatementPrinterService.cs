@@ -6,7 +6,7 @@ using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.Printers
 {
-    public class TextStatementPrinter : IStatementPrinter
+    public class TextStatementPrinterService : IStatementPrinter
     {
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {

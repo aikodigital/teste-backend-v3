@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TheatricalPlayersRefactoringKata.Presentation</name>
+    </assembly>
+    <members>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.GetAllPerformances">
+            <summary>
+            Retorna todas as performances teatrais.
+            </summary>
+            <returns>Lista de performances.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.GetPerformanceById(System.Int32)">
+            <summary>
+            Retorna uma performance por ID.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <returns>Detalhes da performance.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.CreatePerformance(ApiTheatrical)">
+            <summary>
+            Cria uma nova performance.
+            </summary>
+            <param name="model">Modelo da performance.</param>
+            <returns>Confirmação da criação.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.UpdatePerformance(System.Int32,ApiTheatrical)">
+            <summary>
+            Atualiza completamente uma performance existente.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <param name="model">Modelo da performance atualizada.</param>
+            <returns>Confirmação da atualização.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.PatchPerformance(System.Int32,ApiTheatrical)">
+            <summary>
+            Atualiza parcialmente uma performance existente.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <param name="patchModel">Modelo com as propriedades a serem atualizadas.</param>
+            <returns>Confirmação da atualização parcial.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Presentation.Controllers.ApiTheatricalController.DeletePerformance(System.Int32)">
+            <summary>
+            Remove uma performance existente.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <returns>Confirmação da remoção.</returns>
+        </member>
+        <member name="T:ApiTheatrical">
+            <summary>
+            Representa um modelo de domínio para performances teatrais.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.Id">
+            <summary>
+            ID chave primária (PK)
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.Title">
+            <summary>
+            O nome da peça teatral.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.Genre">
+            <summary>
+            Tipo de peça, pode ser Comédia, Tragédia, Histórica e etc.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.DurationInMinutes">
+            <summary>
+            Duração da peça em minutos.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.BasePrice">
+            <summary>
+            Preço base da peça.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.PerformanceDate">
+            <summary>
+            Data da apresentação.
+            </summary>
+        </member>
+        <member name="P:ApiTheatrical.Audience">
+            <summary>
+            Número de espectadores.
+            </summary>
+        </member>
+    </members>
+</doc>

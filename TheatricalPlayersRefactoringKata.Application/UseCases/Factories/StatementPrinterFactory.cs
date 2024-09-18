@@ -10,9 +10,9 @@ namespace TheatricalPlayersRefactoringKata.Application.UseCases.Factories
             switch (format.ToLower())
             {
                 case "text":
-                    return new TextStatementPrinter();
+                    return new TextStatementPrinterService();
                 case "xml":
-                    return new XmlStatementPrinter();
+                    return new XmlStatementPrinterService();
                 // Adicione mais casos conforme necessário para novos formatos
                 default:
                     throw new ArgumentException("Invalid format", nameof(format));

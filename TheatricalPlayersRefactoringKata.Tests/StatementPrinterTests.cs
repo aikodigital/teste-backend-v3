@@ -29,7 +29,7 @@ public class StatementPrinterTests
         );
 
         //StatementPrinter statementPrinter = new StatementPrinter(); deprecated
-        TextStatementPrinter statementPrinter = new TextStatementPrinter();
+        TextStatementPrinterService statementPrinter = new TextStatementPrinterService();
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -61,7 +61,7 @@ public class StatementPrinterTests
         );
 
         //StatementPrinter statementPrinter = new StatementPrinter(); deprecated
-        TextStatementPrinter statementPrinter = new TextStatementPrinter();
+        TextStatementPrinterService statementPrinter = new TextStatementPrinterService();
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -92,7 +92,7 @@ public class StatementPrinterTests
             }
         );
 
-        XmlStatementPrinter statementPrinter = new XmlStatementPrinter();
+        XmlStatementPrinterService statementPrinter = new XmlStatementPrinterService();
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
