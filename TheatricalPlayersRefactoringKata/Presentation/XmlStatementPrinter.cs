@@ -1,12 +1,13 @@
 ﻿using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Application.DTOs;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Helpers;
 
 namespace TheatricalPlayersRefactoringKata.Presentation;
 
-public class XmlStatementPrinter
+public class XmlStatementPrinter : IStatementFormatter
 {
-    public string PrintXml(StatementResult statement)
+    public string Print(StatementResult statement)
     {
         XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
         XNamespace xsd = "http://www.w3.org/2001/XMLSchema";
