@@ -1,3 +1,4 @@
+using System.Reflection;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
@@ -28,7 +29,14 @@ builder.Services.AddTransient<EnqueueStatementUseCase>();
 builder.Services.AddTransient<XmlStatementPrinter>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 var app = builder.Build();
 

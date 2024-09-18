@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using TheatricalPlayersRefactoringKata.Application.UseCases;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 
@@ -6,6 +7,7 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [SwaggerTag("API responsável por operações de extrato.")]
     public class StatementController : ControllerBase
     {
         private readonly EnqueueStatementUseCase _enqueueStatementUseCase;
@@ -17,6 +19,10 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             _generateStatementUseCase = generateStatementUseCase;
         }
 
+        /// <summary>
+        /// Gera um extrato
+        /// </summary>
+        /// <param name="invoice">Extrato a ser criado.</param>
         [HttpPost("GenerateExtract")]
         public IActionResult GenerateExtract([FromBody] Invoice invoice)
         {
@@ -24,6 +30,10 @@ namespace TheatricalPlayersRefactoringKata.API.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Enfileira um extrato para processamento.
+        /// </summary>
+        /// <param name="invoice">Extrato a ser enfileirado.</param>
         [HttpPost("enqueue")]
         public IActionResult EnqueueInvoice([FromBody] Invoice invoice)
         {
