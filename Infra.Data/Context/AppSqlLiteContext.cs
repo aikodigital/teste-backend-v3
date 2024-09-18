@@ -18,6 +18,7 @@ namespace Infra.Data.Context
         public DbSet<TheaterPlayEntity> TheaterPlays { get; set; }
         public DbSet<ReportEntity> Reports { get; set; }
 
+        public DbSet<ReportCreditEntity> ReportCredits { get; set; }
         public AppSqlLiteContext(DbContextOptions<AppSqlLiteContext> options)
        : base(options)
         {

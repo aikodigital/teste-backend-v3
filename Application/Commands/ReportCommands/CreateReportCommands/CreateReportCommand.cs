@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.TheaterPlayCommands.FilterTheaterPlayCommands
+namespace Application.Commands.ReportCommands.CreateReportCommands
 {
-    public class FilterTheaterPlayCommandHandler
+    public class CreateReportCommand
     {
     }
 }

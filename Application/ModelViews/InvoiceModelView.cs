@@ -1,3 +1,4 @@
+using Domain.DTOs;
 using System.Collections.Generic;
 
 namespace TheatricalPlayersRefactoringKata;
@@ -12,6 +13,16 @@ public class InvoiceModelView
     public InvoiceModelView()
     {
 
+    }
+
+    public InvoiceDTO DTO()
+    {
+        var dto = new InvoiceDTO
+        {
+            Customer = Customer,
+            Performances = Performances.Select(p => p.DTO()).ToList()
+        };
+        return dto;
     }
 
 }

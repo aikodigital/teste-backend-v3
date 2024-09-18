@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Domain.DTOs;
+using Domain.Entites;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -25,7 +28,7 @@ public class StatementPrinter
         {
             var play = plays[perf.PlayId];
             var thisAmount = Calculates.CalculatePlayAmount(perf, play);
-            volumeCredits += Calculates.CalculateVolumeCredits(perf, play);
+            volumeCredits += Calculates.CalculateVolumeCredits(perf.Audience, play);
 
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             totalAmount += thisAmount;
@@ -34,7 +37,49 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
+    public IList<ReportDTO> Report(InvoiceDTO invoice, IList<TheaterPlayDTO> theaterplays)
+    {
+        decimal totalAmount = 0;
+        var volumeCredits = 0;
+        var result = string.Format("Statement for {0}\n", invoice.Customer);
+        CultureInfo cultureInfo = new CultureInfo("en-US");
+        var repots = new List<ReportDTO>();
+        foreach (var performance in invoice.Performances)
+        {  
+            var play = theaterplays.Where(p => p.PlayId == performance.PlayId).Select(p => new Play(p.Play.Name, p.Play.Lines, p.Play.Type)).FirstOrDefault();
+            var perf = new Performance( play.Name, performance.Audience);
 
+
+            var thisAmount = Calculates.CalculatePlayAmount(perf, play);
+            volumeCredits += Calculates.CalculateVolumeCredits(perf.Audience, play);
+
+            //result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+            totalAmount += thisAmount;
+
+            var report = new ReportDTO
+            {
+                PlayId = performance.PlayId,
+                Play = theaterplays.FirstOrDefault(p => p.PlayId == performance.PlayId).Play,
+                InvoiceId = invoice.Id,
+                Invoice = invoice,
+                Amount = Convert.ToDecimal(thisAmount / 100),
+                Seats = perf.Audience,
+                Name = play.Name,
+            };
+            repots.Add(report);
+        }
+        return repots;
+    }
+    public ReportCreditEntity ReportCredits(IList<ReportDTO> reports)
+    {
+        var result = new ReportCreditEntity();
+        foreach (var item in reports)
+        { var performance = item.Invoice.Performances.FirstOrDefault(p => p.PlayId == item.PlayId);
+            result.AmountTotal += item.Amount;
+            result.Credits += Calculates.CalculateVolumeCredits(performance.Audience, new Play (  item.Play.Name, item.Play.Lines, item.Play.Type ));
+        }
+        return result;
+    }
     public string Xml(Invoice invoice, Dictionary<string, Play> plays)
     {
         decimal totalAmount = 0;
@@ -52,7 +97,7 @@ public class StatementPrinter
         {
             var play = plays[perf.PlayId];
             var thisAmount = Calculates.CalculatePlayAmount(perf, play);
-            var credits = Calculates.CalculateVolumeCredits(perf, play);
+            var credits = Calculates.CalculateVolumeCredits(perf.Audience, play);
 
             var itemElement = new XElement("Item",
                 new XElement("AmountOwed", Convert.ToDecimal(thisAmount / 100).ToString("0.##", cultureInfo)),

@@ -1,5 +1,6 @@
 ﻿using Application.Commands.Base;
 using Domain.DTOs;
+using Domain.Interfaces;
 using Shared.Commands;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,16 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.TheaterPlayCommands.CreateTheaterPlayCommands
 {
-    internal class CreateTheaterPlayCommandHandler : CommandHandlerBase<CreateTheaterPlayCommand, TheaterPlayDTO>
+    public class CreateTheaterPlayCommandHandler (ITheaterPlayRepository _ITheaterPlayRepository): CommandHandlerBase<CreateTheaterPlayCommand, TheaterPlayDTO>
     {
-        public override Task<ICommandResult<TheaterPlayDTO>> HandleAsync(CreateTheaterPlayCommand command)
+        public override async Task<ICommandResult<TheaterPlayDTO>> HandleAsync(CreateTheaterPlayCommand command)
         {
-            throw new NotImplementedException();
+            
+           var entity =await _ITheaterPlayRepository.AddAsync(command.Dto());
+
+           var result = new  CommandResult<TheaterPlayDTO>(true, "TheaterPlayers create with sucess!");
+            result.Dto = entity;
+           return result;
         }
     }
 }

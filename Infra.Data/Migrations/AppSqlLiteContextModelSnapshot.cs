@@ -68,18 +68,66 @@ namespace Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TheaterPlayId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TheaterPlayId");
-
                     b.ToTable("Plays");
+                });
+
+            modelBuilder.Entity("Domain.Entites.ReportCreditEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("AmountTotal")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Credits")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("ReportCredits");
+                });
+
+            modelBuilder.Entity("Domain.Entites.ReportEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PlayId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("PlayId");
+
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("Domain.Entites.TheaterPlayEntity", b =>
@@ -92,7 +140,12 @@ namespace Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("PlayId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PlayId");
 
                     b.ToTable("TheaterPlays");
                 });
@@ -116,25 +169,50 @@ namespace Infra.Data.Migrations
                     b.Navigation("Play");
                 });
 
-            modelBuilder.Entity("Domain.Entites.PlayEntity", b =>
+            modelBuilder.Entity("Domain.Entites.ReportCreditEntity", b =>
                 {
-                    b.HasOne("Domain.Entites.TheaterPlayEntity", "TheaterPlay")
-                        .WithMany("Players")
-                        .HasForeignKey("TheaterPlayId")
+                    b.HasOne("Domain.Entites.ReportEntity", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TheaterPlay");
+                    b.Navigation("Report");
+                });
+
+            modelBuilder.Entity("Domain.Entites.ReportEntity", b =>
+                {
+                    b.HasOne("Domain.Entites.InvoiceEntity", "Invoice")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entites.PlayEntity", "Play")
+                        .WithMany()
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+
+                    b.Navigation("Play");
+                });
+
+            modelBuilder.Entity("Domain.Entites.TheaterPlayEntity", b =>
+                {
+                    b.HasOne("Domain.Entites.PlayEntity", "Play")
+                        .WithMany()
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Play");
                 });
 
             modelBuilder.Entity("Domain.Entites.InvoiceEntity", b =>
                 {
                     b.Navigation("Performances");
-                });
-
-            modelBuilder.Entity("Domain.Entites.TheaterPlayEntity", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

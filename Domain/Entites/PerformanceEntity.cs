@@ -10,9 +10,9 @@ namespace Domain.Entites
     {
         public int Id { get; set; }
         public int PlayId { get; set; }
-        public PlayEntity Play { get; set; }
+        public PlayEntity? Play { get; set; }
         public int InvoiceId { get; set; }
-        public InvoiceEntity Invoice { get; set; }
+        public InvoiceEntity? Invoice { get; set; }
 
         public int Audience { get; set; }
     }

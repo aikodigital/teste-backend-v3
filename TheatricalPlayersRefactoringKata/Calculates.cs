@@ -49,14 +49,16 @@ namespace TheatricalPlayersRefactoringKata
             }
             return thisAmount;
         }
-        public static int CalculateVolumeCredits(Performance perf, Play play)
+        public static int CalculateVolumeCredits(int audience, Play play)
         {
-            int volumeCredits = Math.Max(perf.Audience - 30, 0);
+            int volumeCredits = Math.Max(audience - 30, 0);
             if ("comedy" == play.Type)
             {
-                volumeCredits += (int)Math.Floor((decimal)perf.Audience / 5);
+                volumeCredits += (int)Math.Floor((decimal)audience / 5);
             }
             return volumeCredits;
         }
+
+       
     }
 }

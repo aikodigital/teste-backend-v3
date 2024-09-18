@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class PlayEntity
+    public class ReportCreditEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public int Lines { get; set; }
-        public string Type { get; set; } = string.Empty;
+        public decimal AmountTotal { get; set; }
+        public int Credits
+        {
+            get; set;
+        }
     }
 }

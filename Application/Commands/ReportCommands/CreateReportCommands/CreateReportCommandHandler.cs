@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.InvoiceCommands.FilterInvoiceCommands
+namespace Application.Commands.ReportCommands.CreateReportCommands
 {
-    internal class FilterInvoiceCommandHandler
+    public class CreateReportCommandHandler
     {
     }
 }

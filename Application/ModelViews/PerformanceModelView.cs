@@ -1,9 +1,11 @@
+using Domain.DTOs;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class PerformanceModelView
 {
 
-    public string PlayId { get ; set ; }
+    public int PlayId { get ; set ; }
     public int Audience { get; set; }
 
     public PerformanceModelView()
@@ -11,4 +13,14 @@ public class PerformanceModelView
   
     }
 
+    public PerformanceDTO DTO()
+    {
+        var dto = new PerformanceDTO
+        {
+            PlayId = PlayId,
+            Audience = Audience
+        };
+
+        return dto;
+    }
 }

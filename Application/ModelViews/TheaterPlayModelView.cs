@@ -11,7 +11,7 @@ namespace Application.ModelViews
     {
 
         public string Name { get; set; }
-        public IList<PlayModelView> Players { get; set; }
+        public PlayModelView Play { get; set; }
 
         public TheaterPlayModelView()
         {
