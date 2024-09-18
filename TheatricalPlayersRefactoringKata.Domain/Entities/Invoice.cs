@@ -19,5 +19,10 @@ public class Invoice
     }
 
     public string Customer { get => _customer; set => _customer = value; }
-    public int InvoiceId { get => _invoiceId; set => _invoiceId = value; }  
+    public int InvoiceId { get => _invoiceId; set => _invoiceId = value; }
+
+    public override string ToString()
+    {
+        return $"{this._invoiceId} - {this._customer}";
+    }
 }

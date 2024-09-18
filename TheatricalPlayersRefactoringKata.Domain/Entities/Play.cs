@@ -26,4 +26,9 @@ public class Play
         this._lines = lines;
         this._playTypeId = playTypeId;
     }
+
+    public override string ToString()
+    {
+        return $"{this._playId} - {this._name}";
+    }
 }
