@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Injection", "TheatricalPlayersRefactoringKata.Injection\TheatricalPlayersRefactoringKata.Injection.csproj", "{C772BE13-8AB1-4D45-986F-595E5674592D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{485B4E77-4FE9-473B-9BCC-852317D71A7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{485B4E77-4FE9-473B-9BCC-852317D71A7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

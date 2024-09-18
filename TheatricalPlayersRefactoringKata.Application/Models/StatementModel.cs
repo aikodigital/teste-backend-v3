@@ -34,7 +34,9 @@ namespace TheatricalPlayersRefactoringKata.Application.Models
             using var stringWriter = new Utf8StringWriter(cultureInfo);
             var xmlSerializer = new XmlSerializer(GetType());
             xmlSerializer.Serialize(stringWriter, this);
-            return stringWriter.ToString();
+
+            return stringWriter.ToString()
+                .Replace("StatementModel", "Statement");
         }
 
         public string ToXMLFile(CultureInfo cultureInfo, string fileName)
