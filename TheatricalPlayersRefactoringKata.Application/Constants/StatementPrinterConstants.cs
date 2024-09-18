@@ -21,13 +21,5 @@
         public const decimal COMEDY_PER_AUDIENCE_ADDITIONAL = 5.00m;
         public const decimal COMEDY_BONUS_CREDIT_PER_ATTENDEES = 5m;
         #endregion
-
-
-
-
-        //public const decimal BASE_AMOUNT_FOR_PLAY = 100.00m;
-        //public const decimal BONUS_CREDITS_THRESHOLD = 30;
-        
-        
     }
 }

@@ -24,13 +24,6 @@ namespace TheatricalPlayersRefactoringKata.Application.Extensions
                 }
             }
 
-            //var filePath = "C:\\Users\\henri\\source\\repos\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.TestXmlStatementExample.approved.txt";
-
-            //using (var reader = new StreamReader(filePath, Encoding.UTF8))
-            //{
-            //    xml = reader.ReadToEnd();
-            //}
-
             return xml;
         }
     }

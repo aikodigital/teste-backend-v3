@@ -22,7 +22,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Factory
                 case PrintType.Text:
                     return new InvoicePrintText();
                 default:
-                    throw new Exception("unknown Print type: " + type.ToString());
+                    throw new InvalidPrintTypeException("unknown Print type: " + type.ToString());
             }
         }
 

@@ -30,18 +30,6 @@ namespace TheatricalPlayersRefactoringKata.UI.Controllers
             _invoiceRepository = invoiceRepository;
         }
 
-        /// <summary>
-        /// Gets a list of weather forecasts.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     GET /weatherforecast
-        ///
-        /// </remarks>
-        /// <returns>List of weather forecasts</returns>
-        /// <response code="200">Returns the list of weather forecasts</response>
-        /// <response code="500">If there is an internal server error</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

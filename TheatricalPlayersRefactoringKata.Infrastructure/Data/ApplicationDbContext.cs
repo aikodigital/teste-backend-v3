@@ -24,8 +24,5 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure.Data
         public DbSet<Performance> Performances { get; set; }
         public DbSet<Play> Play { get; set; }
         public DbSet<PlayType> PlayType { get; set; }
-
-        //add-migration -Context ApplicationDbContext InitialMigration -v
-        //update-database -Context ApplicationDbContext -v
     }
 }
