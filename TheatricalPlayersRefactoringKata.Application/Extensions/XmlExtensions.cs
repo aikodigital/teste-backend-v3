@@ -10,6 +10,15 @@ namespace TheatricalPlayersRefactoringKata.Application.Extensions
 {
     public static class XmlExtensions
     {
+        /// <summary>
+        /// Serializes an object of type <typeparamref name="T"/> into an XML string representation.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to be serialized. It must be a serializable type.</typeparam>
+        /// <param name="obj">The object to be serialized into an XML string.</param>
+        /// <returns>A string containing the XML representation of the object.</returns>
+        /// <remarks>
+        /// This method uses <see cref="XmlSerializer"/> to serialize the object. It creates an XML string with UTF-8 encoding and indents the XML for readability.
+        /// </remarks>
         public static string GenerateXmlAsString<T>(this T obj)
         {
             string xml = string.Empty;
