@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Data
 {
     [XmlRoot("Statement")]
     public class StatementData
     {
         public string Customer { get; set; }
 
-        [XmlArray("Items")] 
+        [XmlArray("Items")]
         [XmlArrayItem("Item")]
         public List<ItemData> Items { get; set; } = new List<ItemData>();
 

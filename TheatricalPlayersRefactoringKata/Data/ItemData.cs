@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata
+namespace TheatricalPlayersRefactoringKata.Data
 {
     [XmlType("Item")]
     public class ItemData
