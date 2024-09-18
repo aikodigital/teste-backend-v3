@@ -1,0 +1,38 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<Statement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>BigCo</Customer>
+  <Items>
+    <Item>
+      <AmountOwed>650</AmountOwed>
+      <EarnedCredits>25</EarnedCredits>
+      <Seats>55</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>547</AmountOwed>
+      <EarnedCredits>12</EarnedCredits>
+      <Seats>35</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>456</AmountOwed>
+      <EarnedCredits>10</EarnedCredits>
+      <Seats>40</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>705.4</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
+      <Seats>20</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>931.6</AmountOwed>
+      <EarnedCredits>9</EarnedCredits>
+      <Seats>39</Seats>
+    </Item>
+    <Item>
+      <AmountOwed>705.4</AmountOwed>
+      <EarnedCredits>0</EarnedCredits>
+      <Seats>20</Seats>
+    </Item>
+  </Items>
+  <AmountOwed>3995.4</AmountOwed>
+  <EarnedCredits>56</EarnedCredits>
+</Statement>
