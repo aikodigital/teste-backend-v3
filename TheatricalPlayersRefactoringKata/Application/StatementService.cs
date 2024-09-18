@@ -15,7 +15,7 @@ namespace TheatricalPlayersRefactoringKata.Application
 
             foreach (var perf in invoice.Performances)
             {
-                var play = PlayFactory.CreatePlay(plays[perf.PlayId].Name, plays[perf.PlayId].Type);
+                var play = PlayFactory.CreatePlay(plays[perf.PlayId.ToLower()].Name, plays[perf.PlayId.ToLower()].Type);
                 int lines = plays[perf.PlayId].Lines;
 
                 decimal thisAmount = play.CalculateAmount(perf.Audience, lines);

@@ -1,19 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Tests", "TheatricalPlayersRefactoringKata.Tests\TheatricalPlayersRefactoringKata.Tests.csproj", "{2AFBF20D-3D97-46EC-B506-8B7C82598951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringWebAPI", "TheatricalPlayersRefactoringWebAPI\TheatricalPlayersRefactoringWebAPI.csproj", "{DF5C9801-6595-4209-8D2A-5F16667D4A8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +23,15 @@ Global
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFBF20D-3D97-46EC-B506-8B7C82598951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5C9801-6595-4209-8D2A-5F16667D4A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5C9801-6595-4209-8D2A-5F16667D4A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5C9801-6595-4209-8D2A-5F16667D4A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5C9801-6595-4209-8D2A-5F16667D4A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0842D1EE-7280-4609-B0C2-D0EA48BB9759}
 	EndGlobalSection
 EndGlobal

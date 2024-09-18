@@ -6,7 +6,7 @@ using TheatricalPlayersRefactoringKata.Data;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure
 {
-    public class XmlStatementFormatter : IStatementFormatter
+    public class XmlStatementFormatter : IXmlStatementFormatter
     {
         public string Format(StatementData statementData)
         {

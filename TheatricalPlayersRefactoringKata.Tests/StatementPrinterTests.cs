@@ -10,6 +10,7 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    //Método obsoleto, pois já estamos utilizando outros métodos refatorados
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()

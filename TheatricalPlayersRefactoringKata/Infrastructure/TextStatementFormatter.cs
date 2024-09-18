@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Data;
 
 namespace TheatricalPlayersRefactoringKata.Infrastructure
 {
-    public class TextStatementFormatter : IStatementFormatter
+    public class TextStatementFormatter : ITextStatementFormatter
     {
         public string Format(StatementData statementData)
         {

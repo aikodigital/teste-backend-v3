@@ -9,16 +9,19 @@ namespace TheatricalPlayersRefactoringKata.Infrastructure;
 public class StatementPrinter
 {
     private readonly StatementService _statementService;
-    private readonly IStatementFormatter _txtFormatter;
-    private readonly IStatementFormatter _xmlFormatter;
+    private readonly ITextStatementFormatter _txtFormatter;
+    private readonly IXmlStatementFormatter _xmlFormatter;
 
-    public StatementPrinter(StatementService statementService, IStatementFormatter txtFormatter, IStatementFormatter xmlFormatter)
-    {
-        _statementService = statementService;
-        _txtFormatter = txtFormatter;
-        _xmlFormatter = xmlFormatter;
-    }
+    public StatementPrinter(StatementService statementService,
+                       ITextStatementFormatter txtFormatter,
+                       IXmlStatementFormatter xmlFormatter)
+{
+    _statementService = statementService;
+    _txtFormatter = txtFormatter;
+    _xmlFormatter = xmlFormatter;
+}
 
+    //Método obsoleto, pois já estamos utilizando outros métodos refatorados
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {
         var totalAmount = 0;
