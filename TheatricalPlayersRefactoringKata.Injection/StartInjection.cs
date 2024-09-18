@@ -16,5 +16,7 @@ public static class ServiceInjection
 
         services.AddScoped<IPlayRepository, PlayRepository>();
         services.AddScoped<IPlayService, PlayService>();
+        services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+        services.AddScoped<IInvoiceService, InvoiceService>();
     }
 }

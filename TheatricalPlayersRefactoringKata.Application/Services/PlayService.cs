@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheatricalPlayersRefactoringKata.Application.Interfaces;
 using TheatricalPlayersRefactoringKata.Application.Models;
-using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interface;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services
@@ -27,7 +26,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
@@ -41,7 +40,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
@@ -57,7 +56,23 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+
+        public async Task<ActionResult> GetByPlayId(string playId)
+        {
+            try
+            {
+                var result = await _playRepository.GetByPlayId(playId);
+
+                var model = PlayModel.ConvertToModel(result);
+
+                return new OkObjectResult(model);
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
@@ -73,24 +88,23 @@ namespace TheatricalPlayersRefactoringKata.Application.Services
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
-        public async Task<ActionResult> Update(PlayModel play, string id)
+        public async Task<ActionResult> Update(PlayModel play)
         {
             try
             {
                 var entity = PlayModel.ConvertToEntity(play);
-                entity.Id = id;
 
-                var result = await _playRepository.Update(entity, id);
+                var result = await _playRepository.Update(entity);
 
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Message);
             }
         }
     }

@@ -7,6 +7,7 @@ namespace TheatricalPlayersRefactoringKata.Infra
         public static void Configure()
         {
             PlayMap.Configure();
+            InvoiceMap.Configure();
         }
     }
 }

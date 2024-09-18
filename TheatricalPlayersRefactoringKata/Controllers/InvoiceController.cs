@@ -6,21 +6,21 @@ namespace TheatricalPlayersRefactoringKata.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayController : ControllerBase
+    public class InvoiceController : ControllerBase
     {
-        private readonly IPlayService _playsService;
+        private readonly IInvoiceService _invoiceService;
 
-        public PlayController(IPlayService playsService)
+        public InvoiceController(IInvoiceService invoiceService)
         {
-            _playsService = playsService;
+            _invoiceService = invoiceService;
         }
 
         [HttpPost("Create")]
-        public Task<ActionResult> Create(string name, int lines, int type)
+        public Task<ActionResult> Create(string customer, List<PerformanceModel> performances)
         {
             try
             {
-                return _playsService.Create(new PlayModel(name, lines, (TypePlay)type));
+                return _invoiceService.Create(new InvoiceModel(customer, performances));
             }
             catch
             {
@@ -28,12 +28,12 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
         }
 
-        [HttpGet("GetByName")]
-        public Task<ActionResult> GetByName(string name)
+        [HttpGet("GetAllByCustomer")]
+        public Task<ActionResult> GetAllByCustomer(string customerName)
         {
             try
             {
-                return _playsService.GetByName(name);
+                return _invoiceService.GetAllByCustomer(customerName);
             }
             catch
             {
@@ -41,25 +41,12 @@ namespace TheatricalPlayersRefactoringKata.Controllers
             }
         }
 
-        [HttpGet("GetAll")]
-        public Task<ActionResult> GetAll()
+        [HttpGet("GetAllByPlay")]
+        public Task<ActionResult> GetAllByPlay(string playId)
         {
             try
             {
-                return _playsService.GetAll();
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        [HttpPut("Update")]
-        public Task<ActionResult> Update(PlayModel play)
-        {
-            try
-            {
-                return _playsService.Update(play);
+                return _invoiceService.GetAllByPlay(playId);
             }
             catch
             {
@@ -72,7 +59,7 @@ namespace TheatricalPlayersRefactoringKata.Controllers
         {
             try
             {
-                return _playsService.Delete(id);
+                return _invoiceService.Delete(id);
             }
             catch
             {

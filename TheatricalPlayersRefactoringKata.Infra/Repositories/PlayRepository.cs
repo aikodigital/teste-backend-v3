@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Xml.Linq;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.Interface;
 
@@ -80,11 +79,27 @@ namespace TheatricalPlayersRefactoringKata.Infra.Repositories
             }
         }
 
-        public async Task<Play> Update(Play play, string id)
+        public async Task<Play> GetByPlayId(string playId)
         {
             try
             {
-                if (!ObjectId.TryParse(id, out ObjectId objId))
+                var filterId = Builders<Play>.Filter.Eq(x => x.Id, playId);
+
+                var result = await _mongoContext.GetCollection<Play>().Find(filterId).FirstOrDefaultAsync();
+
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Play> Update(Play play)
+        {
+            try
+            {
+                if (!ObjectId.TryParse(play.Id, out ObjectId objId))
                     return default;
 
                 var filterId = Builders<Play>.Filter.Eq("_id", objId);
