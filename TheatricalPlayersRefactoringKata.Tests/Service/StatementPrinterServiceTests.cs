@@ -19,12 +19,12 @@ public class StatementPrinterServiceTests
 
     private readonly static Dictionary<string, Play> PlayMap = new()
     {
-        { Hamlet, new Play() { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
-        { AsLike, new Play() { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
-        { Othello, new Play() { Name = "Othello", Lines = 3560, Type = "tragedy" } },
-        { HenryV, new Play() { Name = "Henry V", Lines = 3227, Type = "history" } },
-        { John, new Play() { Name = "King John", Lines = 2648, Type = "history" } },
-        { RichardIii, new Play() { Name = "Richard III", Lines = 3718, Type = "history" } }
+        { Hamlet, new () { Name = "Hamlet", Lines = 4024, Type = Gender.Tragedy} },
+        { AsLike, new () { Name = "As You Like It", Lines = 2670, Type = Gender.Comedy} },
+        { Othello, new () { Name = "Othello", Lines = 3560, Type = Gender.Tragedy} },
+        { HenryV, new () { Name = "Henry V", Lines = 3227, Type = Gender.History} },
+        { John, new () { Name = "King John", Lines = 2648, Type = Gender.History} },
+        { RichardIii, new () { Name = "Richard III", Lines = 3718, Type = Gender.History } }
     };
 
     private readonly static List<Performance> Performances = new()
@@ -37,40 +37,32 @@ public class StatementPrinterServiceTests
         new () { PlayId = RichardIii, Audience = 20 }
     };
 
-
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestStatementExampleLegacy()
-    {
-        var invoice = new Invoice
-        {
-            Customer = Customer,
-            Performances = Performances
+    public void TestStatementExampleLegacy() =>
+        RunTest(
+            Performances
                 .Take(3)
-                .ToList()
-        };
-
-        var result = new StatementPrinterService().Print(
-            invoice,
+                .ToList(),
             PlayMap
                 .Take(3)
                 .ToDictionary(p => p.Key, p => p.Value));
 
-        Approvals.Verify(result);
-    }
-
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample()
+    public void TestTextStatementExample() =>
+        RunTest(Performances, PlayMap);
+
+    private static void RunTest(List<Performance> performances, Dictionary<string, Play> plays)
     {
         var invoice = new Invoice
         {
             Customer = Customer,
-            Performances = Performances
+            Performances = performances
         };
 
-        var result = new StatementPrinterService().Print(invoice, PlayMap);
-
+        var result = StatementPrinterService.Print(invoice, plays);
         Approvals.Verify(result);
     }
+
 }
