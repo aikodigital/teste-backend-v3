@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata;
 
-public class StatementPrinter
+public class StatementPrinterService
 {
     public string Print(Invoice invoice, Dictionary<string, Play> plays)
     {

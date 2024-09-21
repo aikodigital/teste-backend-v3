@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Entities;
 using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.Service;
 
-public class StatementPrinterTests
+public class StatementPrinterServiceTests
 {
     private readonly static string Hamlet = "hamlet";
     private readonly static string AsLike = "as-like";
@@ -19,23 +19,24 @@ public class StatementPrinterTests
 
     private readonly static Dictionary<string, Play> PlayMap = new()
     {
-        { Hamlet, new Play("Hamlet", 4024, "tragedy") },
-        { AsLike, new Play("As You Like It", 2670, "comedy") },
-        { Othello, new Play("Othello", 3560, "tragedy") },
-        { HenryV, new Play("Henry V", 3227, "history") },
-        { John, new Play("King John", 2648, "history") },
-        { RichardIii, new Play("Richard III", 3718, "history") }
+        { Hamlet, new Play() { Name = "Hamlet", Lines = 4024, Type = "tragedy" } },
+        { AsLike, new Play() { Name = "As You Like It", Lines = 2670, Type = "comedy" } },
+        { Othello, new Play() { Name = "Othello", Lines = 3560, Type = "tragedy" } },
+        { HenryV, new Play() { Name = "Henry V", Lines = 3227, Type = "history" } },
+        { John, new Play() { Name = "King John", Lines = 2648, Type = "history" } },
+        { RichardIii, new Play() { Name = "Richard III", Lines = 3718, Type = "history" } }
     };
 
     private readonly static List<Performance> Performances = new()
     {
-        new (Hamlet, 55),
-        new (AsLike, 35),
-        new (Othello, 40),
-        new (HenryV, 20),
-        new (John, 39),
-        new (RichardIii, 20)
+        new () { PlayId = Hamlet, Audience = 55 },
+        new () { PlayId = AsLike, Audience = 35 },
+        new () { PlayId = Othello, Audience = 40 },
+        new () { PlayId = HenryV, Audience = 20 },
+        new () { PlayId = John, Audience = 39 },
+        new () { PlayId = RichardIii, Audience = 20 }
     };
+
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
@@ -49,7 +50,7 @@ public class StatementPrinterTests
                 .ToList()
         };
 
-        var result = new StatementPrinter().Print(
+        var result = new StatementPrinterService().Print(
             invoice,
             PlayMap
                 .Take(3)
@@ -68,7 +69,7 @@ public class StatementPrinterTests
             Performances = Performances
         };
 
-        var result = new StatementPrinter().Print(invoice, PlayMap);
+        var result = new StatementPrinterService().Print(invoice, PlayMap);
 
         Approvals.Verify(result);
     }
