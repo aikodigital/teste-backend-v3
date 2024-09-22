@@ -5,7 +5,7 @@ namespace TheatricalPlayersRefactoringKata.Services;
 
 public static class CalculatorServiceFactory
 {
-    public static ICalculator Create(Gender type)
+    public static CalculatorService Create(Gender type)
     {
         return type switch
         {

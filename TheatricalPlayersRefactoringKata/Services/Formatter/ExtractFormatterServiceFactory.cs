@@ -10,7 +10,7 @@ public static class ExtractFormatterServiceFactory
         return type switch
         {
             FileExtension.Txt => new TextFormatterService(),
-            FileExtension.Xml => new SpreadSheetFormatterService(),
+            FileExtension.Xml => new XMLFormatterService(),
             _ => throw new Exception("Unknown extension type"),
         };
     }

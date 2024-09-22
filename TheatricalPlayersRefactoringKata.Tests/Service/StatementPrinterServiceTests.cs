@@ -25,7 +25,8 @@ public class StatementPrinterServiceTests
         { Othello, new () { Name = "Othello", Lines = 3560, Type = Gender.Tragedy} },
         { HenryV, new () { Name = "Henry V", Lines = 3227, Type = Gender.History} },
         { John, new () { Name = "King John", Lines = 2648, Type = Gender.History} },
-        { RichardIii, new () { Name = "Richard III", Lines = 3718, Type = Gender.History } }
+        { RichardIii, new () { Name = "Henry V", Lines = 3227, Type = Gender.History} }
+        //{ RichardIii, new () { Name = "Richard III", Lines = 3718, Type = Gender.History } }
     };
 
     private readonly static List<Performance> Performances = new()
@@ -35,13 +36,15 @@ public class StatementPrinterServiceTests
         new () { PlayId = Othello, Audience = 40 },
         new () { PlayId = HenryV, Audience = 20 },
         new () { PlayId = John, Audience = 39 },
-        new () { PlayId = RichardIii, Audience = 20 }
+        new () { PlayId = RichardIii, Audience = 20 },
+        //new () { PlayId = RichardIii, Audience = 20 }
     };
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy() =>
         RunTest(
+            FileExtension.Txt,
             Performances
                 .Take(3)
                 .ToList(),
@@ -51,10 +54,15 @@ public class StatementPrinterServiceTests
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
-    public void TestTextStatementExample() =>
-        RunTest(Performances, PlayMap);
+    public void TestXmlStatementExample() =>
+        RunTest(FileExtension.Xml, Performances, PlayMap);
 
-    private static void RunTest(List<Performance> performances, Dictionary<string, Play> plays)
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestTextStatementExample() =>
+        RunTest(FileExtension.Txt, Performances, PlayMap);
+
+    private static void RunTest(FileExtension extension, List<Performance> performances, Dictionary<string, Play> plays)
     {
         var invoice = new Invoice
         {
@@ -62,7 +70,7 @@ public class StatementPrinterServiceTests
             Performances = performances
         };
 
-        var result = StatementPrinterService.Print(FileExtension.Txt, invoice, plays);
+        var result = StatementPrinterService.Print(extension, invoice, plays);
         Approvals.Verify(result);
     }
 }

@@ -3,9 +3,9 @@ using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
-public class ComedyCalculatorService : CalculatorService, ICalculator
+public class ComedyCalculatorService : CalculatorService
 {
-    public int CalculateAmount(Performance performance, Play play)
+    public override int CalculateAmount(Performance performance, Play play)
     {
         var amount = CalculateBaseAmount(play.Lines);
 
@@ -19,8 +19,6 @@ public class ComedyCalculatorService : CalculatorService, ICalculator
         return amount;
     }
 
-    public int CalculateCredits(Performance performance, Play play)
-    {
-        return Math.Max(performance.Audience - 30, 0) + (int)Math.Floor((decimal)performance.Audience / 5);
-    }
+    public override int CalculateCredits(Performance performance, Play play) =>
+        base.CalculateCredits(performance, play) + (int)Math.Floor((decimal)performance.Audience / 5);
 }
