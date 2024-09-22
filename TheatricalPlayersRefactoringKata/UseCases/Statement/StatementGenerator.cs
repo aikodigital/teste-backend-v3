@@ -21,8 +21,8 @@ public class StatementGenerator
         {
             var play =  _statementinput.plays[perf.PlayId];
             Item item = new Item();
+            item.Name = play.Name;
             int line = play.Lines < 1000 ? 1000 : play.Lines > 4000 ? 4000 : play.Lines;
-
             item.AmountOwed = CalculateAmount(play.Type,perf.Audience,line);
             item.EarnedCredits = CalculateEarnedCredits(perf.Audience,play.Type);
             item.Seats = perf.Audience;  
@@ -35,7 +35,7 @@ public class StatementGenerator
         return statement;
     }
 
-    private int CalculateEarnedCredits(int audience , Domain.enums.PlayType type = Domain.enums.PlayType.none)
+    public int CalculateEarnedCredits(int audience , Domain.enums.PlayType type = Domain.enums.PlayType.none)
     {         
         int _volumeCredits = 0;
         _volumeCredits += Math.Max(audience - 30, 0);

@@ -9,6 +9,14 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+    private StatementTests _statementTests = new StatementTests();
+
+    [Fact]
+    public void SerializeStament_IsNull()
+    {
+        Assert.True(_statementTests.SerializeStament_IsNull());
+    }    
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
@@ -28,8 +36,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = StatementPrinter.Print(invoice, plays);
+        Statement statement = new StatementGenerator(new StatementInput(invoice,plays)).GenerateStatement();
+        var result = new PrintStatement().Print(statement,PrintType.text);
 
         Approvals.Verify(result);
     }
@@ -59,8 +67,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = StatementPrinter.Print(invoice, plays);
+        Statement statement = new StatementGenerator(new StatementInput(invoice,plays)).GenerateStatement();
+        var result = new PrintStatement().Print(statement,PrintType.text);
 
         Approvals.Verify(result);
     }
@@ -90,8 +98,8 @@ public class StatementPrinterTests
             }
         );
 
-        var statement = new StatementGenerator(new StatementInput(invoice,plays)).GenerateStatement();
-        string result =  StatementPrinter.PrintStatement(statement);
+        Statement statement = new StatementGenerator(new StatementInput(invoice,plays)).GenerateStatement();
+        var result = new PrintStatement().Print(statement,PrintType.xml);
         Approvals.Verify(result);
     }
 }
