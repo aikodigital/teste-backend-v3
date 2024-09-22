@@ -3,17 +3,20 @@ using TheatricalPlayersRefactoringKata.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Services;
 
-public class ComedyCalculatorService : ICalculator
+public class ComedyCalculatorService : CalculatorService, ICalculator
 {
     public int CalculateAmount(Performance performance, Play play)
     {
-        var baseAmount = play.Lines < 1000 ? 1000 : (play.Lines > 4000 ? 4000 : play.Lines) * 10;
+        var amount = CalculateBaseAmount(play.Lines);
+
         if (performance.Audience > 20)
         {
-            baseAmount += 10000 + 500 * (performance.Audience - 20);
+            amount += 10000 + 500 * (performance.Audience - 20);
         }
-        baseAmount += 300 * performance.Audience;
-        return baseAmount;
+
+        amount += 300 * performance.Audience;
+
+        return amount;
     }
 
     public int CalculateCredits(Performance performance, Play play)
