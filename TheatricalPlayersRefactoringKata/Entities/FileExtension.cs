@@ -1,8 +1,7 @@
 ﻿namespace TheatricalPlayersRefactoringKata.Entities;
 
-public enum Gender
+public enum FileExtension
 {
-    Tragedy,
-    Comedy,
-    History
+    Txt,
+    Xml
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Entities;
+using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests.Service;
@@ -61,8 +62,7 @@ public class StatementPrinterServiceTests
             Performances = performances
         };
 
-        var result = StatementPrinterService.Print(invoice, plays);
+        var result = StatementPrinterService.Print(FileExtension.Txt, invoice, plays);
         Approvals.Verify(result);
     }
-
 }
