@@ -26,7 +26,6 @@ public class StatementPrinterServiceTests
         { HenryV, new () { Name = "Henry V", Lines = 3227, Type = Gender.History} },
         { John, new () { Name = "King John", Lines = 2648, Type = Gender.History} },
         { RichardIii, new () { Name = "Henry V", Lines = 3227, Type = Gender.History} }
-        //{ RichardIii, new () { Name = "Richard III", Lines = 3718, Type = Gender.History } }
     };
 
     private readonly static List<Performance> Performances = new()
@@ -37,7 +36,6 @@ public class StatementPrinterServiceTests
         new () { PlayId = HenryV, Audience = 20 },
         new () { PlayId = John, Audience = 39 },
         new () { PlayId = RichardIii, Audience = 20 },
-        //new () { PlayId = RichardIii, Audience = 20 }
     };
 
     [Fact]

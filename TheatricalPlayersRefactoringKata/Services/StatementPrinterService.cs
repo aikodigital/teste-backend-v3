@@ -27,8 +27,9 @@ public class StatementPrinterService
                     {
                         PlayName = play.Name,
                         Amount = thisAmount,
-                        Audience = performance.Audience
-                    });
+                        Audience = performance.Audience,
+                        Credits = credits
+                });
         }
 
         return ExtractFormatterServiceFactory
