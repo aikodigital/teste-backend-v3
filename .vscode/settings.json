@@ -9,5 +9,7 @@
         "**/Thumbs.db": true,
         "**/bin": true,
         "**/obj": true
-    }
+    },
+    "FSharp.suggestGitignore": false,
+    "files.autoGuessEncoding": true
 }
