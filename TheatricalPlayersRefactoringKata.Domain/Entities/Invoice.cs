@@ -16,5 +16,4 @@ public class Invoice
         this._customer = customer;
         this._performances = performance;
     }
-
 }

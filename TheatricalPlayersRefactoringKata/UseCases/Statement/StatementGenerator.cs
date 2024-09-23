@@ -2,16 +2,21 @@ using TheatricalPlayersRefactoringKata.Domain.Entities;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
 namespace TheatricalPlayersRefactoringKata;
 
-public class StatementGenerator
+public class StatementGenerator : IStatementGenerator
 {    
     private static StatementInput _statementinput;
+
     public StatementGenerator(StatementInput statementinput)
     {
          _statementinput = statementinput;
     }
 
+    #region  GenerateStatement
     public Statement GenerateStatement()
     {
         Statement statement= new Statement();
@@ -34,6 +39,7 @@ public class StatementGenerator
 
         return statement;
     }
+
 
     public int CalculateEarnedCredits(int audience , Domain.enums.PlayType type = Domain.enums.PlayType.none)
     {         
@@ -90,4 +96,6 @@ public class StatementGenerator
     {
          return CalculateComedy(audience,lines) + CalculateTragedy(audience,lines);
     }
+    #endregion  GenerateStatement
+
 }
