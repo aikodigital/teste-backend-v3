@@ -33,6 +33,19 @@ public class StatementPrinter
                     }
                     thisAmount += 300 * perf.Audience;
                     break;
+                case "history":
+                    var tragedyAmount = lines * 10;
+                    if (perf.Audience > 30)
+                    {
+                        tragedyAmount += 1000 * (perf.Audience - 30);
+                    }
+                    var comedyAmount = 300 * perf.Audience;
+                    if (perf.Audience > 20)
+                    {
+                        comedyAmount += 10000 + 500 * (perf.Audience - 20);
+                    }
+                    thisAmount += tragedyAmount + comedyAmount;
+                    break;
                 default:
                     throw new Exception("unknown type: " + play.Type);
             }
