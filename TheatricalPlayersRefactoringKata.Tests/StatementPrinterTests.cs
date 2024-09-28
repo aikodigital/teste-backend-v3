@@ -41,8 +41,8 @@ public class StatementPrinterTests
         plays.Add("hamlet", new Play("Hamlet", 4024, "tragedy"));
         plays.Add("as-like", new Play("As You Like It", 2670, "comedy"));
         plays.Add("othello", new Play("Othello", 3560, "tragedy"));
-        plays.Add("henry-v", new Play("Henry V", 3227, "history"));
-        plays.Add("john", new Play("King John", 2648, "history"));
+        //plays.Add("henry-v", new Play("Henry V", 3227, "history"));
+        //plays.Add("john", new Play("King John", 2648, "history"));
         plays.Add("richard-iii", new Play("Richard III", 3718, "history"));
 
         Invoice invoice = new Invoice(
@@ -57,7 +57,6 @@ public class StatementPrinterTests
                 new Performance("henry-v", 20)
             }
         );
-
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.Print(invoice, plays);
 
