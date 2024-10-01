@@ -14,18 +14,18 @@ public class StatementPrinterTests
     {
         var plays = new Dictionary<string, Play>
         {
-            { "hamlet", new Play("Hamlet", 4024, "tragedy") },
-            { "as-like", new Play("As You Like It", 2670, "comedy") },
-            { "othello", new Play("Othello", 3560, "tragedy") }
+            { "hamlet", new("Hamlet", 4024, "tragedy") },
+            { "as-like", new("As You Like It", 2670, "comedy") },
+            { "othello", new("Othello", 3560, "tragedy") }
         };
 
         Invoice invoice = new Invoice(
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40)
+                new("hamlet", 55),
+                new("as-like", 35),
+                new("othello", 40),
             }
         );
 
@@ -53,12 +53,12 @@ public class StatementPrinterTests
             "BigCo",
             new List<Performance>
             {
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40),
-                new Performance("henry-v", 20),
-                new Performance("john", 39),
-                new Performance("henry-v", 20)
+                new("hamlet", 55),
+                new("as-like", 35),
+                new("othello", 40),
+                new("henry-v", 20),
+                new("john", 39),
+                new("henry-v", 20)
             }
         );
 
