@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
 {
     /// <inheritdoc />
@@ -12,6 +14,22 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CustomerStatement",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    Customer = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    TotalAmount = table.Column<int>(type: "integer", nullable: false),
+                    VolumeCredits = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerStatement", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Invoice",
                 columns: table => new
@@ -46,6 +64,27 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerStatementProcess",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    CustomerStatementId = table.Column<int>(type: "integer", nullable: false),
+                    Process = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerStatementProcess", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CustomerStatementProcess_CustomerStatement_CustomerStatemen~",
+                        column: x => x.CustomerStatementId,
+                        principalTable: "CustomerStatement",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Play",
                 columns: table => new
                 {
@@ -64,7 +103,36 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                         column: x => x.TypeGenreId,
                         principalTable: "TypeGenre",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerPlaysStatement",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    CustomerStatementId = table.Column<int>(type: "integer", nullable: false),
+                    PlayId = table.Column<int>(type: "integer", nullable: false),
+                    Amount = table.Column<int>(type: "integer", nullable: false),
+                    TotalSeats = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerPlaysStatement", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CustomerPlaysStatement_CustomerStatement_CustomerStatementId",
+                        column: x => x.CustomerStatementId,
+                        principalTable: "CustomerStatement",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CustomerPlaysStatement_Play_PlayId",
+                        column: x => x.PlayId,
+                        principalTable: "Play",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,8 +159,33 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                         column: x => x.PlayId,
                         principalTable: "Play",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "TypeGenre",
+                columns: new[] { "Id", "BaseFeePerAudience", "BasePriceMultiplier", "BonusFee", "CreatedAt", "ExtraFeePerAudience", "MaxAudience", "Name" },
+                values: new object[,]
+                {
+                    { 1, null, 10, null, new DateTime(2024, 10, 1, 11, 31, 2, 457, DateTimeKind.Local).AddTicks(5402), 1000, 30, "tragedy" },
+                    { 2, 300, 10, 10000, new DateTime(2024, 10, 1, 11, 31, 2, 457, DateTimeKind.Local).AddTicks(5411), 500, 20, "comedy" },
+                    { 3, null, 10, null, new DateTime(2024, 10, 1, 11, 31, 2, 457, DateTimeKind.Local).AddTicks(5413), null, null, "history" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerPlaysStatement_CustomerStatementId",
+                table: "CustomerPlaysStatement",
+                column: "CustomerStatementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerPlaysStatement_PlayId",
+                table: "CustomerPlaysStatement",
+                column: "PlayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerStatementProcess_CustomerStatementId",
+                table: "CustomerStatementProcess",
+                column: "CustomerStatementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Performance_InvoiceId",
@@ -114,7 +207,16 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CustomerPlaysStatement");
+
+            migrationBuilder.DropTable(
+                name: "CustomerStatementProcess");
+
+            migrationBuilder.DropTable(
                 name: "Performance");
+
+            migrationBuilder.DropTable(
+                name: "CustomerStatement");
 
             migrationBuilder.DropTable(
                 name: "Invoice");

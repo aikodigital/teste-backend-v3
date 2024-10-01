@@ -26,9 +26,10 @@ public class PerformanceConfiguration : IEntityTypeConfiguration<Performance>
                 .HasColumnType("integer")
                 .IsRequired();
 
-        builder.HasOne(e => e.Play)
-               .WithMany(e => e.Performances)
-               .HasForeignKey(e => e.PlayId)
-               .HasPrincipalKey(e => e.Id);
+        builder.HasOne(t => t.Play)
+               .WithMany(t => t.Performances)
+               .HasForeignKey(t => t.PlayId)
+               .HasPrincipalKey(t => t.Id)
+               .OnDelete(DeleteBehavior.Restrict);
     }
 }

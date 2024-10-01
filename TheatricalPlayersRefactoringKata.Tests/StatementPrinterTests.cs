@@ -14,10 +14,12 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 public class StatementPrinterTests
 {
     private readonly Mock<ITypeGenreRepository> _mockTypeGenreRepository;
+    private readonly Mock<ICustomerStatementRepository> _iCustomerStatementRepository;
 
     public StatementPrinterTests()
     {
         _mockTypeGenreRepository = new Mock<ITypeGenreRepository>();
+        _iCustomerStatementRepository = new Mock<ICustomerStatementRepository>();
     }
 
     [Fact]
@@ -117,7 +119,7 @@ public class StatementPrinterTests
             }
         };
 
-        StatementPrinterService statementPrinter = new StatementPrinterService(_mockTypeGenreRepository.Object);
+        StatementPrinterService statementPrinter = new StatementPrinterService(_mockTypeGenreRepository.Object, _iCustomerStatementRepository.Object);
         var result = await statementPrinter.Print(invoice);
 
         Approvals.Verify(result);
@@ -138,7 +140,7 @@ public class StatementPrinterTests
 
         var play = new Domain.Entities.Play { Name = "Hamlet", Lines = 4024, TypeGenre = typeGenre };
         var performance = new Domain.Entities.Performance { Play = play, Audience = 55 };
-        var service = new StatementPrinterService(null);
+        var service = new StatementPrinterService(null, null);
 
         int lines = 3000;
 
@@ -162,7 +164,7 @@ public class StatementPrinterTests
 
         var play = new Domain.Entities.Play { Name = "As You Like It", Lines = 2670, TypeGenre = typeGenre };
         var performance = new Domain.Entities.Performance { Play = play, Audience = 35 };
-        var service = new StatementPrinterService(null);
+        var service = new StatementPrinterService(null, null);
 
         int lines = 2000;
 
@@ -196,7 +198,7 @@ public class StatementPrinterTests
         _mockTypeGenreRepository.Setup(repo => repo.GetByFilter(x => x.Name.Equals("comedy")))
                                     .ReturnsAsync(new List<TypeGenre> { typeGenres.Values.FirstOrDefault(x => x.Name.Equals("comedy")) });
 
-        var service = new StatementPrinterService(_mockTypeGenreRepository.Object);
+        var service = new StatementPrinterService(_mockTypeGenreRepository.Object, null);
         int lines = 2500;
 
         var result = await service.Calculate(play, performance, typeGenre, lines);

@@ -12,8 +12,8 @@ using TheatricalPlayersRefactoringKata.Infra.Data.Context;
 namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240926163546_Seeds")]
-    partial class Seeds
+    [Migration("20241001143113_SeedsPlays")]
+    partial class SeedsPlays
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,106 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerPlaysStatement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer")
+                        .HasColumnName("Amount");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<int>("CustomerStatementId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PlayId")
+                        .HasColumnType("integer")
+                        .HasColumnName("PlayId");
+
+                    b.Property<int>("TotalSeats")
+                        .HasColumnType("integer")
+                        .HasColumnName("TotalSeats");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerStatementId");
+
+                    b.HasIndex("PlayId");
+
+                    b.ToTable("CustomerPlaysStatement", (string)null);
+                });
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<string>("Customer")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("Customer");
+
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("integer")
+                        .HasColumnName("TotalAmount");
+
+                    b.Property<int>("VolumeCredits")
+                        .HasColumnType("integer")
+                        .HasColumnName("VolumeCredits");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerStatement", (string)null);
+                });
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatementProcess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<int>("CustomerStatementId")
+                        .HasColumnType("integer")
+                        .HasColumnName("CustomerStatementId");
+
+                    b.Property<bool>("Process")
+                        .HasColumnType("boolean")
+                        .HasColumnName("Process");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerStatementId");
+
+                    b.ToTable("CustomerStatementProcess", (string)null);
+                });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.Invoice", b =>
                 {
@@ -117,6 +217,56 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                     b.HasIndex("TypeGenreId");
 
                     b.ToTable("Play", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2714),
+                            Lines = 4024,
+                            Name = "Hamlet",
+                            TypeGenreId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2724),
+                            Lines = 2670,
+                            Name = "As You Like It",
+                            TypeGenreId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2725),
+                            Lines = 3560,
+                            Name = "Othello",
+                            TypeGenreId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2726),
+                            Lines = 3227,
+                            Name = "Henry V",
+                            TypeGenreId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2727),
+                            Lines = 2648,
+                            Name = "King John",
+                            TypeGenreId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(2727),
+                            Lines = 3718,
+                            Name = "Richard III",
+                            TypeGenreId = 3
+                        });
                 });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.TypeGenre", b =>
@@ -170,7 +320,7 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                         {
                             Id = 1,
                             BasePriceMultiplier = 10,
-                            CreatedAt = new DateTime(2024, 9, 26, 13, 35, 46, 775, DateTimeKind.Local).AddTicks(6048),
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(3814),
                             ExtraFeePerAudience = 1000,
                             MaxAudience = 30,
                             Name = "tragedy"
@@ -181,7 +331,7 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                             BaseFeePerAudience = 300,
                             BasePriceMultiplier = 10,
                             BonusFee = 10000,
-                            CreatedAt = new DateTime(2024, 9, 26, 13, 35, 46, 775, DateTimeKind.Local).AddTicks(6064),
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(3817),
                             ExtraFeePerAudience = 500,
                             MaxAudience = 20,
                             Name = "comedy"
@@ -190,9 +340,39 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                         {
                             Id = 3,
                             BasePriceMultiplier = 10,
-                            CreatedAt = new DateTime(2024, 9, 26, 13, 35, 46, 775, DateTimeKind.Local).AddTicks(6066),
+                            CreatedAt = new DateTime(2024, 10, 1, 11, 31, 13, 714, DateTimeKind.Local).AddTicks(3819),
                             Name = "history"
                         });
+                });
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerPlaysStatement", b =>
+                {
+                    b.HasOne("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatement", "CustomerStatement")
+                        .WithMany("CustomerPlaysStatement")
+                        .HasForeignKey("CustomerStatementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheatricalPlayersRefactoringKata.Domain.Entities.Play", "Play")
+                        .WithMany("CustomerPlaysStatement")
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CustomerStatement");
+
+                    b.Navigation("Play");
+                });
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatementProcess", b =>
+                {
+                    b.HasOne("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatement", "CustomerStatement")
+                        .WithMany("CustomerStatementProcess")
+                        .HasForeignKey("CustomerStatementId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CustomerStatement");
                 });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.Performance", b =>
@@ -204,7 +384,7 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                     b.HasOne("TheatricalPlayersRefactoringKata.Domain.Entities.Play", "Play")
                         .WithMany("Performances")
                         .HasForeignKey("PlayId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Play");
@@ -215,10 +395,17 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
                     b.HasOne("TheatricalPlayersRefactoringKata.Domain.Entities.TypeGenre", "TypeGenre")
                         .WithMany("Plays")
                         .HasForeignKey("TypeGenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("TypeGenre");
+                });
+
+            modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.CustomerStatement", b =>
+                {
+                    b.Navigation("CustomerPlaysStatement");
+
+                    b.Navigation("CustomerStatementProcess");
                 });
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.Invoice", b =>
@@ -228,6 +415,8 @@ namespace TheatricalPlayersRefactoringKata.Infra.Data.Migrations
 
             modelBuilder.Entity("TheatricalPlayersRefactoringKata.Domain.Entities.Play", b =>
                 {
+                    b.Navigation("CustomerPlaysStatement");
+
                     b.Navigation("Performances");
                 });
 

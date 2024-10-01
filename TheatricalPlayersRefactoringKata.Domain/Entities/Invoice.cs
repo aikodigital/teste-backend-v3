@@ -4,8 +4,6 @@ public class Invoice : BaseEntity
 {
     public string Customer { get; set; }
 
-    public virtual ICollection<Performance> Performances { get; set; }
-
-    public virtual InvoiceProcess InvoiceProcess { get; set; }
+    public virtual ICollection<Performance> Performances { get; set; } = new List<Performance>();
 }
   

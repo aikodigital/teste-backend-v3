@@ -8,10 +8,12 @@ namespace TheatricalPlayersRefactoringKata.Service.Services;
 public class StatementPrinterService : IStatementPrinterService
 {
     private readonly ITypeGenreRepository _typeGenreRepository;
+    private readonly ICustomerStatementRepository _iCustomerStatementRepository;
 
-    public StatementPrinterService(ITypeGenreRepository typeGenreRepository)
+    public StatementPrinterService(ITypeGenreRepository typeGenreRepository, ICustomerStatementRepository iCustomerStatementRepository)
     {
         _typeGenreRepository = typeGenreRepository;
+        _iCustomerStatementRepository = iCustomerStatementRepository;
     }
 
     public async Task<string> Print(Invoice invoice)
@@ -35,12 +37,51 @@ public class StatementPrinterService : IStatementPrinterService
             volumeCredits += CalculateCredits(perf, typeGenre, volumeCredits);
 
             result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount) / 100, perf.Audience);
+
             totalAmount += thisAmount;
         }
 
         result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount) / 100);
         result += String.Format("You earned {0} credits\n", volumeCredits);
+
         return result;
+    }
+
+    public async Task AddStatementCustomer(Invoice invoice)
+    {
+        CustomerStatement statement = new()
+        {
+            Customer = invoice.Customer,
+        };
+
+        int totalAmount = 0;
+        int volumeCredits = 0;
+
+        foreach (var perf in invoice.Performances)
+        {
+            Play play = perf.Play;
+            int lines = play.Lines;
+            if (lines < 1000) lines = 1000;
+            if (lines > 4000) lines = 4000;
+
+            TypeGenre typeGenre = perf.Play.TypeGenre;
+            int thisAmount = await Calculate(play, perf, perf.Play.TypeGenre, lines);
+
+            statement.CustomerPlaysStatement.Add(new()
+            {
+                Amount = await Calculate(play, perf, typeGenre, lines),
+                TotalSeats = perf.Audience,
+                PlayId = play.Id
+            });
+
+            volumeCredits += CalculateCredits(perf, typeGenre, volumeCredits);
+            totalAmount += thisAmount;
+        }
+
+        statement.TotalAmount = totalAmount;
+        statement.VolumeCredits = volumeCredits;
+
+        await _iCustomerStatementRepository.AddAsync(statement);
     }
 
     public async Task<int> Calculate(Play play, Performance perf, TypeGenre genre, int lines)

@@ -4,9 +4,9 @@ using TheatricalPlayersRefactoringKata.Infra.Data.Context;
 
 namespace TheatricalPlayersRefactoringKata.Infra.Data.Repositories;
 
-public class InvoiceProcessRepository : BaseRepository<InvoiceProcess, ApplicationDbContext>, IInvoiceProcessRepository
-{
-    public InvoiceProcessRepository(ApplicationDbContext context) : base(context)
+public class CustomerStatementRepository : BaseRepository<CustomerStatement, ApplicationDbContext>, ICustomerStatementRepository
+{ 
+    public CustomerStatementRepository(ApplicationDbContext context) : base(context)
     {
 
     }

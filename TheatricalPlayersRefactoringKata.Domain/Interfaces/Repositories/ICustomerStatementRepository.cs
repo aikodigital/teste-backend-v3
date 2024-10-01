@@ -2,6 +2,6 @@
 
 namespace TheatricalPlayersRefactoringKata.Domain.Interfaces.Repositories;
 
-public interface IInvoiceProcessRepository : IBaseRepository<InvoiceProcess>
+public interface ICustomerStatementRepository : IBaseRepository<CustomerStatement>
 {
 }

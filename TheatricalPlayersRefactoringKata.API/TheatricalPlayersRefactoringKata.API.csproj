@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infra.Data\TheatricalPlayersRefactoringKata.Infra.Data.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Service\TheatricalPlayersRefactoringKata.Service.csproj" />
+  </ItemGroup>
+
+</Project>
