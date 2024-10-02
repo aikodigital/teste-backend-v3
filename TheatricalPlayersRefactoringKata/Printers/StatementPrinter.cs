@@ -9,7 +9,6 @@ namespace TheatricalPlayersRefactoringKata
     public class StatementPrinter
     {
         private readonly Dictionary<string, IPlayTypeCalculator> _calculators;
-
         public StatementPrinter()
         {
             _calculators = new Dictionary<string, IPlayTypeCalculator>
@@ -19,7 +18,6 @@ namespace TheatricalPlayersRefactoringKata
                 { "history", new HistoryCalculator() }
             };
         }
-
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
             decimal totalAmount = 0m;

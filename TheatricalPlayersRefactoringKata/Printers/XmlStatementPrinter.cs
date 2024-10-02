@@ -20,7 +20,6 @@ namespace TheatricalPlayersRefactoringKata
                 { "history", new HistoryCalculator() }
             };
         }
-
         public string Print(Invoice invoice, Dictionary<string, Play> plays)
         {
             decimal totalAmount = 0m;
@@ -57,7 +56,6 @@ namespace TheatricalPlayersRefactoringKata
 
             return result.ToString();
         }
-
         private string FormatAmount(decimal amount)
         {
             return amount % 1 == 0 ? amount.ToString("0", CultureInfo.InvariantCulture) : amount.ToString("0.0", CultureInfo.InvariantCulture);

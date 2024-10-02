@@ -2,8 +2,7 @@
 using TheatricalPlayersRefactoringKata.Calculators;
 using TheatricalPlayersRefactoringKata.Core;
 
-namespace TheatricalPlayersRefactoringKata
-{
+namespace TheatricalPlayersRefactoringKata{
     public class TragedyCalculator : IPlayTypeCalculator
     {
         public decimal CalculateAmount(Performance perf, Play play)
@@ -15,7 +14,6 @@ namespace TheatricalPlayersRefactoringKata
             }
             return thisAmount;
         }
-
         public decimal CalculateVolumeCredits(Performance perf)
         {
             return Math.Max(perf.Audience - 30, 0);

@@ -16,7 +16,6 @@ namespace TheatricalPlayersRefactoringKata
             thisAmount += 300m * perf.Audience;
             return thisAmount;
         }
-
         public decimal CalculateVolumeCredits(Performance perf)
         {
             return Math.Max(perf.Audience - 30, 0) + (int)Math.Floor((decimal)perf.Audience / 5);

@@ -113,11 +113,7 @@ public class StatementPrinterTests
         StatementPrinter printer = new StatementPrinter();
         var result = printer.Print(invoice, plays);
 
-        // Verifica se o valor total está correto
         Assert.Contains("Amount owed is $400.00", result);
-        // Verifica se os créditos estão corretos
         Assert.Contains("You earned 10 credits", result);
     }
-
-
 }
