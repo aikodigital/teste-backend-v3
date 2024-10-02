@@ -97,4 +97,27 @@ public class StatementPrinterTests
         Approvals.Verify(result);
     }
 
+    [Fact]
+    public void TestTragedyCalculation()
+    {
+        var plays = new Dictionary<string, Play>
+    {
+        { "hamlet", new Play("Hamlet", 3000, "tragedy") }
+    };
+
+        Invoice invoice = new Invoice(
+            "Customer",
+            new List<Performance> { new Performance("hamlet", 40) }
+        );
+
+        StatementPrinter printer = new StatementPrinter();
+        var result = printer.Print(invoice, plays);
+
+        // Verifica se o valor total está correto
+        Assert.Contains("Amount owed is $400.00", result);
+        // Verifica se os créditos estão corretos
+        Assert.Contains("You earned 10 credits", result);
+    }
+
+
 }

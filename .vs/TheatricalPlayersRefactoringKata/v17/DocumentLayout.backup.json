@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\calculators\\historycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\historycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AFBF20D-3D97-46EC-B506-8B7C82598951}|TheatricalPlayersRefactoringKata.Tests\\TheatricalPlayersRefactoringKata.Tests.csproj|solutionrelative:theatricalplayersrefactoringkata.tests\\statementprintertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\printers\\xmlstatementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\printers\\xmlstatementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\printers\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\printers\\statementprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\calculators\\tragedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\tragedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\calculators\\comedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\comedycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|c:\\users\\4960017212\\documents\\github\\teste-backend-v3\\theatricalplayersrefactoringkata\\calculators\\iplaytypecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}|TheatricalPlayersRefactoringKata\\TheatricalPlayersRefactoringKata.csproj|solutionrelative:theatricalplayersrefactoringkata\\calculators\\iplaytypecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,21 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HistoryCalculator.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\HistoryCalculator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:37:11.237Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -63,80 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StatementPrinter.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Printers\\StatementPrinter.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Printers\\StatementPrinter.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Printers\\StatementPrinter.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Printers\\StatementPrinter.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAuwBIAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:33:38.208Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "StatementPrinterTests.cs",
               "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
               "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
               "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
               "RelativeToolTip": "TheatricalPlayersRefactoringKata.Tests\\StatementPrinterTests.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAIwEMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAuwHQAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T20:11:16.987Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "XmlStatementPrinter.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Printers\\XmlStatementPrinter.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Printers\\XmlStatementPrinter.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Printers\\XmlStatementPrinter.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Printers\\XmlStatementPrinter.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAIwCUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T20:08:32.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TragedyCalculator.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\TragedyCalculator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:33:12.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ComedyCalculator.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\ComedyCalculator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:32:56.891Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IPlayTypeCalculator.cs",
-              "DocumentMoniker": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\IPlayTypeCalculator.cs",
-              "RelativeDocumentMoniker": "TheatricalPlayersRefactoringKata\\Calculators\\IPlayTypeCalculator.cs",
-              "ToolTip": "C:\\Users\\4960017212\\Documents\\GitHub\\teste-backend-v3\\TheatricalPlayersRefactoringKata\\Calculators\\IPlayTypeCalculator.cs",
-              "RelativeToolTip": "TheatricalPlayersRefactoringKata\\Calculators\\IPlayTypeCalculator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:32:42.006Z",
+              "WhenOpened": "2024-10-01T21:56:53.068Z",
               "EditorCaption": ""
             }
           ]
