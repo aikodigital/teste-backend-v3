@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TheatricalPlayersRefactoringKata.Api</name>
+    </assembly>
+    <members>
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.GetAllPerformances">
+            <summary>
+            Retorna a lista com todas as perfomances.
+            </summary>
+            <returns>Lista de performances.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.GetPerformanceById(System.Int32)">
+            <summary>
+            Este método deve retornar os detalhes da performance com o ID {id}.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <returns>Detalhes da performance.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.CreatePerformance(TheatricalPlayersRefactoringKata.Model.Performance)">
+            <summary>
+            Este método deve criar uma nova performance com base nos dados fornecidos.
+            </summary>
+            <param name="model">Modelo da performance.</param>
+            <returns>Confirmação da criação.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.UpdatePerformance(System.Int32,TheatricalPlayersRefactoringKata.Model.Performance)">
+            <summary>
+            Este método deve atualizar completamente a performance com o ID {id} com os dados fornecidos.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <param name="model">Modelo da performance atualizada.</param>
+            <returns>Confirmação da atualização.</returns>
+        </member>
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.DeletePerformance(System.Int32)">
+            <summary>
+            Este método deve excluir a performance com o ID {id}.
+            </summary>
+            <param name="id">ID da performance.</param>
+            <returns>Confirmação da remoção.</returns>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.Id">
+            <summary>
+            ID chave primária (PK)
+            </summary>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.Play">
+            <summary>
+            A peça.
+            </summary>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.Genre">
+            <summary>
+            Tipo de peça. Pode ser Comédia, Tragédia, Histórica...
+            </summary>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.AmountOwed">
+            <summary>
+            Valor total da peça.
+            </summary>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.EarnedCredits">
+            <summary>
+            Créditos adquiridos.
+            </summary>
+        </member>
+        <member name="P:TheatricalPlayersRefactoringKata.Api.Swagger.ApiPerformance.Audience">
+            <summary>
+            Número de espectadores.
+            </summary>
+        </member>
+    </members>
+</doc>
