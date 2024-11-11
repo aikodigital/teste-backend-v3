@@ -17,14 +17,14 @@
             <param name="id">ID da performance.</param>
             <returns>Detalhes da performance.</returns>
         </member>
-        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.CreatePerformance(TheatricalPlayersRefactoringKata.Model.Performance)">
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.CreatePerformance(TheatricalPlayersRefactoringKata.Model.Models.Performance)">
             <summary>
             Este método deve criar uma nova performance com base nos dados fornecidos.
             </summary>
             <param name="model">Modelo da performance.</param>
             <returns>Confirmação da criação.</returns>
         </member>
-        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.UpdatePerformance(System.Int32,TheatricalPlayersRefactoringKata.Model.Performance)">
+        <member name="M:TheatricalPlayersRefactoringKata.Api.Controller.ApiTheaterController.UpdatePerformance(System.Int32,TheatricalPlayersRefactoringKata.Model.Models.Performance)">
             <summary>
             Este método deve atualizar completamente a performance com o ID {id} com os dados fornecidos.
             </summary>

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service.Calculators;
 
 namespace TheatricalPlayersRefactoringKata.Service.Printer;

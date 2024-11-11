@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service.Printer;
 using Xunit;
 

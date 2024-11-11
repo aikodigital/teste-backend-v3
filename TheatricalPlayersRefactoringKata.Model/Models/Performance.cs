@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata.Model;
+namespace TheatricalPlayersRefactoringKata.Model.Models;
 
 public class Performance
 {

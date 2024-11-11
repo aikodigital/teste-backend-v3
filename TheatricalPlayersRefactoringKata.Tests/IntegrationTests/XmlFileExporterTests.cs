@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service.Printer;
 using Xunit;
 

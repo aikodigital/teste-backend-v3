@@ -2,7 +2,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Xml.Serialization;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service.Calculators;
 
 namespace TheatricalPlayersRefactoringKata.Service.Printer;

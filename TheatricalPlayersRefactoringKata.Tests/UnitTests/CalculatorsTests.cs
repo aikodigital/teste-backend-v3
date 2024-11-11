@@ -1,5 +1,5 @@
 using System;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service.Calculators;
 using Xunit;
 

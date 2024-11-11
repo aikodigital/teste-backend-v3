@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 using TheatricalPlayersRefactoringKata.Service;
 
 namespace TheatricalPlayersRefactoringKata.Api.Controller;

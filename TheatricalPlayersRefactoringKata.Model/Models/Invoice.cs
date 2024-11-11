@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TheatricalPlayersRefactoringKata.Model;
+namespace TheatricalPlayersRefactoringKata.Model.Models;
 
 [XmlRoot("Statement")]
 public class Invoice

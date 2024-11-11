@@ -1,5 +1,5 @@
 ﻿﻿using Microsoft.EntityFrameworkCore;
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 
 namespace TheatricalPlayersRefactoringKata.Repository;
 

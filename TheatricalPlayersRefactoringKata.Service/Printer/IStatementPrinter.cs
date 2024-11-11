@@ -1,4 +1,4 @@
-using TheatricalPlayersRefactoringKata.Model;
+using TheatricalPlayersRefactoringKata.Model.Models;
 
 namespace TheatricalPlayersRefactoringKata.Service.Printer;
 
