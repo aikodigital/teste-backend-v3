@@ -11,17 +11,21 @@ namespace Aplication.Services
 {
     public class StatementService
     {
-        private static List<PerformanceDto> Performances = new()
+        private List<PerformanceDto> ListAllPerformances()
         {
-                new PerformanceDto(GetPlayByName("Hamlet"), 55),
-                new PerformanceDto(GetPlayByName("You Like"), 35),
-                new PerformanceDto(GetPlayByName("Othello"), 40),
-                new PerformanceDto(GetPlayByName("Henry"), 20),
-                new PerformanceDto(GetPlayByName("John"), 39),
-                new PerformanceDto(GetPlayByName("Henry"), 20)
-        };
+            List<PerformanceDto> performances = new()
+            {
+                new(GetPlayByName("Hamlet"), 55),
+                new(GetPlayByName("You Like"), 35),
+                new(GetPlayByName("Othello"), 40),
+                new(GetPlayByName("Henry"), 20),
+                new(GetPlayByName("John"), 39),
+                new(GetPlayByName("Henry"), 20)
+                };
+            return performances;
+        }
 
-        private static List<PlayDto> Plays = new()
+        private List<PlayDto> Plays = new()
             {
                 new PlayDto("Hamlet", 4024, PlayType.tragedy),
                 new PlayDto("As You Like It", 2670, PlayType.comedy),
@@ -31,23 +35,26 @@ namespace Aplication.Services
                 new PlayDto("Richard III", 3718, PlayType.history)
             };
 
-        public static string Print()//InvoiceDto invoice
+        public string Print()//InvoiceDto invoice
         {
             InvoiceDto invoicex = new("BigCo", GetPerformances("Hamlet", "As You Like",
                 "Othello"));
 
+
+
             return "";
         }
 
-        private static List<PerformanceDto> GetPerformances(params string[] names)
+        private List<PerformanceDto> GetPerformances(params string[] names)
         {
-            var perfs = names.Select(name => Performances.FirstOrDefault(perf => perf.Play.Name.Contains(name)))
+            var AllPerformances = ListAllPerformances();
+            var perfs = names.Select(name => AllPerformances.FirstOrDefault(perf => perf.Play.Name.Contains(name)))
                 .ToList();
             return perfs!;
         }
 
 
-        private static PlayDto GetPlayByName(string name)
+        private PlayDto GetPlayByName(string name)
         => Plays.FirstOrDefault(x => x.Name.Contains(name))!;
 
 
