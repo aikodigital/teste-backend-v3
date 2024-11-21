@@ -53,7 +53,7 @@ namespace Aplication.Services
         public InvoiceDto ObterInvoiceBigCo2()
         => new("BigCo", GetPerformancesByName("Hamlet", "As You Like", "Othello", "Henry", "John", "Henry"));
 
-        public string Imprimir() 
+        public string Imprimir()
         {
             var invoice = ObterInvoiceBigCo2();
             return Print(invoice);
@@ -65,29 +65,18 @@ namespace Aplication.Services
             var valorTotal = 0; var valorCreditos = 0;
             var resultado = string.Format("Statement for {0}\n", invoice.Customer);
 
-            bool jaVerificouComedia = false;
-            bool jaVerificouTragedia = false;
             foreach (var perf in invoice.Performances)
             {
-                int linhas = 0;
-                int valorPorPerformance = 0;
+                int lines = perf.Play.Lines;
 
-                if (perf.Play.Lines < 1000) linhas = 1000;
-                if (perf.Play.Lines > 4000) linhas = 4000;
+                if (lines < 1000) lines = 1000;
+                if (lines > 4000) lines = 4000;
 
-                valorPorPerformance += linhas * 10; //1ª rodagem: = 32270
+                var valorPorPerformance = lines * 10;
 
-                if (perf.PlayType == PlayType.tragedy)
-                    PrecificarTragedia(perf.Audience, valorPorPerformance, ref jaVerificouTragedia);
+                var calculadora = PriceCalculatorFactory.GetCalculator(perf.PlayType);
+                valorPorPerformance += calculadora.CalculatePrice(perf.Audience);
 
-                if (perf.PlayType == PlayType.comedy)
-                    PrecificarComedia(perf.Audience, valorPorPerformance, ref jaVerificouComedia);
-
-                if (perf.PlayType == PlayType.history)
-                {
-                    PrecificarTragedia(perf.Audience, valorPorPerformance, ref jaVerificouTragedia);
-                    PrecificarComedia(perf.Audience, valorPorPerformance, ref jaVerificouComedia);
-                }
                 valorCreditos += Math.Max(perf.Audience - 30, 0);
 
                 if (perf.PlayType == PlayType.comedy || perf.PlayType == PlayType.history)
@@ -108,34 +97,5 @@ namespace Aplication.Services
             resultado += string.Format(cultura, "  {0}: {1:C} ({2} seats)\n", perf.Play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
             return resultado;
         }
-
-        private static int PrecificarComedia(int audience, int valorTotal, ref bool jaRodouComedia)
-        {
-            if (jaRodouComedia) return valorTotal;
-
-            if (audience > 20) valorTotal += 10000 + 500 * (audience - 20);
-            
-            valorTotal += 300 * audience;
-
-            jaRodouComedia = true;
-            return valorTotal;
-        }
-
-        private static int PrecificarTragedia(int audience, int valorTotal, ref bool jaRodouTragedia)
-        {
-            if (jaRodouTragedia)
-                return valorTotal;
-
-            if (audience > 30)
-                valorTotal += 1000 * (audience - 30);
-            
-            jaRodouTragedia = true;
-            return valorTotal;
-        }
-
-
-
-
-
     }
 }
