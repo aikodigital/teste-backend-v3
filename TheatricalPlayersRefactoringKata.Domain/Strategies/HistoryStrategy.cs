@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Utilities;
+using TheatricalPlayersRefactoringKata.Infrastructure.Utilities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Strategies
 {
@@ -20,6 +21,11 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
             //As peças históricas são, por algum motivo, mais complicadas e têm o valor igual à soma dos valores correspondentes a uma peça de tragédia e uma de comédia
             return _tragedy.CalculateCost(audienceSize, lines)
                  + _comedy.CalculateCost(audienceSize, lines);
+        }
+
+        public decimal CalculateBasePrice(int lines)
+        {
+            return PricingHelper.CalculateBasePrice(lines);
         }
         public int CalculateCredits(int audienceSize) => CreditHelper.CalculateBaseCredit(audienceSize);
     }

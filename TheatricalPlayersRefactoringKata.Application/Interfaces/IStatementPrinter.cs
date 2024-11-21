@@ -7,8 +7,8 @@ using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Application.Interfaces
 {
-    public interface IGenreStrategyFactory
+    public interface IStatementPrinter
     {
-        IGenreStrategy Create(string genre);
+        string Print(Invoice invoice, Dictionary<string, Play> plays, string format);
     }
 }

@@ -17,13 +17,18 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
         {
 
             //Para uma peça de comédia, o cálculo base é sempre somado a 3.00 por espectador. Além disso, se a platéia for maior que 20, o valor deve ser aumentado em 100.00 e deve se somar mais 5.00 por espectador adicional aos 20 de base
-            var basePrice = PricingHelper.CalculateBasePrice(lines);
+            var basePrice = CalculateBasePrice(lines);
             decimal additionalCost = 3.0m * audienceSize;
             if (audienceSize > 20)
             {
                 additionalCost += 100.0m + 5.0m * (audienceSize - 20);
             }
             return basePrice + additionalCost;
+        }
+
+        public decimal CalculateBasePrice(int lines)
+        {
+            return PricingHelper.CalculateBasePrice(lines);
         }
 
         public int CalculateCredits(int audienceSize)

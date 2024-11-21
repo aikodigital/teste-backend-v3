@@ -9,18 +9,25 @@ namespace TheatricalPlayersRefactoringKata.Domain.Interfaces
     public interface IGenreStrategy
     {
         /// <summary>
-        /// Calcula o valor total para a apresentação com base no gênero.
+        /// Calculates the total cost for the performance based on the genre.
         /// </summary>
-        /// <param name="audience">Tamanho da platéia.</param>
-        /// <param name="basePrice">Preço base calculado para a peça.</param>
-        /// <returns>O valor total a ser cobrado.</returns>
+        /// <param name="audience">Audience size.</param>
+        /// <param name="basePrice">Base price calculated for the play.</param>
+        /// <returns>The total cost to be charged.</returns>
         decimal CalculateCost(int audience, int lines);
 
         /// <summary>
-        /// Calcula os créditos gerados para o cliente com base no gênero.
+        /// Calculates the credits earned by the customer based on the genre.
         /// </summary>
-        /// <param name="audience">Tamanho da platéia.</param>
-        /// <returns>Total de créditos gerados.</returns>
+        /// <param name="audience">Audience size.</param>
+        /// <returns>Total credits earned.</returns>
         int CalculateCredits(int audience);
+
+        /// <summary>
+        /// Calculates the base price for the play based on the number of lines.
+        /// </summary>
+        /// <param name="lines">Number of lines in the play.</param>
+        /// <returns>The calculated base price.</returns>
+        decimal CalculateBasePrice(int lines);
     }
 }

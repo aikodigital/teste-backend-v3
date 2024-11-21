@@ -21,18 +21,23 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 public class StatementPrinterTests
 {
 
+    private readonly StatementPrinter _statementPrinter = new ();
+    private readonly Dictionary<string, Play> _plays = MockData.GetPlays();
+    private readonly Dictionary<string, Play> _plays1 = MockData.GetPlays1();
+    private readonly Invoice _invoice = MockData.GetInvoice();
+    private readonly Invoice _invoice1 = MockData.GetInvoice1();
+
     [Obsolete]
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
     {
 
-        var Plays = MockData.GetPlays();
+        var Plays = _plays;
 
-        var Invoice = MockData.GetInvoice();
+        var Invoice = _invoice;
 
-        Application.StatementPrinter statementPrinter = new Application.StatementPrinter();
-        var result = statementPrinter.Print(Invoice, Plays, "text");
+        var result = _statementPrinter.Print(Invoice, Plays, "text");
 
         Approvals.Verify(result);
 
@@ -43,12 +48,11 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
 
-        var Plays = MockData.GetPlays1();
+        var Plays = _plays1;
 
-        var Invoice = MockData.GetInvoice1();
+        var Invoice = _invoice1;
 
-        Application.StatementPrinter statementPrinter = new Application.StatementPrinter();
-        var result = statementPrinter.Print(Invoice, Plays, "text");
+        var result = _statementPrinter.Print(Invoice, Plays, "text");
 
         Approvals.Verify(result);
     }
@@ -57,101 +61,103 @@ public class StatementPrinterTests
     [UseReporter(typeof(DiffReporter))]
     public void TestXmlStatementExample()
     {
-        var Plays = MockData.GetPlays1();
+        var Plays = _plays1;
 
-        var Invoice = MockData.GetInvoice1();
+        var Invoice = _invoice1;
 
-        Application.StatementPrinter statementPrinter = new Application.StatementPrinter();
-        var result = statementPrinter.Print(Invoice, Plays, "xml");
+        var result = _statementPrinter.Print(Invoice, Plays, "xml");
 
         Approvals.Verify(result);
     }
 
+    [Fact]
+    public void TestInvalidFormatThrowsException()
+    {
+        var Plays = _plays1;
+        var Invoice = _invoice1;
+
+        //Adding a format output that not exists yet...
+        Assert.Throws<ArgumentException>(() => _statementPrinter.Print(Invoice, Plays, "json"));
+    }
+
+    [Fact]
+    public void TestInvalidPlayGenreThrowsException()
+    {
+        //Adding a genre/type that not exists yet...
+
+        var play = TestDataBuilder.CreatePlay("Alien", 3000, "sci-fi");
+        var performance = TestDataBuilder.CreatePerformance("alien", play.Name, 30, play.Lines, play.Type);
+
+        Assert.Throws<ArgumentException>(() => GenreStrategyFactory.Create(performance.Play.Type));
+    }
+
+    [Fact]
+    public void CalculateCost_WithNegativeAudience_ThrowsException()
+    {
+        var play = TestDataBuilder.CreatePlay("Invalid Play", 3000, "comedy");
+
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            var performance = new Performance("invalid-play", -5) { Play = play };
+        });
+    }
+
     [Theory]
-    [InlineData(500, 100.0)] // Limite inferior ajustado para 1000
-    [InlineData(3500, 350.0)] // Dentro do intervalo
-    [InlineData(4500, 400.0)] // Limite superior ajustado para 4000
+    [MemberData(nameof(TestDataBuilder.BaseValueBasedOnLinesTest), MemberType = typeof(TestDataBuilder))]
     public void Should_CalculateBaseValue_BasedOnLines(int lines, decimal expectedBaseValue)
     {
-        var play = new Play("Test Play", lines, "comedy");
+        //Adding a genre/type that not exists yet...
 
-        var baseValue = PricingHelper.CalculateBasePrice(play.Lines);
+        var play = TestDataBuilder.CreatePlay("The Miserables", lines, "history");
+        var performance = TestDataBuilder.CreatePerformance("miserables", play.Name, 30, play.Lines, play.Type);
 
-
-        Assert.Equal(expectedBaseValue, baseValue);
+        AssertPerformanceBasePrice(performance, expectedBaseValue);
     }
 
     [Theory]
-    [InlineData(30, 300.0)] // Base value only
-    [InlineData(35, 350.0)] // Base + (5 * 10.0)
+    [MemberData(nameof(TestDataBuilder.TragedyCostBasedOnAudienceTest), MemberType = typeof(TestDataBuilder))]
     public void Should_CalculateTragedyValue_BasedOnAudience(int audience, decimal expectedValue)
     {
-        var play = new Play("Hamlet", 3000, "tragedy");
-        var performance = new Performance("hamlet", audience);
 
-        performance.Play = play;
+        var play = TestDataBuilder.CreatePlay("Hamlet", 3000, "tragedy");
+        var performance = TestDataBuilder.CreatePerformance("hamlet", play.Name, audience, play.Lines, play.Type);
 
-        var strategyGenreFactory = GenreStrategyFactory.Create(performance.Play.Type);
+        AssertPerformanceCost(performance, expectedValue);
 
-        CalculatePerformanceCostAndCredits(performance, strategyGenreFactory);
-
-        Assert.Equal(expectedValue, performance.Cost);
     }
 
 
     [Theory]
-    [InlineData(15, 345.0)] // Base + (15 * 3.00)
-    [InlineData(25, 500.0)] // Base + (25 * 3.00) + 100.00 + (5 * 5.00)
+    [MemberData(nameof(TestDataBuilder.ComedyCostBasedOnAudienceTest), MemberType = typeof(TestDataBuilder))]
     public void Should_CalculateComedyValue_BasedOnAudience(int audience, decimal expectedValue)
     {
-        var play = new Play("As You Like It", 3000, "comedy");
-        var performance = new Performance("as-like", audience);
-        performance.Play = play;
 
-        var strategyGenreFactory = GenreStrategyFactory.Create(performance.Play.Type);
+        var play = TestDataBuilder.CreatePlay("As You Like It", 3000, "comedy");
+        var performance = TestDataBuilder.CreatePerformance("as-like", play.Name, audience, play.Lines, play.Type);
 
-        CalculatePerformanceCostAndCredits(performance, strategyGenreFactory);
-
-        Assert.Equal(expectedValue, performance.Cost);
+        AssertPerformanceCost(performance, expectedValue);
     }
 
     [Theory]
-    [InlineData("tragedy", 30, 0)] // No credits for audience <= 30
-    [InlineData("tragedy", 40, 10)] // 10 audience over 30
-    [InlineData("comedy", 30, 6)] // Comedy, audience = 30, 6 credit bonus over audience (1/5)
-    [InlineData("comedy", 40, 18)] // 8 credits (1/5)
-    [InlineData("history", 30, 0)] // No credits for audience <= 30
-    [InlineData("history", 40, 10)] // 10 audience over 30
+    [MemberData(nameof(TestDataBuilder.CreditsBasedOnAudienceTest), MemberType = typeof(TestDataBuilder))]
     public void Should_CalculateCredits_BasedOnAudience(string genre, int audience, int expectedCredits)
     {
-        var play = new Play("Test Play", 3000, genre);
-        var performance = new Performance("test-play", audience);
+        
+        var play = TestDataBuilder.CreatePlay("Test Play", 3000, genre);
+        var performance = TestDataBuilder.CreatePerformance("test-play", play.Name, audience, play.Lines, play.Type);
 
-        performance.Play = play;
-
-        var strategyGenreFactory = GenreStrategyFactory.Create(performance.Play.Type);
-
-        CalculatePerformanceCostAndCredits(performance, strategyGenreFactory);
-
-        Assert.Equal(expectedCredits, performance.Credits);
+        AssertPerformanceCredits(performance, expectedCredits);
     }
 
     [Theory]
-    [InlineData(25, 800.0)] // Tragedy: 300 + (0 * 10) = 300 Comedy: 300 + (25 * 3) + 100 + (5 * 5) = 500
-    [InlineData(50, 1200.0)] // Tragedy: 300 + (20 * 10) = 500 Comedy: 300 + (50 * 3) + 100 + (30 * 5) = 700
-    [InlineData(100, 2100.0)] // Tragedy: 300 + (70 * 10) = 1000 Comedy: 300 + (100 * 3) + 100 + (80 * 5) = 1100
+    [MemberData(nameof(TestDataBuilder.HistoricalPlayTest), MemberType = typeof(TestDataBuilder))]
     public void Should_CalculateHistoricalPlayValue(int audience, decimal expectedValue)
     {
-        var play = new Play("Historical Play", 3000, "history");
-        var performance = new Performance("historical-play", audience);
 
-        performance.Play = play;
+        var play = TestDataBuilder.CreatePlay("King Arthur", 3000, "history");
+        var performance = TestDataBuilder.CreatePerformance("king-arthur", play.Name, audience, play.Lines, play.Type);
 
-        var strategyGenreFactory = GenreStrategyFactory.Create(performance.Play.Type);
-
-        CalculatePerformanceCostAndCredits(performance, strategyGenreFactory);
-        
-        Assert.Equal(expectedValue, performance.Cost);
+        AssertPerformanceCost(performance, expectedValue);
     }
 
 
@@ -219,12 +225,35 @@ public class StatementPrinterTests
     //</statement>", result);
     //        }
 
+    private void AssertPerformanceCredits(Performance performance, decimal expectedCredits)
+    {
+        var strategy = GenreStrategyFactory.Create(performance.Play.Type);
+        CalculatePerformanceCostAndCredits(performance, strategy);
+
+        Assert.Equal(expectedCredits, performance.Credits);
+    }
+
+    private void AssertPerformanceBasePrice(Performance performance, decimal expectedCost)
+    {
+        var strategy = GenreStrategyFactory.Create(performance.Play.Type);
+        CalculatePerformanceCostAndCredits(performance, strategy);
+
+        Assert.Equal(expectedCost, performance.BasePrice);
+    }
+    private void AssertPerformanceCost(Performance performance, decimal expectedCost)
+    {
+        var strategy = GenreStrategyFactory.Create(performance.Play.Type);
+        CalculatePerformanceCostAndCredits(performance, strategy);
+
+        Assert.Equal(expectedCost, performance.Cost);
+    }
     private void CalculatePerformanceCostAndCredits(Performance performance, IGenreStrategy strategyGenreFactory)
     {
 
 
         performance.Cost = strategyGenreFactory.CalculateCost(performance.Audience, performance.Play.Lines);
         performance.Credits = strategyGenreFactory.CalculateCredits(performance.Audience);
+        performance.BasePrice = strategyGenreFactory.CalculateBasePrice(performance.Play.Lines);
     }
 
 }

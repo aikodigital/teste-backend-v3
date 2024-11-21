@@ -11,16 +11,28 @@ public class Performance
     private int _credits;
 
     public string PlayId { get => _playId; set => _playId = value; }
-    public int Audience { get => _audience; set => _audience = value; }
+    public int Audience
+    {
+        get => _audience; set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException("Audience cannot be negative.");
+            _audience = value;
+        }
+    }
     public decimal Cost { get => _cost; set => _cost = value; }
     public string FormattedCost => Cost % 1 == 0 ? ((int)Cost).ToString() : Cost.ToString("0.##", CultureInfo.InvariantCulture);
 
     public int Credits { get => _credits; set => _credits = value; }
+    public decimal BasePrice { get; set; }
 
     public Play Play { get; set; }
 
     public Performance(string playID, int audience)
     {
+        if (audience < 0)
+            throw new ArgumentOutOfRangeException("Audience cannot be negative.");
+
         this._playId = playID;
         this._audience = audience;
     }

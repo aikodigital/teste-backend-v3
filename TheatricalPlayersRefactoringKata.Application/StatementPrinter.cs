@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Application.Interfaces;
 
 namespace TheatricalPlayersRefactoringKata.Application;
 
-public class StatementPrinter
+public class StatementPrinter: IStatementPrinter
 {
 
     public string Print(Invoice invoice, Dictionary<string, Play> plays, string format)
@@ -15,6 +15,7 @@ public class StatementPrinter
 
             performance.Cost = strategy.CalculateCost(performance.Audience, performance.Play.Lines);
             performance.Credits = strategy.CalculateCredits(performance.Audience);
+            performance.BasePrice = strategy.CalculateBasePrice(performance.Play.Lines);
         }
 
         var formatter = StatementFormatterFactory.Create(format);
