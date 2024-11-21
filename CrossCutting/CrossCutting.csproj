@@ -6,12 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
-  </ItemGroup>
-
 </Project>

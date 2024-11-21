@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossCutting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace Aplication.DTO
     {
         public string Name { get; private set; }
         public int Lines { get; private set; }
-        public Type Type { get; private set; }
+        public PlayType Type { get; private set; }
 
-        public PlayDto(string name, int lines, Type type)
+        public PlayDto(string name, int lines, PlayType type)
         {
             Name = name;
             Lines = lines;
