@@ -5,10 +5,10 @@ namespace AplicationTest
     public class StatementServiceTests
     {
         [Fact]
-        public void Test1()
+        public void ImpressaoTeste()
         {
-            StatementService statementService = new StatementService();
-            statementService.Print();
+            StatementService statementService = new();
+            statementService.Imprimir();
         }
     }
 }
