@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 namespace TheatricalPlayersRefactoringKata;
 
 public class Performance
@@ -10,6 +13,8 @@ public class Performance
     public string PlayId { get => _playId; set => _playId = value; }
     public int Audience { get => _audience; set => _audience = value; }
     public decimal Cost { get => _cost; set => _cost = value; }
+    public string FormattedCost => Cost % 1 == 0 ? ((int)Cost).ToString() : Cost.ToString("0.##", CultureInfo.InvariantCulture);
+
     public int Credits { get => _credits; set => _credits = value; }
 
     public Play Play { get; set; }

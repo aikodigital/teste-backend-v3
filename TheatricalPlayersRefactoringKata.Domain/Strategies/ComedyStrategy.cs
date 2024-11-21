@@ -6,6 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Utilities;
 using TheatricalPlayersRefactoringKata.Infrastructure.Utilities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Strategies
@@ -29,7 +30,7 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
         {
             //Existe um bônus de créditos de um quinto da platéia arredondados para baixo, exclusivo para peças de comédia
             int bonusCredits = (int)Math.Floor(audienceSize / 5.0);
-            return Math.Max(0, audienceSize - 30) + bonusCredits;
+            return CreditHelper.CalculateBaseCredit(audienceSize) + bonusCredits;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Utilities;
 using TheatricalPlayersRefactoringKata.Infrastructure.Utilities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Strategies
@@ -20,8 +21,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
                 ? basePrice
                 : basePrice + 10.0m * (audienceSize - 30);
         }
-
-        //Todas performances dão 1 crédito para cada espectador acima de 30, não valendo nenhum crédito para uma platéia menor ou igual a 30
-        public int CalculateCredits(int audienceSize) => Math.Max(0, audienceSize - 30);
+        public int CalculateCredits(int audienceSize) => CreditHelper.CalculateBaseCredit(audienceSize);
     }
 }

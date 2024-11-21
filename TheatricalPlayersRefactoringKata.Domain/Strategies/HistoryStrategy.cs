@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Utilities;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Strategies
 {
@@ -20,12 +21,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Strategies
             return _tragedy.CalculateCost(audienceSize, lines)
                  + _comedy.CalculateCost(audienceSize, lines);
         }
-
-        public int CalculateCredits(int audienceSize)
-        {
-            //mesma logica aplicada para somatoria de creditos
-            return _tragedy.CalculateCredits(audienceSize)
-                 + _comedy.CalculateCredits(audienceSize);
-        }
+        public int CalculateCredits(int audienceSize) => CreditHelper.CalculateBaseCredit(audienceSize);
     }
 }

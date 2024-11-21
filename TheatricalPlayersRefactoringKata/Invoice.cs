@@ -19,6 +19,7 @@ public class Invoice
     }
     public int TotalCredits => Performances?.Sum(performance => performance.Credits) ?? 0;
     public decimal TotalCosts => Performances?.Sum(performance => performance.Cost) ?? 0;
+    public string FormattedTotalCost => TotalCosts % 1 == 0 ? ((int)TotalCosts).ToString() : TotalCosts.ToString("0.##", CultureInfo.InvariantCulture);
     public Invoice(string customer, List<Performance> performance)
     {
         this._customer = customer;
