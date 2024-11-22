@@ -1,9 +1,15 @@
+using System;
 using System.Collections.Generic;
 
 namespace TheatricalPlayersRefactoringKata.Entity;
 
 public class Invoice
 {
+
+    public Invoice() { }
+
+    public Guid Id{ get; set; }
+
     private string _customer;
     private List<Performance> _performances;
 
