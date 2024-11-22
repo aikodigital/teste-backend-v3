@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Aplication.DTO;
 using Aplication.Services;
 using Aplication.Services.Formatters;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Entity;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;

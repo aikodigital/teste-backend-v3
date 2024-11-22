@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata", "TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj", "{6D24051E-3E14-4B98-A8B3-DFDA7E4ACD7B}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplicationTest", "AplicationTest\AplicationTest.csproj", "{A79BEC8D-301A-456A-9CE7-0EBC422C4A99}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Aplication", "04-Aplication", "{3BBDD520-3649-420A-9045-231F07CC6FCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Presentation", "01-Presentation", "{A5FB81D1-FAD5-443B-BE73-5B9C73F2343E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteBackendV3", "TesteBackendV3\TesteBackendV3.csproj", "{97947002-C525-4D22-90CC-D8D6B9406C6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{A79BEC8D-301A-456A-9CE7-0EBC422C4A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A79BEC8D-301A-456A-9CE7-0EBC422C4A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A79BEC8D-301A-456A-9CE7-0EBC422C4A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97947002-C525-4D22-90CC-D8D6B9406C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97947002-C525-4D22-90CC-D8D6B9406C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97947002-C525-4D22-90CC-D8D6B9406C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97947002-C525-4D22-90CC-D8D6B9406C6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +73,7 @@ Global
 		{43E3D4EF-C27C-4116-948F-9700F9A28370} = {5568B4CB-957B-4D70-8C70-BAC92101EC7F}
 		{A79BEC8D-301A-456A-9CE7-0EBC422C4A99} = {3BBDD520-3649-420A-9045-231F07CC6FCA}
 		{3BBDD520-3649-420A-9045-231F07CC6FCA} = {16FA5148-DD29-4743-B2D9-9E18E226EF87}
+		{A5FB81D1-FAD5-443B-BE73-5B9C73F2343E} = {5E840BCB-B823-457A-B980-95AE93EB78FD}
+		{97947002-C525-4D22-90CC-D8D6B9406C6B} = {A5FB81D1-FAD5-443B-BE73-5B9C73F2343E}
 	EndGlobalSection
 EndGlobal
