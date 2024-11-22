@@ -75,6 +75,10 @@ namespace Aplication.Services
                 var valorPorPerformance = lines * 10;
 
                 var calculadora = PriceCalculatorFactory.GetCalculator(perf.PlayType);
+
+                if (perf.PlayType == PlayType.history)
+                    calculadora.ReservedValue = valorPorPerformance;
+
                 valorPorPerformance += calculadora.CalculatePrice(perf.Audience);
 
                 valorCreditos += Math.Max(perf.Audience - 30, 0);

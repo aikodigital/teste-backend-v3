@@ -7,7 +7,7 @@
 
         public override int CalculatePrice(int audience)
         {
-            return _tragedyCalculator.CalculatePrice(audience) +
+            return ReservedValue + _tragedyCalculator.CalculatePrice(audience) +
                    _comedyCalculator.CalculatePrice(audience);
         }
     }
