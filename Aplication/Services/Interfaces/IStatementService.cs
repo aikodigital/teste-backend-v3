@@ -13,5 +13,6 @@ namespace Aplication.Services.Interfaces
         InvoiceDto ObterInvoiceBigCo2();
         string Print(InvoiceDto invoice, IInvoiceFormatter formatter);
         Task InsertInvoice(InvoiceDto invoice);
+        Task<List<InvoiceDto>> GetInvoices();
     }
 }

@@ -6,6 +6,7 @@ using Aplication.Services.Interfaces;
 using AutoMapper;
 using CrossCutting;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -75,6 +76,13 @@ namespace Aplication.Services
         {
             var (performances, valorTotal, valorCreditos) = InvoiceProcessor.Processar(invoice);
             return formatter.Format(invoice, valorTotal, valorCreditos, performances); 
+        }
+
+        public async Task<List<InvoiceDto>> GetInvoices()
+        {
+            var invoices = await _context!.Invoices!.ToListAsync();
+            var invoicesDto = _mapper.Map<List<InvoiceDto>>(invoices!);
+            return invoicesDto;
         }
     }
 }

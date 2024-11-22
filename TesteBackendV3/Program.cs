@@ -39,10 +39,11 @@ app.MapGet("/statementText", (IStatementService statementService) =>
 })
 .WithName("GetStatementText").WithTags("Statement");
 
+
 app.MapGet("/statementXml", (IStatementService statementService) =>
 {
     var impressao = statementService.Print(statementService.ObterInvoiceBigCo2(), new XmlInvoiceFormatter());
-    return Results.Text(impressao,"application/xml");
+    return Results.Text(impressao, "application/xml");
 })
 .WithName("GetStatementXml").WithTags("Statement");
 
@@ -51,9 +52,15 @@ app.MapPost("/invoice", async (InvoiceDto invoiceDto, IStatementService statemen
     try
     {
         await statementService.InsertInvoice(invoiceDto);
-        return Results.Ok(new {Message = "Fatura inserida com sucesso"});
+        return Results.Ok(new { Message = "Fatura inserida com sucesso" });
     }
     catch (Exception ex) { return Results.Problem(ex.Message.ToString()); }
-});
+}).WithName("PostInvoice").WithTags("Invoices");
+
+app.MapGet("/statementSaved", async (IStatementService statementService) =>
+{
+    var invoices = await statementService.GetInvoices();
+    return Results.Ok(invoices);
+}).WithName("GetInvoices").WithTags("Invoices");
 
 app.Run();
