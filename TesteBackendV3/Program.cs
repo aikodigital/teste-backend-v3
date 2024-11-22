@@ -1,3 +1,4 @@
+using Aplication.DTO;
 using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
 using AutoMapper;
@@ -45,5 +46,14 @@ app.MapGet("/statementXml", (IStatementService statementService) =>
 })
 .WithName("GetStatementXml").WithTags("Statement");
 
+app.MapPost("/invoice", async (InvoiceDto invoiceDto, IStatementService statementService) =>
+{
+    try
+    {
+        await statementService.InsertInvoice(invoiceDto);
+        return Results.Ok(new {Message = "Fatura inserida com sucesso"});
+    }
+    catch (Exception ex) { return Results.Problem(ex.Message.ToString()); }
+});
 
 app.Run();

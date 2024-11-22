@@ -3,7 +3,9 @@ using Aplication.Interfaces;
 using Aplication.Services.Calculators;
 using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
+using AutoMapper;
 using CrossCutting;
+using Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,6 +13,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using TheatricalPlayersRefactoringKata.Entity;
 
 namespace Aplication.Services
 {
@@ -18,10 +21,22 @@ namespace Aplication.Services
     {
         PlayService playService = new PlayService();
 
+        private readonly TesteBackendV3DbContext _context;
+        private readonly IMapper _mapper;
 
-        private void InsertInvoice(InvoiceDto invoice)
+        public StatementService() { }
+
+        public StatementService(TesteBackendV3DbContext context, IMapper mapper)
         {
+            _context = context;
+            _mapper = mapper;
+        }
 
+        public async Task InsertInvoice(InvoiceDto dto)
+        {
+            var invoice = _mapper.Map<Invoice>(dto);
+            _context.Invoices.Add(invoice);
+            await _context.SaveChangesAsync();
         }
 
         private List<PerformanceDto> ListAllPerformances()

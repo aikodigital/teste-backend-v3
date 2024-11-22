@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
 
