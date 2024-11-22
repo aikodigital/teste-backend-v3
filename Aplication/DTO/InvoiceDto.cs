@@ -2,6 +2,7 @@
 {
     public class InvoiceDto
     {
+        public InvoiceDto() { }
         public string Customer { get; set; }
         public List<PerformanceDto> Performances { get; set; }
 

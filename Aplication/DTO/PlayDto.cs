@@ -4,6 +4,7 @@ namespace Aplication.DTO
 {
     public class PlayDto
     {
+        public PlayDto() { }
         public string Name { get; private set; }
         public int Lines { get; private set; }
         public PlayType Type { get; private set; }
