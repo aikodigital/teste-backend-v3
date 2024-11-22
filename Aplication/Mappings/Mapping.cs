@@ -18,6 +18,9 @@ namespace Aplication.Mappings
                 .ForMember(dest => dest.Type, 
                 opt => opt.MapFrom(
                     src => (PlayType)Enum.Parse(typeof(PlayType), src.Type)));
+            
+            CreateMap<Invoice, InvoiceDto>().ReverseMap();
+            CreateMap<Performance, PerformanceDto>().ReverseMap();
         }
     }
 }

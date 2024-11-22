@@ -17,6 +17,13 @@ namespace Aplication.Services
     public class StatementService : IStatementService
     {
         PlayService playService = new PlayService();
+
+
+        private void InsertInvoice(InvoiceDto invoice)
+        {
+
+        }
+
         private List<PerformanceDto> ListAllPerformances()
         {
             List<PerformanceDto> performances = new()
