@@ -11,8 +11,8 @@ namespace TheatricalPlayersRefactoringKata.Application.Models
         public static Play CreatePlay(string name, int lines, string type) =>
         new Play(name, lines, type);
 
-        public static Performance CreatePerformance(string playId, string playName, int audience, int lines, string genre) =>
-            new Performance(playId, audience) { Play = CreatePlay(playName, lines, genre) };
+        public static Performance CreatePerformance(string playId, string playName, int audience, int lines, string type) =>
+            new Performance(playId, audience) { Play = CreatePlay(playName, lines, type) };
 
         public static IEnumerable<object[]> TragedyTestCases => new List<object[]>
         {

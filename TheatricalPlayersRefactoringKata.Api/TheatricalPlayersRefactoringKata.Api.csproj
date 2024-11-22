@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\Debug\net6.0\TheatricalPlayersRefactoringKata.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,10 +19,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Application\TheatricalPlayersRefactoringKata.Application.csproj" />
+    <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infrastructure\TheatricalPlayersRefactoringKata.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

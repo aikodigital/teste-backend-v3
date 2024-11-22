@@ -18,6 +18,8 @@ public class Play
         }
     }
     public string Type { get => _type; set => _type = value; }
+
+    public string PlayId { get; set; }
     public Play(string name, int lines, string type)
     {
         if (lines < 0)

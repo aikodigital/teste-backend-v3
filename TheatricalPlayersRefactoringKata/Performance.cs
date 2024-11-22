@@ -9,7 +9,6 @@ public class Performance
     private int _audience;
     private decimal _cost;
     private int _credits;
-
     public string PlayId { get => _playId; set => _playId = value; }
     public int Audience
     {
@@ -25,6 +24,8 @@ public class Performance
 
     public int Credits { get => _credits; set => _credits = value; }
     public decimal BasePrice { get; set; }
+
+    public int StatementId {  get; set; }
 
     public Play Play { get; set; }
 
