@@ -1,4 +1,3 @@
-using Aplication.DTO;
 using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
 using AutoMapper;
@@ -27,12 +26,19 @@ app.MapGet("/plays", (IPlayService playService, IMapper mapper) =>
     return Results.Ok(playsDtos);
 }).WithName("GetPlays").WithTags("Plays");
 
-app.MapGet("/statement", (IStatementService statementService) =>
+app.MapGet("/statementText", (IStatementService statementService) =>
 {
     var impressao = statementService.Print(statementService.ObterInvoiceBigCo2(), new TextoInvoiceFormater());
     return Results.Ok(impressao);
 })
-    .WithName("GetStatement").WithTags("Statement");
+    .WithName("GetStatementText").WithTags("Statement");
+
+app.MapGet("/statementXml", (IStatementService statementService) =>
+{
+    var impressao = statementService.Print(statementService.ObterInvoiceBigCo2(), new XmlInvoiceFormatter());
+    return Results.Text(impressao,"application/xml");
+})
+    .WithName("GetStatementXml").WithTags("Statement");
 
 
 app.Run();
