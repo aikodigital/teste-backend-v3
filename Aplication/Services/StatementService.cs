@@ -15,15 +15,8 @@ namespace Aplication.Services
 {
     public class StatementService
     {
-        private List<PlayDto> Plays = new()
-            {
-                new PlayDto("Hamlet", 4024, PlayType.tragedy),
-                new PlayDto("As You Like It", 2670, PlayType.comedy),
-                new PlayDto("Othello", 3560,        PlayType.tragedy),
-                new PlayDto("Henry V", 3227, PlayType.history),
-                new PlayDto("King John", 2648,   PlayType.history),
-                new PlayDto("Richard III", 3718, PlayType.history)
-            };
+        PlayService playService = new PlayService();
+
         private List<PerformanceDto> ListAllPerformances()
         {
             List<PerformanceDto> performances = new()
@@ -46,7 +39,7 @@ namespace Aplication.Services
         }
 
         private PlayDto GetPlayByName(string name)
-        => Plays.FirstOrDefault(x => x.Name.Contains(name))!;
+        => playService.GetPlays().FirstOrDefault(x => x.Name.Contains(name))!;
 
         public InvoiceDto ObterInvoiceBigCo()
         => new("BigCo", GetPerformancesByName("Hamlet", "As You Like",
