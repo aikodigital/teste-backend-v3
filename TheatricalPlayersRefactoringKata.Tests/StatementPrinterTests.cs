@@ -13,6 +13,18 @@ namespace TheatricalPlayersRefactoringKata.Tests;
 
 public class StatementPrinterTests
 {
+
+    [Fact]
+    [UseReporter(typeof(DiffReporter))]
+    public void TestXmlStatementExample()
+    {
+        StatementService statementService = new();
+        var invoiceBigCo2 = statementService.ObterInvoiceBigCo2();
+        var formatter = new XmlInvoiceFormatter();
+        var result = StatementService.Print(invoiceBigCo2, formatter);
+        Approvals.Verify(result);
+    }
+
     [Fact]
     [UseReporter(typeof(DiffReporter))]
     public void TestStatementExampleLegacy()
