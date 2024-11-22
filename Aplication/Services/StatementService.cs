@@ -1,4 +1,5 @@
 ﻿using Aplication.DTO;
+using Aplication.Services.Calculators;
 using CrossCutting;
 using System;
 using System.Collections.Generic;
@@ -91,7 +92,6 @@ namespace Aplication.Services
                 valorTotal += valorPorPerformance;
             }
 
-
             resultado += string.Format(cultura, "Amount owed is {0:C}\n", Convert.ToDecimal(valorTotal) / 100);
             resultado += string.Format("You earned {0} credits\n", valorCreditos);
             return resultado;
@@ -99,6 +99,5 @@ namespace Aplication.Services
 
         private static string ObterResultado(CultureInfo cultura, PerformanceDto perf, int thisAmount)
             => string.Format(cultura, "  {0}: {1:C} ({2} seats)\n", perf.Play.Name, Convert.ToDecimal(thisAmount) / 100, perf.Audience);
-        
     }
 }

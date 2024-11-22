@@ -1,4 +1,4 @@
-﻿namespace Aplication.Services
+﻿namespace Aplication.Services.Calculators
 {
     public abstract class PriceCalculator
     {

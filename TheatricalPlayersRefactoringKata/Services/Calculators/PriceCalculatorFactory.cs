@@ -1,6 +1,7 @@
 ﻿using CrossCutting;
+using System;
 
-namespace Aplication.Services
+namespace Aplication.Services.Calculators
 {
     public static class PriceCalculatorFactory
     {
