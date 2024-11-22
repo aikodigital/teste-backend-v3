@@ -1,5 +1,7 @@
 ﻿using Aplication.DTO;
+using Aplication.Interfaces;
 using Aplication.Services.Calculators;
+using Aplication.Services.Formatters;
 using CrossCutting;
 using System;
 using System.Collections.Generic;
@@ -54,50 +56,10 @@ namespace Aplication.Services
         public InvoiceDto ObterInvoiceBigCo2()
         => new("BigCo", GetPerformancesByName("Hamlet", "As You Like", "Othello", "Henry", "John", "Henry"));
 
-        public string Imprimir()
+        public static string Print(InvoiceDto invoice, IInvoiceFormatter formatter)
         {
-            var invoice = ObterInvoiceBigCo2();
-            return Print(invoice);
+            var (performances, valorTotal, valorCreditos) = InvoiceProcessor.Processar(invoice);
+            return formatter.Format(invoice, valorTotal, valorCreditos, performances); 
         }
-
-        public static string Print(InvoiceDto invoice)
-        {
-            CultureInfo cultura = new("en-US");
-            var valorTotal = 0; var valorCreditos = 0;
-            var resultado = string.Format("Statement for {0}\n", invoice.Customer);
-
-            foreach (var perf in invoice.Performances)
-            {
-                int lines = perf.Play.Lines;
-
-                if (lines < 1000) lines = 1000;
-                if (lines > 4000) lines = 4000;
-
-                var valorPorPerformance = lines * 10;
-
-                var calculadora = PriceCalculatorFactory.GetCalculator(perf.PlayType);
-
-                if (perf.PlayType == PlayType.history)
-                    calculadora.ReservedValue = valorPorPerformance;
-
-                valorPorPerformance += calculadora.CalculatePrice(perf.Audience);
-
-                valorCreditos += Math.Max(perf.Audience - 30, 0);
-
-                if (perf.PlayType == PlayType.comedy)
-                    valorCreditos += (int)Math.Floor((decimal)perf.Audience / 5);
-
-                var resultadoPerformance = ObterResultado(cultura, perf, valorPorPerformance);
-                resultado += resultadoPerformance;
-                valorTotal += valorPorPerformance;
-            }
-
-            resultado += string.Format(cultura, "Amount owed is {0:C}\n", Convert.ToDecimal(valorTotal) / 100);
-            resultado += string.Format("You earned {0} credits\n", valorCreditos);
-            return resultado;
-        }
-
-        private static string ObterResultado(CultureInfo cultura, PerformanceDto perf, int thisAmount)
-            => string.Format(cultura, "  {0}: {1:C} ({2} seats)\n", perf.Play.Name, Convert.ToDecimal(thisAmount) / 100, perf.Audience);
     }
 }

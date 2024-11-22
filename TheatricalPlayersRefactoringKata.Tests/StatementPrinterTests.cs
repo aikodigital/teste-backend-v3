@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Aplication.DTO;
 using Aplication.Services;
+using Aplication.Services.Formatters;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using TheatricalPlayersRefactoringKata.Entity;
@@ -17,7 +19,8 @@ public class StatementPrinterTests
     {
         StatementService statementService = new();
         var invoiceBigCo = statementService.ObterInvoiceBigCo();
-        var result = StatementService.Print(invoiceBigCo);
+        var formatter = new TextoInvoiceFormater();
+        var result = StatementService.Print(invoiceBigCo,formatter);
         Approvals.Verify(result);
     }
 
@@ -26,8 +29,9 @@ public class StatementPrinterTests
     public void TestTextStatementExample()
     {
         StatementService statementService = new();
-        var invoiceBigCo = statementService.ObterInvoiceBigCo2();
-        var result = StatementService.Print(invoiceBigCo);
+        var invoiceBigCo2 = statementService.ObterInvoiceBigCo2();
+        var formatter = new TextoInvoiceFormater();
+        var result = StatementService.Print(invoiceBigCo2, formatter);
         Approvals.Verify(result);
     }
 }
