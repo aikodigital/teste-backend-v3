@@ -11,5 +11,6 @@ namespace Aplication.DTO
         public string PlayName { get; set; } = string.Empty;
         public int Audience { get; set; }
         public int ValorPorPerformance { get; set; }
+        public int EarnedCredits { get; set; }
     }
 }
