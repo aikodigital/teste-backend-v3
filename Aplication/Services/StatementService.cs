@@ -83,7 +83,7 @@ namespace Aplication.Services
 
                 valorCreditos += Math.Max(perf.Audience - 30, 0);
 
-                if (perf.PlayType == PlayType.comedy || perf.PlayType == PlayType.history)
+                if (perf.PlayType == PlayType.comedy)
                     valorCreditos += (int)Math.Floor((decimal)perf.Audience / 5);
 
                 var resultadoPerformance = ObterResultado(cultura, perf, valorPorPerformance);
