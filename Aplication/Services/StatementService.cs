@@ -86,20 +86,19 @@ namespace Aplication.Services
                 if (perf.PlayType == PlayType.comedy || perf.PlayType == PlayType.history)
                     valorCreditos += (int)Math.Floor((decimal)perf.Audience / 5);
 
-                resultado = ObterResultado(cultura, resultado, perf, valorPorPerformance);
-
+                var resultadoPerformance = ObterResultado(cultura, perf, valorPorPerformance);
+                resultado += resultadoPerformance;
                 valorTotal += valorPorPerformance;
             }
 
-            resultado += string.Format(cultura, "Amount owed is {0:C}\n", Convert.ToDecimal(valorTotal / 100));
+
+            resultado += string.Format(cultura, "Amount owed is {0:C}\n", Convert.ToDecimal(valorTotal) / 100);
             resultado += string.Format("You earned {0} credits\n", valorCreditos);
             return resultado;
         }
 
-        private static string ObterResultado(CultureInfo cultura, string resultado, PerformanceDto perf, int thisAmount)
-        {
-            resultado += string.Format(cultura, "  {0}: {1:C} ({2} seats)\n", perf.Play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
-            return resultado;
-        }
+        private static string ObterResultado(CultureInfo cultura, PerformanceDto perf, int thisAmount)
+            => string.Format(cultura, "  {0}: {1:C} ({2} seats)\n", perf.Play.Name, Convert.ToDecimal(thisAmount) / 100, perf.Audience);
+        
     }
 }
