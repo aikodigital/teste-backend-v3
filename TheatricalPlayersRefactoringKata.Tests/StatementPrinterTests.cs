@@ -16,7 +16,7 @@ public class StatementPrinterTests
         StatementService statementService = new();
         var invoiceBigCo2 = statementService.ObterInvoiceBigCo2();
         var formatter = new XmlInvoiceFormatter();
-        var result = StatementService.Print(invoiceBigCo2, formatter);
+        var result = statementService.Print(invoiceBigCo2, formatter);
         Approvals.Verify(result);
     }
 
@@ -27,7 +27,7 @@ public class StatementPrinterTests
         StatementService statementService = new();
         var invoiceBigCo = statementService.ObterInvoiceBigCo();
         var formatter = new TextoInvoiceFormater();
-        var result = StatementService.Print(invoiceBigCo,formatter);
+        var result = statementService.Print(invoiceBigCo,formatter);
         Approvals.Verify(result);
     }
 
@@ -38,7 +38,7 @@ public class StatementPrinterTests
         StatementService statementService = new();
         var invoiceBigCo2 = statementService.ObterInvoiceBigCo2();
         var formatter = new TextoInvoiceFormater();
-        var result = StatementService.Print(invoiceBigCo2, formatter);
+        var result = statementService.Print(invoiceBigCo2, formatter);
         Approvals.Verify(result);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Aplication.DTO;
-using Aplication.Interfaces;
+using Aplication.Services.Interfaces;
 using CrossCutting;
 
 namespace Aplication.Services

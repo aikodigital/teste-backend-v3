@@ -2,6 +2,7 @@
 using Aplication.Interfaces;
 using Aplication.Services.Calculators;
 using Aplication.Services.Formatters;
+using Aplication.Services.Interfaces;
 using CrossCutting;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,9 @@ using System.Threading.Tasks;
 
 namespace Aplication.Services
 {
-    public class StatementService
+    public class StatementService : IStatementService
     {
         PlayService playService = new PlayService();
-
         private List<PerformanceDto> ListAllPerformances()
         {
             List<PerformanceDto> performances = new()
@@ -49,7 +49,7 @@ namespace Aplication.Services
         public InvoiceDto ObterInvoiceBigCo2()
         => new("BigCo", GetPerformancesByName("Hamlet", "As You Like", "Othello", "Henry", "John", "Henry"));
 
-        public static string Print(InvoiceDto invoice, IInvoiceFormatter formatter)
+        public string Print(InvoiceDto invoice, IInvoiceFormatter formatter)
         {
             var (performances, valorTotal, valorCreditos) = InvoiceProcessor.Processar(invoice);
             return formatter.Format(invoice, valorTotal, valorCreditos, performances); 
