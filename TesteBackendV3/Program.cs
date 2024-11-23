@@ -4,6 +4,7 @@ using Aplication.Services.Interfaces;
 using AutoMapper;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using TesteBackendV3;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -26,41 +27,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/plays", (IPlayService playService, IMapper mapper) =>
-{
-    var playsDtos = playService.GetPlays();
-    return Results.Ok(playsDtos);
-}).WithName("GetPlays").WithTags("Plays");
+PlayEndpoints.GetPlays(app);
 
-app.MapGet("/statementText", (IStatementService statementService) =>
-{
-    var impressao = statementService.Print(statementService.ObterInvoiceBigCo2(), new TextoInvoiceFormater());
-    return Results.Ok(impressao);
-})
-.WithName("GetStatementText").WithTags("Statement");
+StatementEndpoints.StatementText(app);
 
+StatementEndpoints.StatementXml(app);
 
-app.MapGet("/statementXml", (IStatementService statementService) =>
-{
-    var impressao = statementService.Print(statementService.ObterInvoiceBigCo2(), new XmlInvoiceFormatter());
-    return Results.Text(impressao, "application/xml");
-})
-.WithName("GetStatementXml").WithTags("Statement");
+InvoiceEndpoints.InvoicePost(app);
 
-app.MapPost("/invoice", async (InvoiceDto invoiceDto, IStatementService statementService) =>
-{
-    try
-    {
-        await statementService.InsertInvoice(invoiceDto);
-        return Results.Ok(new { Message = "Fatura inserida com sucesso" });
-    }
-    catch (Exception ex) { return Results.Problem(ex.Message.ToString()); }
-}).WithName("PostInvoice").WithTags("Invoices");
-
-app.MapGet("/statementSaved", async (IStatementService statementService) =>
-{
-    var invoices = await statementService.GetInvoices();
-    return Results.Ok(invoices);
-}).WithName("GetInvoices").WithTags("Invoices");
+StatementEndpoints.StatementSaved(app);
 
 app.Run();

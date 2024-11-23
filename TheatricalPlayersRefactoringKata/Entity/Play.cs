@@ -1,19 +1,16 @@
+using System;
+using System.Text.Json.Serialization;
+
 namespace TheatricalPlayersRefactoringKata.Entity;
 
 public class Play
 {
-    private string _name;
-    private int _lines;
-    private string _type;
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public int Lines { get; set; }
+    public string Type { get; set; }
 
-    public string Name { get => _name; set => _name = value; }
-    public int Lines { get => _lines; set => _lines = value; }
-    public string Type { get => _type; set => _type = value; }
-
-    public Play(string name, int lines, string type)
-    {
-        _name = name;
-        _lines = lines;
-        _type = type;
-    }
+    [JsonIgnore]
+    public Performance Performance { get; set; }
+    public Guid PerformanceId { get; set; }
 }
