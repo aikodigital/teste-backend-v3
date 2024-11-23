@@ -1,7 +1,4 @@
-using Aplication.DTO;
-using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
-using AutoMapper;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using TesteBackendV3;
@@ -13,6 +10,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IPlayService, Aplication.Services.PlayService>();
 builder.Services.AddScoped<IStatementService, Aplication.Services.StatementService>();
+builder.Services.AddScoped<IPerformanceService, Aplication.Services.PerformanceService>();
 
 builder.Services.AddDbContext<TesteBackendV3DbContext>(options =>
     options.UseSqlite("Data Source=app.db"));
@@ -27,14 +25,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+PerformanceEndpoints.GetPerformances(app);
+
 PlayEndpoints.GetPlays(app);
 
 StatementEndpoints.StatementText(app);
 
 StatementEndpoints.StatementXml(app);
 
-InvoiceEndpoints.InvoicePost(app);
+//InvoiceEndpoints.InvoicePost(app);
 
-StatementEndpoints.StatementSaved(app);
+//StatementEndpoints.StatementSaved(app);
 
 app.Run();

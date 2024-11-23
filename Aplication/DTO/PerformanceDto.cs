@@ -5,6 +5,9 @@ namespace Aplication.DTO
     public class PerformanceDto
     {
         public PerformanceDto() { }
+
+        public Guid Id { get; set; }
+
         public PlayDto Play { get; set; }
         public int Audience { get; set; }
 
