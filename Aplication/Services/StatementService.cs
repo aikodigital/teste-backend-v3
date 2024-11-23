@@ -65,17 +65,24 @@ namespace Aplication.Services
         => playService.GetPlays().FirstOrDefault(x => x.Name.Contains(name))!;
 
         public InvoiceDto ObterInvoiceBigCo()
-        => new("BigCo", GetPerformancesByName("Hamlet", "As You Like",
-                "Othello"));
-
+        => new()
+        {
+            Customer = "BigCo",
+            Performances = GetPerformancesByName("Hamlet", "As You Like",
+            "Othello")
+        };
 
         public InvoiceDto ObterInvoiceBigCo2()
-        => new("BigCo", GetPerformancesByName("Hamlet", "As You Like", "Othello", "Henry", "John", "Henry"));
+        => new()
+        {
+            Customer = "BigCo",
+            Performances = GetPerformancesByName("Hamlet", "As You Like", "Othello", "Henry", "John", "Henry")
+        };
 
         public string Print(InvoiceDto invoice, IInvoiceFormatter formatter)
         {
             var (performances, valorTotal, valorCreditos) = InvoiceProcessor.Processar(invoice);
-            return formatter.Format(invoice, valorTotal, valorCreditos, performances); 
+            return formatter.Format(invoice, valorTotal, valorCreditos, performances);
         }
 
         public async Task<List<InvoiceDto>> GetInvoices()

@@ -33,7 +33,7 @@ StatementEndpoints.StatementText(app);
 
 StatementEndpoints.StatementXml(app);
 
-//InvoiceEndpoints.InvoicePost(app);
+InvoiceEndpoints.InvoicePost(app);
 
 //StatementEndpoints.StatementSaved(app);
 

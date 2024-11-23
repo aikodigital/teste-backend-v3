@@ -5,7 +5,8 @@ namespace Aplication.DTO
     public class PlayDto
     {
         public PlayDto() { }
-        public string Name { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int Lines { get; set; }
         public PlayType Type { get; set; }
 

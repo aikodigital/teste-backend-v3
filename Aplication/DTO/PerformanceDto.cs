@@ -8,7 +8,7 @@ namespace Aplication.DTO
 
         public Guid Id { get; set; }
 
-        public PlayDto Play { get; set; }
+        public PlayDto Play { get; set; } = new PlayDto();
         public int Audience { get; set; }
 
         public PlayType PlayType => Play.Type;

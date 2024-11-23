@@ -12,5 +12,6 @@ public class Play
 
     [JsonIgnore]
     public Performance Performance { get; set; }
+
     public Guid PerformanceId { get; set; }
 }
