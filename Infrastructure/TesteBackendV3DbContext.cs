@@ -17,6 +17,10 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Performance>()
+                .HasOne(p => p.Play)
+                .WithOne(play => play.Performance)
+                .HasForeignKey<Play>(p => p.PerformanceId);
             base.OnModelCreating(modelBuilder);
         }
 

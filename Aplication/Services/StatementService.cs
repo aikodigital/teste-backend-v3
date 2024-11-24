@@ -87,7 +87,9 @@ namespace Aplication.Services
 
         public async Task<List<InvoiceDto>> GetInvoices()
         {
-            var invoices = await _context!.Invoices!.ToListAsync();
+            var invoices = await _context!.Invoices!.Include(i=> i.Performances)
+                .ThenInclude(p=> p.Play)
+                .ToListAsync();
             var invoicesDto = _mapper.Map<List<InvoiceDto>>(invoices!);
             return invoicesDto;
         }

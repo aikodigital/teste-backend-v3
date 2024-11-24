@@ -35,6 +35,6 @@ StatementEndpoints.StatementXml(app);
 
 InvoiceEndpoints.InvoicePost(app);
 
-//StatementEndpoints.StatementSaved(app);
+StatementEndpoints.StatementSaved(app);
 
 app.Run();
