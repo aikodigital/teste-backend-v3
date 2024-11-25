@@ -3,6 +3,7 @@ using Aplication.Interfaces;
 using Aplication.Services.Calculators;
 using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
+using Aplication.Services.Queue;
 using AutoMapper;
 using CrossCutting;
 using Infrastructure;
@@ -13,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TheatricalPlayersRefactoringKata.Entity;
 
@@ -24,18 +26,27 @@ namespace Aplication.Services
 
         private readonly TesteBackendV3DbContext _context;
         private readonly IMapper _mapper;
+        private readonly ServiceBusProducer _producer;
 
         public StatementService() { }
 
-        public StatementService(TesteBackendV3DbContext context, IMapper mapper)
+        public StatementService(TesteBackendV3DbContext context, IMapper mapper, ServiceBusProducer producer)
         {
             _context = context;
             _mapper = mapper;
+            _producer = producer;
         }
 
-        public async Task InsertInvoice(InvoiceDto dto)
+
+        public async Task MakeStatement(InvoiceDto invoiceDto)
         {
-            var invoice = _mapper.Map<Invoice>(dto);
+            await _producer.SendMessageAsync(JsonSerializer.Serialize(invoiceDto));
+        }
+
+
+        public async Task InsertInvoice(InvoiceDto Invoicedto)
+        {
+            var invoice = _mapper.Map<Invoice>(Invoicedto);
             _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
         }

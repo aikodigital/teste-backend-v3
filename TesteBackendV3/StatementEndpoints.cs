@@ -1,10 +1,23 @@
-﻿using Aplication.Services.Formatters;
+﻿using Aplication.DTO;
+using Aplication.Services.Formatters;
 using Aplication.Services.Interfaces;
 
 namespace TesteBackendV3
 {
     public static class StatementEndpoints
     {
+        public static void MakeStatement(WebApplication app)
+        {
+            app.MapPost("makeStatement", async (InvoiceDto invoiceDto, IStatementService statementService) =>
+            {
+                try
+                {
+                    await statementService.MakeStatement(invoiceDto);
+                    return Results.Ok(new { Message = "Enfileirado com sucesso" });
+                }
+                catch (Exception ex) { return Results.Problem(ex.Message.ToString()); }
+            }).WithName("MakeStatement").WithTags("Statement");
+        }
         public static void StatementSaved(WebApplication app)
         {
             app.MapGet("/statementSaved", async (IStatementService statementService) =>

@@ -1,4 +1,5 @@
 using Aplication.Services.Interfaces;
+using Aplication.Services.Queue;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using TesteBackendV3;
@@ -11,6 +12,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPlayService, Aplication.Services.PlayService>();
 builder.Services.AddScoped<IStatementService, Aplication.Services.StatementService>();
 builder.Services.AddScoped<IPerformanceService, Aplication.Services.PerformanceService>();
+builder.Services.AddSingleton<ServiceBusProducer>();
+builder.Services.AddSingleton<ServiceBusConsumer>();
+builder.Services.AddHostedService<ServiceBusBackgroundWorker>();
 
 builder.Services.AddDbContext<TesteBackendV3DbContext>(options =>
     options.UseSqlite("Data Source=app.db"));
@@ -36,5 +40,7 @@ StatementEndpoints.StatementXml(app);
 InvoiceEndpoints.InvoicePost(app);
 
 StatementEndpoints.StatementSaved(app);
+
+StatementEndpoints.MakeStatement(app);
 
 app.Run();

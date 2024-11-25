@@ -14,5 +14,6 @@ namespace Aplication.Services.Interfaces
         string Print(InvoiceDto invoice, IInvoiceFormatter formatter);
         Task InsertInvoice(InvoiceDto invoice);
         Task<List<InvoiceDto>> GetInvoices();
+        Task MakeStatement(InvoiceDto invoiceDto);
     }
 }
