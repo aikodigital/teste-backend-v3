@@ -37,13 +37,9 @@ namespace Aplication.Services
             _producer = producer;
         }
 
-
         public async Task MakeStatement(InvoiceDto invoiceDto)
-        {
-            await _producer.SendMessageAsync(JsonSerializer.Serialize(invoiceDto));
-        }
-
-
+        => await _producer.SendMessageAsync(JsonSerializer.Serialize(invoiceDto));
+        
         public async Task InsertInvoice(InvoiceDto Invoicedto)
         {
             var invoice = _mapper.Map<Invoice>(Invoicedto);

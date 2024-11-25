@@ -1,5 +1,12 @@
-﻿using Azure.Messaging.ServiceBus;
+﻿using Aplication.DTO;
+using Aplication.Services.Formatters;
+using Aplication.Services.Interfaces;
+using Aplication.Services.XML;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Security.AccessControl;
+using System.Text.Json;
 
 namespace Aplication.Services.Queue
 {
@@ -8,12 +15,17 @@ namespace Aplication.Services.Queue
         private readonly string _queueName;
         private readonly ServiceBusClient _client;
         private readonly ServiceBusProcessor _processor;
-
-        public ServiceBusConsumer(IConfiguration configuration)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly string _savePath;
+        private readonly XmlFileService _xmlFileService;
+        public ServiceBusConsumer(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _queueName = configuration["AzureServiceBus:QueueName"];
             _client = new ServiceBusClient(configuration["AzureServiceBus:ConnectionString"]);
             _processor = _client.CreateProcessor(_queueName, new ServiceBusProcessorOptions());
+            _serviceProvider = serviceProvider;
+            _savePath = configuration["SavePath"];
+            _xmlFileService = new XmlFileService(_savePath);
         }
 
         public async Task StartProcessingAsync()
@@ -36,14 +48,18 @@ namespace Aplication.Services.Queue
         {
             var message = args.Message.Body.ToString();
             Console.WriteLine($"Mensagem recebida: {message}");
-            DoWork();
+            await DoWork(message);
             await args.CompleteMessageAsync(args.Message);
         }
 
 
-        private void DoWork()
+        private async Task DoWork(string message)
         {
-            Console.WriteLine("Procesamento iniciado, Processamento concluído");
+            var invoiceDto = JsonSerializer.Deserialize(message, typeof(InvoiceDto));
+            using var scope = _serviceProvider.CreateScope();
+            var statementService = scope.ServiceProvider.GetRequiredService<IStatementService>();
+            var xml = statementService.Print((InvoiceDto)invoiceDto!, new XmlInvoiceFormatter());
+            await _xmlFileService.SaveXmlAsync(xml);
         }
 
         private Task ErrorHandler(ProcessErrorEventArgs args)
@@ -53,6 +69,4 @@ namespace Aplication.Services.Queue
             return Task.CompletedTask;
         }
     }
-
-
 }
