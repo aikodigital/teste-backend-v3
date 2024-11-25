@@ -24,7 +24,7 @@ namespace Aplication.Services.Queue
             _client = new ServiceBusClient(configuration["AzureServiceBus:ConnectionString"]);
             _processor = _client.CreateProcessor(_queueName, new ServiceBusProcessorOptions());
             _serviceProvider = serviceProvider;
-            _savePath = configuration["SavePath"];
+            _savePath = configuration["XmlSavePath"];
             _xmlFileService = new XmlFileService(_savePath);
         }
 
