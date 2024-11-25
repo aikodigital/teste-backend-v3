@@ -27,6 +27,7 @@ namespace Aplication.Services
         private readonly TesteBackendV3DbContext _context;
         private readonly IMapper _mapper;
         private readonly ServiceBusProducer _producer;
+        const string guidIdVazia = "00000000-0000-0000-0000-000000000000";
 
         public StatementService() { }
 
@@ -40,9 +41,15 @@ namespace Aplication.Services
         public async Task MakeStatement(InvoiceDto invoiceDto)
         => await _producer.SendMessageAsync(JsonSerializer.Serialize(invoiceDto));
         
-        public async Task InsertInvoice(InvoiceDto Invoicedto)
+        public async Task InsertInvoice(InvoiceDto InvoiceDto)
         {
-            var invoice = _mapper.Map<Invoice>(Invoicedto);
+            InvoiceDto.Performances.Where(x => x.Id.ToString() == guidIdVazia)
+                .Select(a => a.Id = Guid.NewGuid()).ToList();
+
+            InvoiceDto.Performances.Select(x => x.Play).ToList().Where(a => a.Id.ToString() == guidIdVazia)
+                .Select(a => a.Id = Guid.NewGuid()).ToList();
+
+            var invoice = _mapper.Map<Invoice>(InvoiceDto);
             _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
         }

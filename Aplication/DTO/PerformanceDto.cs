@@ -1,4 +1,5 @@
 ﻿using CrossCutting;
+using System.Text.Json.Serialization;
 
 namespace Aplication.DTO
 {

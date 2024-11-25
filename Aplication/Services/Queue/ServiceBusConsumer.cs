@@ -55,11 +55,12 @@ namespace Aplication.Services.Queue
 
         private async Task DoWork(string message)
         {
-            var invoiceDto = JsonSerializer.Deserialize(message, typeof(InvoiceDto));
+            var invoiceDto = (InvoiceDto)JsonSerializer.Deserialize(message, typeof(InvoiceDto))!;
             using var scope = _serviceProvider.CreateScope();
             var statementService = scope.ServiceProvider.GetRequiredService<IStatementService>();
-            var xml = statementService.Print((InvoiceDto)invoiceDto!, new XmlInvoiceFormatter());
+            var xml = statementService.Print(invoiceDto!, new XmlInvoiceFormatter());
             await _xmlFileService.SaveXmlAsync(xml);
+            await statementService.InsertInvoice(invoiceDto);
         }
 
         private Task ErrorHandler(ProcessErrorEventArgs args)

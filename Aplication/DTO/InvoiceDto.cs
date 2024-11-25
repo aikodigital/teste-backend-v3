@@ -1,4 +1,6 @@
-﻿namespace Aplication.DTO
+﻿using System.Text.Json.Serialization;
+
+namespace Aplication.DTO
 {
     public class InvoiceDto
     {
