@@ -1,4 +1,5 @@
 using TheatricalPlayersRefactoringKata;
+using TheatricalPlayersRefactoringKata.Models;
 
 namespace TheatricalPlayersRefactoringKata.Services.PlayType;
 

@@ -1,13 +1,23 @@
-namespace TheatricalPlayersRefactoringKata;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
-public class Performance
+namespace TheatricalPlayersRefactoringKata.Models
 {
-    public string PlayId { get; set; }
-    public int Audience { get; set; }
-
-    public Performance(string playId, int audience)
+    public class Performance
     {
-        PlayId = playId;
-        Audience = audience;
+        [Key]
+        [XmlElement] 
+        public string PlayId { get; set; }
+
+        [XmlElement] 
+        public int Audience { get; set; }
+
+        public Performance() { }
+
+        public Performance(string playId, int audience)
+        {
+            PlayId = playId;
+            Audience = audience;
+        }
     }
 }
