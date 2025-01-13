@@ -7,7 +7,7 @@ using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.ValueObjects;
 using Xunit;
 
-namespace TheatricalPlayersRefactoringKata.Tests;
+namespace TheatricalPlayersRefactoringKata.Tests.Services;
 
 public class StatementPrinterTests
 {

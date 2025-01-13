@@ -3,6 +3,7 @@ using TheatricalPlayersRefactoringKata.Communication.Requests;
 using TheatricalPlayersRefactoringKata.Communication.Responses;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
 using TheatricalPlayersRefactoringKata.Domain.ValueObjects;
+using TheatricalPlayersRefactoringKata.Exception;
 using TheatricalPlayersRefactoringKata.Exception.ExceptionsBase;
 using TheatricalPlayersRefactoringKata.Infraestructure.Services.FileGenerator;
 
@@ -51,7 +52,12 @@ namespace TheatricalPlayersRefactoringKata.Application.UseCases.Statements.Print
             var textFile = await _statementPrinterService.PrintAsync(invoice, plays, formatFile);
 
             // generates the file
-            await _fileGenerator.FileGeneratorAsync(textFile, formatFile);
+            var result = await _fileGenerator.FileGeneratorAsync(textFile, formatFile);
+
+            if (!result)
+            {
+                throw new ErrorOnValidationException(new List<string>() { ResourceErrorMessages.FILE_GENERATOR_ERROR });
+            }
 
             return new ResponsePrintStatementJson() { TextFile = textFile };
         }

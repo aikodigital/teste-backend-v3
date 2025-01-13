@@ -2,6 +2,6 @@
 {
     public interface IFileGenerator
     {
-        Task FileGeneratorAsync(string textFile, string formatFile);
+        Task<bool> FileGeneratorAsync(string textFile, string formatFile);
     }
 }

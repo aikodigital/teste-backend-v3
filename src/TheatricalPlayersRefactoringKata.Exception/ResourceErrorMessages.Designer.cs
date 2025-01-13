@@ -61,6 +61,15 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Occurred an error in generate of file..
+        /// </summary>
+        public static string FILE_GENERATOR_ERROR {
+            get {
+                return ResourceManager.GetString("FILE_GENERATOR_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The format of file is invalid. Chooses between the options: text; xml..
         /// </summary>
         public static string INVALID_FORMAT_FILE {
