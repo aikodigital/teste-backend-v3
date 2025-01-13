@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.StatementManipulate
 {
-    public class StatementPrinterService
+    public class StatementPrinterService : IStatementPrinterService
     {
         public async Task<string> PrintAsync(Invoice invoice, Dictionary<string, Play> plays, string formatFile)
         {

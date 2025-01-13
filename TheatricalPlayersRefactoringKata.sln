@@ -9,6 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactorin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Domain", "src\TheatricalPlayersRefactoringKata.Domain\TheatricalPlayersRefactoringKata.Domain.csproj", "{A8F081EF-0978-4BF5-B469-2CA0D8CF429A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheatricalPlayersRefactoringKata.Api", "src\TheatricalPlayersRefactoringKata.Api\TheatricalPlayersRefactoringKata.Api.csproj", "{2C463868-20F4-43A1-9F33-110FFA0A5C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Communication", "src\TheatricalPlayersRefactoringKata.Communication\TheatricalPlayersRefactoringKata.Communication.csproj", "{31322563-F1F8-4B43-B969-E6C5FF5D8645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Infraestructure", "src\TheatricalPlayersRefactoringKata.Infraestructure\TheatricalPlayersRefactoringKata.Infraestructure.csproj", "{C0485215-F73E-427C-A161-A127149F3B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheatricalPlayersRefactoringKata.Exception", "src\TheatricalPlayersRefactoringKata.Exception\TheatricalPlayersRefactoringKata.Exception.csproj", "{1FC045E3-3459-49AE-9CF1-466B500AEAC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +35,22 @@ Global
 		{A8F081EF-0978-4BF5-B469-2CA0D8CF429A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F081EF-0978-4BF5-B469-2CA0D8CF429A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F081EF-0978-4BF5-B469-2CA0D8CF429A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C463868-20F4-43A1-9F33-110FFA0A5C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C463868-20F4-43A1-9F33-110FFA0A5C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C463868-20F4-43A1-9F33-110FFA0A5C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C463868-20F4-43A1-9F33-110FFA0A5C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31322563-F1F8-4B43-B969-E6C5FF5D8645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31322563-F1F8-4B43-B969-E6C5FF5D8645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31322563-F1F8-4B43-B969-E6C5FF5D8645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31322563-F1F8-4B43-B969-E6C5FF5D8645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0485215-F73E-427C-A161-A127149F3B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0485215-F73E-427C-A161-A127149F3B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0485215-F73E-427C-A161-A127149F3B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0485215-F73E-427C-A161-A127149F3B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC045E3-3459-49AE-9CF1-466B500AEAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC045E3-3459-49AE-9CF1-466B500AEAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC045E3-3459-49AE-9CF1-466B500AEAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC045E3-3459-49AE-9CF1-466B500AEAC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,7 +31,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinterService statementPrinter = new StatementPrinterService();
-        var formatFile = "text";
+        var formatFile = "txt";
         var result = await statementPrinter.PrintAsync(invoice, plays, formatFile);
 
         Approvals.Verify(result);
@@ -63,7 +63,7 @@ public class StatementPrinterTests
         );
 
         StatementPrinterService statementPrinter = new StatementPrinterService();
-        string formatFile = "text";
+        string formatFile = "txt";
         var result = await statementPrinter.PrintAsync(invoice, plays, formatFile);
 
         Approvals.Verify(result);

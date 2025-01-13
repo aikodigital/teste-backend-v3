@@ -1,6 +1,8 @@
 ﻿using TheatricalPlayersRefactoringKata.Application.Services.CalculatorGenre;
 using TheatricalPlayersRefactoringKata.Application.Services.Mapping;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Exception;
+using TheatricalPlayersRefactoringKata.Exception.ExceptionsBase;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.StatementManipulate
 {
@@ -29,7 +31,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.StatementManipul
                 }
                 else
                 {
-                    throw new Exception("Unknown type: " + play.Type);
+                    throw new ErrorOnValidationException(new List<string>() { string.Format(ResourceErrorMessages.UNKNOWN_TYPE, play.Type) });
                 }
             }
 

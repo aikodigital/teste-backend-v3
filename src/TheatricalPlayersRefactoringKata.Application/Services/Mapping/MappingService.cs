@@ -16,7 +16,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.Mapping
         // mapping of the format file to class
         public static readonly Dictionary<string, Type> FormatFileMapping = new Dictionary<string, Type>
         {
-            { "text", typeof(TextFileGeneratorText) },
+            { "txt", typeof(TextFileGeneratorText) },
             { "xml", typeof(TextFileGeneratorXml) },
         };
     }

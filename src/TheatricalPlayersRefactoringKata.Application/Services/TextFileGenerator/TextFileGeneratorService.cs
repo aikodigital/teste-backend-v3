@@ -1,5 +1,7 @@
 ﻿using TheatricalPlayersRefactoringKata.Application.Services.Mapping;
 using TheatricalPlayersRefactoringKata.Domain.Entities;
+using TheatricalPlayersRefactoringKata.Exception.ExceptionsBase;
+using TheatricalPlayersRefactoringKata.Exception;
 
 namespace TheatricalPlayersRefactoringKata.Application.Services.TextFileGenerator
 {
@@ -22,7 +24,7 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.TextFileGenerato
             }
             else
             {
-                throw new Exception("Unknown type: " + formatFile);
+                throw new ErrorOnValidationException(new List<string>() { string.Format(ResourceErrorMessages.UNKNOWN_TYPE, formatFile) });
             }
 
             return textFile;
