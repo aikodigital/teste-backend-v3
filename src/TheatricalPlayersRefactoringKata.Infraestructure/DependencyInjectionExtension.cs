@@ -35,7 +35,7 @@ namespace TheatricalPlayersRefactoringKata.Infraestructure
             var version = new Version(8, 0, 35);
             var serverVersion = new MySqlServerVersion(version);
 
-            services.AddDbContext<CashFlowDbContext>(config => config.UseMySql(connectionString, serverVersion));
+            services.AddDbContext<TheatricalPlayersRefactoringKataDbContext>(config => config.UseMySql(connectionString, serverVersion));
         }
     }
 }

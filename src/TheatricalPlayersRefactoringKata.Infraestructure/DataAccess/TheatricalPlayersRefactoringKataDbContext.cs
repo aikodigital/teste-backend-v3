@@ -3,9 +3,9 @@ using TheatricalPlayersRefactoringKata.Domain.Entities;
 
 namespace TheatricalPlayersRefactoringKata.Infraestructure.DataAccess
 {
-    public class CashFlowDbContext : DbContext
+    public class TheatricalPlayersRefactoringKataDbContext : DbContext
     {
-        public CashFlowDbContext(DbContextOptions options) : base(options) { }
+        public TheatricalPlayersRefactoringKataDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Play> Play { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

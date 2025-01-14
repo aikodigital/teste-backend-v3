@@ -24,10 +24,10 @@ namespace TheatricalPlayersRefactoringKata.Api.Filters
 
         private void HandleProjectException(ExceptionContext context)
         {
-            var cashFlowException = context.Exception as TheatricalPlayersRefactoringKataException;
-            var errorResponse = new ResponseErrorJson(cashFlowException!.GetErrors());
+            var theatricalPlayersRefactoringKataException = context.Exception as TheatricalPlayersRefactoringKataException;
+            var errorResponse = new ResponseErrorJson(theatricalPlayersRefactoringKataException!.GetErrors());
 
-            context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;
+            context.HttpContext.Response.StatusCode = theatricalPlayersRefactoringKataException.StatusCode;
             context.Result = new ObjectResult(errorResponse);
         }
 

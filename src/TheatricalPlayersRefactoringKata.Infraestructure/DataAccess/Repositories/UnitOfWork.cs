@@ -4,8 +4,8 @@ namespace TheatricalPlayersRefactoringKata.Infraestructure.DataAccess.Repositori
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly CashFlowDbContext _dbContext;
-        public UnitOfWork(CashFlowDbContext dbContext)
+        private readonly TheatricalPlayersRefactoringKataDbContext _dbContext;
+        public UnitOfWork(TheatricalPlayersRefactoringKataDbContext dbContext)
         {
             _dbContext = dbContext;
         }

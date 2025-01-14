@@ -5,8 +5,8 @@ namespace TheatricalPlayersRefactoringKata.Infraestructure.DataAccess.Repositori
 {
     public class PlaysRepository : IPlaysWriteOnlyRepository
     {
-        private readonly CashFlowDbContext _dbContext;
-        public PlaysRepository(CashFlowDbContext dbContext)
+        private readonly TheatricalPlayersRefactoringKataDbContext _dbContext;
+        public PlaysRepository(TheatricalPlayersRefactoringKataDbContext dbContext)
         {
             _dbContext = dbContext;
         }
