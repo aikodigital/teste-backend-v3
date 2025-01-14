@@ -123,6 +123,15 @@
   <data name="INVALID_FORMAT_FILE" xml:space="preserve">
     <value>The format of file is invalid. Chooses between the options: text; xml.</value>
   </data>
+  <data name="INVALID_FORMAT_GENRE" xml:space="preserve">
+    <value>The format of genre is invalid. Chooses between the options: comedy; tragedy; history.</value>
+  </data>
+  <data name="LINES_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>The lines must be greater than zero.</value>
+  </data>
+  <data name="NAME_NOT_EMPTY" xml:space="preserve">
+    <value>The name not must empty.</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
   </data>

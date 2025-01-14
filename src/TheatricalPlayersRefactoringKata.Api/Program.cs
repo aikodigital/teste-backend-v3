@@ -14,8 +14,8 @@ builder.Services.AddSwaggerGen();
 // If have an exception redirect to class ExceptionFilter
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
-// Method of extension to add dependency injection of infraestructure
-builder.Services.AddInfraestructure();
+// Method of extension to add dependency injection of DbContext and Repositories
+builder.Services.AddInfraestructure(builder.Configuration);
 
 // Method of extension to add dependency injection of business rule
 builder.Services.AddApplication();

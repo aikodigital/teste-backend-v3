@@ -2,6 +2,7 @@
 {
     public class Play
     {
+        public long Id { get; set; }
         private string _name;
         private int _lines;
         private string _type;

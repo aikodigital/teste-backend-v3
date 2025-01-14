@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheatricalPlayersRefactoringKata.Application.Services.StatementManipulate;
+using TheatricalPlayersRefactoringKata.Application.UseCases.Plays.Register;
 using TheatricalPlayersRefactoringKata.Application.UseCases.Statements.Print;
 
 namespace TheatricalPlayersRefactoringKata.Application
@@ -15,6 +16,7 @@ namespace TheatricalPlayersRefactoringKata.Application
         {
             services.AddScoped<IPrintStatementUseCase, PrintStatementUseCase>();
             services.AddScoped<IStatementPrinterService, StatementPrinterService>();
+            services.AddScoped<IRegisterPlayUseCase, RegisterPlayUseCase>();
         }
     }
 }

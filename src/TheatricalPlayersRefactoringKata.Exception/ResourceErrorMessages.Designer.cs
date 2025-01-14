@@ -79,6 +79,33 @@ namespace TheatricalPlayersRefactoringKata.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The format of genre is invalid. Chooses between the options: comedy; tragedy; history..
+        /// </summary>
+        public static string INVALID_FORMAT_GENRE {
+            get {
+                return ResourceManager.GetString("INVALID_FORMAT_GENRE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The lines must be greater than zero..
+        /// </summary>
+        public static string LINES_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("LINES_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The name not must empty..
+        /// </summary>
+        public static string NAME_NOT_EMPTY {
+            get {
+                return ResourceManager.GetString("NAME_NOT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {
