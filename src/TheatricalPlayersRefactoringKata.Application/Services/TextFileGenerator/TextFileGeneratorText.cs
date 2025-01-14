@@ -16,9 +16,9 @@ namespace TheatricalPlayersRefactoringKata.Application.Services.TextFileGenerato
             foreach (var stat in statements)
             {
                 // print line for this order
-                result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", stat.name, Convert.ToDecimal(stat.amount / 100), stat.seat);
-                totalAmount += stat.amount;
-                volumeCredits += stat.credit;
+                result += string.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", stat.Customer, Convert.ToDecimal(stat.AmountOwed / 100), stat.Seats);
+                totalAmount += stat.AmountOwed;
+                volumeCredits += stat.EarnedCredits;
             }
 
             result += string.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
