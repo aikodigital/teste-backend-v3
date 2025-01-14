@@ -9,6 +9,11 @@ namespace TheatricalPlayersRefactoringKata.Api.Controllers
     [ApiController]
     public class StatementsController : ControllerBase
     {
+        /// <summary>
+        /// prints the statement.
+        /// </summary>
+        /// <param name="request">model of request.</param>
+        /// <returns>text of statement.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(ResponsePrintStatementJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
