@@ -9,6 +9,11 @@ namespace TheatricalPlayersRefactoringKata.Api.Controllers
     [ApiController]
     public class PlaysController : ControllerBase
     {
+        /// <summary>
+        /// register the play.
+        /// </summary>
+        /// <param name="request">model of request.</param>
+        /// <returns>datas of play registered.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisterPlayJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
