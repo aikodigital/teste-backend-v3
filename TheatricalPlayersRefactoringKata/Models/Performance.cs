@@ -1,4 +1,4 @@
-namespace TheatricalPlayersRefactoringKata;
+namespace TheatricalPlayersRefactoringKata.Models;
 
 public class Performance
 {
@@ -7,11 +7,15 @@ public class Performance
 
     public string PlayId { get => _playId; set => _playId = value; }
     public int Audience { get => _audience; set => _audience = value; }
+    public Play Play { get; set; }
 
-    public Performance(string playID, int audience)
+    public Performance(string playID, int audience, Play play=null)
     {
         this._playId = playID;
         this._audience = audience;
+        this.Play = play;
     }
+
+    
 
 }

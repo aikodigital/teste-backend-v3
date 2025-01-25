@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using TheatricalPlayersRefactoringKata.Calculators;
+using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;
@@ -26,8 +29,8 @@ public class StatementPrinterTests
                 new Performance("othello", 40),
             }
         );
-
-        StatementPrinter statementPrinter = new StatementPrinter();
+        var calculatorFactory = new TypeCalculatorFactory();
+        StatementPrinter statementPrinter = new StatementPrinter(calculatorFactory);
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
@@ -58,7 +61,8 @@ public class StatementPrinterTests
             }
         );
 
-        StatementPrinter statementPrinter = new StatementPrinter();
+        var calculatorFactory = new TypeCalculatorFactory();
+        StatementPrinter statementPrinter = new StatementPrinter(calculatorFactory);
         var result = statementPrinter.Print(invoice, plays);
 
         Approvals.Verify(result);
