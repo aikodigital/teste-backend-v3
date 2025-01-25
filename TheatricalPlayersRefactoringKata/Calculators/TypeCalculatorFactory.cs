@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
-using TheatricalPlayersRefactoringKata.Calculators.Types;
+using TheatricalPlayersRefactoringKata.Domain.Calculators.Types;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 
-namespace TheatricalPlayersRefactoringKata.Calculators
+namespace TheatricalPlayersRefactoringKata.Domain.Calculators
 {
     public class TypeCalculatorFactory : ITypeCalculatorFactory
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using TheatricalPlayersRefactoringKata.Calculators;
-using TheatricalPlayersRefactoringKata.Models;
-using TheatricalPlayersRefactoringKata.Services;
+using TheatricalPlayersRefactoringKata.Domain.Calculators;
+using TheatricalPlayersRefactoringKata.Domain.Models;
+using TheatricalPlayersRefactoringKata.Domain.Services;
 using Xunit;
 
 namespace TheatricalPlayersRefactoringKata.Tests;

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Domain.Models;
 
-namespace TheatricalPlayersRefactoringKata.Calculators.Types
+namespace TheatricalPlayersRefactoringKata.Domain.Calculators.Types
 {
     public class ComedyCalculator : TypeCalculator
     {

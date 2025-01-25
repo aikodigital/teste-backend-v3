@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using TheatricalPlayersRefactoringKata.Calculators.Interfaces;
-using TheatricalPlayersRefactoringKata.Models;
+using TheatricalPlayersRefactoringKata.Domain.Interfaces;
+using TheatricalPlayersRefactoringKata.Domain.Models;
 
-namespace TheatricalPlayersRefactoringKata.Services;
+namespace TheatricalPlayersRefactoringKata.Domain.Services;
 
 public class StatementPrinter
 {
@@ -24,7 +24,7 @@ public class StatementPrinter
 
         foreach (var perf in invoice.Performances)
         {
-            var play = plays[perf.PlayId];
+            var play = plays[perf.PlayName];
             perf.Play = play;
 
             var calculator = _calculatorFactory.GetCalculator(play.Type);
