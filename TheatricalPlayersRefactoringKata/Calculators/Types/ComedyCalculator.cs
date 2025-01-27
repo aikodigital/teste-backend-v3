@@ -3,7 +3,7 @@ using TheatricalPlayersRefactoringKata.Domain.Models;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Calculators.Types
 {
-    public class ComedyCalculator : TypeCalculator
+    public class ComedyCalculator : TypeGenericCalculator
     {
         public override double Calculate(Performance perf)
         {

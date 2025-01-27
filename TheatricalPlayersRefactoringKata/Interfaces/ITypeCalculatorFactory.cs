@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Interfaces
 {
     public interface ITypeCalculatorFactory
     {
-        ITypeCalculator GetCalculator(string playType);
+        ITypeGenericCalculator GetCalculator(string playType);
     }
 }

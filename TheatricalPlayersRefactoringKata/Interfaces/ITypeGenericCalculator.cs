@@ -7,7 +7,7 @@ using TheatricalPlayersRefactoringKata.Domain.Models;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Interfaces
 {
-    public interface ITypeCalculator
+    public interface ITypeGenericCalculator
     {
         double Calculate(Performance performance);
         double CalculateCredits(Performance performance);

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Xml.Serialization;
-using System.IO;
 using TheatricalPlayersRefactoringKata.Domain.Interfaces;
 using TheatricalPlayersRefactoringKata.Domain.Models;
 using TheatricalPlayersRefactoringKata.Domain.DTO;
@@ -30,11 +27,7 @@ public class StatementPrinter
             var calculator = _calculatorFactory.GetCalculator(play.Type);
             var thisAmount = calculator.Calculate(perf);
             var thisVolumeCredits = calculator.CalculateCredits(perf);
-
-            // Add volume credits
             volumeCredits += thisVolumeCredits;
-
-            // Add item to the list
             items.Add(new ItemDTO
             {
                 ItemName = play.Name,

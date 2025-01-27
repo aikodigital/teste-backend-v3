@@ -3,10 +3,10 @@ using TheatricalPlayersRefactoringKata.Domain.Models;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Calculators.Types
 {
-    public class HistoryCalculator : TypeCalculator
+    public class HistoryCalculator : TypeGenericCalculator
     {
-        private readonly ITypeCalculator _comedyCalculator;
-        private readonly ITypeCalculator _tragedyCalculator;
+        private readonly ITypeGenericCalculator _comedyCalculator;
+        private readonly ITypeGenericCalculator _tragedyCalculator;
 
         public HistoryCalculator()
         {

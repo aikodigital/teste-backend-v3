@@ -1,0 +1,85 @@
+﻿{
+    
+  "Customer":  "BigCo",
+    
+  "Items":  [
+        
+    {
+            
+      "ItemName":  "Hamlet",
+            
+      "AmountOwed":  650,
+            
+      "EarnedCredits":  25,
+            
+      "Seats":  55
+    
+        },
+        
+    {
+            
+      "ItemName":  "As You Like It",
+            
+      "AmountOwed":  547,
+            
+      "EarnedCredits":  12,
+            
+      "Seats":  35
+    
+        },
+        
+    {
+            
+      "ItemName":  "Othello",
+            
+      "AmountOwed":  456,
+            
+      "EarnedCredits":  10,
+            
+      "Seats":  40
+    
+        },
+        
+    {
+            
+      "ItemName":  "Henry V",
+            
+      "AmountOwed":  705.4,
+            
+      "EarnedCredits":  0,
+            
+      "Seats":  20
+    
+        },
+        
+    {
+            
+      "ItemName":  "King John",
+            
+      "AmountOwed":  931.6,
+            
+      "EarnedCredits":  9,
+            
+      "Seats":  39
+    
+        },
+        
+    {
+            
+      "ItemName":  "Henry V",
+            
+      "AmountOwed":  705.4,
+            
+      "EarnedCredits":  0,
+            
+      "Seats":  20
+    
+        }
+  
+    ],
+    
+  "AmountOwed":  3995.4,
+    
+  "EarnedCredits":  56
+
+}

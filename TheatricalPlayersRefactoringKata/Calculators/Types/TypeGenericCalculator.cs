@@ -8,7 +8,7 @@ using TheatricalPlayersRefactoringKata.Domain.Models;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Calculators.Types
 {
-    public abstract class TypeCalculator : ITypeCalculator
+    public abstract class TypeGenericCalculator : ITypeGenericCalculator
     {
         public virtual double Calculate(Performance perf)
         {
