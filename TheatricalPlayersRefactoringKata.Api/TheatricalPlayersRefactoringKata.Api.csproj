@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheatricalPlayersRefactoringKata.Infra\TheatricalPlayersRefactoringKata.Infra.csproj" />
-    <ProjectReference Include="..\TheatricalPlayersRefactoringKata\TheatricalPlayersRefactoringKata.csproj" />
   </ItemGroup>
 
 </Project>
