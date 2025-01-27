@@ -6,9 +6,9 @@ namespace TheatricalPlayersRefactoringKata.Infra.Contexto
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Invoice> Invoice { get; set; }
-        public DbSet<Performance> Performance { get; set; }
-        public DbSet<Play> Play { get; set; }
+        public DbSet<InvoiceEntity> Invoice { get; set; }
+        public DbSet<PerformanceEntity> Performance { get; set; }
+        public DbSet<PlayEntity> Play { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

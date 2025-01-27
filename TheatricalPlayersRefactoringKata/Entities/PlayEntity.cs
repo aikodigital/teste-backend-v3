@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Entities
 {
-    public class Play
+    [Table("Play")]
+    public class PlayEntity
     {
         [Key]
         public int Id { get; set; }

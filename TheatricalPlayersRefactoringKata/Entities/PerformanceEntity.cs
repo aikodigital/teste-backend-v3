@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheatricalPlayersRefactoringKata.Domain.Entities
 {
-    public  class Performance
+    [Table("Performance")]
+    public  class PerformanceEntity
     {
         [Key]
         public int Id { get; set; }
@@ -14,6 +15,6 @@ namespace TheatricalPlayersRefactoringKata.Domain.Entities
         public int PlayId {  get; set; }
 
         [ForeignKey(nameof(PlayId))]
-        public Play Play { get; set; }
+        public PlayEntity Play { get; set; }
     }
 }

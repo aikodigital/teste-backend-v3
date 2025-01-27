@@ -18,9 +18,9 @@ namespace TheatricalPlayersRefactoringKata.Domain.Services
 
             var settings = new XmlWriterSettings
             {
-                Encoding = new UTF8Encoding(true), // Sem BOM (Byte Order Mark)
-                Indent = true, // Para formatação legível
-                OmitXmlDeclaration = false // Inclui a declaração XML
+                Encoding = new UTF8Encoding(true),
+                Indent = true, 
+                OmitXmlDeclaration = false
             };
 
             using (var stream = new MemoryStream())
