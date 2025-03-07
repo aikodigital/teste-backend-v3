@@ -1,8 +1,10 @@
-# Teste Backend
+# 🏆 Teste Backend
 
 ![Aiko](img/logo.png)
 
-## Apresentação e estado atual da aplicação
+Este teste tem como objetivo avaliar suas habilidades em refatoração de código, design de software e implementação de novas funcionalidades em uma aplicação backend. A proposta envolve trabalhar em um sistema já existente, melhorando sua testabilidade, adicionando suporte a novos requisitos e garantindo a confiabilidade da solução por meio de testes unitários. Além disso, a adoção de boas práticas de arquitetura e desenvolvimento será um diferencial.
+
+## 📜 Apresentação e estado atual da aplicação
 
 Essa aplicação é usada por uma companhia de teatro para gerar extratos
 impressos a partir das faturas de seus clientes.
@@ -17,7 +19,7 @@ mecanismo de fidelização que os clientes podem usar para obter descontos em
 futuras apresentações. O total de créditos gerados é também mostrado no
 extrato.
 
-## Novas funcionalidades desejadas
+## ✨ Novas funcionalidades desejadas
 
 A companhia de teatro pretende adicionar o gênero histórico ao seu repertório,
 então o software deve ser capaz de calcular os valores e créditos também para
@@ -29,7 +31,7 @@ de texto atualmente suportado. Novamente, é bom que o design facilite que
 futuramente esse extrato seja emitido em novos formatos, pois certamente é uma
 questão de tempo até surgir essa demanda.
 
-## Especificação da atividade
+## 🛠️ Especificação da atividade
 
 Este é um exercício de refatoração. O design inicial da aplicação é pouco
 testável, portanto os únicos testes que a aplicação possui no momento são os
@@ -61,7 +63,7 @@ passem.
 Faça commits com frequência para que sua abordagem de refatoração seja mostrada
 pelo histórico de versões.
 
-## Extras
+## 🚀 Extras (Opcional)
 
 Não é mandatório, mas de maneira opcional os seguintes requisitos poderão ser
 implementados:
@@ -74,7 +76,7 @@ implementados:
 * Persistencia dos dados em um banco de dados para salvar o extrato com suas
   respectivas peças
 
-## Regras de negócio
+## 📜 Regras de negócio
 
 * O valor base para a cobrança de todas as peças é o número de linhas da peça
   dividido por 10
@@ -97,14 +99,17 @@ implementados:
 * A estrutura do XML deve seguir como referência a saída aprovada no
   ApprovalTest correspondente
 
-## Entregas
+## 📦 Entrega
 
-Para realizar a entrega do teste você deve:
+Para realizar a entrega do teste, siga as instruções abaixo:
 
-* Relizar o fork e clonar esse repositório para sua máquina.
-  
-* Criar uma branch com o nome de `teste/[NOME]`.
-  * `[NOME]`: Seu nome.
-  * Exemplos: `teste/fulano-da-silva`; `teste/beltrano-primeiro-gomes`.
-  
+1. Fork este repositório e clone-o em sua máquina.
+2. Crie uma branch com o nome `teste/[NOME]`:
+    - `[NOME]`: Seu nome.
+    - Exemplos: `teste/fulano-da-silva`; `teste/beltrano-primeiro-gomes`.
+3. Realize um pull request da sua branch para este repositório.
 * Realize o pull request da sua branch nesse repositório.
+4. Envie um vídeo apresentando a aplicação e a entrega como um todo. O vídeo pode ser hospedado como não listado no YouTube ou compartilhado via Google Drive, e o link deve ser incluído no pull request ou no README do projeto.
+
+
+📩 **Boa sorte! Estamos ansiosos para ver seu código e sua apresentação!** 🚀
